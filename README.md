@@ -23,6 +23,7 @@ Sistema web completo para administrar una clínica veterinaria: historias clíni
 - [Seguridad](#seguridad)
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Instalación](#instalación)
+- [Probar el sistema](#probar-el-sistema-usuarios-de-demostración)
 - [Capturas](#capturas)
 - [Autor](#autor)
 
@@ -162,7 +163,21 @@ Cada paso del flujo se validó de punta a punta con datos de prueba: desde la so
    ```
    Abre `http://localhost:4000` para el panel y `http://localhost:4000/cliente/login.html` para el portal de clientes. En Windows también puedes usar `iniciar-premiercan.bat` y `detener-premiercan.bat`.
 
-> **Importante:** el script crea dos usuarios de demostración (`admin` y `vet.demo`) con la contraseña inicial definida en `scripts/crear-bd.js`. **Cámbiala apenas entres**, y configura la verificación en dos pasos del administrador.
+### Probar el sistema (usuarios de demostración)
+
+Al terminar la instalación, el script `crear-bd.js` deja creados estos usuarios para probar cada rol:
+
+| Rol | Dónde entrar | Usuario | Contraseña |
+|---|---|---|---|
+| Administrativo | `http://localhost:4000` → pestaña **Administrativo** | `admin` | `123456` |
+| Veterinario | `http://localhost:4000` → pestaña **Veterinario** | `vet.demo` | `123456` |
+| Cliente | `http://localhost:4000/cliente/login.html` | Se crea desde el panel (ver abajo) | Temporal, la elige el sistema |
+
+- **Administrativo:** en el primer ingreso el sistema muestra un **código QR**. Escanéalo con una app autenticadora (Google Authenticator, Microsoft Authenticator, Authy…) y escribe el código de 6 dígitos. Desde entonces, cada ingreso pide ese código.
+- **Cliente:** entra como administrativo o veterinario, registra una mascota en **Pacientes** con el correo del dueño y pulsa 🔑 **Dar acceso al portal**. El dueño recibe una contraseña temporal y la cambia en su primer ingreso.
+- Para cargar proveedores de ejemplo: `node scripts/cargar-proveedores-peru.js`.
+
+> ⚠️ Estas credenciales son **solo para una instalación local de prueba**. Antes de usar el sistema con datos reales, cambia las contraseñas de `admin` y `vet.demo` (o crea usuarios nuevos y desactiva los de demostración).
 
 ### App Android
 
