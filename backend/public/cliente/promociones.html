@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promociones - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth-cliente.js"></script>
+<script src="../assets/js/promo-ui.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<link rel="stylesheet" href="../assets/css/promociones.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<script src="../assets/js/app-notificaciones.js" defer></script>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-background">
+<header class="bg-surface-container-lowest border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="mis-mascotas.html" id="linkVolver" title="Volver">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<span class="font-headline-md text-headline-md text-primary">Promociones</span>
+</div>
+<a class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="mis-citas.html" id="linkCuenta">
+<span class="material-symbols-outlined text-[20px]">event</span><span class="hidden sm:inline">Mis citas</span>
+</a>
+</header>
+
+<main class="p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto">
+<div class="pc-hero">
+<h1 class="font-headline-lg text-headline-lg">Ofertas para tu peludo 🐾</h1>
+<p class="font-body-md text-body-md mt-1">Descuentos y campañas de Premier Can. Toca una promoción para ver todos los detalles.</p>
+</div>
+
+<div class="promo-filtros mb-5 hidden" id="filtros">
+<button class="promo-filtro activo" data-filtro="todas" type="button">Todas</button>
+<button class="promo-filtro" data-filtro="Vigente" type="button">🔥 Ahora</button>
+<button class="promo-filtro" data-filtro="Programada" type="button">🗓️ Próximamente</button>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="lista">
+<p class="text-on-surface-variant">Buscando promociones…</p>
+</div>
+</main>
+
+<script>
+  // Sin sesión también se puede ver (por ejemplo, al tocar una notificación).
+  if (!AuthCliente.obtenerToken()) {
+    const cuenta = document.getElementById('linkCuenta');
+    cuenta.href = 'login.html';
+    cuenta.innerHTML = '<span class="material-symbols-outlined text-[20px]">login</span><span>Iniciar sesión</span>';
+    document.getElementById('linkVolver').href = 'login.html';
+  }
+
+  let promociones = [];
+  let filtro = 'todas';
+
+  function pintar() {
+    const lista = document.getElementById('lista');
+    const visibles = promociones.filter((p) => filtro === 'todas' || p.Estado === filtro);
+    if (!promociones.length) {
+      lista.innerHTML = `
+        <div class="promo-vacio sm:col-span-2 lg:col-span-3">
+          <span class="promo-vacio__emoji">🐶</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface mt-3">Por ahora no hay promociones</h3>
+          <p class="text-body-md text-on-surface-variant mt-1">Te avisaremos con una notificación en cuanto tengamos una nueva.</p>
+        </div>`;
+      return;
+    }
+    lista.innerHTML = visibles.length
+      ? visibles.map((p) => PromoUI.tarjetaCliente(p, { href: `promocion.html?id=${p.PromocionID}` })).join('')
+      : '<div class="promo-vacio sm:col-span-2 lg:col-span-3"><p class="text-on-surface-variant">No hay promociones en esta sección.</p></div>';
+  }
+
+  document.getElementById('filtros').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-filtro]');
+    if (!b) return;
+    filtro = b.dataset.filtro;
+    document.querySelectorAll('.promo-filtro').forEach((x) => x.classList.toggle('activo', x === b));
+    pintar();
+  });
+
+  (async () => {
+    try {
+      const resp = await fetch(`${window.API_BASE_URL}/cliente/promociones`);
+      if (!resp.ok) throw new Error('No se pudieron cargar las promociones.');
+      promociones = await resp.json();
+      // Las filtros solo se muestran si hay de ambos tipos
+      const tipos = new Set(promociones.map((p) => p.Estado));
+      document.getElementById('filtros').classList.toggle('hidden', tipos.size < 2);
+      // Recordar lo visto para el puntito de "nuevas" en el portal
+      try { localStorage.setItem('pc_promos_vistas', JSON.stringify(promociones.map((p) => p.PromocionID))); } catch (e) {}
+      pintar();
+    } catch (err) {
+      document.getElementById('lista').innerHTML = `<p class="text-error">${PromoUI.escapar(err.message)}</p>`;
+    }
+  })();
+</script>
+</body></html>

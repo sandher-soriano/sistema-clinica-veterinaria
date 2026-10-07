@@ -1,0 +1,1068 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pacientes - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- Side Navigation Shell -->
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- Main Content Canvas -->
+<main class="flex-grow ml-0 md:ml-64 flex flex-col h-screen overflow-y-auto">
+<!-- Mobile Top Nav (Visible only on mobile) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Pacientes</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<!-- Desktop Header & Controls -->
+<div class="px-margin-mobile md:px-margin-desktop py-lg shrink-0">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-lg">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface hidden md:block">Pacientes</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-xs">Gestión y registros clínicos de animales.</p>
+</div>
+<button class="flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-sm px-md rounded-full hover:bg-surface-tint transition-all shadow-sm hover:-translate-y-[2px] hover:shadow-md active:translate-y-0" id="openAddPatientBtn">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Registrar nuevo paciente
+                </button>
+</div>
+<!-- Filters Bar -->
+<div class="flex flex-col md:flex-row gap-md bg-surface-container-lowest p-md rounded-xl border border-outline-variant/50 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+<!-- Search -->
+<div class="flex-grow relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-[#F1F4F6] border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-t-md font-body-md text-body-md text-on-surface transition-colors placeholder:text-on-surface-variant/70" id="searchInput" placeholder="Buscar paciente por nombre o propietario..." type="text">
+</div>
+<div class="flex flex-wrap gap-md">
+<!-- Species Filter -->
+<div class="relative min-w-[160px]">
+<select class="w-full pl-md pr-xl py-sm bg-[#F1F4F6] border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-t-md font-body-md text-body-md text-on-surface appearance-none cursor-pointer transition-colors" id="filterEspecie">
+<option value="">Especie: Todas</option>
+<option value="Canino">Perro</option>
+<option value="Felino">Gato</option>
+<option value="Otro">Otros</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+<!-- Vax Status Filter -->
+<div class="relative min-w-[200px]">
+<select class="w-full pl-md pr-xl py-sm bg-[#F1F4F6] border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-t-md font-body-md text-body-md text-on-surface appearance-none cursor-pointer transition-colors" id="filterVacunacion">
+<option value="">Vacunación: Todos</option>
+<option value="AlDia">Al día</option>
+<option value="Pendiente">Pendiente</option>
+<option value="Atrasado">Vencido</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table Area -->
+<div class="px-margin-mobile md:px-margin-desktop pb-xl flex-grow flex flex-col">
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] overflow-hidden flex-grow flex flex-col">
+<div class="overflow-x-auto flex-grow">
+<table class="w-full text-left border-collapse min-w-[900px]">
+<thead class="bg-[#F8FAFB] sticky top-0 z-10 border-b border-outline-variant/50">
+<tr>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium">Paciente</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium">Especie</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium">Raza &amp; Edad</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium">Propietario</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium">Última Visita</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium text-right">Vacunación</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium">Estado</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md font-medium text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30" id="patientsTableBody">
+<tr>
+<td class="py-6 px-md text-center text-on-surface-variant" colspan="8">Cargando pacientes...</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="border-t border-outline-variant/30 p-sm px-md bg-surface flex items-center justify-between mt-auto">
+<span class="text-caption font-caption text-on-surface-variant" id="paginationInfo">Mostrando 0 pacientes</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal: Registrar nuevo paciente -->
+<div class="fixed inset-0 z-[100] hidden" id="addPatientModal">
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm transition-opacity" id="patientModalBackdrop"></div>
+<div class="absolute inset-y-0 right-0 w-full max-w-lg bg-surface-container-lowest shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out" id="patientModalPanel">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold" id="patientModalTitle">Registrar nuevo paciente</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="closePatientModalBtn">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-lg">
+<!-- Propietario (solo al REGISTRAR; al editar solo se tocan datos de la mascota) -->
+<div id="seccionPropietario">
+<h4 class="font-label-md text-label-md text-on-surface mb-sm">Propietario</h4>
+<div class="flex gap-md mb-sm">
+<label class="flex items-center gap-xs cursor-pointer">
+<input checked class="accent-primary" id="modoPropietarioExistente" name="modoPropietario" type="radio">
+<span class="font-body-md text-body-md">Buscar existente</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="accent-primary" id="modoPropietarioNuevo" name="modoPropietario" type="radio">
+<span class="font-body-md text-body-md">Registrar nuevo</span>
+</label>
+</div>
+
+<!-- Buscar propietario existente -->
+<div id="bloquePropietarioExistente">
+<div class="relative">
+<input autocomplete="off" class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="buscarPropietarioInput" placeholder="Buscar por nombre, correo o teléfono...">
+<div class="hidden absolute z-10 w-full bg-surface-container-lowest border border-outline-variant rounded-b-md shadow-lg max-h-48 overflow-y-auto" id="resultadosPropietario"></div>
+</div>
+<div class="hidden mt-sm p-sm bg-primary-container/10 border border-primary/30 rounded-md flex items-center justify-between" id="propietarioSeleccionadoBox">
+<span class="font-body-md text-body-md text-on-surface" id="propietarioSeleccionadoTexto"></span>
+<button class="text-on-surface-variant hover:text-error" id="quitarPropietarioBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+
+<!-- Registrar propietario nuevo -->
+<div class="hidden space-y-sm" id="bloquePropietarioNuevo">
+<div>
+<label class="block font-caption text-caption text-on-surface-variant mb-1">DNI</label>
+<div class="flex gap-xs">
+<input class="flex-1 bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="nuevoPropDni" inputmode="numeric" maxlength="8" placeholder="8 dígitos">
+<button class="px-3 py-1.5 border border-primary text-primary rounded-full font-label-md text-caption whitespace-nowrap hover:bg-primary-container/10 transition-colors" id="btnValidarDni" type="button">Validar DNI</button>
+</div>
+<p class="hidden font-caption text-caption mt-1" id="dniEstadoTexto"></p>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<input class="bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="nuevoPropNombres" placeholder="Nombres">
+<input class="bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="nuevoPropApellidos" placeholder="Apellidos">
+</div>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="nuevoPropTelefono" inputmode="numeric" maxlength="9" placeholder="Teléfono (9 dígitos)">
+<div class="flex gap-xs">
+<input class="flex-1 bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="nuevoPropCorreo" placeholder="Correo electrónico" type="email">
+<button class="px-3 py-1.5 border border-primary text-primary rounded-full font-label-md text-caption whitespace-nowrap hover:bg-primary-container/10 transition-colors" id="btnVerificarCorreoProp" type="button">Verificar</button>
+</div>
+<p class="hidden font-caption text-caption" id="propCorreoEstadoTexto"></p>
+<div class="grid grid-cols-3 gap-xs">
+<select class="bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-2 text-on-surface focus:ring-0 focus:outline-none font-body-md text-caption" id="nuevoPropDepartamento">
+<option value="">Departamento</option>
+</select>
+<select class="bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-2 text-on-surface focus:ring-0 focus:outline-none font-body-md text-caption" disabled id="nuevoPropProvincia">
+<option value="">Provincia</option>
+</select>
+<select class="bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-2 text-on-surface focus:ring-0 focus:outline-none font-body-md text-caption" disabled id="nuevoPropDistrito">
+<option value="">Distrito</option>
+</select>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+Código Ubigeo: <span class="font-semibold text-on-surface" id="propUbigeoCodigo">— — —</span>
+<span class="italic">(se arma solo, no se escribe)</span>
+</p>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="nuevoPropDireccion" placeholder="Dirección (calle, número, referencia)">
+</div>
+</div>
+
+<hr class="border-outline-variant/50">
+
+<!-- Mascota -->
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-sm">Mascota</h4>
+<div class="space-y-sm">
+
+<!-- Foto -->
+<div class="flex items-center gap-md">
+<div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0" id="pacienteFotoPreviewWrap">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px]" id="pacienteFotoPreviewIcono">pets</span>
+<img class="hidden w-full h-full object-cover" id="pacienteFotoPreviewImg"/>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex gap-xs">
+<button class="px-3 py-1.5 border border-primary text-primary rounded-full font-label-md text-caption flex items-center gap-1 hover:bg-primary-container/10 transition-colors" id="btnSubirFoto" type="button">
+<span class="material-symbols-outlined text-[16px]">upload</span> Subir imagen
+</button>
+<button class="px-3 py-1.5 border border-primary text-primary rounded-full font-label-md text-caption flex items-center gap-1 hover:bg-primary-container/10 transition-colors" id="btnTomarFoto" type="button">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> Tomar foto
+</button>
+</div>
+<button class="hidden text-caption font-caption text-error text-left" id="btnQuitarFoto" type="button">Quitar foto seleccionada</button>
+</div>
+<!-- Input para elegir de galería/archivos -->
+<input accept="image/*" class="hidden" id="pacienteFotoInputGaleria" type="file">
+<!-- Input con "capture" para abrir la cámara directamente en celulares -->
+<input accept="image/*" capture="environment" class="hidden" id="pacienteFotoInputCamara" type="file">
+</div>
+
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="pacienteNombre" placeholder="Nombre de la mascota" required>
+<div class="grid grid-cols-2 gap-sm">
+<div class="relative">
+<select class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md appearance-none" id="pacienteEspecie">
+<option value="Canino">Perro</option>
+<option value="Felino">Gato</option>
+<option value="Otro">Otro</option>
+</select>
+</div>
+<input class="bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="pacienteRaza" placeholder="Raza">
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div>
+<label class="block font-caption text-caption text-on-surface-variant mb-1">Fecha de nacimiento</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="pacienteFechaNacimiento" type="date">
+</div>
+<div class="relative">
+<label class="block font-caption text-caption text-on-surface-variant mb-1">Sexo</label>
+<select class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md appearance-none" id="pacienteSexo">
+<option value="M">Macho</option>
+<option value="H">Hembra</option>
+</select>
+</div>
+</div>
+<textarea class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="pacienteAlergias" placeholder="Alergias conocidas (opcional)" rows="2"></textarea>
+</div>
+</div>
+<p class="hidden font-caption text-caption text-error" id="addPatientError"></p>
+</div>
+<div class="px-md py-sm border-t border-outline-variant bg-surface-container-lowest flex justify-end gap-sm">
+<button class="px-md py-2 border border-primary text-primary rounded-DEFAULT font-label-md text-label-md hover:bg-primary-container/10 transition-colors" id="cancelPatientModalBtn" type="button">Cancelar</button>
+<button class="px-md py-2 bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md hover:bg-surface-tint transition-colors shadow-sm" id="savePatientBtn" type="button">Guardar</button>
+</div>
+</div>
+</div>
+
+
+
+<!-- Modal: Historial de auditoría de un paciente -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-on-surface/30 backdrop-blur-sm p-margin-mobile" id="auditoriaModal">
+<div class="absolute inset-0" id="auditoriaModalBackdrop"></div>
+<div class="relative w-full max-w-md max-h-[80vh] bg-surface-container-lowest rounded-lg shadow-2xl flex flex-col">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold" id="auditoriaTitulo">Historial</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="closeAuditoriaModalBtn">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-md" id="auditoriaLista"></div>
+</div>
+</div>
+
+<script>
+  // ============================================================
+  // Estado en memoria de la lista de pacientes (para filtrar sin
+  // volver a pedirle al backend cada vez que escribes en el buscador)
+  // ============================================================
+  let pacientesCache = [];
+  let propietarioSeleccionadoId = null;
+  let dniValidadoOk = false; // true solo si Auth.validarDniPropietario() confirmó el DNI contra RENIEC
+
+  const ICONOS_ESPECIE = {
+    Canino: 'sound_detection_dog_barking',
+    Felino: 'cruelty_free',
+    Otro: 'pets',
+  };
+  const NOMBRE_ESPECIE = { Canino: 'Perro', Felino: 'Gato', Otro: 'Otro' };
+  const BADGE_VACUNACION = {
+    AlDia: { texto: 'Al día', clases: 'bg-secondary-container text-on-secondary-container border-secondary/20', punto: 'bg-secondary' },
+    Pendiente: { texto: 'Pendiente', clases: 'bg-[#FFF5D6] text-[#8C6D00] border-[#D9B52E]/30', punto: 'bg-[#D9B52E]' },
+    Atrasado: { texto: 'Vencido', clases: 'bg-error-container/30 text-error border-error/30', punto: 'bg-error' },
+  };
+
+  function fechaSoloDia(fechaIso) {
+    if (!fechaIso) return null;
+    const [y, m, d] = fechaIso.substring(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function calcularEdad(fechaNacimiento) {
+    const nacimiento = fechaSoloDia(fechaNacimiento);
+    if (!nacimiento) return 'Edad no registrada';
+    const hoy = new Date();
+    let años = hoy.getFullYear() - nacimiento.getFullYear();
+    let meses = hoy.getMonth() - nacimiento.getMonth();
+    if (meses < 0) { años--; meses += 12; }
+    if (años <= 0) return `${meses} meses`;
+    return `${años} años, ${meses} meses`;
+  }
+
+  function formatearFecha(fechaIso) {
+    const d = fechaSoloDia(fechaIso);
+    if (!d) return 'Sin visitas';
+    return d.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  function renderPacientes(lista) {
+    const tbody = document.getElementById('patientsTableBody');
+    document.getElementById('paginationInfo').textContent = `Mostrando ${lista.length} pacientes`;
+
+    if (lista.length === 0) {
+      tbody.innerHTML = `<tr><td class="py-6 px-md text-center text-on-surface-variant" colspan="8">No se encontraron pacientes.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = lista.map((p) => {
+      const iniciales = p.Nombre.slice(0, 2).toUpperCase();
+      const badge = p.EstadoVacunacion ? BADGE_VACUNACION[p.EstadoVacunacion] : null;
+      const avatar = p.FotoURL
+        ? `<img class="w-full h-full object-cover" src="${BACKEND_ORIGIN}${escHtml(p.FotoURL)}">`
+        : iniciales;
+      return `
+        <tr class="hover:bg-surface-container/30 transition-colors group">
+          <td class="py-sm px-md">
+            <div class="flex items-center gap-sm">
+              <div class="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-outline-variant/30 relative bg-surface-container-high flex items-center justify-center text-primary font-bold text-caption">
+                ${avatar}
+              </div>
+              <span class="font-body-md text-body-md text-on-surface font-semibold group-hover:text-primary transition-colors">${escHtml(p.Nombre)}</span>
+              ${p.RegistradoPorCliente ? '<span class="ml-1 px-2 py-0.5 rounded-full text-[11px] font-bold whitespace-nowrap" style="background:rgba(217,119,6,.14);color:#d97706" title="La registró el cliente desde el portal. Al editar y guardar la ficha queda revisada.">📱 Por revisar</span>' : ''}
+            </div>
+          </td>
+          <td class="py-sm px-md">
+            <div class="flex items-center gap-xs text-on-surface-variant">
+              <span class="material-symbols-outlined text-[18px]">${ICONOS_ESPECIE[p.Especie] || 'pets'}</span>
+              <span class="font-body-md text-body-md">${escHtml(NOMBRE_ESPECIE[p.Especie] || p.Especie)}</span>
+            </div>
+          </td>
+          <td class="py-sm px-md">
+            <div class="flex flex-col">
+              <span class="font-body-md text-body-md text-on-surface">${escHtml(p.Raza || 'Sin raza registrada')}</span>
+              <span class="text-caption font-caption text-on-surface-variant">${calcularEdad(p.FechaNacimiento)}</span>
+            </div>
+          </td>
+          <td class="py-sm px-md">
+            <div class="flex flex-col">
+              <span class="font-body-md text-body-md text-on-surface">${escHtml(p.PropietarioNombres)} ${escHtml(p.PropietarioApellidos)}</span>
+              <span class="text-caption font-caption text-on-surface-variant">${escHtml(p.PropietarioTelefono || '')}</span>
+            </div>
+          </td>
+          <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">${formatearFecha(p.UltimaVisita)}</td>
+          <td class="py-sm px-md text-right">
+            ${badge
+              ? `<span class="inline-flex items-center gap-xs px-xs py-[2px] rounded-full ${escHtml(badge.clases)} text-caption font-caption font-medium border">
+                   <span class="w-2 h-2 rounded-full ${escHtml(badge.punto)}"></span>${escHtml(badge.texto)}
+                 </span>`
+              : `<span class="text-caption font-caption text-on-surface-variant">Sin esquema</span>`}
+          </td>
+          <td class="py-sm px-md">
+            <span class="inline-flex items-center gap-xs px-2 py-1 rounded-full ${escHtml(p.Activo ? 'bg-secondary-container/30 text-secondary-container' : 'bg-outline-variant/30 text-on-surface-variant')} text-caption font-semibold">
+              <span class="w-2 h-2 rounded-full ${escHtml(p.Activo ? 'bg-secondary-container' : 'bg-outline-variant')}"></span>
+              ${escHtml(p.Activo ? 'Activo' : 'Inactivo')}
+            </span>
+          </td>
+          <td class="py-sm px-md text-right">
+            <div class="flex justify-end gap-xs">
+              <a class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" href="historia-clinica.html?pacienteId=${escHtml(p.PacienteID)}" title="Ver historia clínica">
+                <span class="material-symbols-outlined text-[20px]">description</span>
+              </a>
+              <a class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" href="esquemas-preventivos.html?pacienteId=${escHtml(p.PacienteID)}" title="Ver esquemas preventivos">
+                <span class="material-symbols-outlined text-[20px]">vaccines</span>
+              </a>
+              <button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors btn-editar-paciente" data-paciente-id="${escHtml(p.PacienteID)}" title="Editar paciente" type="button">
+                <span class="material-symbols-outlined text-[20px]">edit</span>
+              </button>
+              <button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors btn-ver-auditoria" data-paciente-id="${escHtml(p.PacienteID)}" data-paciente-nombre="${escHtml(p.Nombre)}" title="Ver historial de auditoría" type="button">
+                <span class="material-symbols-outlined text-[20px]">history</span>
+              </button>
+              <button class="w-8 h-8 rounded-full flex items-center justify-center ${escHtml(p.Activo ? 'text-on-surface-variant hover:text-error hover:bg-error-container/20' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high')} transition-colors btn-toggle-paciente" data-paciente-id="${escHtml(p.PacienteID)}" data-activo="${escHtml(p.Activo)}" title="${escHtml(p.Activo ? 'Desactivar paciente' : 'Activar paciente')}" type="button">
+                <span class="material-symbols-outlined text-[20px]">${escHtml(p.Activo ? 'toggle_off' : 'toggle_on')}</span>
+              </button>
+              ${Auth.obtenerUsuario()?.accesoConfig ? `
+              <button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors btn-dar-acceso" data-propietario-id="${escHtml(p.PropietarioID)}" data-propietario-nombre="${escHtml(p.PropietarioNombres)} ${escHtml(p.PropietarioApellidos)}" title="Dar acceso al portal de clientes" type="button">
+                <span class="material-symbols-outlined text-[20px]">vpn_key</span>
+              </button>` : ''}
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  function aplicarFiltros() {
+    const texto = document.getElementById('searchInput').value.trim().toLowerCase();
+    const especie = document.getElementById('filterEspecie').value;
+    const vacunacion = document.getElementById('filterVacunacion').value;
+
+    const filtrados = pacientesCache.filter((p) => {
+      const coincideTexto = !texto ||
+        p.Nombre.toLowerCase().includes(texto) ||
+        `${p.PropietarioNombres} ${p.PropietarioApellidos}`.toLowerCase().includes(texto);
+      const coincideEspecie = !especie || p.Especie === especie;
+      const coincideVacunacion = !vacunacion || p.EstadoVacunacion === vacunacion;
+      return coincideTexto && coincideEspecie && coincideVacunacion;
+    });
+
+    renderPacientes(filtrados);
+  }
+
+  async function cargarPacientes() {
+    try {
+      pacientesCache = await Auth.apiFetch('/pacientes');
+      // Búsqueda que llega desde la barra superior de otras páginas (?buscar=...)
+      const buscarInicial = new URLSearchParams(window.location.search).get('buscar');
+      if (buscarInicial && !cargarPacientes.yaBusco) {
+        document.getElementById('searchInput').value = buscarInicial;
+        cargarPacientes.yaBusco = true;
+      }
+      aplicarFiltros();
+    } catch (err) {
+      document.getElementById('patientsTableBody').innerHTML =
+        `<tr><td class="py-6 px-md text-center text-error" colspan="8">${escHtml(err.message)}</td></tr>`;
+    }
+  }
+
+  document.getElementById('searchInput').addEventListener('input', aplicarFiltros);
+  document.getElementById('filterEspecie').addEventListener('change', aplicarFiltros);
+  document.getElementById('filterVacunacion').addEventListener('change', aplicarFiltros);
+
+  // ============================================================
+  // Foto de la mascota: subir desde galería o tomar con la cámara
+  // ============================================================
+  let archivoFotoSeleccionado = null; // File pendiente de subir
+  const BACKEND_ORIGIN = window.BACKEND_ORIGIN ?? 'http://localhost:4000';
+
+  function mostrarPreviewFoto(url) {
+    document.getElementById('pacienteFotoPreviewImg').src = url;
+    document.getElementById('pacienteFotoPreviewImg').classList.remove('hidden');
+    document.getElementById('pacienteFotoPreviewIcono').classList.add('hidden');
+    document.getElementById('btnQuitarFoto').classList.remove('hidden');
+  }
+
+  function limpiarPreviewFoto() {
+    archivoFotoSeleccionado = null;
+    document.getElementById('pacienteFotoInputGaleria').value = '';
+    document.getElementById('pacienteFotoInputCamara').value = '';
+    document.getElementById('pacienteFotoPreviewImg').src = '';
+    document.getElementById('pacienteFotoPreviewImg').classList.add('hidden');
+    document.getElementById('pacienteFotoPreviewIcono').classList.remove('hidden');
+    document.getElementById('btnQuitarFoto').classList.add('hidden');
+  }
+
+  function manejarSeleccionFoto(archivo) {
+    if (!archivo) return;
+    if (!archivo.type.startsWith('image/')) {
+      alert('Selecciona un archivo de imagen válido.');
+      return;
+    }
+    archivoFotoSeleccionado = archivo;
+    mostrarPreviewFoto(URL.createObjectURL(archivo));
+  }
+
+  document.getElementById('btnSubirFoto').addEventListener('click', () => {
+    document.getElementById('pacienteFotoInputGaleria').click();
+  });
+  document.getElementById('btnTomarFoto').addEventListener('click', () => {
+    document.getElementById('pacienteFotoInputCamara').click();
+  });
+  document.getElementById('pacienteFotoInputGaleria').addEventListener('change', (e) => {
+    manejarSeleccionFoto(e.target.files[0]);
+  });
+  document.getElementById('pacienteFotoInputCamara').addEventListener('change', (e) => {
+    manejarSeleccionFoto(e.target.files[0]);
+  });
+  document.getElementById('btnQuitarFoto').addEventListener('click', limpiarPreviewFoto);
+
+  // Sube la foto seleccionada (si hay una) al paciente ya creado/editado.
+  // No usa Auth.apiFetch porque ese helper fija Content-Type: application/json;
+  // para multipart hay que dejar que el navegador ponga el boundary solo.
+  async function subirFotoSiCorresponde(pacienteId) {
+    if (!archivoFotoSeleccionado) return;
+    const formData = new FormData();
+    formData.append('foto', archivoFotoSeleccionado);
+    try {
+      await fetch(`${window.API_BASE_URL}/pacientes/${pacienteId}/foto`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${Auth.obtenerToken()}` },
+        body: formData,
+      });
+    } catch (err) {
+      console.error('No se pudo subir la foto:', err);
+    }
+  }
+
+  // ============================================================
+  // Modal: abrir / cerrar (modo "crear" o modo "editar")
+  // ============================================================
+  const patientModal = document.getElementById('addPatientModal');
+  const patientModalPanel = document.getElementById('patientModalPanel');
+  let pacienteEnEdicionId = null;
+
+  function abrirModalPaciente() {
+    pacienteEnEdicionId = null;
+    resetearFormularioPaciente();
+    document.getElementById('patientModalTitle').textContent = 'Registrar nuevo paciente';
+    document.getElementById('seccionPropietario').classList.remove('hidden');
+    document.getElementById('savePatientBtn').textContent = 'Guardar';
+    patientModal.classList.remove('hidden');
+    setTimeout(() => patientModalPanel.classList.remove('translate-x-full'), 10);
+  }
+
+  function abrirModalEdicion(paciente) {
+    pacienteEnEdicionId = paciente.PacienteID;
+    resetearFormularioPaciente();
+    document.getElementById('patientModalTitle').textContent = `Editar paciente: ${paciente.Nombre}`;
+    document.getElementById('seccionPropietario').classList.add('hidden'); // no se cambia de dueño aquí
+    document.getElementById('savePatientBtn').textContent = 'Actualizar';
+
+    document.getElementById('pacienteNombre').value = paciente.Nombre || '';
+    document.getElementById('pacienteEspecie').value = paciente.Especie || 'Canino';
+    document.getElementById('pacienteRaza').value = paciente.Raza || '';
+    document.getElementById('pacienteFechaNacimiento').value = paciente.FechaNacimiento
+      ? paciente.FechaNacimiento.substring(0, 10)
+      : '';
+    document.getElementById('pacienteSexo').value = paciente.Sexo || 'M';
+    document.getElementById('pacienteAlergias').value = paciente.Alergias || '';
+
+    if (paciente.FotoURL) {
+      mostrarPreviewFoto(`${BACKEND_ORIGIN}${paciente.FotoURL}`);
+    }
+
+    patientModal.classList.remove('hidden');
+    setTimeout(() => patientModalPanel.classList.remove('translate-x-full'), 10);
+  }
+
+  function cerrarModalPaciente() {
+    patientModalPanel.classList.add('translate-x-full');
+    setTimeout(() => patientModal.classList.add('hidden'), 300);
+  }
+
+  document.getElementById('openAddPatientBtn').addEventListener('click', abrirModalPaciente);
+  document.getElementById('closePatientModalBtn').addEventListener('click', cerrarModalPaciente);
+  document.getElementById('cancelPatientModalBtn').addEventListener('click', cerrarModalPaciente);
+  document.getElementById('patientModalBackdrop').addEventListener('click', cerrarModalPaciente);
+
+  // Delegación de clicks en la tabla: botón "Editar paciente" de cada fila
+  document.getElementById('patientsTableBody').addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-editar-paciente');
+    if (!btn) return;
+    const id = Number(btn.dataset.pacienteId);
+    const paciente = pacientesCache.find((p) => p.PacienteID === id);
+    if (paciente) abrirModalEdicion(paciente);
+  });
+
+  // Delegación de clicks: botón "Dar acceso al portal de clientes"
+  document.getElementById('patientsTableBody').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-dar-acceso');
+    if (!btn) return;
+
+    const nombre = btn.dataset.propietarioNombre;
+    const confirmar = confirm(`¿Generar acceso al portal de clientes para ${nombre}?\n\nSi ya tenía una contraseña, quedará reemplazada por una nueva.`);
+    if (!confirmar) return;
+
+    btn.disabled = true;
+    try {
+      const data = await Auth.apiFetch(`/propietarios/${btn.dataset.propietarioId}/generar-acceso`, {
+        method: 'POST',
+        body: JSON.stringify({}),
+      });
+      if (data.contrasenaTemporalDev) {
+        alert(`Acceso generado para ${nombre}, pero el correo NO se pudo enviar.\n\nEntrégale esta contraseña temporal en persona (o por un canal seguro):\n\n${data.contrasenaTemporalDev}\n\nAl ingresar por primera vez, el sistema le pedirá cambiarla.`);
+      } else {
+        alert(`Acceso generado y enviado por correo a ${nombre}.`);
+      }
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // Delegación de clicks: botón activar/desactivar paciente
+  document.getElementById('patientsTableBody').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-toggle-paciente');
+    if (!btn) return;
+
+    const activoActual = btn.dataset.activo === 'true';
+    const mensaje = activoActual
+      ? '¿Desactivar este paciente? (por ejemplo, si falleció o el dueño ya no es cliente)'
+      : '¿Reactivar este paciente?';
+    if (!confirm(mensaje)) return;
+
+    btn.disabled = true;
+    try {
+      await Auth.cambiarEstadoPaciente(btn.dataset.pacienteId, !activoActual);
+      await cargarPacientes();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // Delegación de clicks: botón "Ver historial de auditoría"
+  document.getElementById('patientsTableBody').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-ver-auditoria');
+    if (!btn) return;
+
+    const modal = document.getElementById('auditoriaModal');
+    const lista = document.getElementById('auditoriaLista');
+    document.getElementById('auditoriaTitulo').textContent = `Historial de ${btn.dataset.pacienteNombre}`;
+    lista.innerHTML = '<p class="text-on-surface-variant font-body-md text-body-md">Cargando...</p>';
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    try {
+      const registros = await Auth.obtenerAuditoriaPaciente(btn.dataset.pacienteId);
+      if (registros.length === 0) {
+        lista.innerHTML = '<p class="text-on-surface-variant font-body-md text-body-md">Todavía no hay movimientos registrados.</p>';
+        return;
+      }
+      const ICONO_ACCION = { Crear: 'add_circle', Actualizar: 'edit', Activar: 'toggle_on', Desactivar: 'toggle_off' };
+      lista.innerHTML = registros.map((r) => `
+        <div class="flex gap-sm py-sm border-b border-outline-variant/30 last:border-0">
+          <span class="material-symbols-outlined text-primary text-[20px] mt-1">${ICONO_ACCION[r.Accion] || 'history'}</span>
+          <div>
+            <p class="font-body-md text-body-md text-on-surface">${escHtml(r.Detalle || r.Accion)}</p>
+            <p class="font-caption text-caption text-on-surface-variant">${escHtml(r.UsuarioNombre)} · ${new Date(r.FechaHora).toLocaleString('es-PE')}</p>
+          </div>
+        </div>
+      `).join('');
+    } catch (err) {
+      lista.innerHTML = `<p class="text-error font-body-md text-body-md">${escHtml(err.message)}</p>`;
+    }
+  });
+
+  document.getElementById('closeAuditoriaModalBtn').addEventListener('click', () => {
+    document.getElementById('auditoriaModal').classList.add('hidden');
+    document.getElementById('auditoriaModal').classList.remove('flex');
+  });
+  document.getElementById('auditoriaModalBackdrop').addEventListener('click', () => {
+    document.getElementById('auditoriaModal').classList.add('hidden');
+    document.getElementById('auditoriaModal').classList.remove('flex');
+  });
+
+  function resetearFormularioPaciente() {
+    propietarioSeleccionadoId = null;
+    dniValidadoOk = false;
+    limpiarPreviewFoto();
+    document.getElementById('modoPropietarioExistente').checked = true;
+    document.getElementById('bloquePropietarioExistente').classList.remove('hidden');
+    document.getElementById('bloquePropietarioNuevo').classList.add('hidden');
+    document.getElementById('buscarPropietarioInput').value = '';
+    document.getElementById('resultadosPropietario').classList.add('hidden');
+    document.getElementById('propietarioSeleccionadoBox').classList.add('hidden');
+    document.getElementById('dniEstadoTexto').classList.add('hidden');
+    document.getElementById('propCorreoEstadoTexto').classList.add('hidden');
+    resetearUbigeoPropietario();
+    ['nuevoPropDni', 'nuevoPropNombres', 'nuevoPropApellidos', 'nuevoPropTelefono', 'nuevoPropCorreo', 'nuevoPropDireccion',
+     'pacienteNombre', 'pacienteRaza', 'pacienteFechaNacimiento', 'pacienteAlergias']
+      .forEach((id) => { document.getElementById(id).value = ''; });
+    document.getElementById('pacienteEspecie').value = 'Canino';
+    document.getElementById('pacienteSexo').value = 'M';
+    document.getElementById('addPatientError').classList.add('hidden');
+    // Nunca se puede registrar una mascota con fecha de nacimiento futura.
+    document.getElementById('pacienteFechaNacimiento').max = new Date().toISOString().substring(0, 10);
+  }
+
+  // Teléfono del propietario nuevo: solo números, máximo 9 dígitos (Perú).
+  // beforeinput bloquea la tecla ANTES de que se escriba (evita el
+  // parpadeo de escribir-y-borrar); input es un respaldo por si el
+  // navegador no soporta beforeinput, o si el texto llega pegado (Ctrl+V).
+  function permitirSoloNumeros(input, maxDigitos) {
+    input.addEventListener('beforeinput', (e) => {
+      if (e.data && /\D/.test(e.data)) {
+        e.preventDefault();
+      }
+    });
+    input.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, maxDigitos);
+    });
+  }
+
+  permitirSoloNumeros(document.getElementById('nuevoPropTelefono'), 9);
+  permitirSoloNumeros(document.getElementById('nuevoPropDni'), 8);
+
+  // ============================================================
+  // Ubigeo en cascada: Departamento -> Provincia -> Distrito
+  // (mismo patrón que en Personal)
+  // ============================================================
+  const selPropDepartamento = document.getElementById('nuevoPropDepartamento');
+  const selPropProvincia = document.getElementById('nuevoPropProvincia');
+  const selPropDistrito = document.getElementById('nuevoPropDistrito');
+
+  function llenarSelectUbigeo(select, items, valueKey, labelKey, placeholder) {
+    select.innerHTML = `<option value="">${placeholder}</option>` +
+      items.map((it) => `<option value="${escHtml(it[valueKey])}">${escHtml(it[labelKey])}</option>`).join('');
+  }
+
+  let departamentosCachePaciente = [];
+  async function cargarDepartamentosPaciente() {
+    departamentosCachePaciente = await Auth.listarDepartamentos();
+    llenarSelectUbigeo(selPropDepartamento, departamentosCachePaciente, 'CodigoDepartamento', 'Nombre', 'Departamento');
+  }
+  cargarDepartamentosPaciente();
+
+  function resetearUbigeoPropietario() {
+    llenarSelectUbigeo(selPropDepartamento, departamentosCachePaciente, 'CodigoDepartamento', 'Nombre', 'Departamento');
+    llenarSelectUbigeo(selPropProvincia, [], null, null, 'Provincia');
+    llenarSelectUbigeo(selPropDistrito, [], null, null, 'Distrito');
+    selPropProvincia.disabled = true;
+    selPropDistrito.disabled = true;
+    actualizarCodigoUbigeoPaciente();
+  }
+
+  function actualizarCodigoUbigeoPaciente() {
+    const codigo = document.getElementById('propUbigeoCodigo');
+    if (selPropDistrito.value) {
+      codigo.textContent = selPropDistrito.value;
+    } else {
+      const dep = selPropDepartamento.value || '——';
+      const prov = selPropProvincia.value ? selPropProvincia.value.slice(-2) : '——';
+      codigo.textContent = `${dep} ${prov} ——`;
+    }
+  }
+
+  selPropDepartamento.addEventListener('change', async () => {
+    llenarSelectUbigeo(selPropProvincia, [], null, null, 'Provincia');
+    llenarSelectUbigeo(selPropDistrito, [], null, null, 'Distrito');
+    selPropDistrito.disabled = true;
+    actualizarCodigoUbigeoPaciente();
+    if (!selPropDepartamento.value) { selPropProvincia.disabled = true; return; }
+    const provincias = await Auth.listarProvincias(selPropDepartamento.value);
+    llenarSelectUbigeo(selPropProvincia, provincias, 'CodigoProvincia', 'Nombre', 'Provincia');
+    selPropProvincia.disabled = false;
+  });
+
+  selPropProvincia.addEventListener('change', async () => {
+    llenarSelectUbigeo(selPropDistrito, [], null, null, 'Distrito');
+    actualizarCodigoUbigeoPaciente();
+    if (!selPropProvincia.value) { selPropDistrito.disabled = true; return; }
+    const distritos = await Auth.listarDistritos(selPropProvincia.value);
+    llenarSelectUbigeo(selPropDistrito, distritos, 'CodigoDistrito', 'Nombre', 'Distrito');
+    selPropDistrito.disabled = false;
+  });
+
+  selPropDistrito.addEventListener('change', actualizarCodigoUbigeoPaciente);
+
+  // ============================================================
+  // Verificar que el correo del propietario tenga dominio real
+  // (mismo mecanismo sin costo que en Personal)
+  // ============================================================
+  document.getElementById('btnVerificarCorreoProp').addEventListener('click', async () => {
+    const correo = document.getElementById('nuevoPropCorreo').value.trim();
+    const estadoEl = document.getElementById('propCorreoEstadoTexto');
+    estadoEl.classList.remove('hidden', 'text-error', 'text-secondary', 'text-on-surface-variant');
+
+    if (!correo || !correo.includes('@')) {
+      estadoEl.textContent = 'Escribe un correo válido primero.';
+      estadoEl.classList.add('text-error');
+      return;
+    }
+
+    estadoEl.textContent = 'Verificando dominio...';
+    try {
+      const resultado = await Auth.verificarCorreo(correo);
+      if (resultado.valido === true) {
+        estadoEl.textContent = '✓ El dominio tiene servidor de correo activo.';
+        estadoEl.classList.add('text-secondary');
+      } else if (resultado.valido === false) {
+        estadoEl.textContent = resultado.mensaje;
+        estadoEl.classList.add('text-error');
+      } else {
+        estadoEl.textContent = resultado.mensaje || 'No se pudo verificar en este momento.';
+        estadoEl.classList.add('text-on-surface-variant');
+      }
+    } catch (err) {
+      estadoEl.textContent = err.message;
+      estadoEl.classList.add('text-error');
+    }
+  });
+
+  // ============================================================
+  // Validar DNI del propietario nuevo contra RENIEC
+  // ============================================================
+  document.getElementById('btnValidarDni').addEventListener('click', async () => {
+    const dni = document.getElementById('nuevoPropDni').value.trim();
+    const estadoEl = document.getElementById('dniEstadoTexto');
+    dniValidadoOk = false;
+    estadoEl.classList.remove('hidden', 'text-error', 'text-secondary');
+
+    if (!/^\d{8}$/.test(dni)) {
+      estadoEl.textContent = 'El DNI debe tener 8 dígitos.';
+      estadoEl.classList.add('text-error');
+      return;
+    }
+
+    estadoEl.textContent = 'Consultando RENIEC...';
+    try {
+      const resultado = await Auth.validarDniPropietario(dni);
+      if (resultado.valido) {
+        dniValidadoOk = true;
+        estadoEl.textContent = `✓ DNI válido: ${resultado.nombres} ${resultado.apellidos}`;
+        estadoEl.classList.add('text-secondary');
+        // Autocompleta, pero deja que el usuario lo edite si quiere.
+        if (!document.getElementById('nuevoPropNombres').value) {
+          document.getElementById('nuevoPropNombres').value = resultado.nombres;
+        }
+        if (!document.getElementById('nuevoPropApellidos').value) {
+          document.getElementById('nuevoPropApellidos').value = resultado.apellidos;
+        }
+      } else {
+        estadoEl.textContent = resultado.mensaje || 'No se pudo validar el DNI.';
+        estadoEl.classList.add(resultado.modoDesarrollo ? 'text-on-surface-variant' : 'text-error');
+      }
+    } catch (err) {
+      estadoEl.textContent = err.message;
+      estadoEl.classList.add('text-error');
+    }
+  });
+
+  // ============================================================
+  // Toggle: propietario existente vs. nuevo
+  // ============================================================
+  document.getElementById('modoPropietarioExistente').addEventListener('change', () => {
+    document.getElementById('bloquePropietarioExistente').classList.remove('hidden');
+    document.getElementById('bloquePropietarioNuevo').classList.add('hidden');
+  });
+  document.getElementById('modoPropietarioNuevo').addEventListener('change', () => {
+    document.getElementById('bloquePropietarioExistente').classList.add('hidden');
+    document.getElementById('bloquePropietarioNuevo').classList.remove('hidden');
+    propietarioSeleccionadoId = null;
+    document.getElementById('propietarioSeleccionadoBox').classList.add('hidden');
+  });
+
+  // ============================================================
+  // Buscar propietario existente (con debounce)
+  // ============================================================
+  let debounceTimer;
+  document.getElementById('buscarPropietarioInput').addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    const texto = e.target.value.trim();
+    const resultadosEl = document.getElementById('resultadosPropietario');
+
+    if (texto.length < 2) {
+      resultadosEl.classList.add('hidden');
+      return;
+    }
+
+    debounceTimer = setTimeout(async () => {
+      try {
+        const propietarios = await Auth.apiFetch(`/propietarios?buscar=${encodeURIComponent(texto)}`);
+
+        if (propietarios.length === 0) {
+          resultadosEl.innerHTML = `<div class="p-sm text-caption text-on-surface-variant">Sin resultados. Puedes registrarlo como nuevo.</div>`;
+        } else {
+          resultadosEl.innerHTML = propietarios.map((p) => `
+            <div class="p-sm hover:bg-surface-container-low cursor-pointer border-b border-outline-variant/30 last:border-0"
+                 data-id="${escHtml(p.PropietarioID)}" data-nombre="${escHtml(p.Nombres)} ${escHtml(p.Apellidos)}">
+              <p class="font-body-md text-body-md text-on-surface">${escHtml(p.Nombres)} ${escHtml(p.Apellidos)}</p>
+              <p class="text-caption font-caption text-on-surface-variant">${escHtml(p.CorreoElectronico || '')} ${escHtml(p.Telefono || '')}</p>
+            </div>
+          `).join('');
+        }
+        resultadosEl.classList.remove('hidden');
+      } catch (err) {
+        resultadosEl.classList.add('hidden');
+      }
+    }, 300);
+  });
+
+  document.getElementById('resultadosPropietario').addEventListener('click', (e) => {
+    const item = e.target.closest('[data-id]');
+    if (!item) return;
+    propietarioSeleccionadoId = Number(item.dataset.id);
+    document.getElementById('propietarioSeleccionadoTexto').textContent = item.dataset.nombre;
+    document.getElementById('propietarioSeleccionadoBox').classList.remove('hidden');
+    document.getElementById('resultadosPropietario').classList.add('hidden');
+    document.getElementById('buscarPropietarioInput').value = '';
+  });
+
+  document.getElementById('quitarPropietarioBtn').addEventListener('click', () => {
+    propietarioSeleccionadoId = null;
+    document.getElementById('propietarioSeleccionadoBox').classList.add('hidden');
+  });
+
+  // ============================================================
+  // Guardar paciente (crear o editar, según pacienteEnEdicionId)
+  // ============================================================
+  document.getElementById('savePatientBtn').addEventListener('click', async () => {
+    const errorEl = document.getElementById('addPatientError');
+    errorEl.classList.add('hidden');
+
+    const nombre = document.getElementById('pacienteNombre').value.trim();
+    const especie = document.getElementById('pacienteEspecie').value;
+
+    if (!nombre) {
+      errorEl.textContent = 'El nombre de la mascota es obligatorio.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    // Si se está registrando un propietario nuevo y escribió algo en DNI,
+    // tiene que ser exactamente 8 dígitos — no se deja pasar con menos
+    // (el filtro de "solo números" ya evita que escriba más de 8).
+    if (!pacienteEnEdicionId && document.getElementById('modoPropietarioNuevo').checked) {
+      const dniEscrito = document.getElementById('nuevoPropDni').value.trim();
+      if (dniEscrito && dniEscrito.length !== 8) {
+        errorEl.textContent = 'El DNI del propietario debe tener exactamente 8 dígitos.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+    }
+
+    const body = {
+      nombre,
+      especie,
+      raza: document.getElementById('pacienteRaza').value.trim(),
+      fechaNacimiento: document.getElementById('pacienteFechaNacimiento').value || null,
+      sexo: document.getElementById('pacienteSexo').value,
+      alergias: document.getElementById('pacienteAlergias').value.trim(),
+    };
+
+    // Modo edición: no se toca al propietario, solo los datos de la mascota
+    if (pacienteEnEdicionId) {
+      try {
+        await Auth.apiFetch(`/pacientes/${pacienteEnEdicionId}`, {
+          method: 'PUT',
+          body: JSON.stringify(body),
+        });
+        await subirFotoSiCorresponde(pacienteEnEdicionId);
+        cerrarModalPaciente();
+        await cargarPacientes();
+      } catch (err) {
+        errorEl.textContent = err.message;
+        errorEl.classList.remove('hidden');
+      }
+      return;
+    }
+
+    // Modo registro: sí requiere propietario (existente o nuevo)
+    const esNuevoPropietario = document.getElementById('modoPropietarioNuevo').checked;
+    if (esNuevoPropietario) {
+      body.propietarioNuevo = {
+        nombres: document.getElementById('nuevoPropNombres').value.trim(),
+        apellidos: document.getElementById('nuevoPropApellidos').value.trim(),
+        telefono: document.getElementById('nuevoPropTelefono').value.trim(),
+        correo: document.getElementById('nuevoPropCorreo').value.trim(),
+        direccion: document.getElementById('nuevoPropDireccion').value.trim(),
+        codigoDistrito: document.getElementById('nuevoPropDistrito').value || null,
+        numeroDocumento: document.getElementById('nuevoPropDni').value.trim() || null,
+        dniValidado: dniValidadoOk,
+      };
+    } else {
+      if (!propietarioSeleccionadoId) {
+        errorEl.textContent = 'Selecciona un propietario de la lista o registra uno nuevo.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      body.propietarioId = propietarioSeleccionadoId;
+    }
+
+    try {
+      const respuesta = await Auth.apiFetch('/pacientes', {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+      await subirFotoSiCorresponde(respuesta.pacienteId);
+
+      cerrarModalPaciente();
+      await cargarPacientes();
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+
+  // ============================================================
+  // Carga inicial
+  // ============================================================
+  cargarPacientes();
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

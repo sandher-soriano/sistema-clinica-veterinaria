@@ -1,0 +1,179 @@
+/* ==========================================================
+   Premier Can - Mascota del login (perro "Max" / gata "Luna")
+   Se asoma por encima de la tarjeta, sigue lo que escribes con
+   la mirada y se tapa los ojos cuando escribes la contraseña.
+   Lógica en assets/js/mascota.js
+   ========================================================== */
+
+.mascota-wrap {
+  position: relative;
+  width: 190px;
+  height: 171px;
+  /* La fila y=150 del SVG coincide con el borde superior de la tarjeta */
+  /* 142px = y150 del viewBox escalado; 48px = padding p-lg de la tarjeta */
+  margin: calc(-1 * (142px + var(--mascota-pad, 48px))) auto 4px;
+  z-index: 5;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.mascota-svg { width: 100%; height: 100%; overflow: visible; display: block; }
+
+/* ---- Paleta por especie ---- */
+.mascota-wrap.m-perro {
+  --m-fur: #e0a15e;
+  --m-fur-dark: #b9773a;
+  --m-ear: #8f5528;
+  --m-light: #f8e3c6;
+  --m-eye: #2b1d14;
+  --m-pupil: #2b1d14;
+  --m-nose: #2b1d14;
+}
+.mascota-wrap.m-gato {
+  --m-fur: #f4a259;
+  --m-fur-dark: #d17a2c;
+  --m-ear: #f4a259;
+  --m-light: #fff3e3;
+  --m-eye: #7cc47f;
+  --m-pupil: #1f2a1f;
+  --m-nose: #f08a9b;
+}
+
+.m-fur { fill: var(--m-fur); }
+.m-fur-dark { fill: var(--m-fur-dark); }
+.m-ear { fill: var(--m-ear); }
+.m-light { fill: var(--m-light); }
+.m-eye-base { fill: var(--m-eye); }
+.m-pupil { fill: var(--m-pupil); }
+.m-nose { fill: var(--m-nose); }
+.m-stroke { fill: none; stroke: #3b2a1e; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.m-paw-shape { fill: var(--m-fur); stroke: var(--m-fur-dark); stroke-width: 2; }
+.m-toe { fill: none; stroke: var(--m-fur-dark); stroke-width: 2; stroke-linecap: round; }
+
+/* Partes que dependen de la especie */
+.m-perro .solo-gato, .m-gato .solo-perro { display: none; }
+.m-perro .m-pupil { display: none; } /* el perro tiene ojos "botón" de un solo color */
+
+/* ---- Animaciones base ---- */
+.m-head, .m-eye-inner, .m-ear-l, .m-ear-r, .m-tail, .m-brow {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.m-head { transition: transform .35s ease; }
+
+.m-eye-inner {
+  transform: translate(var(--lx, 0px), var(--ly, 0px));
+  transition: transform .18s ease-out;
+}
+.m-eye { transform-box: fill-box; transform-origin: center; animation: m-parpadeo 5s infinite; }
+.m-eye-r { animation-delay: .04s; }
+@keyframes m-parpadeo {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(.1); }
+}
+
+.m-ear-l { transform-origin: 80% 10%; animation: m-oreja 7s ease-in-out infinite; }
+.m-ear-r { transform-origin: 20% 10%; animation: m-oreja 7s ease-in-out infinite reverse; }
+@keyframes m-oreja {
+  0%, 85%, 100% { transform: rotate(0deg); }
+  90% { transform: rotate(-8deg); }
+  95% { transform: rotate(4deg); }
+}
+
+.m-tail { transform-origin: 0% 100%; animation: m-cola 1.1s ease-in-out infinite alternate; }
+.m-gato .m-tail { animation-duration: 2.6s; }
+@keyframes m-cola {
+  from { transform: rotate(-10deg); }
+  to   { transform: rotate(14deg); }
+}
+
+/* ---- Patitas ---- */
+.m-paw {
+  transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+/* Mismo origen (en coordenadas del SVG) para brazo y patita, así se mueven juntos */
+.m-paw { transform-box: view-box; }
+.m-paw-l { transform-origin: 72px 158px; }
+.m-paw-r { transform-origin: 128px 158px; }
+
+/* Tapándose los ojos (escribiendo la contraseña) */
+.is-cubriendo .m-paw-l { transform: translate(6px, -70px) rotate(12deg) scale(1.12); }
+.is-cubriendo .m-paw-r { transform: translate(-6px, -70px) rotate(-12deg) scale(1.12); }
+.is-cubriendo .m-eye { animation: none; }
+.is-cubriendo .m-head { transform: translateY(3px); }
+
+/* Espiando por un huequito (contraseña visible con el botón del ojo) */
+.is-cubriendo.is-espiando .m-paw-r { transform: translate(-2px, -40px) rotate(-4deg) scale(1.08); }
+.is-espiando .m-eye-r .m-eye-inner { transform: translate(-2px, 4px); }
+.is-espiando .m-brow-r { opacity: 1; transform: translateY(-4px) rotate(-10deg); }
+
+/* ---- Expresiones ---- */
+.m-brow { transition: transform .3s ease, opacity .3s ease; opacity: 0; }
+.m-mouth-sad, .m-tongue, .m-eye-happy { opacity: 0; transition: opacity .2s ease; }
+.m-mouth-normal { transition: opacity .2s ease; }
+
+.is-triste .m-brow { opacity: 1; }
+.is-triste .m-brow-l { transform: rotate(18deg) translateY(-2px); }
+.is-triste .m-brow-r { transform: rotate(-18deg) translateY(-2px); }
+.is-triste .m-mouth-normal { opacity: 0; }
+.is-triste .m-mouth-sad { opacity: 1; }
+.is-triste .m-ear-l { animation: none; transform: rotate(14deg); }
+.is-triste .m-ear-r { animation: none; transform: rotate(-14deg); }
+.is-triste .m-head { animation: m-no .5s ease-in-out 2; }
+.is-triste .m-tail { animation-play-state: paused; }
+@keyframes m-no {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-6px) rotate(-4deg); }
+  75% { transform: translateX(6px) rotate(4deg); }
+}
+
+.is-feliz .m-tongue, .is-feliz .m-eye-happy { opacity: 1; }
+.is-feliz .m-eye { opacity: 0; }
+.is-feliz .m-tail { animation-duration: .3s; }
+.is-feliz .mascota-svg { animation: m-salto .5s ease 3; }
+@keyframes m-salto {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-12px); }
+}
+
+/* Cambio de especie */
+.mascota-wrap.is-cambiando .mascota-svg { animation: m-giro .5s ease; }
+@keyframes m-giro {
+  0% { transform: scale(1) rotate(0); }
+  50% { transform: scale(.6) rotate(-12deg); opacity: .4; }
+  100% { transform: scale(1) rotate(0); }
+}
+.mascota-wrap:hover .m-head { transform: rotate(-4deg); }
+.is-cubriendo.mascota-wrap:hover .m-head { transform: translateY(3px); }
+
+/* ---- Globo de diálogo ---- */
+.mascota-burbuja {
+  position: absolute;
+  left: calc(100% - 18px);
+  top: 18px;
+  min-width: 128px;
+  max-width: 200px;
+  padding: 8px 12px;
+  border-radius: 14px 14px 14px 4px;
+  background: #ffffff;
+  color: #00606a;
+  border: 1.5px solid #9ed8df;
+  box-shadow: 0 8px 18px rgba(13, 122, 135, .16);
+  font: 600 13px/1.3 'Hanken Grotesk', system-ui, sans-serif;
+  opacity: 0;
+  transform: translateY(6px) scale(.9);
+  transform-origin: 0% 100%;
+  transition: opacity .2s ease, transform .25s cubic-bezier(.34, 1.56, .64, 1);
+  pointer-events: none;
+  white-space: normal;
+}
+.mascota-burbuja.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+@media (max-width: 480px) {
+  .mascota-burbuja { left: auto; right: calc(100% - 30px); top: -8px; border-radius: 14px 14px 4px 14px; transform-origin: 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascota-wrap *, .mascota-svg { animation: none !important; transition-duration: .01s !important; }
+}

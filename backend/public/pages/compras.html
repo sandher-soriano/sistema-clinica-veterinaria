@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compras - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background flex min-h-screen antialiased">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm"><div class="w-9 h-9"></div><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Compras</h1></div>
+</header>
+<main class="flex-1 p-margin-mobile md:p-margin-desktop">
+<div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Compras y proveedores</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Abastecimiento del inventario: comprobantes, lotes, cuentas por pagar y pedidos.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="border border-primary text-primary py-3 px-4 rounded-lg flex items-center gap-2 font-label-md" id="btnNuevoProveedor" type="button"><span class="material-symbols-outlined">add_business</span>Nuevo proveedor</button>
+<button class="bg-primary text-on-primary py-3 px-5 rounded-lg flex items-center gap-2 font-label-md" id="btnNuevaCompra" type="button"><span class="material-symbols-outlined">add_shopping_cart</span>Registrar compra</button>
+</div>
+</div>
+
+<div class="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-6" id="tarjetas"></div>
+
+<div class="flex gap-2 mb-4 overflow-x-auto" id="pestanas" role="tablist">
+<button class="pestana activa" data-tab="compras" type="button"><span class="material-symbols-outlined">receipt_long</span>Compras</button>
+<button class="pestana" data-tab="proveedores" type="button"><span class="material-symbols-outlined">storefront</span>Proveedores</button>
+<button class="pestana" data-tab="pedido" type="button"><span class="material-symbols-outlined">assignment</span>Pedido sugerido <span class="hidden ml-1 px-2 rounded-full text-xs font-bold" id="badgePedido" style="background:#d97706;color:#fff"></span></button>
+</div>
+
+<!-- ===== Compras ===== -->
+<section data-panel="compras">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 mb-4 flex flex-wrap gap-3 items-center">
+<select class="py-2 px-3" id="filtroEstado"><option value="">Todas</option><option value="Pendiente">Por pagar</option><option value="Vencida">Vencidas</option><option value="Pagado">Pagadas</option></select>
+<select class="py-2 px-3 min-w-[200px]" id="filtroProveedor"><option value="">Todos los proveedores</option></select>
+<label class="flex items-center gap-2 text-sm text-on-surface-variant">Desde <input class="py-2 px-3" id="filtroDesde" type="date"></label>
+<label class="flex items-center gap-2 text-sm text-on-surface-variant">Hasta <input class="py-2 px-3" id="filtroHasta" type="date"></label>
+</div>
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-x-auto">
+<table class="w-full text-left">
+<thead><tr><th class="py-3 px-4">Fecha</th><th class="py-3 px-4">Proveedor</th><th class="py-3 px-4">Comprobante</th><th class="py-3 px-4 text-right">Total</th><th class="py-3 px-4">Pago</th><th class="py-3 px-4"></th></tr></thead>
+<tbody id="tablaCompras"><tr><td class="py-6 px-4 text-center text-on-surface-variant" colspan="6">Cargando…</td></tr></tbody>
+</table>
+</div>
+</section>
+
+<!-- ===== Proveedores ===== -->
+<section class="hidden" data-panel="proveedores">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 mb-4 flex flex-wrap gap-3 items-center">
+<div class="relative flex-1 min-w-[220px]"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-3 py-2" id="buscarProveedor" placeholder="Buscar por nombre, RUC o contacto…" type="text"></div>
+<label class="flex items-center gap-2 text-sm text-on-surface-variant"><input id="verInactivos" type="checkbox"> Ver inactivos</label>
+</div>
+<div class="grid md:grid-cols-2 2xl:grid-cols-3 gap-4" id="gridProveedores"></div>
+</section>
+
+<!-- ===== Pedido sugerido ===== -->
+<section class="hidden" data-panel="pedido">
+<p class="text-on-surface-variant mb-4">Se arma solo: productos en su <b>stock mínimo</b> o por debajo, y los que el personal pidió desde Inventario (🙋 Solicitar reposición). Se agrupan por proveedor habitual; la cantidad repone hasta el doble del mínimo y puedes cambiarla. Al registrar la compra, las solicitudes se marcan como atendidas.</p>
+<div class="space-y-4" id="listaPedido"></div>
+</section>
+</main>
+</div>
+
+<!-- ===== Modal compra ===== -->
+<div class="fixed inset-0 z-[100] hidden" id="modalCompra">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-3 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-5xl w-full max-h-[94vh] overflow-y-auto p-5 md:p-6 space-y-4" id="formCompra" novalidate>
+<div class="flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">add_shopping_cart</span>Registrar compra</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="sm:col-span-2"><label class="etq" for="cProveedor">Proveedor *</label><select class="w-full py-2 px-3" id="cProveedor"></select></div>
+<div><label class="etq" for="cTipoDoc">Comprobante *</label><select class="w-full py-2 px-3" id="cTipoDoc"><option>Factura</option><option>Boleta</option><option>Guía de remisión</option><option>Sin comprobante</option></select></div>
+<div><label class="etq" for="cNumero">Serie - número</label><input class="w-full py-2 px-3 uppercase" id="cNumero" maxlength="30" placeholder="F001-000123" type="text"></div>
+<div><label class="etq" for="cEmision">Fecha de emisión *</label><input class="w-full py-2 px-3" id="cEmision" type="date"></div>
+<div><label class="etq" for="cCondicion">Condición de pago</label><select class="w-full py-2 px-3" id="cCondicion"><option>Contado</option><option>Crédito</option></select></div>
+<div id="bloqueVencePago"><label class="etq" for="cVencePago">Pagar hasta</label><input class="w-full py-2 px-3" id="cVencePago" type="date"></div>
+<div id="bloqueMetodo"><label class="etq" for="cMetodo">Pagado con</label><select class="w-full py-2 px-3 sel-metodo" id="cMetodo"></select></div>
+</div>
+
+<div>
+<div class="flex items-center justify-between mb-2"><h4 class="font-label-md text-on-surface">Productos recibidos</h4><span class="text-caption text-on-surface-variant">Si el producto no existe en el inventario, escríbelo y se creará.</span></div>
+<div class="overflow-x-auto rounded-xl border border-outline-variant">
+<table class="w-full text-left text-sm" id="tablaItems">
+<thead><tr><th class="py-2 px-2 min-w-[220px]">Producto</th><th class="py-2 px-2 w-24">Cant.</th><th class="py-2 px-2 w-28">Costo unit. S/</th><th class="py-2 px-2 w-32">Lote</th><th class="py-2 px-2 w-40">Vence</th><th class="py-2 px-2 w-28">P. venta S/</th><th class="py-2 px-2 w-24 text-right">Subtotal</th><th class="w-8"></th></tr></thead>
+<tbody id="itemsCompra"></tbody>
+</table>
+</div>
+<datalist id="listaProductos"></datalist>
+<button class="mt-2 text-primary font-semibold text-sm flex items-center gap-1" id="btnAgregarItem" type="button"><span class="material-symbols-outlined text-[18px]">add</span>Agregar producto</button>
+</div>
+
+<div class="grid md:grid-cols-2 gap-4 items-end">
+<div><label class="etq" for="cObs">Observaciones</label><input class="w-full py-2 px-3" id="cObs" maxlength="300" placeholder="Ej. llegó con la guía 0001-554, falta 1 caja" type="text"></div>
+<div class="p-4 rounded-xl" style="background:var(--pc-field)">
+<div class="flex justify-between text-on-surface-variant text-sm" id="filaGravada"><span>Op. gravada</span><span id="cGravada">S/ 0.00</span></div>
+<div class="flex justify-between text-on-surface-variant text-sm" id="filaIgv"><span>IGV (18 %)</span><span id="cIgv">S/ 0.00</span></div>
+<div class="flex justify-between items-end mt-1"><span class="font-bold text-on-surface">Total</span><span class="font-bold text-on-surface" id="cTotal" style="font:800 26px/1 Manrope,sans-serif">S/ 0.00</span></div>
+</div>
+</div>
+<p class="hidden text-error text-sm font-semibold" id="errorCompra"></p>
+<div class="flex justify-end gap-2"><button class="px-4 py-2 rounded-lg border border-outline-variant" data-cerrar type="button">Cancelar</button><button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-md flex items-center gap-2" type="submit"><span class="material-symbols-outlined">inventory</span>Registrar y sumar al stock</button></div>
+</form>
+</div>
+</div>
+
+<!-- ===== Modal detalle ===== -->
+<div class="fixed inset-0 z-[100] hidden" id="modalDetalle">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-3 pointer-events-none">
+<div class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-3xl w-full max-h-[94vh] overflow-y-auto p-6" id="contenidoDetalle"></div>
+</div>
+</div>
+
+<!-- ===== Modal proveedor ===== -->
+<div class="fixed inset-0 z-[100] hidden" id="modalProveedor">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-3 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-2xl w-full max-h-[94vh] overflow-y-auto p-6 space-y-4" id="formProveedor" novalidate>
+<div class="flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface" id="tituloProveedor">Nuevo proveedor</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<input id="pId" type="hidden">
+<div class="grid sm:grid-cols-2 gap-3">
+<div><label class="etq" for="pRuc">RUC</label>
+<div class="flex gap-2"><input class="flex-1 min-w-0 py-2 px-3" id="pRuc" inputmode="numeric" maxlength="11" placeholder="20XXXXXXXXX" type="text">
+<button class="px-3 rounded-lg bg-primary text-on-primary text-sm font-semibold flex items-center gap-1 whitespace-nowrap disabled:opacity-50" disabled id="btnBuscarRuc" title="Trae razón social, dirección y estado desde el padrón de SUNAT" type="button"><span class="material-symbols-outlined text-[18px]">travel_explore</span>SUNAT</button></div>
+<p class="text-caption mt-1" id="ayudaRuc"></p></div>
+<div><label class="etq" for="pTipo">Tipo</label><select class="w-full py-2 px-3" id="pTipo"><option>Distribuidora</option><option>Laboratorio</option><option>Droguería</option><option>Otro</option></select></div>
+<div class="sm:col-span-2 hidden p-3 rounded-xl text-sm" id="resultadoSunat"></div>
+<div class="sm:col-span-2"><label class="etq" for="pRazon">Razón social *</label><input class="w-full py-2 px-3" id="pRazon" maxlength="150" placeholder="Ej. Distribuidora Veterinaria S.A.C." type="text"></div>
+<div class="sm:col-span-2"><label class="etq" for="pComercial">Nombre comercial</label><input class="w-full py-2 px-3" id="pComercial" maxlength="100" type="text"></div>
+<div><label class="etq" for="pContacto">Contacto / vendedor</label><input class="w-full py-2 px-3" id="pContacto" maxlength="100" placeholder="Nombre del representante" type="text"></div>
+<div><label class="etq" for="pTelefono">Celular / teléfono</label><input class="w-full py-2 px-3" id="pTelefono" maxlength="20" placeholder="9XX XXX XXX" type="tel"></div>
+<div><label class="etq" for="pCorreo">Correo</label><input class="w-full py-2 px-3" id="pCorreo" maxlength="120" type="email"></div>
+<div><label class="etq" for="pEntrega">Días de reparto</label><input class="w-full py-2 px-3" id="pEntrega" maxlength="60" placeholder="Ej. martes y viernes" type="text"></div>
+<div class="sm:col-span-2"><label class="etq" for="pDireccion">Dirección</label><input class="w-full py-2 px-3" id="pDireccion" maxlength="200" type="text"></div>
+<div><label class="etq" for="pCondicion">Condición de pago</label><select class="w-full py-2 px-3" id="pCondicion"><option>Contado</option><option>Crédito</option></select></div>
+<div id="bloqueDias"><label class="etq" for="pDias">Días de crédito</label><input class="w-full py-2 px-3" id="pDias" max="180" min="1" type="number" value="30"></div>
+<div class="sm:col-span-2"><label class="etq" for="pNotas">Notas</label><input class="w-full py-2 px-3" id="pNotas" maxlength="500" placeholder="Pedido mínimo, marcas que trabaja, cuenta para depósitos…" type="text"></div>
+<label class="flex items-center gap-2 text-sm"><input checked id="pActivo" type="checkbox"> Activo</label>
+</div>
+<p class="hidden text-error text-sm font-semibold" id="errorProveedor"></p>
+<div class="flex justify-end gap-2"><button class="px-4 py-2 rounded-lg border border-outline-variant" data-cerrar type="button">Cancelar</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md" type="submit">Guardar</button></div>
+</form>
+</div>
+</div>
+
+<style>
+  .etq { display: block; font-size: 13px; font-weight: 600; color: var(--pc-muted); margin-bottom: 4px; }
+  .pestana { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--pc-line); font-weight: 700; font-size: 14px; color: var(--pc-muted); background: var(--pc-field); white-space: nowrap; }
+  .pestana .material-symbols-outlined { font-size: 20px; }
+  .pestana.activa { background: var(--pc-teal-500); border-color: var(--pc-teal-500); color: #fff; }
+  html.pc-oscuro .pestana.activa { background: #16a34a; border-color: #16a34a; }
+  .chip { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+  .chip-ok { background: rgba(22,163,74,.12); color: #16a34a; } .chip-warn { background: rgba(217,119,6,.14); color: #d97706; }
+  .chip-mal { background: rgba(220,38,38,.12); color: #dc2626; } .chip-gris { background: rgba(100,116,139,.14); color: var(--pc-muted); }
+  #itemsCompra input, #itemsCompra select { padding: 6px 8px; width: 100%; }
+  .det-mini { color: var(--pc-muted); font-size: 12.5px; }
+</style>
+
+<script>
+  // =============================================================
+  // Utilidades
+  // =============================================================
+  const $ = (id) => document.getElementById(id);
+  const soles = (v) => `S/ ${Number(v || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const r2 = (n) => Math.round((Number(n) + Number.EPSILON) * 100) / 100;
+  const hoy = () => new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
+  const sumarDias = (f, n) => new Date(Date.parse(`${f}T00:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
+  const fecha = (f) => (f ? new Date(String(f).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '—');
+  const METODOS = ['Efectivo', 'Transferencia', 'Depósito', 'Yape', 'Plin', 'Tarjeta'];
+  const CATEGORIAS = ['Medicamento', 'Vacuna', 'Antiparasitario', 'Insumo', 'Alimento'];
+  // RUC (SUNAT): 11 dígitos, 10/15/17/20 y dígito de control módulo 11 — igual que en el servidor
+  function rucValido(r) {
+    if (!/^(10|15|17|20)\d{9}$/.test(r)) return false;
+    const s = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2].reduce((a, p, i) => a + p * Number(r[i]), 0);
+    return (11 - (s % 11)) % 10 === Number(r[10]);
+  }
+  document.querySelectorAll('.sel-metodo').forEach((s) => { s.innerHTML = METODOS.map((m) => `<option>${m}</option>`).join(''); });
+
+  let proveedores = [];
+  let productos = [];
+  let datosCompras = { compras: [], resumen: {} };
+  let pedido = [];
+
+  // Solo Administrativo
+  if (!(Auth.obtenerUsuario() || {}).accesoConfig) location.replace('dashboard.html');
+
+  // =============================================================
+  // Pestañas
+  // =============================================================
+  function mostrarTab(t) {
+    document.querySelectorAll('.pestana').forEach((b) => b.classList.toggle('activa', b.dataset.tab === t));
+    document.querySelectorAll('[data-panel]').forEach((p) => p.classList.toggle('hidden', p.dataset.panel !== t));
+  }
+  $('pestanas').addEventListener('click', (e) => { const b = e.target.closest('.pestana'); if (b) mostrarTab(b.dataset.tab); });
+
+  // Modales
+  const abrir = (id) => $(id).classList.remove('hidden');
+  const cerrar = (id) => $(id).classList.add('hidden');
+  document.querySelectorAll('[data-cerrar]').forEach((b) => b.addEventListener('click', () => cerrar(b.closest('.fixed').id)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') ['modalCompra', 'modalDetalle', 'modalProveedor'].forEach(cerrar); });
+
+  // =============================================================
+  // Tarjetas
+  // =============================================================
+  function tarjeta(etq, valor, icono, color, pie) {
+    return `<div class="pc-stat"><div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">${etq}</span><span class="pc-ico" style="background:${color}"><span class="material-symbols-outlined">${icono}</span></span></div>
+      <p class="pc-stat-valor" style="font-size:28px">${valor}</p><p class="pc-stat-pie">${pie}</p></div>`;
+  }
+  function pintarTarjetas() {
+    const r = datosCompras.resumen || {};
+    $('tarjetas').innerHTML =
+      tarjeta('Comprado este mes', soles(r.CompradoMes), 'shopping_bag', 'linear-gradient(135deg,#13a3a3,#00606a)', 'Compras registradas') +
+      tarjeta('Por pagar', soles(r.PorPagar), 'account_balance', 'linear-gradient(135deg,#60a5fa,#2563eb)', 'Facturas a crédito pendientes') +
+      tarjeta('Vencido', soles(r.Vencido), 'warning', 'linear-gradient(135deg,#ff8a8a,#d4525e)', `${r.FacturasVencidas || 0} factura(s) fuera de plazo`) +
+      tarjeta('Vencen en 7 días', String(r.VencenEstaSemana || 0), 'event_upcoming', 'linear-gradient(135deg,#f6cf6a,#d99a17)', `${proveedores.filter((p) => p.Activo).length} proveedor(es) activos`);
+  }
+
+  // =============================================================
+  // Compras
+  // =============================================================
+  $('filtroDesde').value = sumarDias(hoy(), -90); $('filtroHasta').value = hoy(); $('filtroHasta').max = hoy();
+  function chipPago(c) {
+    if (c.Anulada) return '<span class="chip chip-gris">Anulada</span>';
+    if (c.EstadoPago === 'Pagado') return `<span class="chip chip-ok">Pagado</span><p class="det-mini">${escHtml(c.MetodoPago || '')} · ${escHtml(fecha(c.FechaPago))}</p>`;
+    if (c.Vencida) return `<span class="chip chip-mal">Vencida</span><p class="det-mini">debía pagarse el ${escHtml(fecha(c.FechaVencimientoPago))}</p>`;
+    return `<span class="chip ${c.PorVencer ? 'chip-warn' : 'chip-gris'}">Por pagar</span><p class="det-mini">hasta ${escHtml(fecha(c.FechaVencimientoPago))}</p>`;
+  }
+  async function cargarCompras() {
+    const q = new URLSearchParams({ desde: $('filtroDesde').value, hasta: $('filtroHasta').value });
+    if ($('filtroProveedor').value) q.set('proveedorId', $('filtroProveedor').value);
+    if ($('filtroEstado').value) q.set('estado', $('filtroEstado').value);
+    try {
+      datosCompras = await Auth.apiFetch(`/compras?${q}`);
+      pintarTarjetas();
+      const l = datosCompras.compras;
+      $('tablaCompras').innerHTML = l.length ? l.map((c) => `
+        <tr class="${c.Anulada ? 'opacity-50' : ''}">
+          <td class="py-3 px-4 text-on-surface-variant whitespace-nowrap">${escHtml(fecha(c.FechaEmision))}</td>
+          <td class="py-3 px-4"><p class="font-semibold text-on-surface">${escHtml(c.NombreComercial || c.RazonSocial)}</p><p class="det-mini">${escHtml(c.Items)} producto(s)</p></td>
+          <td class="py-3 px-4 text-on-surface">${escHtml(c.TipoDocumento)}<p class="det-mini">${escHtml(c.NumeroDocumento || '—')}</p></td>
+          <td class="py-3 px-4 text-right font-bold text-on-surface whitespace-nowrap">${escHtml(soles(c.Total))}</td>
+          <td class="py-3 px-4">${chipPago(c)}</td>
+          <td class="py-3 px-4 text-right"><button class="btn-ver px-3 py-1.5 rounded-lg border border-primary text-primary text-sm font-semibold" data-id="${escHtml(c.CompraID)}" type="button">Ver</button></td>
+        </tr>`).join('') : '<tr><td class="py-8 px-4 text-center text-on-surface-variant" colspan="6">No hay compras con ese filtro. Registra la primera con "Registrar compra".</td></tr>';
+    } catch (err) { $('tablaCompras').innerHTML = `<tr><td class="py-6 px-4 text-center text-error" colspan="6">${escHtml(err.message)}</td></tr>`; }
+  }
+  ['filtroEstado', 'filtroProveedor', 'filtroDesde', 'filtroHasta'].forEach((id) => $(id).addEventListener('change', cargarCompras));
+  $('tablaCompras').addEventListener('click', (e) => { const b = e.target.closest('.btn-ver'); if (b) verCompra(Number(b.dataset.id)); });
+
+  // ---------- Detalle ----------
+  async function verCompra(id) {
+    $('contenidoDetalle').innerHTML = '<p class="text-on-surface-variant">Cargando…</p>'; abrir('modalDetalle');
+    try {
+      const c = await Auth.apiFetch(`/compras/${id}`);
+      const usados = c.Items.some((i) => i.QuedaEnLote != null && Number(i.QuedaEnLote) < Number(i.Cantidad));
+      $('contenidoDetalle').innerHTML = `
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <div><h3 class="font-headline-md text-headline-md text-on-surface">Compra #${escHtml(c.CompraID)}</h3>
+            <p class="text-on-surface-variant">${escHtml(c.RazonSocial)}${c.RUC ? ` · RUC ${escHtml(c.RUC)}` : ''}</p>
+            <p class="text-on-surface-variant text-sm">${escHtml(c.TipoDocumento)} ${escHtml(c.NumeroDocumento || '')} · emitida el ${escHtml(fecha(c.FechaEmision))} · registró ${escHtml((c.RegistradoPor || '').split(' ').slice(0, 2).join(' '))}</p></div>
+          <button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-x type="button"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="overflow-x-auto rounded-xl border border-outline-variant mb-4"><table class="w-full text-left text-sm">
+          <thead><tr><th class="py-2 px-3">Producto</th><th class="py-2 px-3">Lote</th><th class="py-2 px-3">Vence</th><th class="py-2 px-3 text-right">Cant.</th><th class="py-2 px-3 text-right">Costo</th><th class="py-2 px-3 text-right">Subtotal</th><th class="py-2 px-3 text-right">Queda</th></tr></thead>
+          <tbody>${c.Items.map((i) => `<tr><td class="py-2 px-3 font-semibold text-on-surface">${escHtml(i.NombreMedicamento)}</td><td class="py-2 px-3">${escHtml(i.NumeroLote || '—')}</td><td class="py-2 px-3">${escHtml(fecha(i.FechaVencimiento))}</td>
+            <td class="py-2 px-3 text-right">${escHtml(Number(i.Cantidad))} ${escHtml(i.Unidad)}</td><td class="py-2 px-3 text-right">${escHtml(soles(i.CostoUnitario))}</td><td class="py-2 px-3 text-right">${escHtml(soles(i.Subtotal))}</td>
+            <td class="py-2 px-3 text-right text-on-surface-variant">${escHtml(i.QuedaEnLote != null ? Number(i.QuedaEnLote) : '—')}</td></tr>`).join('')}</tbody>
+        </table></div>
+        <div class="flex flex-wrap justify-between gap-4 items-end">
+          <div class="text-sm space-y-1">
+            <p>Condición: <b>${escHtml(c.CondicionPago)}</b>${c.FechaVencimientoPago ? ` · pagar hasta <b>${escHtml(fecha(c.FechaVencimientoPago))}</b>` : ''}</p>
+            <p>Estado: ${chipPago({ ...c, Vencida: c.EstadoPago === 'Pendiente' && String(c.FechaVencimientoPago).slice(0, 10) < hoy() })}</p>
+            ${c.Observaciones ? `<p class="text-on-surface-variant">📝 ${escHtml(c.Observaciones)}</p>` : ''}
+            ${c.Anulada ? `<p class="text-error">Anulada: ${escHtml(c.MotivoAnulacion)}</p>` : ''}
+          </div>
+          <p class="text-right"><span class="text-on-surface-variant text-sm">Total</span><br><b class="text-on-surface" style="font:800 26px Manrope,sans-serif">${escHtml(soles(c.Total))}</b></p>
+        </div>
+        ${!c.Anulada && c.EstadoPago === 'Pendiente' ? `
+        <div class="mt-4 p-4 rounded-xl border border-outline-variant flex flex-wrap items-end gap-3">
+          <div><label class="etq">Fecha de pago</label><input class="py-2 px-3" id="dPagoFecha" max="${hoy()}" type="date" value="${hoy()}"></div>
+          <div><label class="etq">Medio</label><select class="py-2 px-3" id="dPagoMetodo">${METODOS.map((m) => `<option ${m === 'Transferencia' ? 'selected' : ''}>${m}</option>`).join('')}</select></div>
+          <button class="px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md flex items-center gap-1" id="dPagar" type="button"><span class="material-symbols-outlined text-[18px]">paid</span>Registrar pago</button>
+        </div>` : ''}
+        ${!c.Anulada ? `
+        <div class="mt-4 flex flex-wrap items-end gap-2 justify-end">
+          ${usados ? '<p class="text-caption text-on-surface-variant mr-auto">Ya se usaron unidades de esta compra: no se puede anular (corrige con un ajuste en Inventario).</p>'
+            : '<input class="py-2 px-3 flex-1 min-w-[200px]" id="dMotivo" maxlength="200" placeholder="Motivo para anular (ej. se registró dos veces)" type="text"><button class="px-4 py-2 rounded-lg border border-error text-error font-label-md" id="dAnular" type="button">Anular compra</button>'}
+        </div>` : ''}
+        <p class="hidden text-error text-sm font-semibold mt-3" id="dError"></p>`;
+      const box = $('contenidoDetalle');
+      box.querySelector('[data-x]').addEventListener('click', () => cerrar('modalDetalle'));
+      const err = (m) => { const e = $('dError'); e.textContent = m; e.classList.remove('hidden'); };
+      $('dPagar')?.addEventListener('click', async () => {
+        try { await Auth.apiFetch(`/compras/${id}/pagar`, { method: 'POST', body: JSON.stringify({ fechaPago: $('dPagoFecha').value, metodoPago: $('dPagoMetodo').value }) }); await recargarTodo(); verCompra(id); }
+        catch (ex) { err(ex.message); }
+      });
+      $('dAnular')?.addEventListener('click', async () => {
+        const motivo = $('dMotivo').value.trim(); if (!motivo) return err('Escribe el motivo de la anulación.');
+        const ok = await PCConfirmar({ titulo: '¿Anular esta compra?', mensaje: 'Se retirará del stock todo lo que ingresó con ella.', textoSi: 'Sí, anular', icono: 'remove_shopping_cart' });
+        if (!ok) return;
+        try { await Auth.apiFetch(`/compras/${id}/anular`, { method: 'POST', body: JSON.stringify({ motivo }) }); await recargarTodo(); verCompra(id); }
+        catch (ex) { err(ex.message); }
+      });
+    } catch (err) { $('contenidoDetalle').innerHTML = `<p class="text-error">${escHtml(err.message)}</p>`; }
+  }
+
+  // ---------- Registrar compra ----------
+  let filas = [];
+  function filaVacia() { return { nombre: '', medicamentoId: null, categoria: 'Medicamento', unidad: 'unid.', cantidad: 1, costo: '', lote: '', vence: '', precioVenta: '' }; }
+  function productoPorNombre(n) { const t = String(n || '').trim().toLowerCase(); return productos.find((p) => p.NombreMedicamento.toLowerCase() === t); }
+  function pintarFilas() {
+    $('itemsCompra').innerHTML = filas.map((f, k) => {
+      const p = f.medicamentoId ? productos.find((x) => x.MedicamentoID === f.medicamentoId) : null;
+      const nuevo = f.nombre.trim() && !p;
+      return `<tr class="border-t border-outline-variant align-top">
+        <td class="py-2 px-2"><input class="f-nombre" data-k="${k}" list="listaProductos" maxlength="150" placeholder="Buscar o escribir…" value="${escHtml(f.nombre)}">
+          ${p ? `<p class="det-mini mt-1">Stock ${escHtml(Number(p.Stock))} ${escHtml(p.Unidad)}${p.CostoUnitario != null ? ` · último costo ${escHtml(soles(p.CostoUnitario))}` : ''}${p.Refrigerado ? ' · ❄️ cadena de frío' : ''}</p>` : ''}
+          ${nuevo ? `<div class="flex gap-1 mt-1"><select class="f-cat" data-k="${k}">${CATEGORIAS.map((c) => `<option ${c === f.categoria ? 'selected' : ''}>${c}</option>`).join('')}</select><input class="f-uni" data-k="${k}" maxlength="20" placeholder="unidad" style="max-width:80px" value="${escHtml(f.unidad)}"></div><p class="det-mini mt-1" style="color:#d97706">Producto nuevo: se creará en el inventario</p>` : ''}</td>
+        <td class="py-2 px-2"><input class="f-cant" data-k="${k}" min="0.01" step="1" type="number" value="${escHtml(f.cantidad)}"></td>
+        <td class="py-2 px-2"><input class="f-costo" data-k="${k}" min="0" step="0.01" type="number" value="${escHtml(f.costo)}"></td>
+        <td class="py-2 px-2"><input class="f-lote" data-k="${k}" maxlength="40" placeholder="${(p ? p.Categoria : f.categoria) === 'Vacuna' ? 'Obligatorio' : 'N.º lote'}" value="${escHtml(f.lote)}"></td>
+        <td class="py-2 px-2"><input class="f-vence" data-k="${k}" min="${sumarDias(hoy(), 1)}" type="date" value="${escHtml(f.vence)}"></td>
+        <td class="py-2 px-2"><input class="f-pv" data-k="${k}" min="0" placeholder="${p && p.PrecioVenta != null ? escHtml(Number(p.PrecioVenta)) : '—'}" step="0.01" type="number" value="${escHtml(f.precioVenta)}"></td>
+        <td class="py-2 px-2 text-right font-semibold text-on-surface f-sub">${escHtml(soles(r2(Number(f.cantidad || 0) * Number(f.costo || 0))))}</td>
+        <td class="py-2 px-1"><button class="f-quitar w-8 h-8 rounded-lg inline-grid place-items-center text-on-surface-variant hover:text-error" data-k="${k}" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button></td>
+      </tr>`;
+    }).join('');
+    pintarTotalCompra();
+  }
+  function pintarTotalCompra() {
+    const total = r2(filas.reduce((s, f) => s + Number(f.cantidad || 0) * Number(f.costo || 0), 0));
+    const esFactura = $('cTipoDoc').value === 'Factura';
+    const gravada = r2(total / 1.18);
+    $('filaGravada').classList.toggle('hidden', !esFactura); $('filaIgv').classList.toggle('hidden', !esFactura);
+    $('cGravada').textContent = soles(gravada); $('cIgv').textContent = soles(r2(total - gravada)); $('cTotal').textContent = soles(total);
+  }
+  $('itemsCompra').addEventListener('input', (e) => {
+    const k = Number(e.target.dataset.k); const f = filas[k]; if (!f) return;
+    const c = e.target.classList;
+    if (c.contains('f-cant')) f.cantidad = e.target.value;
+    if (c.contains('f-costo')) f.costo = e.target.value;
+    if (c.contains('f-lote')) f.lote = e.target.value;
+    if (c.contains('f-vence')) f.vence = e.target.value;
+    if (c.contains('f-pv')) f.precioVenta = e.target.value;
+    if (c.contains('f-uni')) f.unidad = e.target.value;
+    if (c.contains('f-nombre')) f.nombre = e.target.value;
+    if (c.contains('f-cant') || c.contains('f-costo')) { e.target.closest('tr').querySelector('.f-sub').textContent = soles(r2(Number(f.cantidad || 0) * Number(f.costo || 0))); pintarTotalCompra(); }
+  });
+  $('itemsCompra').addEventListener('change', (e) => {
+    const k = Number(e.target.dataset.k); const f = filas[k]; if (!f) return;
+    if (e.target.classList.contains('f-nombre')) {
+      const p = productoPorNombre(f.nombre);
+      f.medicamentoId = p ? p.MedicamentoID : null;
+      if (p && f.costo === '' && p.CostoUnitario != null) f.costo = Number(p.CostoUnitario);
+      pintarFilas();
+    }
+    if (e.target.classList.contains('f-cat')) { f.categoria = e.target.value; pintarFilas(); }
+  });
+  $('itemsCompra').addEventListener('click', (e) => { const b = e.target.closest('.f-quitar'); if (b) { filas.splice(Number(b.dataset.k), 1); if (!filas.length) filas.push(filaVacia()); pintarFilas(); } });
+  $('btnAgregarItem').addEventListener('click', () => { filas.push(filaVacia()); pintarFilas(); $('itemsCompra').querySelector('tr:last-child .f-nombre')?.focus(); });
+
+  function condicionSegunProveedor() {
+    const p = proveedores.find((x) => String(x.ProveedorID) === $('cProveedor').value);
+    if (p) { $('cCondicion').value = p.CondicionPago; }
+    actualizarCondicion();
+  }
+  function actualizarCondicion() {
+    const credito = $('cCondicion').value === 'Crédito';
+    $('bloqueVencePago').classList.toggle('hidden', !credito); $('bloqueMetodo').classList.toggle('hidden', credito);
+    const p = proveedores.find((x) => String(x.ProveedorID) === $('cProveedor').value);
+    if (credito && $('cEmision').value) $('cVencePago').value = sumarDias($('cEmision').value, (p && p.DiasCredito) || 30);
+  }
+  $('cProveedor').addEventListener('change', condicionSegunProveedor);
+  $('cCondicion').addEventListener('change', actualizarCondicion);
+  $('cEmision').addEventListener('change', actualizarCondicion);
+  $('cTipoDoc').addEventListener('change', () => { $('cNumero').placeholder = $('cTipoDoc').value === 'Boleta' ? 'B001-000123' : $('cTipoDoc').value === 'Guía de remisión' ? 'T001-000123' : 'F001-000123'; pintarTotalCompra(); });
+
+  function abrirCompra(prefill) {
+    const activos = proveedores.filter((p) => p.Activo);
+    if (!activos.length) { abrirProveedor(null); return; }
+    $('cProveedor').innerHTML = activos.map((p) => `<option value="${escHtml(p.ProveedorID)}">${escHtml(p.NombreComercial || p.RazonSocial)}${p.RUC ? ` · ${escHtml(p.RUC)}` : ''}</option>`).join('');
+    if (prefill && prefill.proveedorId) $('cProveedor').value = prefill.proveedorId;
+    $('cTipoDoc').value = 'Factura'; $('cNumero').value = ''; $('cEmision').value = hoy(); $('cEmision').max = hoy(); $('cObs').value = ''; $('cMetodo').value = 'Efectivo';
+    filas = prefill && prefill.items && prefill.items.length ? prefill.items.map((i) => ({ ...filaVacia(), nombre: i.nombre, medicamentoId: i.medicamentoId, cantidad: i.cantidad, costo: i.costo != null ? i.costo : '' })) : [filaVacia()];
+    $('errorCompra').classList.add('hidden');
+    condicionSegunProveedor(); pintarFilas(); abrir('modalCompra');
+  }
+  $('btnNuevaCompra').addEventListener('click', () => abrirCompra(null));
+
+  $('formCompra').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const error = (m) => { $('errorCompra').textContent = m; $('errorCompra').classList.remove('hidden'); };
+    $('errorCompra').classList.add('hidden');
+    const validas = filas.filter((f) => f.nombre.trim());
+    if (!validas.length) return error('Agrega al menos un producto.');
+    for (const [i, f] of validas.entries()) {
+      const p = f.medicamentoId ? productos.find((x) => x.MedicamentoID === f.medicamentoId) : null;
+      if (!(Number(f.cantidad) > 0)) return error(`Ítem ${i + 1}: indica la cantidad.`);
+      if (f.costo === '' || !(Number(f.costo) >= 0)) return error(`Ítem ${i + 1}: indica el costo unitario.`);
+      if ((p ? p.Categoria : f.categoria) === 'Vacuna' && (!f.lote.trim() || !f.vence)) return error(`Ítem ${i + 1}: las vacunas necesitan lote y vencimiento.`);
+    }
+    const tipo = $('cTipoDoc').value;
+    if (['Factura', 'Boleta'].includes(tipo) && !$('cNumero').value.trim()) return error('Escribe la serie y número del comprobante.');
+    const body = {
+      proveedorId: Number($('cProveedor').value), tipoDocumento: tipo, numeroDocumento: $('cNumero').value.trim(), fechaEmision: $('cEmision').value,
+      condicionPago: $('cCondicion').value, fechaVencimientoPago: $('cVencePago').value, metodoPago: $('cMetodo').value, observaciones: $('cObs').value,
+      items: validas.map((f) => ({ ...(f.medicamentoId ? { medicamentoId: f.medicamentoId } : { nuevoProducto: { nombre: f.nombre.trim(), categoria: f.categoria, unidad: f.unidad } }),
+        cantidad: Number(f.cantidad), costoUnitario: Number(f.costo), numeroLote: f.lote.trim(), fechaVencimiento: f.vence || null, precioVenta: f.precioVenta === '' ? null : Number(f.precioVenta) })),
+    };
+    try {
+      const r = await Auth.apiFetch('/compras', { method: 'POST', body: JSON.stringify(body) });
+      cerrar('modalCompra');
+      await recargarTodo();
+      mostrarTab('compras');
+      verCompra(r.compraId);
+    } catch (ex) { error(ex.message); }
+  });
+
+  // =============================================================
+  // Proveedores
+  // =============================================================
+  function pintarProveedores() {
+    const q = $('buscarProveedor').value.trim().toLowerCase();
+    const lista = proveedores.filter((p) => ($('verInactivos').checked || p.Activo) &&
+      (!q || [p.RazonSocial, p.NombreComercial, p.RUC, p.Contacto].some((v) => String(v || '').toLowerCase().includes(q))));
+    $('gridProveedores').innerHTML = lista.length ? lista.map((p) => {
+      const wa = pcEnlaceWhatsApp(p.Telefono, `Hola${p.Contacto ? ' ' + p.Contacto.split(' ')[0] : ''}, le escribimos de la Clínica Veterinaria Premier Can.`);
+      return `<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 ${p.Activo ? '' : 'opacity-60'}">
+        <div class="flex items-start justify-between gap-2">
+          <div class="min-w-0"><h4 class="font-bold text-on-surface truncate">${escHtml(p.NombreComercial || p.RazonSocial)}</h4>
+            <p class="det-mini truncate">${p.NombreComercial ? escHtml(p.RazonSocial) + ' · ' : ''}${p.RUC ? 'RUC ' + escHtml(p.RUC) : '<span style="color:#d97706">RUC pendiente</span>'}</p>
+            ${p.EstadoSunat ? `<div class="mt-1">${chipSunat(p.EstadoSunat, p.CondicionSunat)}</div>` : ''}</div>
+          <span class="chip chip-gris shrink-0">${escHtml(p.Tipo)}</span>
+        </div>
+        <div class="mt-3 space-y-1 text-sm text-on-surface">
+          ${p.Contacto || p.Telefono ? `<p class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">person</span>${escHtml([p.Contacto, p.Telefono].filter(Boolean).join(' · '))}</p>` : ''}
+          ${p.Correo ? `<p class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">mail</span>${escHtml(p.Correo)}</p>` : ''}
+          ${p.Direccion ? `<p class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">location_on</span><span class="det-mini" style="font-size:13px">${escHtml(p.Direccion)}</span></p>` : ''}
+          <p class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">payments</span>${p.CondicionPago === 'Crédito' ? `Crédito a ${escHtml(p.DiasCredito)} días` : 'Al contado'}${p.DiasEntrega ? ` · reparte ${escHtml(p.DiasEntrega)}` : ''}</p>
+          ${p.Notas ? `<p class="det-mini">📝 ${escHtml(p.Notas)}</p>` : ''}
+        </div>
+        <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+          <div class="rounded-lg p-2" style="background:var(--pc-field)"><p class="font-bold text-on-surface">${escHtml(p.Productos)}</p><p class="det-mini">productos</p></div>
+          <div class="rounded-lg p-2" style="background:var(--pc-field)"><p class="font-bold text-on-surface">${escHtml(soles(p.TotalAnio))}</p><p class="det-mini">este año</p></div>
+          <div class="rounded-lg p-2" style="background:var(--pc-field)"><p class="font-bold" style="color:${Number(p.DeudaVencida) > 0 ? '#dc2626' : Number(p.Deuda) > 0 ? '#d97706' : 'var(--pc-ink)'}">${escHtml(soles(p.Deuda))}</p><p class="det-mini">${Number(p.DeudaVencida) > 0 ? 'deuda (vencida)' : 'por pagar'}</p></div>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-4">
+          ${p.Activo ? `<button class="p-compra px-3 py-1.5 rounded-lg bg-primary text-on-primary text-sm font-semibold" data-id="${escHtml(p.ProveedorID)}" type="button">Registrar compra</button>` : ''}
+          <button class="p-ver px-3 py-1.5 rounded-lg border border-outline-variant text-sm font-semibold" data-id="${escHtml(p.ProveedorID)}" type="button">Ver compras</button>
+          <button class="p-editar px-3 py-1.5 rounded-lg border border-outline-variant text-sm font-semibold" data-id="${escHtml(p.ProveedorID)}" type="button">Editar</button>
+          ${wa ? `<a class="px-3 py-1.5 rounded-lg text-sm font-semibold" href="${escHtml(wa)}" rel="noopener" style="background:#25D366;color:#fff" target="_blank">WhatsApp</a>` : ''}
+        </div>
+      </article>`;
+    }).join('') : `<div class="md:col-span-2 2xl:col-span-3 text-center p-10 rounded-xl border border-dashed border-outline-variant">
+        <span class="material-symbols-outlined text-5xl text-on-surface-variant">storefront</span>
+        <p class="font-semibold text-on-surface mt-2">${proveedores.length ? 'Ningún proveedor coincide con la búsqueda.' : 'Aún no hay proveedores'}</p>
+        <p class="text-on-surface-variant text-sm">Registra a las distribuidoras y laboratorios a los que compras (con su RUC, vendedor y condición de pago).</p></div>`;
+  }
+  ['buscarProveedor', 'verInactivos'].forEach((id) => $(id).addEventListener('input', pintarProveedores));
+  $('gridProveedores').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-id]'); if (!b) return;
+    const p = proveedores.find((x) => String(x.ProveedorID) === b.dataset.id); if (!p) return;
+    if (b.classList.contains('p-editar')) abrirProveedor(p);
+    if (b.classList.contains('p-compra')) abrirCompra({ proveedorId: p.ProveedorID });
+    if (b.classList.contains('p-ver')) { $('filtroProveedor').value = p.ProveedorID; $('filtroEstado').value = ''; $('filtroDesde').value = sumarDias(hoy(), -365); mostrarTab('compras'); cargarCompras(); }
+  });
+
+  function abrirProveedor(p) {
+    $('tituloProveedor').textContent = p ? 'Editar proveedor' : 'Nuevo proveedor';
+    $('pId').value = p ? p.ProveedorID : '';
+    const v = (id, val) => { $(id).value = val ?? ''; };
+    v('pRuc', p && p.RUC); v('pTipo', (p && p.Tipo) || 'Distribuidora'); v('pRazon', p && p.RazonSocial); v('pComercial', p && p.NombreComercial);
+    v('pContacto', p && p.Contacto); v('pTelefono', p && p.Telefono); v('pCorreo', p && p.Correo); v('pEntrega', p && p.DiasEntrega);
+    v('pDireccion', p && p.Direccion); v('pCondicion', (p && p.CondicionPago) || 'Contado'); v('pDias', p && p.DiasCredito ? p.DiasCredito : 30); v('pNotas', p && p.Notas);
+    $('pActivo').checked = p ? !!p.Activo : true;
+    $('errorProveedor').classList.add('hidden'); validarRucVisual();
+    ultimoRucConsultado = (p && p.RUC) || '';
+    $('btnBuscarRuc').disabled = !rucValido($('pRuc').value.trim());
+    const caja = $('resultadoSunat');
+    if (p && p.EstadoSunat) {
+      caja.className = 'sm:col-span-2 p-3 rounded-xl text-sm'; caja.style.background = 'var(--pc-field)';
+      caja.innerHTML = `${chipSunat(p.EstadoSunat, p.CondicionSunat)} <span class="text-on-surface-variant">verificado el ${escHtml(fecha(p.VerificadoSunat))} · pulsa SUNAT para actualizar</span>`;
+    } else caja.classList.add('hidden'); $('bloqueDias').classList.toggle('hidden', $('pCondicion').value !== 'Crédito');
+    abrir('modalProveedor'); $('pRuc').focus();
+  }
+  function validarRucVisual() {
+    const r = $('pRuc').value.trim(); const el = $('ayudaRuc');
+    if (!r) { el.textContent = 'Opcional (si el proveedor emite factura, va su RUC).'; el.style.color = 'var(--pc-muted)'; return true; }
+    const ok = rucValido(r);
+    el.textContent = ok ? (r.startsWith('20') ? '✓ RUC válido (empresa)' : '✓ RUC válido (persona natural con negocio)') : r.length < 11 ? `${r.length}/11 dígitos` : '✗ RUC no válido: revisa los dígitos';
+    el.style.color = ok ? '#16a34a' : r.length < 11 ? 'var(--pc-muted)' : '#dc2626';
+    return ok;
+  }
+  // ---------- Consulta SUNAT (API gratuita, vía el servidor) ----------
+  let ultimoRucConsultado = '';
+  const chipSunat = (estado, condicion) => {
+    const ok = estado === 'ACTIVO' && condicion === 'HABIDO';
+    return `<span class="chip ${ok ? 'chip-ok' : 'chip-mal'}">SUNAT: ${escHtml(estado || '¿?')} / ${escHtml(condicion || '¿?')}</span>`;
+  };
+  async function buscarSunat() {
+    const ruc = $('pRuc').value.trim(); const caja = $('resultadoSunat');
+    if (!rucValido(ruc)) return;
+    ultimoRucConsultado = ruc;
+    $('btnBuscarRuc').disabled = true;
+    caja.className = 'sm:col-span-2 p-3 rounded-xl text-sm'; caja.style.background = 'var(--pc-field)';
+    caja.innerHTML = '<span class="text-on-surface-variant">Consultando el padrón de SUNAT…</span>';
+    try {
+      const d = await Auth.apiFetch(`/proveedores/ruc/${ruc}`);
+      if ($('pRuc').value.trim() !== ruc) return; // cambió mientras consultaba
+      const editando = $('pId').value;
+      if (d.yaRegistrado && String(d.yaRegistrado.proveedorId) !== editando) {
+        caja.style.background = 'rgba(217,119,6,.12)';
+        caja.innerHTML = `⚠️ Este RUC ya está registrado como <b>${escHtml(d.yaRegistrado.razonSocial)}</b>. <button class="font-semibold text-primary underline" id="irRegistrado" type="button">Abrir ese proveedor</button>`;
+        $('irRegistrado').addEventListener('click', () => abrirProveedor(proveedores.find((p) => p.ProveedorID === d.yaRegistrado.proveedorId)));
+        return;
+      }
+      $('pRazon').value = d.razonSocial;
+      if (d.direccion) $('pDireccion').value = d.direccion;
+      const ok = d.estado === 'ACTIVO' && d.condicion === 'HABIDO';
+      caja.style.background = ok ? 'rgba(22,163,74,.10)' : 'rgba(220,38,38,.10)';
+      caja.innerHTML = `<div class="flex flex-wrap items-center gap-2 mb-1"><b class="text-on-surface">${escHtml(d.razonSocial)}</b> ${chipSunat(d.estado, d.condicion)}</div>
+        ${d.direccion ? `<p class="text-on-surface-variant">📍 ${escHtml(d.direccion)}</p>` : ''}
+        <p class="text-on-surface-variant mt-1">${ok ? '✓ Razón social y dirección cargadas desde SUNAT. Completa el contacto y la condición de pago.' : '⚠️ Este contribuyente no está ACTIVO/HABIDO: sus facturas podrían no ser válidas para sustentar la compra.'}</p>`;
+    } catch (err) {
+      caja.style.background = 'rgba(220,38,38,.10)';
+      caja.innerHTML = `${escHtml(err.message)}`;
+    } finally { $('btnBuscarRuc').disabled = !rucValido($('pRuc').value.trim()); }
+  }
+  $('btnBuscarRuc').addEventListener('click', buscarSunat);
+  $('pRuc').addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 11);
+    const ok = validarRucVisual();
+    $('btnBuscarRuc').disabled = !ok;
+    if (!ok) $('resultadoSunat').classList.add('hidden');
+    // Al completar un RUC válido se consulta solo (una vez por RUC)
+    if (ok && e.target.value !== ultimoRucConsultado) buscarSunat();
+  });
+  $('pCondicion').addEventListener('change', () => $('bloqueDias').classList.toggle('hidden', $('pCondicion').value !== 'Crédito'));
+  $('btnNuevoProveedor').addEventListener('click', () => abrirProveedor(null));
+  $('formProveedor').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const error = (m) => { $('errorProveedor').textContent = m; $('errorProveedor').classList.remove('hidden'); };
+    if (!$('pRazon').value.trim()) return error('Escribe la razón social o nombre del proveedor.');
+    if ($('pRuc').value.trim() && !validarRucVisual()) return error('El RUC no es válido.');
+    const id = $('pId').value;
+    const body = { ruc: $('pRuc').value.trim(), tipo: $('pTipo').value, razonSocial: $('pRazon').value, nombreComercial: $('pComercial').value, contacto: $('pContacto').value,
+      telefono: $('pTelefono').value, correo: $('pCorreo').value, diasEntrega: $('pEntrega').value, direccion: $('pDireccion').value,
+      condicionPago: $('pCondicion').value, diasCredito: Number($('pDias').value), notas: $('pNotas').value, activo: $('pActivo').checked };
+    try {
+      await Auth.apiFetch(id ? `/proveedores/${id}` : '/proveedores', { method: id ? 'PUT' : 'POST', body: JSON.stringify(body) });
+      cerrar('modalProveedor');
+      await recargarTodo();
+      if (!id) mostrarTab('proveedores');
+    } catch (ex) { error(ex.message); }
+  });
+
+  // =============================================================
+  // Pedido sugerido
+  // =============================================================
+  function textoPedido(g) {
+    return `Hola${g.contacto ? ' ' + g.contacto.split(' ')[0] : ''}, le saluda la Clínica Veterinaria Premier Can. Quisiéramos hacer el siguiente pedido:\n\n` +
+      g.items.map((i) => `• ${i.nombre}${i.presentacion ? ` (${i.presentacion})` : ''}: ${i.sugerido} ${i.unidad}`).join('\n') +
+      '\n\n¿Nos confirma disponibilidad, precio y fecha de entrega? Gracias.';
+  }
+  function pintarPedido() {
+    const total = pedido.reduce((s, g) => s + g.items.length, 0);
+    $('badgePedido').textContent = total; $('badgePedido').classList.toggle('hidden', !total);
+    $('listaPedido').innerHTML = pedido.length ? pedido.map((g, gi) => {
+      const est = g.items.reduce((s, i) => s + (i.costo != null ? i.costo * i.sugerido : 0), 0);
+      const wa = pcEnlaceWhatsApp(g.telefono, textoPedido(g));
+      return `<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5">
+        <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+          <div><h4 class="font-bold text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">${g.proveedorId ? 'storefront' : 'help'}</span>${escHtml(g.nombreComercial || g.razonSocial)}</h4>
+            <p class="det-mini">${g.proveedorId ? `${g.telefono ? escHtml(g.telefono) : 'Sin teléfono'}${g.diasEntrega ? ` · reparte ${escHtml(g.diasEntrega)}` : ''}` : 'Asigna el proveedor habitual a estos productos (Inventario → Editar).'}</p></div>
+          <p class="text-right text-sm text-on-surface-variant">Costo estimado<br><b class="text-on-surface text-lg">${escHtml(soles(est))}</b></p>
+        </div>
+        <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead><tr><th class="py-2 px-2">Producto</th><th class="py-2 px-2 text-right">Stock</th><th class="py-2 px-2 text-right">Mínimo</th><th class="py-2 px-2 w-28">Pedir</th></tr></thead>
+          <tbody>${g.items.map((i, ii) => `<tr class="border-t border-outline-variant"><td class="py-2 px-2 font-semibold text-on-surface">${escHtml(i.nombre)}<p class="det-mini">${escHtml(i.categoria)}${i.costo != null ? ` · último costo ${escHtml(soles(i.costo))}` : ''}</p>
+            ${i.solicitud ? `<p class="det-mini mt-1" style="color:var(--pc-ink)">${i.solicitud.urgente ? '<span class="chip chip-mal">Urgente</span> ' : ''}🙋 Pedido por ${escHtml((i.solicitud.por || '').split(' ').slice(0, 2).join(' '))}${i.solicitud.cantidad ? ` (${escHtml(i.solicitud.cantidad)})` : ''}${i.solicitud.nota ? `: “${escHtml(i.solicitud.nota)}”` : ''}
+              <button class="sol-descartar text-error font-semibold ml-1" data-sol="${escHtml(i.solicitud.id)}" type="button">Descartar</button></p>` : ''}</td>
+            <td class="py-2 px-2 text-right ${i.stock <= 0 ? 'text-error font-bold' : ''}">${escHtml(i.stock)} ${escHtml(i.unidad)}</td><td class="py-2 px-2 text-right">${escHtml(i.minimo)}</td>
+            <td class="py-2 px-2"><input class="ped-cant w-full py-1 px-2" data-g="${gi}" data-i="${ii}" min="0" step="1" type="number" value="${escHtml(i.sugerido)}"></td></tr>`).join('')}</tbody></table></div>
+        <div class="flex flex-wrap gap-2 mt-4 justify-end">
+          <button class="ped-copiar px-3 py-2 rounded-lg border border-outline-variant text-sm font-semibold flex items-center gap-1" data-g="${gi}" type="button"><span class="material-symbols-outlined text-[18px]">content_copy</span>Copiar pedido</button>
+          ${wa ? `<a class="px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-1" href="${escHtml(wa)}" rel="noopener" style="background:#25D366;color:#fff" target="_blank"><span class="material-symbols-outlined text-[18px]">chat</span>Enviar por WhatsApp</a>` : ''}
+          ${g.proveedorId || g.razonSocial === 'Productos nuevos solicitados' ? `<button class="ped-llego px-3 py-2 rounded-lg bg-primary text-on-primary text-sm font-semibold flex items-center gap-1" data-g="${gi}" type="button"><span class="material-symbols-outlined text-[18px]">inventory</span>Llegó: registrar compra</button>` : ''}
+        </div>
+      </article>`;
+    }).join('') : `<div class="text-center p-10 rounded-xl border border-dashed border-outline-variant"><span class="material-symbols-outlined text-5xl" style="color:#16a34a">task_alt</span>
+        <p class="font-semibold text-on-surface mt-2">Todo el stock está sobre el mínimo</p><p class="text-on-surface-variant text-sm">Cuando un producto llegue a su stock mínimo aparecerá aquí, listo para pedirlo.</p></div>`;
+  }
+  $('listaPedido').addEventListener('change', (e) => {
+    if (!e.target.classList.contains('ped-cant')) return;
+    pedido[e.target.dataset.g].items[e.target.dataset.i].sugerido = Math.max(0, Number(e.target.value || 0));
+    pintarPedido();
+  });
+  $('listaPedido').addEventListener('click', async (e) => {
+    const d = e.target.closest('.sol-descartar');
+    if (d) {
+      const ok = await PCConfirmar({ titulo: '¿Descartar la solicitud?', mensaje: 'Ya no aparecerá en el pedido (por ejemplo, si no se va a comprar).', textoSi: 'Sí, descartar', icono: 'block' });
+      if (!ok) return;
+      try { await Auth.apiFetch(`/inventario/solicitudes/${d.dataset.sol}/resolver`, { method: 'POST', body: JSON.stringify({ estado: 'Descartada' }) }); await recargarTodo(); } catch (ex) { alert(ex.message); }
+      return;
+    }
+    const b = e.target.closest('button[data-g]'); if (!b) return;
+    const g = pedido[b.dataset.g];
+    if (b.classList.contains('ped-copiar')) {
+      try { await navigator.clipboard.writeText(textoPedido(g)); b.lastChild.textContent = '¡Copiado!'; setTimeout(() => { b.lastChild.textContent = 'Copiar pedido'; }, 1500); } catch (_) { /* sin permiso */ }
+    }
+    if (b.classList.contains('ped-llego')) abrirCompra({ proveedorId: g.proveedorId, items: g.items.filter((i) => i.sugerido > 0).map((i) => ({ nombre: i.nombre, medicamentoId: i.medicamentoId, cantidad: i.sugerido, costo: i.costo })) });
+  });
+
+  // =============================================================
+  // Carga
+  // =============================================================
+  async function recargarTodo() {
+    const [prov, prod, ped] = await Promise.all([Auth.apiFetch('/proveedores'), Auth.apiFetch('/inventario'), Auth.apiFetch('/compras/pedido-sugerido')]);
+    proveedores = prov; productos = prod; pedido = ped;
+    const sel = $('filtroProveedor').value;
+    $('filtroProveedor').innerHTML = '<option value="">Todos los proveedores</option>' + proveedores.map((p) => `<option value="${escHtml(p.ProveedorID)}">${escHtml(p.NombreComercial || p.RazonSocial)}</option>`).join('');
+    $('filtroProveedor').value = sel;
+    $('listaProductos').innerHTML = productos.map((p) => `<option value="${escHtml(p.NombreMedicamento)}">${escHtml(p.Categoria)} · stock ${escHtml(Number(p.Stock))}</option>`).join('');
+    pintarProveedores(); pintarPedido();
+    await cargarCompras();
+  }
+  const params = new URLSearchParams(location.search);
+  recargarTodo().then(() => { if (['proveedores', 'pedido'].includes(params.get('tab'))) mostrarTab(params.get('tab')); })
+    .catch((err) => { $('tablaCompras').innerHTML = `<tr><td class="py-6 px-4 text-center text-error" colspan="6">${escHtml(err.message)}</td></tr>`; });
+</script>
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

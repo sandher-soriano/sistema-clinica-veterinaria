@@ -1,0 +1,448 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Registrar consulta - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="flex h-screen overflow-hidden antialiased font-body-md text-body-md text-on-background bg-background">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Config</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 h-full overflow-y-auto bg-surface-container-lowest">
+<!-- Header -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Registrar Consulta</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<header class="hidden md:block bg-surface-bright border-b border-outline-variant px-margin-desktop py-6 sticky top-0 z-10">
+<div class="max-w-5xl mx-auto flex justify-between items-center">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<a class="text-primary hover:underline font-label-md text-label-md flex items-center gap-1" id="linkVolverPaciente" href="historia-clinica.html">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Volver a la ficha del paciente
+                        </a>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3">
+                        Registrar Nueva Consulta
+                        <span class="bg-surface-variant text-on-surface-variant text-sm px-3 py-1 rounded-full font-label-md flex items-center gap-2" id="badgePaciente">
+                            Cargando paciente...
+                        </span>
+</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface-variant">Fecha</p>
+<p class="font-body-md text-body-md font-medium text-on-surface" id="fechaHoyTexto"></p>
+</div>
+</div>
+</div>
+</header>
+<!-- Form Container -->
+<div class="p-margin-desktop">
+<div class="max-w-5xl mx-auto">
+<form class="bg-surface-container-lowest rounded-lg border border-outline-variant shadow-sm" id="formConsulta">
+<div class="p-8 space-y-8">
+<!-- Section 1: Basic Info -->
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">info</span>
+                                Información General
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Fecha de Consulta *</label>
+<input class="form-input-clean" id="campoFecha" required type="date">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Veterinario Responsable *</label>
+<select class="form-input-clean" id="campoVeterinario" required>
+<option disabled selected value="">Cargando veterinarios...</option>
+</select>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Motivo de la Consulta *</label>
+<input class="form-input-clean" id="campoMotivo" placeholder="Ej: Control anual, cojera, vómitos..." required type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="campoPeso">Peso (kg)</label>
+<input class="form-input-clean" id="campoPeso" inputmode="decimal" max="200" min="0" placeholder="Ej: 12.5" step="0.01" type="number">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="campoTemperatura">Temperatura (°C)</label>
+<input class="form-input-clean" id="campoTemperatura" inputmode="decimal" max="45" min="30" placeholder="Ej: 38.5" step="0.1" type="number">
+</div>
+</div>
+</div>
+<!-- Section 2: Clinical Assessment -->
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">stethoscope</span>
+                                Evaluación Clínica
+                            </h3>
+<div class="space-y-6">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Síntomas</label>
+<textarea class="form-input-clean" id="campoSintomas" placeholder="Describa los síntomas observados..." rows="3"></textarea>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Diagnóstico Presuntivo / Definitivo</label>
+<textarea class="form-input-clean" id="campoDiagnostico" placeholder="Ingrese el diagnóstico..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Section 3: Treatment & Meds -->
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">prescriptions</span>
+                                Tratamiento
+                            </h3>
+<div class="space-y-6">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Tratamiento Prescrito</label>
+<textarea class="form-input-clean" id="campoTratamiento" placeholder="Plan de tratamiento general..." rows="3"></textarea>
+</div>
+<div class="bg-surface p-4 rounded-lg border border-outline-variant">
+<label class="block font-label-md text-label-md text-on-surface mb-4 flex justify-between items-center">
+                                        Medicación
+                                        <button class="text-primary hover:text-primary-container text-sm flex items-center gap-1" id="btnAñadirMedicamento" type="button">
+<span class="material-symbols-outlined text-sm">add</span> Añadir Medicamento
+                                        </button>
+</label>
+<div id="filasMedicamentos" class="space-y-2"></div>
+</div>
+</div>
+</div>
+<!-- Section 4: Attachments & Notes -->
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined">attach_file</span>
+                                Anexos y Observaciones
+                            </h3>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Observaciones Adicionales</label>
+<textarea class="form-input-clean h-32" id="campoObservaciones" placeholder="Notas internas, evolución esperada..."></textarea>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Archivos Adjuntos (Exámenes, Fotos)</label>
+<div class="file-upload-zone flex flex-col items-center justify-center h-32 opacity-50 cursor-not-allowed" title="Próximamente">
+<span class="material-symbols-outlined text-primary mb-2 text-3xl">cloud_upload</span>
+<p class="font-body-md text-sm text-on-surface-variant">Disponible próximamente</p>
+<p class="font-caption text-xs text-outline mt-1">JPG, PNG, PDF (Max 10MB)</p>
+</div>
+</div>
+</div>
+</div>
+<p class="hidden font-caption text-caption text-error" id="errorConsulta"></p>
+</div>
+<!-- Footer Actions -->
+<div class="bg-surface-bright border-t border-outline-variant p-6 flex items-center justify-end gap-4 rounded-b-lg">
+<a class="px-6 py-3 rounded border border-primary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors" id="linkCancelar" href="pacientes.html">
+                            Cancelar
+                        </a>
+<button class="px-6 py-3 rounded bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transform" type="submit">
+<span class="material-symbols-outlined text-sm">save</span>
+                            Guardar Consulta
+                        </button>
+</div>
+</form>
+</div>
+</div>
+</main>
+
+
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const pacienteId = params.get('pacienteId');
+
+  document.getElementById('linkVolverPaciente').href = pacienteId
+    ? `historia-clinica.html?pacienteId=${pacienteId}`
+    : 'pacientes.html';
+  document.getElementById('linkCancelar').href = pacienteId
+    ? `historia-clinica.html?pacienteId=${pacienteId}`
+    : 'pacientes.html';
+
+  // Fecha local de "hoy" en YYYY-MM-DD, sin el bug de UTC de toISOString()
+  // (que puede saltar al día siguiente/anterior según la hora y el huso
+  // horario del navegador).
+  function hoyLocalISO() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const dia = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${dia}`;
+  }
+
+  // Llegó desde "Atender" en el calendario de citas: la consulta queda ligada
+  // a esa cita y, al guardar, la cita se marca como atendida.
+  const citaId = params.get('citaId');
+  if (citaId) {
+    document.getElementById('linkCancelar').href = 'citas.html';
+    const aviso = document.createElement('div');
+    aviso.className = 'flex items-start gap-3 p-4 mb-6 rounded-2xl border border-primary/20 bg-primary-container/10';
+    aviso.innerHTML = `
+      <span class="material-symbols-outlined text-primary">event_available</span>
+      <div>
+        <p class="font-label-md text-on-surface">Atendiendo una cita agendada</p>
+        <p class="text-caption font-caption text-on-surface-variant">Al guardar esta consulta, la cita se marcará como <b>atendida</b> automáticamente.</p>
+      </div>`;
+    document.querySelector('form').prepend(aviso);
+  }
+
+  document.getElementById('campoFecha').value = hoyLocalISO();
+  document.getElementById('fechaHoyTexto').textContent =
+    new Date().toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+
+  if (!pacienteId) {
+    document.getElementById('badgePaciente').textContent = 'Sin paciente seleccionado';
+    document.getElementById('errorConsulta').textContent =
+      'Falta indicar el paciente. Entra a esta pantalla desde "Historias Clínicas" o desde la ficha de un paciente.';
+    document.getElementById('errorConsulta').classList.remove('hidden');
+  }
+
+  // ============================================================
+  // Cargar datos del paciente (para el badge del encabezado)
+  // ============================================================
+  async function cargarPaciente() {
+    if (!pacienteId) return;
+    try {
+      const paciente = await Auth.apiFetch(`/pacientes/${pacienteId}`);
+      document.getElementById('badgePaciente').textContent = paciente.Nombre;
+    } catch (err) {
+      document.getElementById('badgePaciente').textContent = 'Paciente no encontrado';
+    }
+  }
+
+  // ============================================================
+  // Cargar veterinarios activos para el select
+  // ============================================================
+  async function cargarVeterinarios() {
+    const select = document.getElementById('campoVeterinario');
+    try {
+      const veterinarios = await Auth.apiFetch('/usuarios/veterinarios/lista');
+      const usuarioActual = Auth.obtenerUsuario();
+
+      select.innerHTML = '<option disabled value="">Seleccionar...</option>' +
+        veterinarios.map((v) => `<option value="${escHtml(v.UsuarioID)}">${escHtml(v.NombreCompleto)}</option>`).join('');
+
+      // Si quien está logueado es veterinario, se preselecciona a sí mismo
+      const propio = veterinarios.find((v) => v.NombreCompleto === usuarioActual?.nombreCompleto);
+      if (propio) select.value = propio.UsuarioID;
+    } catch (err) {
+      select.innerHTML = `<option disabled selected value="">No se pudo cargar la lista</option>`;
+    }
+  }
+
+  // ============================================================
+  // Medicamentos dinámicos
+  // ============================================================
+  function crearFilaMedicamento() {
+    const fila = document.createElement('div');
+    fila.className = 'grid grid-cols-12 gap-4 fila-medicamento';
+    fila.innerHTML = `
+      <div class="col-span-5"><input class="form-input-clean text-sm py-2 campo-med-nombre" placeholder="Nombre del medicamento" type="text"></div>
+      <div class="col-span-3"><input class="form-input-clean text-sm py-2 campo-med-dosis" placeholder="Dosis (ej. 5mg)" type="text"></div>
+      <div class="col-span-3"><input class="form-input-clean text-sm py-2 campo-med-frecuencia" placeholder="Frecuencia (ej. c/8h)" type="text"></div>
+      <div class="col-span-1 flex items-center justify-center">
+        <button class="text-error hover:text-error-container btn-quitar-med" type="button"><span class="material-symbols-outlined">delete</span></button>
+      </div>`;
+    return fila;
+  }
+
+  const contenedorMeds = document.getElementById('filasMedicamentos');
+  contenedorMeds.appendChild(crearFilaMedicamento());
+
+  document.getElementById('btnAñadirMedicamento').addEventListener('click', () => {
+    contenedorMeds.appendChild(crearFilaMedicamento());
+  });
+
+  contenedorMeds.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-quitar-med');
+    if (!btn) return;
+    if (contenedorMeds.children.length > 1) {
+      btn.closest('.fila-medicamento').remove();
+    }
+  });
+
+  function recolectarMedicamentos() {
+    return Array.from(contenedorMeds.querySelectorAll('.fila-medicamento'))
+      .map((fila) => ({
+        nombre: fila.querySelector('.campo-med-nombre').value.trim(),
+        dosis: fila.querySelector('.campo-med-dosis').value.trim(),
+        frecuencia: fila.querySelector('.campo-med-frecuencia').value.trim(),
+      }))
+      .filter((m) => m.nombre); // ignora filas vacías
+  }
+
+  // ============================================================
+  // Envío del formulario
+  // ============================================================
+  document.getElementById('formConsulta').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById('errorConsulta');
+    errorEl.classList.add('hidden');
+
+    if (!pacienteId) {
+      errorEl.textContent = 'Falta indicar el paciente. Vuelve a "Historias Clínicas" y entra desde la ficha de un paciente.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const veterinarioId = document.getElementById('campoVeterinario').value;
+    if (!veterinarioId) {
+      errorEl.textContent = 'Selecciona el veterinario responsable de la consulta.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const body = {
+      pacienteId: Number(pacienteId),
+      veterinarioId: Number(veterinarioId),
+      fechaConsulta: document.getElementById('campoFecha').value,
+      motivoConsulta: document.getElementById('campoMotivo').value.trim(),
+      sintomas: document.getElementById('campoSintomas').value.trim(),
+      diagnostico: document.getElementById('campoDiagnostico').value.trim(),
+      tratamiento: document.getElementById('campoTratamiento').value.trim(),
+      observaciones: document.getElementById('campoObservaciones').value.trim(),
+      medicamentos: recolectarMedicamentos(),
+      citaId: citaId ? Number(citaId) : undefined,
+      pesoKg: document.getElementById('campoPeso').value || null,
+      temperaturaC: document.getElementById('campoTemperatura').value || null,
+    };
+
+    if (!body.motivoConsulta) {
+      errorEl.textContent = 'El motivo de la consulta es obligatorio.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    try {
+      const r = await Auth.apiFetch('/consultas', {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+      // Se ofrece cobrar enseguida: Caja carga el servicio y los medicamentos recetados
+      if (r && r.consultaId) {
+        const cobrar = await PCConfirmar({
+          titulo: 'Consulta guardada ✅',
+          mensaje: body.medicamentos.length
+            ? '¿Cobrar ahora en Caja? Se cargarán la consulta y los medicamentos recetados (la receta se puede abrir desde Caja). También quedará en "Por cobrar".'
+            : '¿Cobrar ahora en Caja? Si no, quedará en "Por cobrar".',
+          textoSi: 'Cobrar ahora', textoNo: 'Más tarde', icono: 'point_of_sale',
+        });
+        if (cobrar) { window.location.href = `caja.html?consultaId=${r.consultaId}`; return; }
+        if (body.medicamentos.length) {
+          const imprimir = await PCConfirmar({
+            titulo: 'Receta', mensaje: '¿Quieres abrir la receta para imprimirla o enviarla en PDF?',
+            textoSi: 'Abrir receta', textoNo: 'Ahora no', icono: 'medication',
+          });
+          if (imprimir) { window.location.href = `../receta.html?c=${r.consultaId}`; return; }
+        }
+      }
+      window.location.href = `historia-clinica.html?pacienteId=${pacienteId}`;
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+
+  cargarPaciente();
+  cargarVeterinarios();
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

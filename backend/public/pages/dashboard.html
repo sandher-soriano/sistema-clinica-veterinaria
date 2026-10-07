@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background flex min-h-screen antialiased">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<!-- Encabezado móvil (mismo estilo que Pacientes) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Resumen</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop bg-background overflow-y-auto">
+<!-- Bienvenida -->
+<section class="pc-dash-hero">
+<div>
+<span class="pc-fecha"><span class="material-symbols-outlined">today</span><span id="fechaHoy"></span></span>
+<h2 id="saludoTitulo">¡Hola! 👋</h2>
+<p id="saludoUsuario">Este es el estado de la clínica hoy.</p>
+</div>
+<div class="pc-hero-arte" aria-hidden="true">
+<span class="pc-burbuja x1"><span class="material-symbols-outlined">pets</span></span>
+<span class="pc-burbuja x2"><span class="material-symbols-outlined">star</span></span>
+<span class="pc-burbuja x3"><span class="material-symbols-outlined">favorite</span></span>
+</div>
+</section>
+<!-- Accesos rápidos -->
+<nav class="pc-atajos" aria-label="Accesos rápidos">
+<a class="pc-atajo" href="citas.html"><span class="pc-ico" style="background:#e3f5f6;color:#0d7a87"><span class="material-symbols-outlined">calendar_add_on</span></span><span>Agendar cita<small>Calendario de la clínica</small></span><span class="material-symbols-outlined pc-flecha">chevron_right</span></a>
+<a class="pc-atajo" href="pacientes.html"><span class="pc-ico" style="background:#e6f8ef;color:#1e9e6a"><span class="material-symbols-outlined">pets</span></span><span>Pacientes<small>Buscar o registrar</small></span><span class="material-symbols-outlined pc-flecha">chevron_right</span></a>
+<a class="pc-atajo" href="historia-clinica.html"><span class="pc-ico" style="background:#fff4dc;color:#c48a12"><span class="material-symbols-outlined">stethoscope</span></span><span>Historias clínicas<small>Consultas registradas</small></span><span class="material-symbols-outlined pc-flecha">chevron_right</span></a>
+<a class="pc-atajo" href="recordatorios.html"><span class="pc-ico" style="background:#ffeaea;color:#d4525e"><span class="material-symbols-outlined">notifications_active</span></span><span>Recordatorios<small>Avisos a clientes</small></span><span class="material-symbols-outlined pc-flecha">chevron_right</span></a>
+</nav>
+<!-- Aviso: citas que ya pasaron y falta marcar si el cliente asistió -->
+<a class="hidden mb-6 flex items-center gap-3 p-4 rounded-2xl border" href="citas.html" id="avisoCitasPorCerrar" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">
+<span class="material-symbols-outlined">event_busy</span>
+<span class="font-semibold" id="avisoCitasPorCerrarTexto"></span>
+<span class="ml-auto font-label-md whitespace-nowrap">Cerrar ahora →</span>
+</a>
+<!-- Aviso: inventario con stock bajo o vencimientos -->
+<a class="hidden mb-6 flex items-center gap-3 p-4 rounded-2xl border" href="inventario.html" id="avisoInventario" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-semibold" id="avisoInventarioTexto"></span>
+<span class="ml-auto font-label-md whitespace-nowrap">Ver inventario →</span>
+</a>
+<!-- Summary Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+<div class="pc-stat" style="--pc-stat-tono:rgba(13,122,135,.07);--pc-stat-sombra:rgba(0,96,106,.7)">
+<div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Pacientes</span><span class="pc-ico" style="background:linear-gradient(135deg,#13a3a3,#00606a)"><span class="material-symbols-outlined">pets</span></span></div>
+<p class="pc-stat-valor" id="statTotalPacientes">—</p>
+<p class="pc-stat-pie">Peluditos activos en la clínica</p>
+</div>
+<div class="pc-stat" style="--pc-stat-tono:rgba(30,158,106,.08);--pc-stat-sombra:rgba(30,158,106,.7)">
+<div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Citas de hoy</span><span class="pc-ico" style="background:linear-gradient(135deg,#3ccf91,#16865a)"><span class="material-symbols-outlined">event_available</span></span></div>
+<p class="pc-stat-valor" id="statCitasHoy">—</p>
+<p class="pc-stat-pie">Programadas para hoy</p>
+</div>
+<div class="pc-stat" style="--pc-stat-tono:rgba(212,82,94,.08);--pc-stat-sombra:rgba(212,82,94,.7)">
+<div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Vacunas pendientes</span><span class="pc-ico" style="background:linear-gradient(135deg,#ff8a8a,#d4525e)"><span class="material-symbols-outlined">vaccines</span></span></div>
+<p class="pc-stat-valor" id="statVacunasPendientes">—</p>
+<p class="pc-stat-pie">Pendientes o atrasadas</p>
+</div>
+<div class="pc-stat" style="--pc-stat-tono:rgba(242,193,78,.14);--pc-stat-sombra:rgba(196,138,18,.7)">
+<div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Avisos enviados</span><span class="pc-ico" style="background:linear-gradient(135deg,#f6cf6a,#d99a17)"><span class="material-symbols-outlined">forward_to_inbox</span></span></div>
+<p class="pc-stat-valor" id="statRecordatoriosHoy">—</p>
+<p class="pc-stat-pie">Recordatorios enviados hoy</p>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column (Chart Area) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background">Citas por Semana</h3>
+<a class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline" href="citas.html">
+                            Ver calendario <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="pc-barras" id="graficoCitasSemana"></div>
+<div class="pc-dias" id="etiquetasDiasSemana"></div>
+</div>
+<!-- Right Column (List Area) -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background">Últimas Historias</h3>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-bright border-b border-outline-variant">
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant">Paciente</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant">Motivo</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant text-right">Fecha</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-background" id="tablaUltimasHistorias">
+<tr><td class="py-4 px-2 text-center text-on-surface-variant" colspan="3">Cargando...</td></tr>
+</tbody>
+</table>
+</div>
+<a class="w-full mt-4 py-2 text-center text-primary font-label-md text-label-md hover:bg-surface-container-low rounded-lg transition-colors border border-transparent hover:border-outline-variant block" href="historia-clinica.html">
+                        Ver todas las historias
+                    </a>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+  function formatearFechaCorta(fechaIso) {
+    const soloFecha = fechaIso.substring(0, 10);
+    const [y, m, d] = soloFecha.split('-').map(Number);
+    const fecha = new Date(y, m - 1, d);
+    const hoy = new Date();
+    const ayer = new Date(); ayer.setDate(hoy.getDate() - 1);
+    const hora = fechaIso.substring(11, 16);
+    const esHoy = fecha.toDateString() === hoy.toDateString();
+    const esAyer = fecha.toDateString() === ayer.toDateString();
+    const etiquetaDia = esHoy ? 'Hoy' : esAyer ? 'Ayer' : fecha.toLocaleDateString('es-PE', { day: '2-digit', month: 'short' });
+    // Las consultas guardan solo la fecha: "00:00" no es una hora real, no se muestra.
+    return hora && hora !== '00:00' ? `${etiquetaDia} ${hora}` : etiquetaDia;
+  }
+
+  // Primer nombre real (se salta títulos como "Dra." o "Dr.")
+  function primerNombre(nombreCompleto) {
+    const partes = (nombreCompleto || '').trim().split(/\s+/)
+      .filter((p) => !/^(dr|dra|lic|sr|sra|srta)\.?$/i.test(p));
+    return partes[0] || '';
+  }
+
+  function pintarSaludo() {
+    const h = new Date().getHours();
+    const saludo = h < 12 ? 'Buenos días' : h < 19 ? 'Buenas tardes' : 'Buenas noches';
+    const emoji = h < 12 ? '☀️' : h < 19 ? '👋' : '🌙';
+    const usuario = Auth.obtenerUsuario();
+    const nombre = usuario ? primerNombre(usuario.nombreCompleto) : '';
+    document.getElementById('saludoTitulo').textContent = `${saludo}${nombre ? ', ' + nombre : ''} ${emoji}`;
+    const fecha = new Date().toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' });
+    document.getElementById('fechaHoy').textContent = fecha.charAt(0).toUpperCase() + fecha.slice(1);
+  }
+
+  async function cargarDashboard() {
+    try {
+      pintarSaludo();
+
+      const data = await Auth.apiFetch('/dashboard');
+
+      contarHasta('statTotalPacientes', data.tarjetas.TotalPacientes);
+      contarHasta('statCitasHoy', data.tarjetas.CitasHoy);
+      contarHasta('statVacunasPendientes', data.tarjetas.VacunasPendientes);
+      contarHasta('statRecordatoriosHoy', data.tarjetas.RecordatoriosEnviadosHoy);
+
+      // --- Gráfico de citas por semana ---
+      const maximo = Math.max(1, ...data.citasPorSemana.map((d) => d.cantidad));
+      const indiceHoy = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
+      document.getElementById('graficoCitasSemana').innerHTML = data.citasPorSemana.map((d, i) => {
+        const alturaPct = Math.max(5, Math.round((d.cantidad / maximo) * 100));
+        return `
+          <div class="pc-barra-col" title="${escHtml(d.dia)}: ${escHtml(d.cantidad)} cita${escHtml(d.cantidad === 1 ? '' : 's')}">
+            <div class="pc-barra ${i === indiceHoy ? 'hoy' : ''}" style="height:${alturaPct}%;animation-delay:${(i * 0.07).toFixed(2)}s">
+              <span class="pc-barra-valor">${escHtml(d.cantidad)}</span>
+            </div>
+          </div>`;
+      }).join('');
+      document.getElementById('etiquetasDiasSemana').innerHTML =
+        data.citasPorSemana.map((d, i) => `<span class="${i === indiceHoy ? 'hoy' : ''}">${escHtml(d.dia)}</span>`).join('');
+
+      // --- Últimas historias ---
+      const tbody = document.getElementById('tablaUltimasHistorias');
+      if (data.ultimasHistorias.length === 0) {
+        tbody.innerHTML = `<tr><td class="py-4 px-2 text-center text-on-surface-variant" colspan="3">Todavía no hay consultas registradas.</td></tr>`;
+      } else {
+        tbody.innerHTML = data.ultimasHistorias.map((h) => `
+          <tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+            <td class="py-3 px-2">
+              <div class="flex flex-col">
+                <span class="font-semibold text-primary">${escHtml(h.PacienteNombre)}</span>
+                <span class="font-caption text-caption text-on-surface-variant">${escHtml(h.PropietarioNombres)} ${escHtml(h.PropietarioApellidos)}</span>
+              </div>
+            </td>
+            <td class="py-3 px-2">
+              <span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-full text-xs">${escHtml(h.MotivoConsulta)}</span>
+            </td>
+            <td class="py-3 px-2 text-right text-on-surface-variant">${formatearFechaCorta(h.FechaConsulta)}</td>
+          </tr>
+        `).join('');
+      }
+    } catch (err) {
+      document.getElementById('tablaUltimasHistorias').innerHTML =
+        `<tr><td class="py-4 px-2 text-center text-error" colspan="3">${escHtml(err.message)}</td></tr>`;
+    }
+  }
+
+  // Los números "cuentan" hasta su valor (0 -> N)
+  function contarHasta(id, valor) {
+    const el = document.getElementById(id);
+    const fin = Number(valor) || 0;
+    if (fin === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = fin; return; }
+    const inicio = performance.now();
+    const dur = Math.min(1200, 400 + fin * 25);
+    (function paso(t) {
+      const p = Math.min(1, (t - inicio) / dur);
+      el.textContent = Math.round(fin * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(paso);
+    })(inicio);
+  }
+
+  cargarDashboard();
+
+  // Inventario: stock bajo, vencidos o por vencer
+  (async () => {
+    try {
+      const a = await Auth.apiFetch('/inventario/alertas');
+      const partes = [];
+      if (a.bajoStock) partes.push(`${a.bajoStock} con stock bajo`);
+      if (a.vencidos) partes.push(`${a.vencidos} vencido(s)`);
+      if (a.porVencer) partes.push(`${a.porVencer} por vencer`);
+      if (!partes.length) return;
+      document.getElementById('avisoInventarioTexto').textContent = `Inventario: ${partes.join(' · ')}.`;
+      document.getElementById('avisoInventario').classList.remove('hidden');
+    } catch (e) { /* el aviso es un extra */ }
+  })();
+
+  // Citas pasadas sin cerrar (asistió / no asistió)
+  (async () => {
+    try {
+      const lista = await Auth.apiFetch('/citas/por-cerrar');
+      if (!lista.length) return;
+      document.getElementById('avisoCitasPorCerrarTexto').textContent = lista.length === 1
+        ? 'Hay 1 cita que ya pasó y falta marcar si el cliente asistió.'
+        : `Hay ${lista.length} citas que ya pasaron y falta marcar si el cliente asistió.`;
+      document.getElementById('avisoCitasPorCerrar').classList.remove('hidden');
+    } catch (e) { /* el aviso es un extra */ }
+  })();
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

@@ -1,0 +1,63 @@
+# ============================================================
+# Premier Can - archivos que NUNCA entran al historial de git
+# ============================================================
+
+# --- Secretos: contraseñas, claves de correo, RENIEC, JWT, cadenas de conexión ---
+.env
+.env.*
+*.env
+!.env.example
+sa.txt
+
+# --- Bases de datos y respaldos (datos reales de clientes y mascotas) ---
+respaldos/
+*.bak
+*.bak.*
+*.bak*.json
+*.mdf
+*.ldf
+*.bacpac
+
+# --- Datos personales: fotos, análisis y archivos subidos ---
+backend/uploads/*/*
+!backend/uploads/*/.gitkeep
+backend/privado/
+
+# --- Dependencias (se reinstalan con npm install) ---
+node_modules/
+
+# --- Herramientas portables (Node, git, ngrok, GitHub CLI: binarios pesados) ---
+herramientas/
+
+# --- Binarios, documentos y archivos generados ---
+*.apk
+*.aab
+*.rar
+*.zip
+*.docx
+*.doc
+*.pdf
+~$*
+*.log
+
+# --- Notas internas y configuración del editor (rutas y cuentas personales) ---
+PUBLICAR.md
+RESUMEN_MEJORAS.txt
+.vscode/
+.idea/
+.claude/
+
+# --- App Android: configuración real (lleva la dirección pública del sistema) ---
+# En el repositorio van las versiones *.example; cada instalación crea las suyas.
+premiercan-app-clientes/capacitor.config.json
+premiercan-app-clientes/www/runners/promociones.js
+
+# --- App Android: carpetas de compilación y del editor ---
+premiercan-app-clientes/android/build/
+premiercan-app-clientes/android/app/build/
+premiercan-app-clientes/android/.gradle/
+premiercan-app-clientes/android/.idea/
+premiercan-app-clientes/android/.kotlin/
+premiercan-app-clientes/android/local.properties
+premiercan-app-clientes/android/capacitor-cordova-android-plugins/build/
+premiercan-app-clientes/android/app/src/main/assets/

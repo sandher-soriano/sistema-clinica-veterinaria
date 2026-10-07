@@ -1,0 +1,832 @@
+<!DOCTYPE html><html class="h-full bg-background text-on-background" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Recordatorios - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<style>
+  /* En pantallas angostas (celular) cada recordatorio se ve como tarjeta:
+     cliente arriba con su menú "⋯", y debajo el recordatorio y el seguimiento. */
+  @media (max-width: 700px) {
+    .tabla-recordatorios, .tabla-recordatorios tbody { display: block; width: 100%; }
+    .tabla-recordatorios thead, .tabla-recordatorios colgroup { display: none; }
+    .tabla-recordatorios tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; padding: 14px 16px; }
+    .tabla-recordatorios td { display: block; padding: 0 !important; border: 0 !important; }
+    .tabla-recordatorios td:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .tabla-recordatorios td:nth-child(4) { grid-column: 2; grid-row: 1; }
+    .tabla-recordatorios td:nth-child(2) { grid-column: 1 / span 2; padding-left: 52px !important; }
+    .tabla-recordatorios td:nth-child(2) p { display: inline; margin-right: 8px; }
+    .tabla-recordatorios td:nth-child(3) { grid-column: 1 / span 2; padding-left: 52px !important; }
+    .tabla-recordatorios td[colspan] { grid-column: 1 / span 2; text-align: center; }
+  }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden min-h-screen">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- TopAppBar Component -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Recordatorios</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<header class="hidden md:flex fixed top-0 right-0 left-0 md:left-64 h-16 bg-background/80 backdrop-blur-md border-b border-outline-variant dark:border-outline justify-between items-center px-margin-desktop w-full z-10">
+<!-- Title -->
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 -ml-2 text-on-surface-variant rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface dark:text-on-surface">Recordatorios</h2>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full p-2 transition-opacity duration-200 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full p-2 transition-opacity duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="ml-4 w-8 h-8 rounded-full border border-outline-variant overflow-hidden bg-surface-container">
+<img alt="User Profile" class="w-full h-full object-cover" src="../assets/img/logo.jpg">
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop md:ml-64 flex flex-col gap-md">
+<div class="max-w-[1600px] mx-auto h-full flex flex-col">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight mb-2">Recordatorios</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Cada 15 minutos el sistema genera solo los avisos de próximas dosis (según las reglas de la derecha) y de citas (10 días, 3 días, 1 día y 5 horas antes), y se los envía al cliente por correo y como notificación en su app. Los marcados como <b>Interno</b> son alertas para el personal y nunca le llegan al cliente.</p>
+</div>
+<div class="flex gap-3 flex-wrap justify-end">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-3 px-5 flex items-center justify-center gap-2" id="btnNuevaNotificacion" type="button">
+<span class="material-symbols-outlined text-lg">campaign</span>
+Nueva notificación
+</button>
+<button class="bg-surface-container-lowest border-2 border-primary text-primary hover:bg-primary-container/10 font-label-md text-label-md py-3 px-5 rounded-lg flex items-center justify-center gap-2 transition-colors" id="btnGenerarAutomaticos" title="Vuelve a revisar ahora mismo (esto también ocurre solo al entrar a esta página)">
+<span class="material-symbols-outlined text-lg">autorenew</span>
+                        Volver a revisar ahora
+                    </button>
+</div>
+</div>
+<p class="hidden font-caption text-caption text-primary bg-primary-container/10 border border-primary/20 rounded-md px-3 py-2 mb-4" id="avisoGeneracionAutomatica"></p>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 min-[1700px]:grid-cols-12 gap-8 flex-1 min-h-0">
+<!-- Left Column: Active Reminders Table -->
+<div class="min-[1700px]:col-span-8 flex flex-col bg-surface-container-lowest rounded-xl border border-[#e0e6ed] shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<!-- Table Header Controls -->
+<div class="px-6 py-5 border-b border-[#e0e6ed] flex justify-between items-center bg-[#fcfdfe] flex-wrap gap-3">
+<div class="flex flex-wrap gap-2" id="filtrosEstado">
+<button class="px-4 py-1.5 rounded-full bg-surface-container-low text-primary font-label-md text-label-md border border-primary-fixed-dim" data-estado="Todos" type="button">Todos</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors" data-estado="Pendiente" type="button">Pendientes</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors" data-estado="Enviado" type="button">Enviados</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors" data-estado="Fallido" type="button">Descartados</button>
+</div>
+<div class="flex items-center bg-[#f1f4f6] rounded-full px-3 py-1.5 w-64 border-b-2 border-transparent focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-outline mr-2 text-sm">search</span>
+<input class="bg-transparent border-none outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:ring-0 p-0" id="buscarRecordatorio" placeholder="Buscar mascota o dueño..." type="text">
+</div>
+</div>
+<!-- Table -->
+<div class="flex-1">
+<table class="w-full text-left border-collapse table-fixed tabla-recordatorios">
+<colgroup><col style="width:34%"><col style="width:24%"><col><col style="width:52px"></colgroup>
+<thead class="bg-[#f8fafb] sticky top-0 z-10 border-b border-[#e0e6ed]">
+<tr>
+<th class="px-5 py-4 font-label-md text-label-md text-outline font-semibold">Cliente</th>
+<th class="px-5 py-4 font-label-md text-label-md text-outline font-semibold">Recordatorio</th>
+<th class="px-5 py-4 font-label-md text-label-md text-outline font-semibold">Seguimiento automático</th>
+<th class="px-3 py-4 w-12"><span class="sr-only">Más acciones</span></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e0e6ed] font-body-md text-body-md text-on-surface" id="tablaRecordatorios">
+<tr><td class="px-6 py-4 text-center text-on-surface-variant" colspan="4">Cargando recordatorios...</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Footer info -->
+<div class="px-6 py-4 border-t border-[#e0e6ed] bg-[#fcfdfe] flex items-center justify-between text-sm text-on-surface-variant">
+<span id="infoConteo">Mostrando 0 recordatorios</span>
+</div>
+</div>
+<!-- Right Column: Configuration Rules -->
+<div class="min-[1700px]:col-span-4 grid md:grid-cols-2 min-[1700px]:flex min-[1700px]:flex-col gap-6">
+<!-- Automated Rules Panel -->
+<div class="bg-surface-container-lowest rounded-xl border border-[#e0e6ed] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md-mobile font-bold text-on-surface">Reglas automáticas</h3>
+</div>
+<p class="font-caption text-caption text-on-surface-variant -mt-4 mb-4">Cada 15 minutos el sistema revisa las próximas dosis y avisa al cliente cuando faltan estos días.</p>
+<div class="space-y-4" id="listaReglas">
+<p class="text-on-surface-variant text-caption font-caption">Cargando reglas...</p>
+</div>
+</div>
+<!-- Quick Stats Widget -->
+<div class="bg-primary text-on-primary rounded-xl p-6 relative overflow-hidden shadow-[0px_12px_24px_rgba(13,122,135,0.15)]">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<h3 class="font-label-md text-label-md text-primary-fixed-dim mb-4">Resumen general</h3>
+<div class="flex items-end gap-4 mb-2">
+<span class="font-display-lg text-display-lg font-bold leading-none" id="statPorcentajeEnviados">—</span>
+<span class="text-sm bg-white/20 px-2 py-1 rounded-md flex items-center gap-1 mb-1" id="statPendientesBadge">— pendientes</span>
+</div>
+<p class="font-body-md text-sm text-on-primary/80">Porcentaje de recordatorios ya enviados sobre el total registrado.</p>
+</div>
+</div>
+</div>
+</div>
+
+</main>
+
+
+
+<script>
+  const TIPO_LABEL = { Vacuna: 'Vacuna', Desparasitacion: 'Desparasitación', Cita: 'Cita', ControlGeneral: 'Control general', Aviso: 'Aviso' };
+  const COLOR = {
+    verde: 'bg-[#e6f4ea] text-[#137333]',
+    azul: 'bg-[#e8f0fe] text-[#1a56b8]',
+    ambar: 'bg-[#fff8e6] text-[#b06000]',
+    rojo: 'bg-error-container text-on-error-container',
+    gris: 'bg-surface-container-high text-on-surface-variant',
+  };
+
+  function escapar(texto) {
+    return String(texto ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  /**
+   * Seguimiento automático de un recordatorio: se deduce solo de los datos
+   * (cuándo le toca, por dónde salió, si el cliente tiene correo / app).
+   * El personal no tiene que marcar nada.
+   */
+  function seguimiento(r) {
+    const canales = (r.CanalEnvio || '').split('+');
+    const quiereCorreo = r.EnviarPor !== 'App';
+    const quiereApp = r.EnviarPor !== 'Correo';
+    const puedeCorreo = quiereCorreo && r.ConCorreo;
+    const puedeApp = quiereApp && r.ConApp;
+    const porDonde = [puedeApp && 'app', puedeCorreo && 'correo'].filter(Boolean).join(' y ');
+
+    if (r.Destino === 'Staff') {
+      return r.Estado === 'Pendiente'
+        ? { texto: 'Alerta interna', icono: 'badge', clases: COLOR.gris, detalle: 'Solo para el personal: el cliente no la recibe.' }
+        : { texto: 'Atendida', icono: 'task_alt', clases: COLOR.verde, detalle: '' };
+    }
+
+    if (r.Estado === 'Fallido') {
+      const msg = r.Mensaje || '';
+      const detalle = msg.startsWith('[No enviado: la cita cambió]') ? 'La cita se canceló, se reprogramó o ya se atendió.'
+        : msg.startsWith('[Reemplazado') ? 'Se envió en su lugar un aviso más cercano a la cita.'
+        : msg.startsWith('[No enviado: la dosis ya se aplicó]') ? 'La dosis ya se aplicó (o se registró una nueva).'
+        : 'Se descartó a mano.';
+      return { texto: 'No se envía', icono: 'block', clases: COLOR.gris, detalle };
+    }
+
+    if (r.Estado === 'Enviado') {
+      if (canales.includes('Manual')) {
+        return { texto: 'Avisado por teléfono', icono: 'call', clases: COLOR.azul, detalle: r.EnviadoEn ? `Registrado el ${formatearFechaHora(r.EnviadoEn)}` : '' };
+      }
+      const hecho = [];
+      if (canales.includes('Correo')) hecho.push('📧 Correo enviado');
+      if (canales.includes('App')) hecho.push('📱 Llegó al celular');
+      if (quiereApp && r.ConApp && !canales.includes('App')) hecho.push('📱 Le llegará al celular cuando abra o revise la app');
+      if (quiereCorreo && r.ConCorreo && !canales.includes('Correo')) hecho.push('📧 Correo en camino');
+      return {
+        texto: 'Enviado', icono: 'check_circle', clases: COLOR.verde,
+        // HTML armado aquí mismo (cada parte escapada): se muestra tal cual, sin volver a escaparlo
+        detalleHtml: `${hecho.map(escHtml).join('<br>')}${r.EnviadoEn ? `<br><span class="text-outline">${escHtml(formatearFechaHora(r.EnviadoEn))}</span>` : ''}`,
+      };
+    }
+
+    // Pendiente
+    if (r.Vencido) {
+      return { texto: 'Venció sin enviarse', icono: 'event_busy', clases: COLOR.rojo, detalle: 'La fecha ya pasó. Si hace falta, llama al cliente.' };
+    }
+    if (!puedeCorreo && !puedeApp) {
+      return { texto: 'Sin forma de avisar', icono: 'phone_disabled', clases: COLOR.ambar, detalle: 'El cliente no tiene correo ni acceso a la app: avísale por teléfono.' };
+    }
+    if (r.EnvioPrevisto && r.EnvioPrevisto > r.AhoraLima) {
+      return { texto: 'Programado', icono: 'schedule', clases: COLOR.azul, detalle: `Se enviará solo el ${formatearFechaHora(r.EnvioPrevisto)} por ${porDonde}.` };
+    }
+    return { texto: 'Enviándose', icono: 'sync', clases: COLOR.ambar, detalle: `El sistema lo está enviando por ${porDonde}.` };
+  }
+
+  let estadoFiltro = 'Todos';
+  let recordatoriosCache = [];
+  let debounceBusqueda;
+
+  function fechaSoloDia(fechaIso) {
+    if (!fechaIso) return null;
+    const [y, m, d] = fechaIso.substring(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function formatearFechaHora(fechaIso) {
+    if (!fechaIso) return '—';
+    const soloFecha = fechaSoloDia(fechaIso);
+    // Con el año si no es el actual: "07-set." de 2027 parecería una fecha ya pasada
+    const otroAnio = soloFecha.getFullYear() !== new Date().getFullYear();
+    const fechaTexto = soloFecha.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', ...(otroAnio ? { year: 'numeric' } : {}) });
+    const horas = fechaIso.substring(11, 16);
+    return horas && horas !== '00:00' ? `${fechaTexto}, ${horas}` : fechaTexto;
+  }
+
+  function iniciales(nombre) {
+    return nombre.slice(0, 2).toUpperCase();
+  }
+
+  async function cargarResumen() {
+    try {
+      const r = await Auth.apiFetch('/recordatorios/resumen');
+      const total = r.Total || 0;
+      const enviados = r.Enviados || 0;
+      const porcentaje = total > 0 ? Math.round((enviados / total) * 100) : 0;
+      document.getElementById('statPorcentajeEnviados').textContent = `${porcentaje}%`;
+      document.getElementById('statPendientesBadge').textContent = `${r.Pendientes || 0} pendientes`;
+    } catch (err) {
+      document.getElementById('statPorcentajeEnviados').textContent = '—';
+    }
+  }
+
+  function renderTabla(lista) {
+    const tbody = document.getElementById('tablaRecordatorios');
+    document.getElementById('infoConteo').textContent = `Mostrando ${lista.length} recordatorio(s)`;
+
+    if (lista.length === 0) {
+      tbody.innerHTML = `<tr><td class="px-6 py-4 text-center text-on-surface-variant" colspan="4">No hay recordatorios que coincidan.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = lista.map((r) => {
+      const esAviso = r.TipoRecordatorio === 'Aviso';
+      const esInterno = r.Destino === 'Staff';
+      const avatar = esAviso
+        ? '<span class="material-symbols-outlined">campaign</span>'
+        : r.FotoURL
+          ? `<img class="w-full h-full object-cover" src="${escHtml(window.BACKEND_ORIGIN ?? 'http://localhost:4000')}${escHtml(r.FotoURL)}">`
+          : escapar(iniciales(r.PacienteNombre || '?'));
+      const detalle = esAviso
+        ? `<span class="font-semibold text-on-surface">${escapar(r.Titulo || 'Aviso')}</span>`
+        : `${escapar(r.PacienteNombre)} • ${escapar(r.Especie)}`;
+
+      const seg = seguimiento(r);
+      // Menú "⋯" solo para excepciones (lo normal es que todo vaya solo)
+      const menu = r.Estado === 'Pendiente'
+        ? `<div class="relative">
+             <button class="w-9 h-9 rounded-full grid place-items-center text-on-surface-variant hover:bg-surface-container-low btn-menu-fila" data-id="${escHtml(r.RecordatorioID)}" title="Más acciones" type="button">
+               <span class="material-symbols-outlined">more_vert</span></button>
+             <div class="hidden absolute right-0 top-10 z-20 w-56 py-1 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-xl text-left menu-fila" data-menu="${escHtml(r.RecordatorioID)}">
+               ${esInterno
+                 ? `<button class="w-full px-4 py-2.5 text-left hover:bg-surface-container-low btn-marcar-enviado" data-id="${escHtml(r.RecordatorioID)}" type="button">✔️ Marcar como atendido</button>`
+                 : `<button class="w-full px-4 py-2.5 text-left hover:bg-surface-container-low btn-enviar-ahora" data-id="${escHtml(r.RecordatorioID)}" type="button">📤 Enviar ahora (no esperar)</button>
+                    ${enlaceWhatsAppRecordatorio(r)}
+                    <button class="w-full px-4 py-2.5 text-left hover:bg-surface-container-low btn-marcar-enviado" data-id="${escHtml(r.RecordatorioID)}" type="button">📞 Ya avisé por teléfono / WhatsApp</button>`}
+               <button class="w-full px-4 py-2.5 text-left text-error hover:bg-surface-container-low btn-marcar-fallido" data-id="${escHtml(r.RecordatorioID)}" type="button">🚫 Descartar</button>
+             </div>
+           </div>`
+        : '';
+
+      return `
+        <tr class="hover:bg-[#fcfdfe] transition-colors align-top" title="${escapar(r.Mensaje || '')}">
+          <td class="px-5 py-4">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-10 h-10 rounded-full ${esAviso ? 'bg-primary-container/15 text-primary' : 'bg-secondary-container text-on-secondary-container'} flex items-center justify-center font-semibold overflow-hidden shrink-0">
+                ${avatar}
+              </div>
+              <div class="min-w-0">
+                <p class="font-medium text-on-surface truncate">${escapar(r.PropietarioNombres)} ${escapar(r.PropietarioApellidos)}</p>
+                <p class="font-caption text-caption text-on-surface-variant truncate">${detalle}</p>
+              </div>
+            </div>
+          </td>
+          <td class="px-5 py-4">
+            <p class="font-medium">${TIPO_LABEL[r.TipoRecordatorio] || escapar(r.TipoRecordatorio)}</p>
+            <p class="font-caption text-caption text-on-surface-variant">${formatearFechaHora(r.FechaProgramada)}</p>
+          </td>
+          <td class="px-5 py-4">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold ${escHtml(seg.clases)}">
+              <span class="material-symbols-outlined text-[14px]">${escHtml(seg.icono)}</span> ${escHtml(seg.texto)}
+            </span>
+            ${seg.detalleHtml || seg.detalle ? `<p class="font-caption text-caption text-on-surface-variant mt-1.5 leading-snug">${seg.detalleHtml || escHtml(seg.detalle)}</p>` : ''}
+          </td>
+          <td class="px-3 py-4 text-right">${menu}</td>
+        </tr>`;
+    }).join('');
+  }
+
+  // "Avisar por WhatsApp": abre el chat del dueño con el recordatorio ya escrito
+  function enlaceWhatsAppRecordatorio(r) {
+    const nombre = String(r.PropietarioNombres || '').trim().split(/\s+/)[0];
+    const texto = r.TipoRecordatorio === 'Aviso'
+      ? `Hola ${nombre}, te escribimos de Premier Can 🐾\n\n${r.Titulo ? r.Titulo + '\n' : ''}${r.Mensaje || ''}`
+      : `Hola ${nombre}, te escribimos de Premier Can 🐾\n\n${r.Mensaje || ''}\n\n¿Te ayudamos a agendar? Responde este mensaje o agenda desde la app.`;
+    const url = pcEnlaceWhatsApp(r.PropietarioTelefono, texto);
+    return url
+      ? `<a class="block w-full px-4 py-2.5 text-left hover:bg-surface-container-low" href="${escHtml(url)}" target="_blank" rel="noopener">💬 Avisar por WhatsApp</a>`
+      : '<span class="block w-full px-4 py-2.5 text-left text-caption font-caption text-on-surface-variant">💬 WhatsApp: el dueño no tiene celular registrado</span>';
+  }
+
+  async function cargarRecordatorios() {
+    const buscar = document.getElementById('buscarRecordatorio').value.trim();
+    try {
+      const params = new URLSearchParams({ estado: estadoFiltro, buscar });
+      recordatoriosCache = await Auth.apiFetch(`/recordatorios?${params.toString()}`);
+      renderTabla(recordatoriosCache);
+    } catch (err) {
+      document.getElementById('tablaRecordatorios').innerHTML =
+        `<tr><td class="px-6 py-4 text-center text-error" colspan="4">${escHtml(err.message)}</td></tr>`;
+    }
+  }
+
+  document.getElementById('filtrosEstado').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-estado]');
+    if (!btn) return;
+    estadoFiltro = btn.dataset.estado;
+    document.querySelectorAll('#filtrosEstado button').forEach((b) => {
+      b.classList.remove('bg-surface-container-low', 'text-primary', 'border', 'border-primary-fixed-dim');
+      b.classList.add('text-on-surface-variant');
+    });
+    btn.classList.add('bg-surface-container-low', 'text-primary', 'border', 'border-primary-fixed-dim');
+    btn.classList.remove('text-on-surface-variant');
+    cargarRecordatorios();
+  });
+
+  document.getElementById('buscarRecordatorio').addEventListener('input', () => {
+    clearTimeout(debounceBusqueda);
+    debounceBusqueda = setTimeout(cargarRecordatorios, 300);
+  });
+
+  // Menú "⋯" de cada fila
+  function cerrarMenusFila() {
+    document.querySelectorAll('.menu-fila').forEach((m) => m.classList.add('hidden'));
+  }
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.btn-menu-fila') && !e.target.closest('.menu-fila')) cerrarMenusFila();
+  });
+
+  document.getElementById('tablaRecordatorios').addEventListener('click', async (e) => {
+    const btnMenu = e.target.closest('.btn-menu-fila');
+    if (btnMenu) {
+      const menu = document.querySelector(`.menu-fila[data-menu="${btnMenu.dataset.id}"]`);
+      const estabaAbierto = !menu.classList.contains('hidden');
+      cerrarMenusFila();
+      if (!estabaAbierto) menu.classList.remove('hidden');
+      return;
+    }
+    const btnAhora = e.target.closest('.btn-enviar-ahora');
+    const btnEnviado = e.target.closest('.btn-marcar-enviado');
+    const btnFallido = e.target.closest('.btn-marcar-fallido');
+    const btn = btnAhora || btnEnviado || btnFallido;
+    if (!btn) return;
+
+    btn.disabled = true;
+    try {
+      if (btnAhora) {
+        // Lo manda DE VERDAD (correo al instante; a la app en su próxima revisión)
+        const r = await Auth.apiFetch(`/recordatorios/${btn.dataset.id}/enviar-ahora`, { method: 'POST', body: '{}' });
+        mostrarAvisoPantalla(r.mensaje);
+      } else {
+        if (btnFallido && !confirm('¿Descartar este recordatorio? No se le enviará al cliente.')) { btn.disabled = false; return; }
+        const r = await Auth.apiFetch(`/recordatorios/${btn.dataset.id}/estado`, {
+          method: 'PATCH',
+          body: JSON.stringify({ estado: btnEnviado ? 'Enviado' : 'Fallido' }),
+        });
+        mostrarAvisoPantalla(r.mensaje);
+      }
+      await cargarRecordatorios();
+      await cargarResumen();
+    } catch (err) {
+      alert(err.message);
+      btn.disabled = false;
+    }
+  });
+
+  let timerAvisoPantalla;
+  function mostrarAvisoPantalla(texto) {
+    const el = document.getElementById('avisoGeneracionAutomatica');
+    el.textContent = texto;
+    el.classList.remove('hidden');
+    clearTimeout(timerAvisoPantalla);
+    timerAvisoPantalla = setTimeout(() => el.classList.add('hidden'), 6000);
+  }
+
+  // ============================================================
+  // Generar recordatorios automáticos
+  // ============================================================
+  async function generarAutomaticos({ mostrarBoton = false } = {}) {
+    const btn = document.getElementById('btnGenerarAutomaticos');
+    const aviso = document.getElementById('avisoGeneracionAutomatica');
+    let textoOriginal;
+
+    if (mostrarBoton) {
+      btn.disabled = true;
+      textoOriginal = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">progress_activity</span> Revisando...';
+    }
+
+    try {
+      const data = await Auth.apiFetch('/recordatorios/generar-automaticos', { method: 'POST', body: JSON.stringify({}) });
+      if (data.creados > 0) {
+        aviso.textContent = `✓ ${data.mensaje}`;
+        aviso.classList.remove('hidden');
+      } else if (mostrarBoton) {
+        aviso.textContent = 'No hay dosis próximas dentro de los días configurados en las reglas, así que no se generó nada nuevo.';
+        aviso.classList.remove('hidden');
+      }
+      await cargarRecordatorios();
+      await cargarResumen();
+    } catch (err) {
+      if (mostrarBoton) {
+        aviso.textContent = err.message;
+        aviso.classList.remove('hidden');
+      }
+    } finally {
+      if (mostrarBoton) {
+        btn.disabled = false;
+        btn.innerHTML = textoOriginal;
+      }
+    }
+  }
+
+  document.getElementById('btnGenerarAutomaticos').addEventListener('click', () => generarAutomaticos({ mostrarBoton: true }));
+
+  // ============================================================
+  // Reglas automáticas
+  // ============================================================
+  async function cargarReglas() {
+    const cont = document.getElementById('listaReglas');
+    try {
+      const reglas = await Auth.apiFetch('/recordatorios/reglas');
+      const ICONOS_REGLA = { Vacuna: 'vaccines', Desparasitacion: 'bug_report' };
+      // Solo el Administrativo cambia las reglas (son globales); el resto las ve
+      const puedeEditar = !!(Auth.obtenerUsuario() || {}).accesoConfig;
+      cont.innerHTML = (puedeEditar ? '' : '<p class="text-caption font-caption text-on-surface-variant mb-1">🔒 Solo el personal administrativo puede cambiar estas reglas.</p>') + reglas.map((r) => `
+        <div class="p-4 rounded-lg border border-[#e0e6ed] bg-[#f8fafb]">
+          <div class="flex items-start justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary bg-primary-container/20 p-1.5 rounded-md text-sm">${ICONOS_REGLA[r.TipoRecordatorio] || 'notifications'}</span>
+              <h4 class="font-label-md text-label-md text-on-surface">${escHtml(TIPO_LABEL[r.TipoRecordatorio] || r.TipoRecordatorio)}</h4>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input class="sr-only peer regla-activo" data-id="${escHtml(r.ReglaID)}" type="checkbox" ${escHtml(r.Activo ? 'checked' : '')} ${puedeEditar ? '' : 'disabled'}>
+              <div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+            </label>
+          </div>
+          <p class="font-body-md text-sm text-on-surface-variant mt-1">
+            Avisar <input class="w-[72px] px-2 py-1 mx-1 text-center font-semibold text-on-surface regla-dias" data-id="${escHtml(r.ReglaID)}" type="number" min="0" value="${escHtml(r.DiasAntes)}" ${puedeEditar ? '' : 'disabled'}> días antes de la próxima dosis.
+          </p>
+        </div>
+      `).join('');
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error text-caption font-caption">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  async function guardarRegla(reglaId) {
+    const activo = document.querySelector(`.regla-activo[data-id="${reglaId}"]`).checked;
+    const diasAntes = Number(document.querySelector(`.regla-dias[data-id="${reglaId}"]`).value) || 0;
+    try {
+      await Auth.apiFetch(`/recordatorios/reglas/${reglaId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ diasAntes, activo }),
+      });
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  document.getElementById('listaReglas').addEventListener('change', (e) => {
+    if (e.target.classList.contains('regla-activo')) guardarRegla(e.target.dataset.id);
+  });
+  document.getElementById('listaReglas').addEventListener('blur', (e) => {
+    if (e.target.classList.contains('regla-dias')) guardarRegla(e.target.dataset.id);
+  }, true);
+
+  // ============================================================
+  // Carga inicial: la revisión automática corre SOLA al entrar aquí,
+  // sin que el usuario tenga que apretar nada.
+  // ============================================================
+  generarAutomaticos({ mostrarBoton: false });
+  cargarRecordatorios();
+  cargarResumen();
+  cargarReglas();
+
+  // La lista se actualiza sola cada 30 segundos (así se ve cuando algo se envía),
+  // salvo que haya un menú o la ventana de "Nueva notificación" abierta.
+  setInterval(() => {
+    const menuAbierto = document.querySelector('.menu-fila:not(.hidden)');
+    const modalAbierto = !document.getElementById('modalAviso').classList.contains('hidden');
+    if (document.visibilityState !== 'visible' || menuAbierto || modalAbierto) return;
+    cargarRecordatorios();
+    cargarResumen();
+  }, 30000);
+</script>
+
+<!-- ============ Nueva notificación (aviso personalizado) ============ -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-on-surface/40 p-4" id="modalAviso">
+<div class="max-w-2xl w-full bg-surface-container-lowest shadow-2xl rounded-2xl flex flex-col max-h-[92vh]">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Nueva notificación</h3>
+<p class="text-caption font-caption text-on-surface-variant">Llega al celular del cliente (app) y/o a su correo.</p>
+</div>
+<button class="w-10 h-10 rounded-full grid place-items-center text-on-surface-variant hover:bg-surface-container-low" id="cerrarModalAviso" title="Cerrar" type="button"><span class="material-symbols-outlined">close</span></button>
+</div>
+<form class="overflow-y-auto px-6 py-5 space-y-5" id="formAviso" novalidate>
+<div>
+<p class="font-label-md text-label-md text-on-surface mb-2">¿A quién?</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="opcionesDestinatarios">
+<label class="flex items-center gap-2 p-3 rounded-xl border border-outline-variant cursor-pointer"><input checked name="destinatarios" type="radio" value="uno"/>Un cliente</label>
+<label class="flex items-center gap-2 p-3 rounded-xl border border-outline-variant cursor-pointer solo-admin"><input name="destinatarios" type="radio" value="todos"/>Todos</label>
+<label class="flex items-center gap-2 p-3 rounded-xl border border-outline-variant cursor-pointer solo-admin"><input name="destinatarios" type="radio" value="perros"/>Dueños de perros</label>
+<label class="flex items-center gap-2 p-3 rounded-xl border border-outline-variant cursor-pointer solo-admin"><input name="destinatarios" type="radio" value="gatos"/>Dueños de gatos</label>
+</div>
+<div class="relative mt-3" id="bloqueCliente">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline">search</span>
+<input autocomplete="off" class="w-full pl-10 pr-4 py-2.5 font-body-md" id="avisoBuscarCliente" placeholder="Buscar cliente por nombre, correo o teléfono…" type="text"/>
+<div class="hidden absolute z-10 left-0 right-0 mt-1 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg max-h-56 overflow-y-auto" id="avisoResultadosCliente"></div>
+</div>
+<p class="text-caption font-caption text-on-surface-variant mt-2" id="avisoAlcance"></p>
+</div>
+<div class="grid md:grid-cols-[1fr_260px] gap-5">
+<div class="space-y-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="avisoTitulo">Título</label>
+<input class="w-full px-4 py-2.5 font-body-md" id="avisoTitulo" maxlength="120" placeholder="Ej. Cerramos el lunes por feriado" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="avisoMensaje">Mensaje</label>
+<textarea class="w-full px-4 py-2.5 font-body-md resize-y" id="avisoMensaje" maxlength="300" placeholder="Ej. El lunes 8 no atenderemos por feriado. Emergencias al 987 654 321." rows="4"></textarea>
+<p class="text-caption text-on-surface-variant text-right"><span id="avisoContador">0</span>/300</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface mb-2">¿Por dónde?</p>
+<div class="flex flex-wrap gap-2">
+<label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant cursor-pointer"><input checked name="enviarPor" type="radio" value="Ambos"/>App y correo</label>
+<label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant cursor-pointer"><input name="enviarPor" type="radio" value="App"/>Solo app</label>
+<label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant cursor-pointer"><input name="enviarPor" type="radio" value="Correo"/>Solo correo</label>
+</div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface mb-2">¿Cuándo?</p>
+<div class="flex flex-wrap items-center gap-2">
+<label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant cursor-pointer"><input checked name="cuando" type="radio" value="ahora"/>Ahora</label>
+<label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant cursor-pointer"><input name="cuando" type="radio" value="programar"/>Programar</label>
+<input class="hidden px-3 py-2 font-body-md" id="avisoFechaHora" type="datetime-local"/>
+</div>
+</div>
+</div>
+<!-- Vista previa de la notificación -->
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-2 text-center">Así le llega</p>
+<div class="rounded-3xl p-3" style="background:#0f1d20">
+<div class="rounded-2xl p-3 bg-white/95 flex gap-2 items-start">
+<div class="w-8 h-8 rounded-lg grid place-items-center shrink-0" style="background:#00606a"><img alt="" class="w-5 h-5" src="../assets/img/favicon.svg"/></div>
+<div class="min-w-0">
+<p class="text-[11px] text-on-surface-variant">Premier Can · ahora</p>
+<p class="text-[13px] font-bold text-on-surface break-words" id="previaTitulo">Título del aviso</p>
+<p class="text-[12px] text-on-surface-variant break-words whitespace-pre-line" id="previaMensaje">Aquí va tu mensaje.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="hidden text-error font-semibold p-3 rounded-xl bg-error-container/40" id="avisoError"></p>
+</form>
+<div class="px-6 py-4 border-t border-outline-variant flex justify-end gap-3">
+<button class="px-5 py-2.5 border border-primary text-primary font-label-md" id="cancelarAviso" type="button">Cancelar</button>
+<button class="px-6 py-2.5 bg-primary text-on-primary font-label-md flex items-center gap-2" form="formAviso" id="enviarAviso" type="submit"><span class="material-symbols-outlined text-[20px]">send</span><span id="enviarAvisoTexto">Enviar ahora</span></button>
+</div>
+</div>
+</div>
+
+<script>
+  // ============================================================
+  // Nueva notificación (aviso personalizado)
+  // ============================================================
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const esAdmin = !!(Auth.obtenerUsuario() && Auth.obtenerUsuario().accesoConfig);
+    let clienteElegido = null;
+    let debounceCliente;
+    let debounceAlcance;
+
+    // Los avisos masivos (todos / perros / gatos) son solo para el Administrativo
+    if (!esAdmin) document.querySelectorAll('#opcionesDestinatarios .solo-admin').forEach((el) => el.remove());
+
+    const valor = (nombre) => document.querySelector(`input[name="${nombre}"]:checked`).value;
+    const hoyLimaMasMinutos = (min) => new Date(Date.now() - 5 * 3600 * 1000 + min * 60000).toISOString().slice(0, 16);
+
+    function abrir() {
+      $('formAviso').reset();
+      clienteElegido = null;
+      $('avisoFechaHora').classList.add('hidden');
+      $('avisoError').classList.add('hidden');
+      $('avisoResultadosCliente').classList.add('hidden');
+      actualizarDestinatarios();
+      actualizarPrevia();
+      $('modalAviso').classList.remove('hidden');
+      $('modalAviso').classList.add('flex');
+    }
+    function cerrar() {
+      $('modalAviso').classList.add('hidden');
+      $('modalAviso').classList.remove('flex');
+    }
+    $('btnNuevaNotificacion').addEventListener('click', abrir);
+    $('cerrarModalAviso').addEventListener('click', cerrar);
+    $('cancelarAviso').addEventListener('click', cerrar);
+
+    function actualizarPrevia() {
+      $('previaTitulo').textContent = $('avisoTitulo').value.trim() || 'Título del aviso';
+      $('previaMensaje').textContent = $('avisoMensaje').value.trim() || 'Aquí va tu mensaje.';
+      $('avisoContador').textContent = $('avisoMensaje').value.length;
+    }
+    $('avisoTitulo').addEventListener('input', actualizarPrevia);
+    $('avisoMensaje').addEventListener('input', actualizarPrevia);
+
+    // A cuántos le llega (y cuántos tienen app / correo)
+    async function actualizarAlcance() {
+      const destinatarios = valor('destinatarios');
+      if (destinatarios === 'uno' && !clienteElegido) { $('avisoAlcance').textContent = 'Busca y elige un cliente.'; return; }
+      try {
+        const params = new URLSearchParams({ destinatarios, propietarioId: clienteElegido ? clienteElegido.id : '' });
+        const a = await Auth.apiFetch(`/recordatorios/avisos/alcance?${params}`);
+        $('avisoAlcance').textContent = destinatarios === 'uno'
+          ? `Para ${clienteElegido.nombre}: ${a.conApp ? 'tiene acceso a la app' : 'no tiene acceso a la app'} · ${a.conCorreo ? 'tiene correo' : 'sin correo'}.`
+          : `Le llegará a ${a.total} cliente(s): ${a.conApp} con acceso a la app y ${a.conCorreo} con correo.`;
+      } catch (err) { $('avisoAlcance').textContent = err.message; }
+    }
+    function actualizarDestinatarios() {
+      $('bloqueCliente').classList.toggle('hidden', valor('destinatarios') !== 'uno');
+      clearTimeout(debounceAlcance);
+      debounceAlcance = setTimeout(actualizarAlcance, 150);
+    }
+    document.querySelectorAll('input[name="destinatarios"]').forEach((r) => r.addEventListener('change', actualizarDestinatarios));
+
+    // Buscar cliente (mismo buscador que en Pacientes)
+    $('avisoBuscarCliente').addEventListener('input', () => {
+      clienteElegido = null;
+      actualizarAlcance();
+      clearTimeout(debounceCliente);
+      const texto = $('avisoBuscarCliente').value.trim();
+      if (texto.length < 2) { $('avisoResultadosCliente').classList.add('hidden'); return; }
+      debounceCliente = setTimeout(async () => {
+        try {
+          const lista = await Auth.apiFetch(`/propietarios?buscar=${encodeURIComponent(texto)}`);
+          $('avisoResultadosCliente').innerHTML = lista.length
+            ? lista.map((p) => `<button class="block w-full text-left px-4 py-2.5 hover:bg-surface-container-low" data-id="${escHtml(p.PropietarioID)}" data-nombre="${escapar(p.Nombres + ' ' + p.Apellidos)}" type="button">
+                 <span class="font-medium">${escapar(p.Nombres)} ${escapar(p.Apellidos)}</span>
+                 <span class="block text-caption text-on-surface-variant">${escapar(p.CorreoElectronico || 'sin correo')}${p.Telefono ? ' · ' + escapar(p.Telefono) : ''}</span></button>`).join('')
+            : '<p class="px-4 py-3 text-caption text-on-surface-variant">Sin resultados.</p>';
+          $('avisoResultadosCliente').classList.remove('hidden');
+        } catch (err) { /* se ignora: se puede volver a escribir */ }
+      }, 250);
+    });
+    $('avisoResultadosCliente').addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-id]');
+      if (!b) return;
+      clienteElegido = { id: Number(b.dataset.id), nombre: b.dataset.nombre };
+      $('avisoBuscarCliente').value = b.dataset.nombre;
+      $('avisoResultadosCliente').classList.add('hidden');
+      actualizarAlcance();
+    });
+
+    // Ahora / programar
+    document.querySelectorAll('input[name="cuando"]').forEach((r) => r.addEventListener('change', () => {
+      const programar = valor('cuando') === 'programar';
+      $('avisoFechaHora').classList.toggle('hidden', !programar);
+      $('avisoFechaHora').min = hoyLimaMasMinutos(5);
+      if (programar && !$('avisoFechaHora').value) $('avisoFechaHora').value = hoyLimaMasMinutos(60);
+      $('enviarAvisoTexto').textContent = programar ? 'Programar aviso' : 'Enviar ahora';
+    }));
+
+    $('formAviso').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const error = $('avisoError');
+      error.classList.add('hidden');
+      const body = {
+        destinatarios: valor('destinatarios'),
+        propietarioId: clienteElegido ? clienteElegido.id : null,
+        titulo: $('avisoTitulo').value.trim(),
+        mensaje: $('avisoMensaje').value.trim(),
+        enviarPor: valor('enviarPor'),
+        enviarEn: valor('cuando') === 'programar' ? $('avisoFechaHora').value : null,
+      };
+      const falta = (body.destinatarios === 'uno' && !body.propietarioId && 'Elige el cliente de la lista.')
+        || (!body.titulo && 'Escribe un título.') || (!body.mensaje && 'Escribe el mensaje.')
+        || (valor('cuando') === 'programar' && !body.enviarEn && 'Elige la fecha y hora de envío.');
+      if (falta) { error.textContent = falta; error.classList.remove('hidden'); return; }
+      if (body.destinatarios !== 'uno' && !confirm(`${$('avisoAlcance').textContent}\n\n¿Enviar el aviso?`)) return;
+
+      $('enviarAviso').disabled = true;
+      try {
+        const r = await Auth.apiFetch('/recordatorios/avisos', { method: 'POST', body: JSON.stringify(body) });
+        cerrar();
+        mostrarAvisoPantalla(r.mensaje);
+        await cargarRecordatorios();
+        await cargarResumen();
+      } catch (err) {
+        error.textContent = err.message;
+        error.classList.remove('hidden');
+      } finally {
+        $('enviarAviso').disabled = false;
+      }
+    });
+  })();
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

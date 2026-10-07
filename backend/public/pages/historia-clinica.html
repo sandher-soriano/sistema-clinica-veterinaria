@@ -1,0 +1,472 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Historia clínica - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden flex h-screen">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col h-screen overflow-hidden bg-background">
+<!-- TopNavBar (Mobile only for simplification in this view, assuming standard dashboard header) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Historias Clínicas</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop scroll-smooth">
+<!-- Selector de paciente (se muestra si no llegamos con ?pacienteId=) -->
+<div class="hidden" id="selectorPaciente">
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-md">Selecciona un paciente</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-lg">Elige una mascota para ver su historia clínica completa.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md" id="listaSelectorPacientes"></div>
+</div>
+
+<!-- Vista de historia clínica -->
+<div class="hidden" id="vistaHistoriaClinica">
+<!-- Patient Header (Bento style) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-6 mb-8 flex flex-col md:flex-row gap-6 items-start relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface shadow-sm shrink-0 relative bg-surface-container-high flex items-center justify-center text-primary font-bold text-headline-lg" id="pacienteAvatarIniciales">
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full relative z-10">
+<div class="col-span-1 lg:col-span-2">
+<div class="flex items-center gap-3 mb-1">
+<h2 class="text-headline-lg font-headline-lg text-on-surface m-0" id="pacienteNombreHeader"></h2>
+<span class="bg-surface-container-high text-primary px-3 py-1 rounded-full text-caption font-caption font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Activo
+                            </span>
+</div>
+<p class="text-on-surface-variant text-body-md font-body-md mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">person</span> <span id="pacientePropietarioHeader"></span>
+                        </p>
+</div>
+<div class="bg-surface rounded-lg p-4 border border-surface-container-highest">
+<p class="text-caption font-caption text-outline mb-1 uppercase tracking-wider">Especie / Raza</p>
+<p class="text-body-md font-body-md text-on-surface font-semibold" id="pacienteEspecieRazaHeader"></p>
+</div>
+<div class="bg-surface rounded-lg p-4 border border-surface-container-highest">
+<p class="text-caption font-caption text-outline mb-1 uppercase tracking-wider">Edad / Sexo</p>
+<p class="text-body-md font-body-md text-on-surface font-semibold" id="pacienteEdadSexoHeader"></p>
+</div>
+</div>
+</div>
+<!-- Peso y archivos -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-primary">monitor_weight</span>Evolución del peso</h3>
+<div id="graficoPeso"><p class="text-on-surface-variant">Cargando…</p></div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
+<div class="flex items-center justify-between gap-3 mb-3">
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">folder_open</span>Análisis y archivos</h3>
+<label class="cursor-pointer bg-primary text-on-primary py-2 px-4 rounded-lg flex items-center gap-2 text-label-md font-label-md" for="inputAdjunto">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>Subir</label>
+<input accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/*" class="sr-only" id="inputAdjunto" type="file">
+</div>
+<p class="text-caption font-caption text-on-surface-variant mb-3">PDF o imagen (máx. 10 MB): análisis de laboratorio, radiografías, ecografías… Solo el personal y el dueño pueden verlos.</p>
+<div id="listaAdjuntos"><p class="text-on-surface-variant">Cargando…</p></div>
+</section>
+</div>
+<!-- Main Content Area: Consultas Anteriores -->
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-md font-headline-md text-on-surface">Historial de Consultas</h3>
+<a class="bg-primary hover:bg-primary-container text-on-primary transition-colors py-2.5 px-5 rounded-lg flex items-center gap-2 text-label-md font-label-md shadow-sm hover:shadow-[0px_4px_12px_rgba(13,122,135,0.2)] hover:-translate-y-[1px] duration-200" id="btnAgregarConsulta">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Agregar nueva consulta
+                </a>
+</div>
+<!-- Vertical Timeline -->
+<div class="relative border-l-2 border-surface-container-high ml-4 space-y-8 pb-12" id="timelineConsultas">
+</div>
+</div>
+</div>
+
+<!-- Modal: detalle completo de una consulta -->
+<div class="fixed inset-0 z-[100] hidden" id="modalDetalleConsulta">
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm" id="modalDetalleBackdrop"></div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="bg-surface-container-lowest rounded-xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto" id="modalDetallePanel">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between sticky top-0 bg-surface-container-lowest z-10">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Detalle de la consulta</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="cerrarModalDetalle">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-5" id="contenidoModalDetalle"></div>
+</div>
+</div>
+</div>
+</main>
+
+
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const pacienteId = params.get('pacienteId');
+
+  const ICONOS_ESPECIE = { Canino: 'sound_detection_dog_barking', Felino: 'cruelty_free', Otro: 'pets' };
+  const NOMBRE_ESPECIE = { Canino: 'Perro', Felino: 'Gato', Otro: 'Otro' };
+  const NOMBRE_SEXO = { M: 'Macho', H: 'Hembra' };
+
+  function fechaSoloDia(fechaIso) {
+    if (!fechaIso) return null;
+    const [y, m, d] = fechaIso.substring(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function calcularEdad(fechaNacimiento) {
+    const nacimiento = fechaSoloDia(fechaNacimiento);
+    if (!nacimiento) return 'Edad no registrada';
+    const hoy = new Date();
+    let años = hoy.getFullYear() - nacimiento.getFullYear();
+    let meses = hoy.getMonth() - nacimiento.getMonth();
+    if (meses < 0) { años--; meses += 12; }
+    if (años <= 0) return `${meses} meses`;
+    return `${años} años, ${meses} meses`;
+  }
+
+  function formatearFechaLarga(fechaIso) {
+    const d = fechaSoloDia(fechaIso);
+    if (!d) return '—';
+    return d.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  async function mostrarSelectorPacientes() {
+    document.getElementById('selectorPaciente').classList.remove('hidden');
+    document.getElementById('vistaHistoriaClinica').classList.add('hidden');
+    const cont = document.getElementById('listaSelectorPacientes');
+    cont.innerHTML = '<p class="text-on-surface-variant">Cargando pacientes...</p>';
+
+    try {
+      const pacientes = await Auth.apiFetch('/pacientes');
+      if (pacientes.length === 0) {
+        cont.innerHTML = '<p class="text-on-surface-variant">Aún no hay pacientes registrados. Ve a "Pacientes" para registrar el primero.</p>';
+        return;
+      }
+      cont.innerHTML = pacientes.map((p) => {
+        const avatar = p.FotoURL
+          ? `<img class="w-full h-full object-cover" src="${escHtml(window.BACKEND_ORIGIN ?? 'http://localhost:4000')}${escHtml(p.FotoURL)}">`
+          : p.Nombre.slice(0, 2).toUpperCase();
+        return `
+        <a href="historia-clinica.html?pacienteId=${escHtml(p.PacienteID)}"
+           class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-3 hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold shrink-0 overflow-hidden">
+            ${avatar}
+          </div>
+          <div>
+            <p class="font-body-md text-body-md text-on-surface font-semibold">${escHtml(p.Nombre)}</p>
+            <p class="text-caption font-caption text-on-surface-variant">${escHtml(p.PropietarioNombres)} ${escHtml(p.PropietarioApellidos)}</p>
+          </div>
+        </a>
+      `;
+      }).join('');
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  let consultasCache = [];
+
+  function renderTimeline(consultas) {
+    consultasCache = consultas;
+    const cont = document.getElementById('timelineConsultas');
+    if (consultas.length === 0) {
+      cont.innerHTML = '<p class="text-on-surface-variant pl-8">Este paciente todavía no tiene consultas registradas.</p>';
+      return;
+    }
+    cont.innerHTML = consultas.map((c, i) => `
+      <div class="relative pl-8 group">
+        <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-surface-container-lowest border-4 ${i === 0 ? 'border-primary' : 'border-surface-container-high'} z-10 group-hover:scale-110 transition-transform"></div>
+        <div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.03)] p-5 hover:shadow-[0px_12px_24px_rgba(13,122,135,0.08)] transition-all duration-300 hover:-translate-y-[2px] cursor-pointer btn-ver-consulta" data-consulta-index="${i}">
+          <div class="flex justify-between items-start mb-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined ${i === 0 ? 'text-tertiary' : 'text-outline'}">calendar_month</span>
+              <span class="text-label-md font-label-md ${i === 0 ? 'text-tertiary' : 'text-outline'}">${formatearFechaLarga(c.FechaConsulta)}</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap justify-end">
+              ${c.PesoKg ? `<span class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-caption font-caption font-semibold">⚖️ ${escHtml(Number(c.PesoKg))} kg</span>` : ''}
+              ${c.TemperaturaC ? `<span class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-caption font-caption font-semibold">🌡️ ${escHtml(Number(c.TemperaturaC))} °C</span>` : ''}
+              <span class="bg-surface-container text-primary px-3 py-1 rounded-full text-caption font-caption font-semibold">Dr(a). ${escHtml(c.VeterinarioNombre)}</span>
+              <a class="btn-receta inline-flex items-center gap-1 px-3 py-1 rounded-full text-caption font-caption font-semibold border border-primary text-primary" href="../receta.html?c=${escHtml(c.ConsultaID)}" title="Receta imprimible / PDF"><span class="material-symbols-outlined text-[16px]">receipt_long</span>Receta</a>
+              <span class="material-symbols-outlined text-outline-variant text-[18px]">open_in_full</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="col-span-1">
+              <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Motivo</h4>
+              <p class="text-body-md font-body-md text-on-surface font-semibold">${escHtml(c.MotivoConsulta)}</p>
+              ${c.Sintomas ? `<h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1 mt-3">Síntomas</h4><p class="text-body-md font-body-md text-on-surface">${escHtml(c.Sintomas)}</p>` : ''}
+            </div>
+            <div class="col-span-1 md:col-span-2">
+              ${c.Diagnostico ? `<h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Diagnóstico</h4><p class="text-body-md font-body-md text-on-surface mb-3">${escHtml(c.Diagnostico)}</p>` : ''}
+              ${c.Tratamiento ? `<h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Tratamiento</h4><div class="bg-surface p-3 rounded-lg border border-surface-container-highest mb-3"><p class="text-body-md font-body-md text-on-surface">${escHtml(c.Tratamiento)}</p></div>` : ''}
+              ${(c.Medicamentos && c.Medicamentos.length > 0) ? `
+                <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Medicación</h4>
+                <ul class="text-body-md font-body-md text-on-surface list-disc list-inside">
+                  ${c.Medicamentos.map((m) => `<li>${escHtml(m.NombreMedicamento)}${m.Dosis ? ` — ${escHtml(m.Dosis)}` : ''}${m.Frecuencia ? `, ${escHtml(m.Frecuencia)}` : ''}</li>`).join('')}
+                </ul>` : ''}
+              ${c.Observaciones ? `<h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1 mt-3">Observaciones</h4><p class="text-body-md font-body-md text-on-surface-variant">${escHtml(c.Observaciones)}</p>` : ''}
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function cargarHistoriaClinica() {
+    document.getElementById('selectorPaciente').classList.add('hidden');
+    document.getElementById('vistaHistoriaClinica').classList.remove('hidden');
+    document.getElementById('btnAgregarConsulta').href = `registrar-consulta.html?pacienteId=${pacienteId}`;
+
+    try {
+      const [paciente, consultas] = await Promise.all([
+        Auth.apiFetch(`/pacientes/${pacienteId}`),
+        Auth.apiFetch(`/consultas?pacienteId=${pacienteId}`),
+      ]);
+
+      document.title = `Historia Clínica - ${paciente.Nombre} | Premier Can`;
+      const avatarEl = document.getElementById('pacienteAvatarIniciales');
+      if (paciente.FotoURL) {
+        avatarEl.innerHTML = `<img class="w-full h-full object-cover" src="${escHtml(window.BACKEND_ORIGIN ?? 'http://localhost:4000')}${escHtml(paciente.FotoURL)}">`;
+      } else {
+        avatarEl.textContent = paciente.Nombre.slice(0, 2).toUpperCase();
+      }
+      document.getElementById('pacienteNombreHeader').textContent = paciente.Nombre;
+      document.getElementById('pacientePropietarioHeader').textContent = `${paciente.PropietarioNombres} ${paciente.PropietarioApellidos}`;
+      document.getElementById('pacienteEspecieRazaHeader').textContent =
+        `${NOMBRE_ESPECIE[paciente.Especie] || paciente.Especie} • ${paciente.Raza || 'Sin raza registrada'}`;
+      document.getElementById('pacienteEdadSexoHeader').textContent =
+        `${calcularEdad(paciente.FechaNacimiento)} • ${NOMBRE_SEXO[paciente.Sexo] || 'Sexo no registrado'}`;
+
+      renderTimeline(consultas);
+      PCGraficoPeso(document.getElementById('graficoPeso'),
+        consultas.filter((c) => c.PesoKg).map((c) => ({ fecha: c.FechaConsulta, peso: c.PesoKg })));
+      cargarAdjuntos();
+    } catch (err) {
+      document.getElementById('timelineConsultas').innerHTML = `<p class="text-error pl-8">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  // ============================================================
+  // Modal: detalle completo al hacer click en una consulta
+  // ============================================================
+  function abrirDetalleConsulta(c) {
+    const cont = document.getElementById('contenidoModalDetalle');
+    cont.innerHTML = `
+      <div class="flex items-center justify-between border-b border-outline-variant pb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">calendar_month</span>
+          <span class="text-label-md font-label-md text-on-surface font-semibold">${formatearFechaLarga(c.FechaConsulta)}</span>
+        </div>
+        <span class="bg-surface-container text-primary px-3 py-1 rounded-full text-caption font-caption font-semibold">Dr(a). ${escHtml(c.VeterinarioNombre)}</span>
+      </div>
+      <div>
+        <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Motivo de consulta</h4>
+        <p class="text-body-md font-body-md text-on-surface font-semibold">${escHtml(c.MotivoConsulta)}</p>
+      </div>
+      <div>
+        <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Síntomas</h4>
+        <p class="text-body-md font-body-md text-on-surface">${escHtml(c.Sintomas || 'No se registraron síntomas.')}</p>
+      </div>
+      <div>
+        <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Diagnóstico</h4>
+        <p class="text-body-md font-body-md text-on-surface">${escHtml(c.Diagnostico || 'No se registró diagnóstico.')}</p>
+      </div>
+      <div>
+        <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Tratamiento</h4>
+        <div class="bg-surface p-3 rounded-lg border border-surface-container-highest">
+          <p class="text-body-md font-body-md text-on-surface">${escHtml(c.Tratamiento || 'No se registró tratamiento.')}</p>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Medicación</h4>
+        ${(c.Medicamentos && c.Medicamentos.length > 0)
+          ? `<ul class="text-body-md font-body-md text-on-surface list-disc list-inside">
+               ${c.Medicamentos.map((m) => `<li>${escHtml(m.NombreMedicamento)}${m.Dosis ? ` — ${escHtml(m.Dosis)}` : ''}${m.Frecuencia ? `, ${escHtml(m.Frecuencia)}` : ''}${m.DuracionDias ? ` (${escHtml(m.DuracionDias)} días)` : ''}</li>`).join('')}
+             </ul>`
+          : `<p class="text-body-md font-body-md text-on-surface-variant">No se recetó medicación.</p>`}
+      </div>
+      <div>
+        <h4 class="text-caption font-caption text-outline uppercase tracking-wider mb-1">Observaciones</h4>
+        <p class="text-body-md font-body-md text-on-surface-variant">${escHtml(c.Observaciones || 'Sin observaciones adicionales.')}</p>
+      </div>
+    `;
+    document.getElementById('modalDetalleConsulta').classList.remove('hidden');
+  }
+
+  function cerrarDetalleConsulta() {
+    document.getElementById('modalDetalleConsulta').classList.add('hidden');
+  }
+
+  document.getElementById('timelineConsultas').addEventListener('click', (e) => {
+    if (e.target.closest('.btn-receta')) return; // el enlace de la receta no abre el detalle
+    const card = e.target.closest('.btn-ver-consulta');
+    if (!card) return;
+    const idx = Number(card.dataset.consultaIndex);
+    abrirDetalleConsulta(consultasCache[idx]);
+  });
+
+  // ============================================================
+  // Análisis y archivos (carpeta privada: se abren con la sesión)
+  // ============================================================
+  const tamanoLegible = (b) => (b >= 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`);
+  async function cargarAdjuntos() {
+    const cont = document.getElementById('listaAdjuntos');
+    try {
+      const lista = await Auth.apiFetch(`/pacientes/${pacienteId}/adjuntos`);
+      cont.innerHTML = lista.length ? lista.map((a) => `
+        <div class="pc-adjunto">
+          <span class="pc-adj-ico ${a.TipoArchivo === 'application/pdf' ? 'pdf' : ''}"><span class="material-symbols-outlined">${a.TipoArchivo === 'application/pdf' ? 'picture_as_pdf' : 'image'}</span></span>
+          <div class="pc-adj-info"><b title="${escHtml(a.NombreArchivo)}">${escHtml(a.Descripcion || a.NombreArchivo)}</b>
+            <small>${escHtml(formatearFechaLarga(a.FechaSubida))} · ${escHtml(tamanoLegible(a.TamanoBytes || 0))}${a.SubidoPorNombre ? ` · ${escHtml(a.SubidoPorNombre)}` : ''}</small></div>
+          <button class="ver" data-id="${escHtml(a.ArchivoID)}" title="Abrir" type="button"><span class="material-symbols-outlined">open_in_new</span></button>
+          <button class="borrar" data-id="${escHtml(a.ArchivoID)}" data-nombre="${escHtml(a.Descripcion || a.NombreArchivo)}" title="Eliminar" type="button"><span class="material-symbols-outlined">delete</span></button>
+        </div>`).join('')
+        : '<p class="text-on-surface-variant text-body-md">Todavía no hay archivos. Usa "Subir" para agregar un análisis o una radiografía.</p>';
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  document.getElementById('listaAdjuntos').addEventListener('click', async (e) => {
+    const ver = e.target.closest('.ver');
+    const borrar = e.target.closest('.borrar');
+    if (ver) PCAbrirArchivo(`/api/adjuntos/${ver.dataset.id}/descargar`, 'pc_token');
+    if (borrar) {
+      const ok = await PCConfirmar({ titulo: '¿Eliminar este archivo?', mensaje: `"${borrar.dataset.nombre}" se borrará definitivamente.`, textoSi: 'Sí, eliminar', peligro: true, icono: 'delete' });
+      if (!ok) return;
+      try { await Auth.apiFetch(`/adjuntos/${borrar.dataset.id}`, { method: 'DELETE' }); cargarAdjuntos(); } catch (err) { alert(err.message); }
+    }
+  });
+
+  document.getElementById('inputAdjunto').addEventListener('change', async (e) => {
+    const archivo = e.target.files[0];
+    e.target.value = '';
+    if (!archivo) return;
+    if (archivo.size > 10 * 1024 * 1024) { alert('El archivo no puede pesar más de 10 MB.'); return; }
+    const descripcion = prompt('Describe el archivo (ej. "Hemograma completo", "Radiografía de cadera"):', archivo.name.replace(/\.[^.]+$/, ''));
+    if (descripcion === null) return;
+    const datos = new FormData();
+    datos.append('archivo', archivo);
+    datos.append('descripcion', descripcion);
+    const cont = document.getElementById('listaAdjuntos');
+    cont.insertAdjacentHTML('afterbegin', '<p class="text-on-surface-variant mb-2" id="subiendoAdjunto">Subiendo archivo…</p>');
+    try {
+      // multipart: se usa fetch directo (apiFetch envía JSON)
+      const resp = await fetch(`${window.API_BASE_URL}/pacientes/${pacienteId}/adjuntos`, {
+        method: 'POST', headers: { Authorization: `Bearer ${Auth.obtenerToken()}` }, body: datos,
+      });
+      const r = await resp.json();
+      if (!resp.ok) throw new Error(r.mensaje || 'No se pudo subir el archivo.');
+    } catch (err) {
+      alert(err.message);
+    }
+    cargarAdjuntos();
+  });
+
+  document.getElementById('cerrarModalDetalle').addEventListener('click', cerrarDetalleConsulta);
+  document.getElementById('modalDetalleBackdrop').addEventListener('click', cerrarDetalleConsulta);
+
+
+  if (pacienteId) {
+    cargarHistoriaClinica();
+  } else {
+    mostrarSelectorPacientes();
+  }
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

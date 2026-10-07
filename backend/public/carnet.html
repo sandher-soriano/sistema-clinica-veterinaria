@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Carnet de vacunación - Premier Can</title>
+<script src="assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root { --teal-900:#002e33; --teal-700:#00505a; --teal-600:#00606a; --teal-500:#0d7a87; --mint:#58d6a7; --sun:#f2c14e; --ink:#0d2226; --muted:#5d7174; --line:#e1eaec; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink);
+    background: radial-gradient(900px 500px at 100% -10%, rgba(125,212,226,.35), transparent 60%), radial-gradient(700px 480px at -10% 110%, rgba(88,214,167,.2), transparent 60%), #eef5f6; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  .contenedor { max-width: 760px; margin: 0 auto; padding: 28px 16px 48px; }
+  .barra { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .barra h1 { margin: 0; font: 800 22px 'Manrope', sans-serif; color: var(--teal-700); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 14px; border: 0; cursor: pointer; font: 700 14.5px 'Hanken Grotesk', sans-serif; color: #fff;
+    background: linear-gradient(135deg, #0d8491, var(--teal-600) 55%, #004c55); box-shadow: 0 10px 22px -10px rgba(0,96,106,.7); }
+  .btn:hover { filter: brightness(1.07); transform: translateY(-1px); }
+  .carnet { position: relative; overflow: hidden; border-radius: 28px; background: #fff; box-shadow: 0 30px 70px -30px rgba(0,60,66,.5), 0 2px 8px rgba(0,60,66,.06); }
+  .cabecera { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 28px; color: #fff;
+    background: radial-gradient(420px 220px at 90% -30%, rgba(242,193,78,.35), transparent 70%), radial-gradient(400px 240px at 0% 130%, rgba(88,214,167,.45), transparent 70%), linear-gradient(130deg, #0d8491, var(--teal-600) 50%, var(--teal-900)); }
+  .cabecera .marca { display: flex; align-items: center; gap: 12px; }
+  .cabecera img { width: 50px; height: 50px; border-radius: 50%; background: #fff; padding: 3px; box-shadow: 0 0 0 4px rgba(255,255,255,.15); }
+  .cabecera strong { display: block; font: 800 20px/1.1 'Manrope', sans-serif; }
+  .cabecera small { display: block; margin-top: 3px; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; opacity: .8; }
+  .cabecera .titulo { text-align: right; font: 800 15px 'Manrope', sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+  .cabecera .titulo span { display: block; font: 600 12px 'Hanken Grotesk', sans-serif; letter-spacing: 0; text-transform: none; opacity: .8; }
+  .huella-fondo { position: absolute; right: -30px; bottom: -40px; width: 220px; opacity: .06; fill: var(--teal-700); pointer-events: none; }
+  .cuerpo { padding: 24px 28px 26px; position: relative; }
+  .perfil { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+  .foto { width: 108px; height: 108px; border-radius: 26px; overflow: hidden; background: #e3f5f6; display: grid; place-items: center; box-shadow: 0 0 0 4px #fff, 0 0 0 6px #cfe6e9; }
+  .foto img { width: 100%; height: 100%; object-fit: cover; }
+  .foto .material-symbols-outlined { font-size: 52px; color: var(--teal-500); }
+  .perfil h2 { margin: 0 0 8px; font: 800 30px/1 'Manrope', sans-serif; letter-spacing: -.02em; }
+  .datos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; font-size: 14px; }
+  .datos b { display: block; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .qr { text-align: center; }
+  .qr img { width: 118px; height: 118px; border-radius: 14px; border: 1px solid var(--line); padding: 4px; background: #fff; }
+  .qr small { display: block; margin-top: 4px; font-size: 10.5px; color: var(--muted); font-weight: 600; }
+  .estado { display: flex; align-items: center; gap: 10px; margin: 20px 0 6px; padding: 12px 16px; border-radius: 16px; font-weight: 700; font-size: 15px; }
+  .estado.AlDia { background: #e7f8ef; color: #15803d; }
+  .estado.Vencido { background: #fdecea; color: #b42318; }
+  .estado.SinRegistros { background: #f3f6f7; color: var(--muted); }
+  h3 { margin: 22px 0 10px; font: 800 15px 'Manrope', sans-serif; display: flex; align-items: center; gap: 8px; color: var(--teal-700); }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
+  th { text-align: left; padding: 9px 12px; background: #f3f8f8; color: var(--muted); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+  th:first-child { border-radius: 10px 0 0 10px; } th:last-child { border-radius: 0 10px 10px 0; }
+  td { padding: 10px 12px; border-bottom: 1px solid #edf2f3; }
+  tr:last-child td { border-bottom: 0; }
+  .chip { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 12px; font-weight: 700; }
+  .chip.ok { background: #e7f8ef; color: #15803d; } .chip.pronto { background: #fff4dc; color: #a86a00; } .chip.vencido { background: #fdecea; color: #b42318; }
+  .vacio { color: var(--muted); font-size: 14px; padding: 6px 2px; }
+  .pie { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 22px; padding-top: 14px; border-top: 1px dashed #cfe0e2; color: var(--muted); font-size: 12px; }
+  .error { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .error .material-symbols-outlined { font-size: 56px; color: #b42318; }
+  @media (max-width: 600px) {
+    .perfil { grid-template-columns: auto 1fr; } .qr { grid-column: 1 / -1; }
+    .foto { width: 84px; height: 84px; } .perfil h2 { font-size: 24px; } .datos { grid-template-columns: 1fr; }
+    .cabecera .titulo span { display: none; } .cuerpo, .cabecera { padding-left: 18px; padding-right: 18px; }
+    td, th { padding: 8px; }
+  }
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background: #fff; } .barra, #pc-splash { display: none !important; }
+    .contenedor { padding: 0; max-width: none; } .carnet { box-shadow: none; border: 1px solid var(--line); }
+    .cabecera, .estado, .chip, th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <div class="barra">
+    <h1>🐾 Carnet de vacunación</h1>
+    <button class="btn" id="btnImprimir" type="button"><span class="material-symbols-outlined">download</span>Descargar PDF / Imprimir</button>
+  </div>
+  <div class="carnet" id="carnet"><div class="error">Cargando carnet…</div></div>
+</div>
+<script>
+  const HUELLA = '<svg class="huella-fondo" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="41" rx="12" ry="10"/><ellipse cx="17" cy="28" rx="5" ry="6.5" transform="rotate(-20 17 28)"/><ellipse cx="26" cy="19" rx="5" ry="6.5" transform="rotate(-6 26 19)"/><ellipse cx="38" cy="19" rx="5" ry="6.5" transform="rotate(6 38 19)"/><ellipse cx="47" cy="28" rx="5" ry="6.5" transform="rotate(20 47 28)"/></svg>';
+  const ESPECIE = { Canino: 'Perro', Felino: 'Gato', Otro: 'Otro' };
+  const fecha = (f) => (f ? new Date(String(f).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '—');
+  function edad(f) {
+    if (!f) return '—';
+    const n = new Date(String(f).slice(0, 10)); const h = new Date();
+    let a = h.getFullYear() - n.getFullYear(); if (h < new Date(h.getFullYear(), n.getMonth(), n.getDate())) a--;
+    if (a >= 1) return `${a} año${a === 1 ? '' : 's'}`;
+    const m = Math.max(0, (h.getFullYear() - n.getFullYear()) * 12 + h.getMonth() - n.getMonth());
+    return `${m} mes${m === 1 ? '' : 'es'}`;
+  }
+  function chipProxima(e) {
+    if (e.Estado === 'Atrasado') return '<span class="chip vencido">Vencida</span>';
+    const dias = Math.round((new Date(String(e.FechaProximaDosis).slice(0, 10)) - new Date(new Date(Date.now() - 5 * 3600e3).toISOString().slice(0, 10))) / 864e5);
+    return dias <= 30 ? `<span class="chip pronto">En ${dias} día${dias === 1 ? '' : 's'}</span>` : '<span class="chip ok">Programada</span>';
+  }
+  function tabla(filas, tipo) {
+    const lista = filas.filter((e) => e.Tipo === tipo);
+    if (!lista.length) return `<p class="vacio">Sin registros de ${tipo.toLowerCase()}.</p>`;
+    return `<table><thead><tr><th>Producto</th><th>Aplicada</th><th>Próxima dosis</th></tr></thead><tbody>${lista.map((e) => `
+      <tr><td><b>${escHtml(e.Producto)}</b></td><td>${escHtml(fecha(e.FechaAplicacion))}</td><td>${escHtml(fecha(e.FechaProximaDosis))}</td></tr>`).join('')}</tbody></table>`;
+  }
+  const ESTADOS = {
+    AlDia: ['verified', 'Vacunas y desparasitación al día'],
+    Vencido: ['error', 'Tiene un refuerzo vencido: acércate a la clínica'],
+    SinRegistros: ['info', 'Todavía no hay vacunas registradas'],
+  };
+
+  (async () => {
+    const cont = document.getElementById('carnet');
+    const token = new URLSearchParams(location.search).get('t');
+    try {
+      const r = await fetch(`/api/publico/carnet/${encodeURIComponent(token || '')}`);
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.mensaje || 'Carnet no disponible.');
+      const m = d.mascota;
+      const [icono, textoEstado] = ESTADOS[d.estadoGeneral];
+      const proximas = d.proximas.length ? `<h3><span class="material-symbols-outlined">event_upcoming</span>Próximas dosis</h3>
+        <table><thead><tr><th>Producto</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>${d.proximas.map((e) => `
+        <tr><td><b>${escHtml(e.Producto)}</b> <span style="color:var(--muted)">(${escHtml(e.Tipo)})</span></td><td>${escHtml(fecha(e.FechaProximaDosis))}</td><td>${chipProxima(e)}</td></tr>`).join('')}</tbody></table>` : '';
+      document.title = `Carnet de ${m.nombre} - Premier Can`;
+      cont.innerHTML = `
+        <div class="cabecera">
+          <div class="marca"><img alt="" src="assets/img/Logo2.jpg"><div><strong>Premier Can</strong><small>Clínica veterinaria</small></div></div>
+          <div class="titulo">Carnet de vacunación<span>Documento digital verificable</span></div>
+        </div>
+        <div class="cuerpo">${HUELLA}
+          <div class="perfil">
+            <div class="foto">${m.fotoUrl ? `<img alt="" src="${escHtml(m.fotoUrl)}">` : '<span class="material-symbols-outlined">pets</span>'}</div>
+            <div>
+              <h2>${escHtml(m.nombre)}</h2>
+              <div class="datos">
+                <div><b>Especie</b>${escHtml(ESPECIE[m.especie] || m.especie)}</div>
+                <div><b>Raza</b>${escHtml(m.raza || '—')}</div>
+                <div><b>Sexo</b>${m.sexo === 'H' ? 'Hembra' : m.sexo === 'M' ? 'Macho' : '—'}</div>
+                <div><b>Edad</b>${escHtml(edad(m.fechaNacimiento))}</div>
+                <div><b>Propietario</b>${escHtml(m.dueno)}</div>
+                <div><b>Nacimiento</b>${escHtml(fecha(m.fechaNacimiento))}</div>
+              </div>
+            </div>
+            <div class="qr"><img alt="Código QR de verificación" src="${escHtml(d.qr)}"><small>Escanea para verificar</small></div>
+          </div>
+          <div class="estado ${escHtml(d.estadoGeneral)}"><span class="material-symbols-outlined">${icono}</span>${escHtml(textoEstado)}</div>
+          <h3><span class="material-symbols-outlined">vaccines</span>Vacunas aplicadas</h3>${tabla(d.aplicadas, 'Vacuna')}
+          <h3><span class="material-symbols-outlined">bug_report</span>Desparasitaciones</h3>${tabla(d.aplicadas, 'Desparasitación')}
+          ${proximas}
+          <div class="pie"><span>Emitido el ${escHtml(fecha(d.emitido))} · Datos en tiempo real del sistema de Premier Can</span><span>Verificación: escanea el código QR</span></div>
+        </div>`;
+    } catch (err) {
+      cont.innerHTML = `<div class="error"><span class="material-symbols-outlined">gpp_bad</span><p><b>${escHtml(err.message)}</b></p><p>Si crees que es un error, comunícate con Premier Can.</p></div>`;
+      document.getElementById('btnImprimir').style.display = 'none';
+    }
+  })();
+  document.getElementById('btnImprimir').addEventListener('click', () => window.print());
+</script>
+</body></html>

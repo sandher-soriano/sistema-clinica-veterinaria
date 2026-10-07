@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agendar cita - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth-cliente.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<script src="../assets/js/app-notificaciones.js" defer></script>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-background">
+<header class="bg-surface-container-lowest border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center gap-3 sticky top-0 z-10">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="mis-mascotas.html">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<span class="font-headline-md text-headline-md text-primary">Premier Can</span>
+</header>
+
+<main class="p-margin-mobile md:p-margin-desktop max-w-lg mx-auto">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Agendar cita</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Tu cita quedará pendiente hasta que la clínica la confirme.</p>
+
+<form class="space-y-md" id="formCita">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Mascota</label>
+<select class="w-full px-4 py-3 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-DEFAULT font-body-md text-on-surface" id="citaMascota" required>
+<option disabled selected value="">Cargando tus mascotas...</option>
+</select>
+</div>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Tipo de cita</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="flex items-center gap-2 p-3 rounded-lg border border-primary bg-primary-container/10 cursor-pointer">
+<input checked class="text-primary focus:ring-primary" name="tipoCita" type="radio" value="Consulta"/>
+<span class="font-body-md text-body-md text-on-surface">Consulta</span>
+</label>
+<label class="flex items-center gap-2 p-3 rounded-lg border border-outline-variant cursor-pointer">
+<input class="text-primary focus:ring-primary" name="tipoCita" type="radio" value="Vacunacion"/>
+<span class="font-body-md text-body-md text-on-surface">Vacunación</span>
+</label>
+<label class="flex items-center gap-2 p-3 rounded-lg border border-outline-variant cursor-pointer">
+<input class="text-primary focus:ring-primary" name="tipoCita" type="radio" value="CirugiaMenor"/>
+<span class="font-body-md text-body-md text-on-surface">Cirugía menor</span>
+</label>
+<label class="flex items-center gap-2 p-3 rounded-lg border border-outline-variant cursor-pointer">
+<input class="text-primary focus:ring-primary" name="tipoCita" type="radio" value="Urgencia"/>
+<span class="font-body-md text-body-md text-on-surface">Urgencia</span>
+</label>
+<label class="flex items-center gap-2 p-3 rounded-lg border border-outline-variant cursor-pointer">
+<input class="text-primary focus:ring-primary" name="tipoCita" type="radio" value="BanoPeluqueria"/>
+<span class="font-body-md text-body-md text-on-surface">🛁 Baño y peluquería</span>
+</label>
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Fecha</label>
+<input class="w-full px-4 py-3 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-DEFAULT font-body-md text-on-surface" id="citaFecha" required type="date"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Hora</label>
+<input class="w-full px-4 py-3 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-DEFAULT font-body-md text-on-surface" id="citaHora" required type="time" value="09:00"/>
+</div>
+</div>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Motivo de la visita</label>
+<textarea class="w-full px-4 py-3 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-DEFAULT font-body-md text-on-surface resize-none" id="citaMotivo" placeholder="Cuéntanos brevemente qué le pasa a tu mascota..." rows="3"></textarea>
+</div>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Método de pago preferido</label>
+<div class="grid grid-cols-4 gap-2" id="metodoPagoOpciones">
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-primary bg-primary-container/10 cursor-pointer">
+<input checked class="sr-only" name="metodoPago" type="radio" value="Efectivo"/>
+<span class="material-symbols-outlined text-[20px] text-primary">payments</span>
+<span class="font-caption text-caption text-on-surface text-center">Efectivo</span>
+</label>
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer">
+<input class="sr-only" name="metodoPago" type="radio" value="Tarjeta"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">credit_card</span>
+<span class="font-caption text-caption text-on-surface text-center">Tarjeta</span>
+</label>
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer">
+<input class="sr-only" name="metodoPago" type="radio" value="Yape"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">smartphone</span>
+<span class="font-caption text-caption text-on-surface text-center">Yape</span>
+</label>
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer">
+<input class="sr-only" name="metodoPago" type="radio" value="Plin"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">smartphone</span>
+<span class="font-caption text-caption text-on-surface text-center">Plin</span>
+</label>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Solo es informativo — el pago se realiza en la clínica.</p>
+</div>
+
+<p class="hidden text-error text-caption font-caption text-center" id="errorCita"></p>
+<!-- Horarios libres sugeridos cuando el elegido está ocupado (tocar uno lo pone en "Hora") -->
+<div class="hidden flex flex-wrap justify-center gap-2" id="sugerenciasHorario"></div>
+<button class="w-full flex justify-center py-3 px-4 rounded-DEFAULT shadow-sm font-label-md text-on-primary bg-primary hover:bg-primary-container transition-colors" type="submit">
+                Solicitar cita
+            </button>
+</form>
+
+<div class="hidden text-center mt-lg p-lg bg-primary-container/10 border border-primary/20 rounded-xl" id="resultadoOk">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">event_available</span>
+<p class="font-body-md text-body-md text-on-surface mb-3">Tu cita fue enviada. La clínica la va a confirmar pronto.</p>
+<a class="font-label-md text-primary hover:underline" href="mis-citas.html">Ver mis citas</a>
+</div>
+</main>
+
+<script>
+  const propietario = AuthCliente.protegerPagina();
+  // "Hoy" en Perú (UTC-5), no en UTC: con toISOString() a partir de las 7 p. m.
+  // ya salía el día siguiente. No se permiten fechas pasadas ni más de 6 meses.
+  const hoyLima = new Date(Date.now() - 5 * 3600 * 1000).toISOString().substring(0, 10);
+  const maxLima = new Date(Date.now() - 5 * 3600 * 1000 + 180 * 86400000).toISOString().substring(0, 10);
+  const inputFecha = document.getElementById('citaFecha');
+  inputFecha.value = hoyLima;
+  inputFecha.min = hoyLima;
+  inputFecha.max = maxLima;
+  document.getElementById('citaMotivo').maxLength = 200;
+
+  // Si venimos desde la ficha de una mascota (mascota.html), esa mascota
+  // ya viene preseleccionada.
+  const params = new URLSearchParams(window.location.search);
+  const mascotaPreseleccionada = params.get('mascotaId');
+
+  document.querySelectorAll('input[name="tipoCita"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('input[name="tipoCita"]').forEach((r) => {
+        r.closest('label').className = 'flex items-center gap-2 p-3 rounded-lg border border-outline-variant cursor-pointer';
+      });
+      radio.closest('label').className = 'flex items-center gap-2 p-3 rounded-lg border border-primary bg-primary-container/10 cursor-pointer';
+    });
+  });
+
+  document.querySelectorAll('input[name="metodoPago"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('#metodoPagoOpciones label').forEach((lbl) => {
+        lbl.className = 'flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer';
+        lbl.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[20px] text-on-surface-variant';
+      });
+      radio.closest('label').className = 'flex flex-col items-center gap-1 p-2 rounded-lg border border-primary bg-primary-container/10 cursor-pointer';
+      radio.closest('label').querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[20px] text-primary';
+    });
+  });
+
+  async function cargarMascotas() {
+    const select = document.getElementById('citaMascota');
+    try {
+      const mascotas = await AuthCliente.apiFetch('/cliente/mascotas');
+      if (mascotas.length === 0) {
+        select.innerHTML = '<option disabled selected value="">No tienes mascotas registradas</option>';
+        return;
+      }
+      select.innerHTML = '<option disabled value="">Selecciona una mascota...</option>' +
+        mascotas.map((m) => `<option value="${escHtml(m.PacienteID)}">${escHtml(m.Nombre)}</option>`).join('');
+      if (mascotaPreseleccionada) {
+        select.value = mascotaPreseleccionada;
+      } else {
+        select.selectedIndex = 1;
+      }
+    } catch (err) {
+      select.innerHTML = `<option disabled selected value="">${escHtml(err.message)}</option>`;
+    }
+  }
+
+  document.getElementById('formCita').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById('errorCita');
+    errorEl.classList.add('hidden');
+
+    const pacienteId = document.getElementById('citaMascota').value;
+    const fecha = document.getElementById('citaFecha').value;
+    const hora = document.getElementById('citaHora').value;
+    const tipoCita = document.querySelector('input[name="tipoCita"]:checked')?.value;
+
+    if (!pacienteId || !fecha || !hora || !tipoCita) {
+      errorEl.textContent = 'Completa todos los campos obligatorios.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    // Evita el doble envío mientras el servidor responde
+    const botonEnviar = e.submitter || document.querySelector('#formCita button[type="submit"]');
+    if (botonEnviar) botonEnviar.disabled = true;
+
+    try {
+      await AuthCliente.apiFetch('/cliente/citas', {
+        method: 'POST',
+        body: JSON.stringify({
+          pacienteId: Number(pacienteId),
+          fechaHora: `${fecha}T${hora}:00`,
+          tipoCita,
+          motivo: document.getElementById('citaMotivo').value.trim(),
+          metodoPago: document.querySelector('input[name="metodoPago"]:checked')?.value,
+        }),
+      });
+      document.getElementById('formCita').classList.add('hidden');
+      document.getElementById('resultadoOk').classList.remove('hidden');
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+      mostrarSugerencias((err.datos && err.datos.sugerencias) || []);
+    } finally {
+      if (botonEnviar) botonEnviar.disabled = false;
+    }
+  });
+
+  // Horarios libres sugeridos: un toque y queda puesta esa hora
+  function mostrarSugerencias(horas) {
+    const cont = document.getElementById('sugerenciasHorario');
+    cont.innerHTML = horas.map((h) => `
+      <button class="px-4 py-2 rounded-full border border-primary text-primary font-label-md hover:bg-primary-container/10" data-hora="${h}" type="button">🕒 ${h}</button>`).join('');
+    cont.classList.toggle('hidden', !horas.length);
+  }
+  document.getElementById('sugerenciasHorario').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-hora]');
+    if (!b) return;
+    document.getElementById('citaHora').value = b.dataset.hora;
+    document.getElementById('errorCita').classList.add('hidden');
+    mostrarSugerencias([]);
+  });
+  // Si cambia la fecha u hora a mano, las sugerencias viejas ya no aplican
+  ['citaFecha', 'citaHora', 'citaMascota'].forEach((id) => document.getElementById(id).addEventListener('change', () => mostrarSugerencias([])));
+
+  if (propietario) cargarMascotas();
+</script>
+</body></html>

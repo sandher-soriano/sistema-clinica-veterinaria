@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Actividad - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background flex min-h-screen antialiased">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm"><div class="w-9 h-9"></div><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Actividad</h1></div>
+</header>
+<main class="flex-1 p-margin-mobile md:p-margin-desktop">
+<div class="mb-6">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Registro de actividad</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Quién hizo qué y cuándo en el sistema (últimos 300 registros con el filtro elegido).</p>
+</div>
+
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 mb-5 grid grid-cols-2 lg:grid-cols-6 gap-3">
+<select class="py-2 px-3 col-span-2 lg:col-span-1" id="fUsuario"><option value="">Todos los usuarios</option></select>
+<select class="py-2 px-3" id="fTabla"><option value="">Todas las secciones</option>
+<option value="Citas">Citas</option><option value="Consultas">Consultas</option><option value="Pacientes">Pacientes</option><option value="EsquemasPreventivos">Vacunas</option>
+<option value="Pagos">Caja: cobros</option><option value="CierresCaja">Caja: cierres</option><option value="Medicamentos">Inventario</option>
+<option value="ArchivosAdjuntos">Archivos</option><option value="Usuarios">Usuarios</option><option value="Propietarios">Clientes</option><option value="Promociones">Promociones</option></select>
+<select class="py-2 px-3" id="fAccion"><option value="">Todas las acciones</option>
+<option>Crear</option><option>Actualizar</option><option value="CambiarEstado">Cambio de estado</option><option>Aplicar</option><option>Subir</option><option>Eliminar</option>
+<option>Cobrar</option><option>Anular</option><option>Cerrar</option><option>Movimiento</option><option>Activar</option><option>Desactivar</option><option>Enviar</option></select>
+<input class="py-2 px-3" id="fDesde" title="Desde" type="date">
+<input class="py-2 px-3" id="fHasta" title="Hasta" type="date">
+<input class="py-2 px-3 col-span-2 lg:col-span-1" id="fBuscar" placeholder="Buscar en el detalle…" type="text">
+</div>
+
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-2 md:p-4" id="listaActividad"><p class="p-6 text-center text-on-surface-variant">Cargando…</p></div>
+</main>
+</div>
+
+<style>
+  .act-fila { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: start; padding: 12px; border-radius: 14px; }
+  .act-fila + .act-fila { border-top: 1px solid var(--pc-line); }
+  .act-fila:hover { background: rgba(13,122,135,.035); }
+  .act-ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; }
+  .act-ico .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24; font-size: 21px; }
+  .act-detalle { color: var(--pc-ink); font-size: 14.5px; line-height: 1.45; }
+  .act-meta { color: var(--pc-muted); font-size: 12.5px; margin-top: 2px; }
+  .act-hora { color: var(--pc-muted); font-size: 12.5px; text-align: right; white-space: nowrap; }
+  .act-dia { padding: 14px 12px 6px; font: 800 12px 'Manrope', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--pc-muted); }
+</style>
+
+<script>
+  if (!(Auth.obtenerUsuario() || {}).accesoConfig) window.location.href = 'dashboard.html';
+  const ESTILO = {
+    Crear: ['add_circle', '#16a34a'], Actualizar: ['edit', '#2563eb'], CambiarEstado: ['swap_horiz', '#0d7a87'], Aplicar: ['vaccines', '#0d9488'],
+    Subir: ['upload_file', '#7c3aed'], Eliminar: ['delete', '#dc2626'], Cobrar: ['payments', '#16a34a'], Anular: ['block', '#dc2626'],
+    Cerrar: ['lock', '#b45309'], Movimiento: ['inventory', '#d97706'], Activar: ['toggle_on', '#16a34a'], Desactivar: ['toggle_off', '#64748b'], Enviar: ['send', '#0d7a87'],
+  };
+  const SECCION = { Citas: 'Citas', Consultas: 'Consultas', Pacientes: 'Pacientes', EsquemasPreventivos: 'Vacunas', Pagos: 'Caja', CierresCaja: 'Caja',
+    Medicamentos: 'Inventario', ArchivosAdjuntos: 'Archivos', Usuarios: 'Usuarios', Propietarios: 'Clientes', Promociones: 'Promociones' };
+  let primeraCarga = true;
+
+  async function cargar() {
+    const p = new URLSearchParams();
+    [['usuarioId', 'fUsuario'], ['tabla', 'fTabla'], ['accion', 'fAccion'], ['desde', 'fDesde'], ['hasta', 'fHasta'], ['buscar', 'fBuscar']]
+      .forEach(([k, id]) => { const v = document.getElementById(id).value.trim(); if (v) p.set(k, v); });
+    const cont = document.getElementById('listaActividad');
+    try {
+      const { registros, usuarios } = await Auth.apiFetch(`/auditoria?${p}`);
+      if (primeraCarga) {
+        document.getElementById('fUsuario').insertAdjacentHTML('beforeend', usuarios.map((u) => `<option value="${escHtml(u.UsuarioID)}">${escHtml(u.Usuario)}</option>`).join(''));
+        primeraCarga = false;
+      }
+      if (!registros.length) { cont.innerHTML = '<p class="p-6 text-center text-on-surface-variant">No hay actividad con ese filtro.</p>'; return; }
+      let diaActual = '';
+      cont.innerHTML = registros.map((r) => {
+        const f = new Date(r.FechaHora);
+        const dia = f.toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        const [ico, color] = ESTILO[r.Accion] || ['history', '#64748b'];
+        const cabecera = dia !== diaActual ? `<div class="act-dia">${escHtml(dia)}</div>` : '';
+        diaActual = dia;
+        return `${cabecera}<div class="act-fila">
+          <span class="act-ico" style="background:${color}1f;color:${color}"><span class="material-symbols-outlined">${ico}</span></span>
+          <div><p class="act-detalle">${escHtml(r.Detalle || `${r.Accion} en ${r.TablaAfectada}`)}</p>
+            <p class="act-meta"><b>${escHtml(r.Usuario || 'Sistema')}</b>${r.Rol ? ` · ${escHtml(r.Rol)}` : ''} · ${escHtml(SECCION[r.TablaAfectada] || r.TablaAfectada)}</p></div>
+          <span class="act-hora">${escHtml(f.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false }))}</span>
+        </div>`;
+      }).join('');
+    } catch (err) {
+      cont.innerHTML = `<p class="p-6 text-center text-error">${escHtml(err.message)}</p>`;
+    }
+  }
+  let espera;
+  ['fUsuario', 'fTabla', 'fAccion', 'fDesde', 'fHasta'].forEach((id) => document.getElementById(id).addEventListener('change', cargar));
+  document.getElementById('fBuscar').addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(cargar, 300); });
+  cargar();
+</script>
+<script>
+  Auth.protegerPaginaConfig();
+</script>
+</body></html>

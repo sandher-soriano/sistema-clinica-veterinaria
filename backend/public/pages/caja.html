@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Caja - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background flex min-h-screen antialiased">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm"><div class="w-9 h-9"></div><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Caja</h1></div>
+</header>
+<main class="flex-1 p-margin-mobile md:p-margin-desktop">
+<div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Caja</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1" id="subtituloCaja">Cobros, promociones y cierre del día.</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<input class="py-2 px-3" id="fechaCaja" type="date">
+<button class="hidden border border-primary text-primary py-2.5 px-4 rounded-lg flex items-center gap-2 font-label-md" id="btnTarifas" type="button"><span class="material-symbols-outlined">sell</span>Tarifas</button>
+<button class="border border-primary text-primary py-2.5 px-4 rounded-lg flex items-center gap-2 font-label-md" id="btnImprimirCaja" type="button"><span class="material-symbols-outlined">print</span>Imprimir</button>
+<button class="border border-error text-error py-2.5 px-4 rounded-lg flex items-center gap-2 font-label-md" id="btnCerrarCaja" type="button"><span class="material-symbols-outlined">lock</span>Cerrar caja</button>
+</div>
+</div>
+
+<div class="hidden mb-6 p-4 rounded-2xl font-semibold flex items-center gap-3" id="avisoCierre" style="background:rgba(22,163,74,.1);color:#15803d"></div>
+<div class="grid grid-cols-2 xl:grid-cols-5 gap-4 mb-6" id="tarjetasTotales"></div>
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6" id="zonaCobro">
+<!-- ================= CARRITO ================= -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 md:p-6 xl:col-span-2">
+<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">shopping_cart</span>Nuevo cobro</h3>
+<button class="text-sm font-semibold text-on-surface-variant hover:text-error flex items-center gap-1" id="btnVaciar" type="button"><span class="material-symbols-outlined text-[18px]">restart_alt</span>Vaciar</button>
+</div>
+<div class="hidden mb-4 p-3 rounded-xl flex flex-wrap items-center gap-3" id="origenCobro" style="background:rgba(13,122,135,.08)"></div>
+
+<div class="flex flex-wrap gap-2 mb-3">
+<div class="flex gap-1 flex-1 min-w-[230px]"><select class="flex-1 py-2 px-3" id="selServicio"><option value="">+ Servicio…</option></select></div>
+<div class="flex gap-1 flex-1 min-w-[230px]"><input class="flex-1 py-2 px-3" id="buscarProductoCaja" list="listaProductosCaja" placeholder="+ Producto del inventario…" type="text"><datalist id="listaProductosCaja"></datalist>
+<button class="px-3 rounded-lg bg-primary text-on-primary" id="btnAgregarProducto" title="Agregar producto" type="button"><span class="material-symbols-outlined">add</span></button></div>
+<button class="px-3 py-2 rounded-lg border border-outline-variant font-label-md flex items-center gap-1" id="btnAgregarLibre" type="button"><span class="material-symbols-outlined text-[18px]">edit_note</span>Otro concepto</button>
+</div>
+
+<div class="overflow-x-auto rounded-xl border border-outline-variant">
+<table class="w-full text-left text-sm">
+<thead><tr><th class="py-2.5 px-3">Ítem</th><th class="py-2.5 px-3 w-24 text-center">Cant.</th><th class="py-2.5 px-3 w-32 text-right">P. unit. (S/)</th><th class="py-2.5 px-3 w-24 text-center">Desc.</th><th class="py-2.5 px-3 w-32 text-right">Subtotal</th><th class="w-10"></th></tr></thead>
+<tbody id="tablaCarrito"></tbody>
+</table>
+</div>
+
+<!-- Descuentos -->
+<div class="mt-4 grid md:grid-cols-2 gap-3">
+<div class="p-3 rounded-xl border border-outline-variant" id="cajaPromoAplicada"></div>
+<div class="p-3 rounded-xl border border-outline-variant">
+<p class="font-label-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">sell</span>Descuento manual</p>
+<p class="text-caption text-on-surface-variant mt-1">Por producto: usa el botón <b>＋ Desc.</b> de cada fila (solo rebaja ese producto).</p>
+<label class="flex items-center gap-2 text-sm text-on-surface cursor-pointer mt-2"><input id="chkDescuento" type="checkbox"> O descuento a <b>todo</b> el cobro</label>
+<div class="hidden mt-2" id="bloqueDescuento">
+<div class="flex gap-2"><select class="py-2 px-2" id="descTipo"><option value="Porcentaje">%</option><option value="Monto">S/</option></select>
+<input class="flex-1 py-2 px-3" id="descValor" min="0" placeholder="Valor" step="0.01" type="number"></div>
+</div>
+</div>
+</div>
+<div class="hidden mt-3 p-3 rounded-xl border border-outline-variant" id="bloqueMotivo">
+<input class="w-full py-2 px-3" id="descMotivo" maxlength="200" placeholder="Motivo del descuento (obligatorio): cliente frecuente, cortesía…" type="text">
+<p class="text-caption text-on-surface-variant mt-1" id="descAyuda"></p>
+</div>
+
+<!-- Totales y pago -->
+<div class="mt-4 grid md:grid-cols-2 gap-4 items-end">
+<div><span class="block font-label-md text-label-md text-on-surface-variant mb-1">Método de pago</span><div class="grid grid-cols-4 gap-2" id="metodosPago"></div></div>
+<div class="p-4 rounded-xl" style="background:var(--pc-field)">
+<div class="flex justify-between text-on-surface-variant"><span>Subtotal</span><span id="totSubtotal">S/ 0.00</span></div>
+<div id="filasDescuento"></div>
+<div class="flex justify-between items-end mt-1"><span class="font-bold text-on-surface">Total</span><span class="font-bold text-on-surface" id="totTotal" style="font:800 30px/1 Manrope,sans-serif">S/ 0.00</span></div>
+</div>
+</div>
+<p class="hidden text-error text-sm font-semibold mt-3" id="errorCobro"></p>
+<button class="w-full mt-4 bg-primary text-on-primary py-3.5 rounded-xl font-label-md text-base flex items-center justify-center gap-2" id="btnCobrar" type="button"><span class="material-symbols-outlined">payments</span>Cobrar</button>
+</section>
+
+<!-- ================= LATERAL ================= -->
+<aside class="space-y-6">
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-primary">stethoscope</span>Por cobrar</h3>
+<p class="text-caption text-on-surface-variant mb-3">Consultas de la historia clínica (últimos 60 días) con sus medicamentos.</p>
+<div class="space-y-2 max-h-[340px] overflow-y-auto" id="listaPendientes"><p class="text-on-surface-variant text-sm">Cargando…</p></div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-primary">loyalty</span>Promociones vigentes</h3>
+<p class="text-caption text-on-surface-variant mb-3">Se aplica sola la que más conviene; puedes elegir otra.</p>
+<div class="space-y-2" id="listaPromos"><p class="text-on-surface-variant text-sm">Cargando…</p></div>
+</section>
+</aside>
+</div>
+
+<!-- ================= COBROS DEL DÍA ================= -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface">Cobros del día</h3><span class="text-on-surface-variant text-sm" id="cantidadCobros"></span></div>
+<div class="overflow-x-auto"><table class="w-full text-left">
+<thead><tr><th class="py-3 px-4">Hora</th><th class="py-3 px-4">Detalle</th><th class="py-3 px-4">Método</th><th class="py-3 px-4 text-right">Total</th><th class="py-3 px-4">Atendió</th><th class="py-3 px-4"></th></tr></thead>
+<tbody id="tablaCobros"><tr><td class="py-6 px-4 text-center text-on-surface-variant" colspan="6">Cargando…</td></tr></tbody>
+</table></div>
+</section>
+</main>
+</div>
+
+<!-- Modal cierre -->
+<div class="fixed inset-0 z-[100] hidden" id="modalCierre">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-md w-full p-6 space-y-4" id="formCierre">
+<div class="flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface">Cerrar caja de hoy</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<p class="text-on-surface-variant">Cuenta el efectivo que hay en caja. Después de cerrar, hoy ya no se podrán registrar ni anular cobros.</p>
+<div class="p-4 rounded-xl bg-surface-container-low"><p class="text-sm text-on-surface-variant">Efectivo esperado según el sistema</p><p class="text-2xl font-bold text-on-surface" id="cierreEsperado">S/ 0.00</p></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="cierreContado">Efectivo contado (S/) *</label><input class="w-full py-2 px-3 text-lg font-bold" id="cierreContado" min="0" required step="0.01" type="number"></div>
+<p class="font-semibold" id="cierreDiferencia"></p>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="cierreObs">Observaciones</label><input class="w-full py-2 px-3" id="cierreObs" maxlength="300" placeholder="Ej. faltan S/ 5 de vuelto" type="text"></div>
+<p class="hidden text-error text-caption font-caption" id="errorCierre"></p>
+<div class="flex justify-end gap-2"><button class="px-4 py-2 rounded-lg border border-outline-variant" data-cerrar type="button">Cancelar</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md" type="submit">Cerrar caja</button></div>
+</form>
+</div>
+</div>
+
+<!-- Modal tarifas (Administrativo) -->
+<div class="fixed inset-0 z-[100] hidden" id="modalTarifas">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+<div class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
+<div class="flex items-center justify-between mb-2"><h3 class="font-headline-md text-headline-md text-on-surface">Tarifas de servicios</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<p class="text-on-surface-variant text-sm mb-4">Precio de cada servicio al cobrar. Los cambios se registran en Actividad.</p>
+<div class="space-y-2" id="listaTarifas"></div>
+</div>
+</div>
+</div>
+
+<style>
+  .metodo-btn { padding: 10px 4px; border-radius: 12px; border: 1.5px solid var(--pc-line); text-align: center; font-weight: 700; font-size: 13px; cursor: pointer; background: var(--pc-field); color: var(--pc-ink); }
+  .metodo-btn.activo { border-color: var(--pc-teal-500); background: rgba(13,122,135,.1); color: var(--pc-teal-600); }
+  html.pc-oscuro .metodo-btn.activo { background: rgba(61,220,151,.12); color: #a7f3d0; }
+  #tablaCarrito input { padding: 6px 8px; width: 100%; text-align: right; }
+  #tablaCarrito input.cant { text-align: center; }
+  .btn-desc { font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 999px; border: 1px dashed var(--pc-line); color: var(--pc-muted); white-space: nowrap; }
+  .btn-desc.con { border-style: solid; border-color: #16a34a; color: #16a34a; background: rgba(22,163,74,.08); }
+  .fila-desc td { background: rgba(22,163,74,.05); }
+  .chip-promo { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: linear-gradient(135deg,#f6cf6a,#d99a17); color: #3b2600; }
+  .promo-op { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; border: 1.5px solid var(--pc-line); cursor: pointer; background: var(--pc-field); }
+  .promo-op.activa { border-color: #16a34a; background: rgba(22,163,74,.08); }
+  .promo-op.no-aplica { opacity: .6; }
+  .promo-op .etq { flex-shrink: 0; padding: 4px 8px; border-radius: 10px; font: 800 12px 'Manrope', sans-serif; background: linear-gradient(135deg,#f6cf6a,#d99a17); color: #3b2600; }
+  .pend { display: block; width: 100%; text-align: left; padding: 10px 12px; border-radius: 14px; border: 1px solid var(--pc-line); background: var(--pc-field); }
+  .pend:hover { border-color: var(--pc-teal-500); }
+  .pend.cargada { border-color: var(--pc-teal-500); background: rgba(13,122,135,.08); }
+  .det-cobro { color: var(--pc-muted); font-size: 12.5px; }
+  @media print { #zonaCobro, #sidebarNav, #btnAbrirMenuMovil, #btnImprimirCaja, #btnTarifas, #btnCerrarCaja, #fechaCaja, .btn-anular, .btn-ticket, header { display: none !important; } .md\:ml-64 { margin-left: 0 !important; } }
+</style>
+
+<script>
+  // =============================================================
+  // Estado y utilidades
+  // =============================================================
+  const METODOS = [['Efectivo', '💵'], ['Tarjeta', '💳'], ['Yape', '📱'], ['Plin', '📲']];
+  const usuarioActual = Auth.obtenerUsuario() || {};
+  const esAdmin = !!usuarioActual.accesoConfig;
+  const soles = (v) => `S/ ${Number(v || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const r2 = (n) => Math.round((Number(n) + Number.EPSILON) * 100) / 100;
+  const hoyLima = () => new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
+  const GRUPO_INVENTARIO = { Vacuna: 'Vacunas', Antiparasitario: 'Desparasitación', Medicamento: 'Tienda', Insumo: 'Tienda', Alimento: 'Tienda' };
+
+  let catalogo = { tarifas: [], productos: [], promociones: [], maxDescuentoSinAdmin: 30 };
+  let pendientes = [];
+  let estadoDia = null;
+  let carrito = [];                 // { tipo, tarifaId?, medicamentoId?, descripcion, grupo, cantidad, precioUnitario, stock?, controlStock?, unidad? }
+  let origen = null;                // { consultaId, citaId, pacienteId, texto }
+  let promoElegida = undefined;     // undefined = automática; null = ninguna; número = la elegida a mano
+  let metodoElegido = 'Efectivo';
+
+  // Mismas reglas que el servidor (utils/precios.js) — el servidor recalcula y valida igual
+  function reglaPromocion(p) {
+    if (p.DescuentoTipo && Number(p.DescuentoValor) > 0) return { tipo: p.DescuentoTipo, valor: Number(p.DescuentoValor) };
+    if (p.PrecioRegular != null && p.PrecioPromocion != null && Number(p.PrecioRegular) > Number(p.PrecioPromocion)) return { tipo: 'Monto', valor: r2(p.PrecioRegular - p.PrecioPromocion) };
+    const m = /(\d+(?:[.,]\d+)?)\s*%/.exec(p.Etiqueta || ''); if (m) { const v = Number(m[1].replace(',', '.')); if (v > 0 && v <= 100) return { tipo: 'Porcentaje', valor: v }; }
+    return null;
+  }
+  const subtotalItem = (i) => r2(Number(i.cantidad || 0) * Number(i.precioUnitario || 0));
+  const esGeneral = () => document.getElementById('chkDescuento').checked;
+  const manualDe = (base, d) => { const v = Number(d && d.valor); if (!(v > 0)) return 0; return d.tipo === 'Porcentaje' ? r2((base * Math.min(v, 100)) / 100) : Math.min(r2(v), r2(base)); };
+  // Descuento manual de un ítem (no cuenta si se eligió descuento a todo el cobro)
+  const descItem = (i) => (esGeneral() ? 0 : manualDe(subtotalItem(i), i.desc));
+  // La promoción cubre los ítems de su categoría que NO tienen descuento propio
+  const cubre = (i, p) => descItem(i) <= 0 && (!p.Categoria || p.Categoria === 'Otro' || i.grupo === p.Categoria);
+  function descuentoPromo(p) {
+    const regla = reglaPromocion(p); if (!regla) return 0;
+    const base = r2(carrito.filter((i) => cubre(i, p)).reduce((s, i) => s + subtotalItem(i), 0));
+    if (base <= 0) return 0;
+    return regla.tipo === 'Porcentaje' ? r2((base * regla.valor) / 100) : Math.min(r2(regla.valor), base);
+  }
+  // Parte de la promoción que le toca a cada ítem (igual que el servidor: proporcional, el último absorbe el redondeo)
+  function repartoPromo(p, total) {
+    const idx = carrito.map((i, k) => (cubre(i, p) ? k : -1)).filter((k) => k >= 0);
+    const base = idx.reduce((s, k) => s + subtotalItem(carrito[k]), 0);
+    const rep = carrito.map(() => 0); if (!(total > 0) || !(base > 0)) return rep;
+    let resto = r2(total);
+    idx.forEach((k, n) => { const parte = n === idx.length - 1 ? resto : r2((total * subtotalItem(carrito[k])) / base); rep[k] = parte; resto = r2(resto - parte); });
+    return rep;
+  }
+  const textoDesc = (d) => (d.tipo === 'Porcentaje' ? `−${Number(d.valor)}%` : `−S/ ${Number(d.valor)}`);
+  const textoRegla = (p) => { const g = reglaPromocion(p); return !g ? 'Sin descuento en caja' : g.tipo === 'Porcentaje' ? `−${g.valor}%` : `−${soles(g.valor)}`; };
+
+  // =============================================================
+  // Cálculo del cobro
+  // =============================================================
+  function calcular() {
+    const subtotal = r2(carrito.reduce((s, i) => s + subtotalItem(i), 0));
+    const manual = esGeneral();   // descuento a todo el cobro
+    let promo = null; let descPromo = 0; let descGeneral = 0; let reparto = carrito.map(() => 0);
+    const descItems = r2(carrito.reduce((s, i) => s + descItem(i), 0));
+    if (manual) {
+      descGeneral = manualDe(subtotal, { tipo: document.getElementById('descTipo').value, valor: document.getElementById('descValor').value });
+    } else {
+      // Automática: la promoción vigente que más descuenta; o la que se eligió a mano
+      const opciones = catalogo.promociones.map((p) => ({ p, d: descuentoPromo(p) })).filter((x) => x.d > 0);
+      if (promoElegida === undefined) { const mejor = opciones.sort((a, b) => b.d - a.d)[0]; if (mejor) { promo = mejor.p; descPromo = mejor.d; } }
+      else if (promoElegida !== null) { const x = opciones.find((o) => o.p.PromocionID === promoElegida); if (x) { promo = x.p; descPromo = x.d; } }
+      if (promo) reparto = repartoPromo(promo, descPromo);
+    }
+    const descuento = r2(descItems + descPromo + descGeneral);
+    const hayManual = manual ? descGeneral > 0 : descItems > 0;
+    // Porcentaje manual más alto (para el límite del 30 % sin administrativo)
+    const pctMax = manual ? (subtotal > 0 ? (descGeneral / subtotal) * 100 : 0)
+      : Math.max(0, ...carrito.map((i) => (subtotalItem(i) > 0 ? (descItem(i) / subtotalItem(i)) * 100 : 0)));
+    return { subtotal, descItems, descPromo, descGeneral, descuento, total: r2(subtotal - descuento), promo, manual, hayManual, reparto, pctMax };
+  }
+
+  // =============================================================
+  // Pintar carrito, promociones y totales
+  // =============================================================
+  function pintar() {
+    const tbody = document.getElementById('tablaCarrito');
+    tbody.innerHTML = carrito.length ? carrito.map((i, k) => {
+      const sinStock = i.controlStock && Number(i.cantidad) > Number(i.stock);
+      const aviso = i.tipo === 'Producto'
+        ? (i.controlStock ? `<span class="${sinStock ? 'text-error font-semibold' : ''}">Stock: ${escHtml(Number(i.stock))} ${escHtml(i.unidad || '')}${sinStock ? ' — insuficiente' : ''}</span>` : 'Sin control de stock')
+        : i.tipo === 'Servicio' ? 'Servicio' : 'Concepto libre';
+      const tieneDesc = i.desc && Number(i.desc.valor) > 0;
+      return `<tr>
+        <td class="py-2 px-3">${i.tipo === 'Libre' ? `<input class="desc text-left" data-k="${k}" maxlength="150" placeholder="Descripción" style="text-align:left" value="${escHtml(i.descripcion)}">` : `<b class="text-on-surface">${escHtml(i.descripcion)}</b>`}
+          <p class="det-cobro">${aviso}${i.indicacion ? ` · ${escHtml(i.indicacion)}` : ''}${i.sinPrecio ? ' · <span style="color:#d97706">sin precio en inventario</span>' : ''} <span class="promo-${k}"></span></p></td>
+        <td class="py-2 px-3"><input class="cant" data-k="${k}" min="0.01" step="1" type="number" value="${escHtml(i.cantidad)}"></td>
+        <td class="py-2 px-3"><input class="precio" data-k="${k}" min="0" step="0.01" type="number" value="${escHtml(i.precioUnitario)}"></td>
+        <td class="py-2 px-3 text-center">${esGeneral() ? '<span class="det-cobro">—</span>'
+          : `<button class="btn-desc ${tieneDesc ? 'con' : ''}" data-k="${k}" title="Descuento solo para este ítem" type="button">${tieneDesc ? escHtml(textoDesc(i.desc)) : '＋ Desc.'}</button>`}</td>
+        <td class="py-2 px-3 text-right text-on-surface sub-${k}"></td>
+        <td class="py-2 px-1 text-center"><button class="quitar w-8 h-8 rounded-lg inline-grid place-items-center text-on-surface-variant hover:text-error" data-k="${k}" title="Quitar" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button></td>
+      </tr>${i.editDesc && !esGeneral() ? `<tr class="fila-desc"><td class="py-2 px-3" colspan="6">
+        <div class="flex flex-wrap items-center gap-2 justify-end text-sm"><span class="text-on-surface-variant">Descuento para <b class="text-on-surface">${escHtml(i.descripcion || 'este ítem')}</b>:</span>
+          <select class="d-tipo py-1.5 px-2" data-k="${k}"><option value="Porcentaje" ${!i.desc || i.desc.tipo === 'Porcentaje' ? 'selected' : ''}>%</option><option value="Monto" ${i.desc && i.desc.tipo === 'Monto' ? 'selected' : ''}>S/</option></select>
+          <input class="d-valor py-1.5 px-2" data-k="${k}" min="0" step="0.01" style="width:90px;text-align:right" type="number" value="${escHtml(i.desc ? i.desc.valor : '')}">
+          <button class="d-listo px-3 py-1.5 rounded-lg bg-primary text-on-primary font-semibold" data-k="${k}" type="button">Listo</button>
+          ${tieneDesc ? `<button class="d-quitar px-3 py-1.5 rounded-lg border border-outline-variant font-semibold" data-k="${k}" type="button">Quitar</button>` : ''}
+        </div></td></tr>` : ''}`;
+    }).join('') : '<tr><td class="py-8 px-3 text-center text-on-surface-variant" colspan="6">Agrega servicios o productos, o elige una consulta de "Por cobrar".</td></tr>';
+    pintarTotales();
+  }
+
+  // Subtotal de cada fila: tachado si tiene descuento (propio o de la promoción)
+  function pintarSubtotales(c) {
+    carrito.forEach((i, k) => {
+      const celda = document.querySelector(`#tablaCarrito .sub-${k}`); if (!celda) return;
+      const sub = subtotalItem(i); const menos = r2(descItem(i) + (c.reparto[k] || 0));
+      celda.innerHTML = menos > 0
+        ? `<span class="det-cobro line-through">${escHtml(soles(sub))}</span><br><b style="color:#16a34a">${escHtml(soles(sub - menos))}</b>`
+        : `<b>${escHtml(soles(sub))}</b>`;
+      const etq = document.querySelector(`#tablaCarrito .promo-${k}`);
+      if (etq) etq.innerHTML = c.reparto[k] > 0 ? `<span class="chip-promo">🎁 promo −${escHtml(soles(c.reparto[k]))}</span>` : '';
+    });
+  }
+
+  function pintarTotales() {
+    const c = calcular();
+    document.getElementById('totSubtotal').textContent = soles(c.subtotal);
+    const fila = (txt, v) => `<div class="flex justify-between font-semibold" style="color:#16a34a"><span>${txt}</span><span>− ${escHtml(soles(v))}</span></div>`;
+    document.getElementById('filasDescuento').innerHTML =
+      (c.descItems > 0 ? fila('Descuentos por producto', c.descItems) : '') +
+      (c.descPromo > 0 ? fila(`🎁 ${escHtml(c.promo.Titulo)}`, c.descPromo) : '') +
+      (c.descGeneral > 0 ? fila('Descuento a todo el cobro', c.descGeneral) : '');
+    document.getElementById('totTotal').textContent = soles(c.total);
+    pintarSubtotales(c);
+    // Caja de promoción aplicada
+    const caja = document.getElementById('cajaPromoAplicada');
+    if (c.manual) caja.innerHTML = '<p class="text-sm text-on-surface-variant">Con descuento a todo el cobro no se aplican promociones ni descuentos por producto.</p>';
+    else if (c.promo) caja.innerHTML = `<p class="font-label-md text-on-surface flex items-center gap-2" style="color:#16a34a"><span class="material-symbols-outlined">redeem</span>Promoción aplicada</p>
+      <p class="text-sm text-on-surface">${escHtml(c.promo.Titulo)} · <b>${escHtml(textoRegla(c.promo))}</b> = −${escHtml(soles(c.descPromo))}</p>
+      <p class="det-cobro">Solo a ${escHtml(c.promo.Categoria && c.promo.Categoria !== 'Otro' ? c.promo.Categoria.toLowerCase() : 'los ítems')} sin descuento propio (marcados con 🎁).</p>
+      <button class="text-sm font-semibold text-on-surface-variant hover:text-error mt-1" id="btnQuitarPromo" type="button">Quitar promoción</button>`;
+    else caja.innerHTML = `<p class="font-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined">redeem</span>Sin promoción</p><p class="text-sm text-on-surface-variant">${catalogo.promociones.length ? 'Ninguna promoción vigente aplica a estos ítems.' : 'No hay promociones vigentes.'}</p>`;
+    // Motivo (obligatorio si hay algún descuento manual) y límite del 30 %
+    document.getElementById('bloqueMotivo').classList.toggle('hidden', !c.hayManual);
+    document.getElementById('descAyuda').textContent = !c.hayManual ? ''
+      : c.pctMax > catalogo.maxDescuentoSinAdmin && !esAdmin ? `⚠️ Un descuento de más del ${catalogo.maxDescuentoSinAdmin}% solo lo autoriza el personal administrativo.`
+      : `Descuento manual total: ${soles(c.descItems + c.descGeneral)}.`;
+    pintarPromos(c);
+    document.getElementById('btnCobrar').disabled = !(c.total > 0);
+  }
+
+  function pintarPromos(c) {
+    const cont = document.getElementById('listaPromos');
+    if (!catalogo.promociones.length) { cont.innerHTML = '<p class="text-sm text-on-surface-variant">No hay promociones vigentes. Créalas en "Promociones".</p>'; return; }
+    cont.innerHTML = catalogo.promociones.map((p) => {
+      const d = descuentoPromo(p); const activa = c.promo && c.promo.PromocionID === p.PromocionID;
+      return `<div class="promo-op ${activa ? 'activa' : ''} ${d > 0 ? '' : 'no-aplica'}" data-promo="${escHtml(p.PromocionID)}" role="button" tabindex="0">
+        <span class="etq">${escHtml(p.Etiqueta || textoRegla(p))}</span>
+        <div class="min-w-0 flex-1"><p class="font-semibold text-on-surface text-sm truncate">${escHtml(p.Titulo)}</p>
+          <p class="det-cobro">${escHtml(p.Categoria || 'Todo el cobro')} · ${escHtml(textoRegla(p))} · hasta ${escHtml(new Date(String(p.FechaFin).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('es-PE', { day: '2-digit', month: 'short', timeZone: 'UTC' }))}</p></div>
+        <span class="text-sm font-bold" style="color:${d > 0 ? '#16a34a' : 'var(--pc-muted)'}">${d > 0 ? `−${escHtml(soles(d))}` : 'No aplica'}</span>
+      </div>`;
+    }).join('');
+  }
+
+  // =============================================================
+  // Agregar ítems
+  // =============================================================
+  function agregarServicio(t) {
+    const ya = carrito.find((i) => i.tipo === 'Servicio' && i.tarifaId === t.TarifaID);
+    if (ya) ya.cantidad = Number(ya.cantidad) + 1;
+    else carrito.push({ tipo: 'Servicio', tarifaId: t.TarifaID, descripcion: t.Nombre, grupo: t.Grupo, cantidad: 1, precioUnitario: Number(t.Precio) });
+    pintar();
+  }
+  function agregarProducto(p) {
+    const ya = carrito.find((i) => i.tipo === 'Producto' && i.medicamentoId === p.MedicamentoID);
+    if (ya) ya.cantidad = Number(ya.cantidad) + 1;
+    else carrito.push({ tipo: 'Producto', medicamentoId: p.MedicamentoID, descripcion: p.NombreMedicamento, grupo: p.Grupo || GRUPO_INVENTARIO[p.Categoria] || 'Tienda',
+      cantidad: 1, precioUnitario: p.PrecioVenta != null ? Number(p.PrecioVenta) : 0, sinPrecio: p.PrecioVenta == null, stock: Number(p.Stock), controlStock: !!p.ControlStock, unidad: p.Unidad });
+    pintar();
+  }
+
+  document.getElementById('selServicio').addEventListener('change', (e) => {
+    const t = catalogo.tarifas.find((x) => String(x.TarifaID) === e.target.value);
+    if (t) agregarServicio(t);
+    e.target.value = '';
+  });
+  function agregarProductoBuscado() {
+    const input = document.getElementById('buscarProductoCaja');
+    const texto = input.value.trim().toLowerCase(); if (!texto) return;
+    const p = catalogo.productos.find((x) => x.NombreMedicamento.toLowerCase() === texto) || catalogo.productos.find((x) => x.NombreMedicamento.toLowerCase().includes(texto));
+    if (!p) { mostrarError('No encontramos ese producto en el inventario.'); return; }
+    agregarProducto(p); input.value = '';
+  }
+  document.getElementById('btnAgregarProducto').addEventListener('click', agregarProductoBuscado);
+  document.getElementById('buscarProductoCaja').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarProductoBuscado(); } });
+  document.getElementById('buscarProductoCaja').addEventListener('change', agregarProductoBuscado);
+  document.getElementById('btnAgregarLibre').addEventListener('click', () => { carrito.push({ tipo: 'Libre', descripcion: '', grupo: null, cantidad: 1, precioUnitario: 0 }); pintar(); document.querySelector('#tablaCarrito input.desc:last-of-type')?.focus(); });
+
+  // Edición en la tabla
+  document.getElementById('tablaCarrito').addEventListener('input', (e) => {
+    const k = Number(e.target.dataset.k); if (!carrito[k]) return;
+    if (e.target.classList.contains('cant')) carrito[k].cantidad = e.target.value;
+    if (e.target.classList.contains('precio')) carrito[k].precioUnitario = e.target.value;
+    if (e.target.classList.contains('desc')) carrito[k].descripcion = e.target.value;
+    if (e.target.classList.contains('d-valor') || e.target.classList.contains('d-tipo')) {
+      const fila = e.target.closest('tr');
+      carrito[k].desc = { tipo: fila.querySelector('.d-tipo').value, valor: fila.querySelector('.d-valor').value };
+    }
+    // Solo se refrescan subtotales/totales (sin reconstruir la fila que se está escribiendo)
+    pintarTotales();
+  });
+  document.getElementById('tablaCarrito').addEventListener('change', (e) => { if (e.target.classList.contains('cant')) pintar(); });
+  document.getElementById('tablaCarrito').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.classList.contains('d-valor')) { e.preventDefault(); e.target.closest('tr').querySelector('.d-listo').click(); } });
+  document.getElementById('tablaCarrito').addEventListener('click', (e) => {
+    const bd = e.target.closest('.btn-desc');
+    if (bd) { const i = carrito[Number(bd.dataset.k)]; i.editDesc = !i.editDesc; pintar(); if (i.editDesc) document.querySelector(`#tablaCarrito .d-valor[data-k="${bd.dataset.k}"]`)?.focus(); return; }
+    const listo = e.target.closest('.d-listo');
+    if (listo) { const i = carrito[Number(listo.dataset.k)]; i.editDesc = false; if (!(i.desc && Number(i.desc.valor) > 0)) delete i.desc; pintar(); return; }
+    const dq = e.target.closest('.d-quitar');
+    if (dq) { const i = carrito[Number(dq.dataset.k)]; delete i.desc; i.editDesc = false; pintar(); return; }
+    const b = e.target.closest('.quitar'); if (!b) return;
+    carrito.splice(Number(b.dataset.k), 1);
+    if (!carrito.length) origen = null, pintarOrigen();
+    pintar();
+  });
+
+  // Promociones: elegir / quitar
+  document.getElementById('listaPromos').addEventListener('click', (e) => {
+    const op = e.target.closest('.promo-op'); if (!op) return;
+    const eraGeneral = esGeneral();
+    if (eraGeneral) { document.getElementById('chkDescuento').checked = false; document.getElementById('bloqueDescuento').classList.add('hidden'); }
+    promoElegida = Number(op.dataset.promo);
+    if (eraGeneral) pintar(); else pintarTotales();
+  });
+  document.getElementById('cajaPromoAplicada').addEventListener('click', (e) => { if (e.target.id === 'btnQuitarPromo') { promoElegida = null; pintarTotales(); } });
+
+  // Descuento a todo el cobro (excluye la promoción y los descuentos por producto)
+  document.getElementById('chkDescuento').addEventListener('change', (e) => {
+    document.getElementById('bloqueDescuento').classList.toggle('hidden', !e.target.checked);
+    pintar();
+    if (e.target.checked) document.getElementById('descValor').focus();
+  });
+  ['descTipo', 'descValor'].forEach((id) => document.getElementById(id).addEventListener('input', pintarTotales));
+
+  // Método de pago
+  function pintarMetodos() {
+    document.getElementById('metodosPago').innerHTML = METODOS.map(([m, ic]) => `<button class="metodo-btn ${m === metodoElegido ? 'activo' : ''}" data-metodo="${m}" type="button">${ic}<br>${m}</button>`).join('');
+  }
+  document.getElementById('metodosPago').addEventListener('click', (e) => { const b = e.target.closest('[data-metodo]'); if (b) { metodoElegido = b.dataset.metodo; pintarMetodos(); } });
+
+  // =============================================================
+  // Por cobrar (desde la historia clínica)
+  // =============================================================
+  function pintarOrigen() {
+    const caja = document.getElementById('origenCobro');
+    if (!origen) { caja.classList.add('hidden'); return; }
+    caja.innerHTML = `<span class="material-symbols-outlined text-primary">pets</span><div class="flex-1 min-w-0"><p class="font-semibold text-on-surface">${escHtml(origen.texto)}</p><p class="det-cobro">${escHtml(origen.detalle || '')}</p></div>
+      ${origen.consultaId ? `<a class="text-sm font-semibold text-primary flex items-center gap-1" href="../receta.html?c=${escHtml(origen.consultaId)}" target="_blank"><span class="material-symbols-outlined text-[18px]">receipt_long</span>Receta</a>` : ''}`;
+    caja.classList.remove('hidden');
+  }
+  function pintarPendientes() {
+    const cont = document.getElementById('listaPendientes');
+    cont.innerHTML = pendientes.length ? pendientes.map((p) => {
+      const total = r2(p.items.reduce((s, i) => s + i.cantidad * i.precioUnitario, 0));
+      return `<button class="pend ${origen && origen.consultaId === p.ConsultaID ? 'cargada' : ''}" data-consulta="${escHtml(p.ConsultaID)}" type="button">
+        <div class="flex justify-between gap-2"><b class="text-on-surface">${escHtml(p.PacienteNombre)}</b><span class="font-bold text-on-surface">${escHtml(soles(total))}</span></div>
+        <p class="det-cobro">${escHtml(new Date(String(p.FechaConsulta).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('es-PE', { day: '2-digit', month: 'short', timeZone: 'UTC' }))} · ${escHtml(p.MotivoConsulta)}</p>
+        <p class="det-cobro">${escHtml(p.items.map((i) => i.descripcion).join(' · '))}</p></button>`;
+    }).join('') : '<p class="text-sm text-on-surface-variant">✅ No hay consultas pendientes de cobro.</p>';
+  }
+  function cargarPendiente(p) {
+    carrito = p.items.map((i) => ({ ...i }));
+    origen = { consultaId: p.ConsultaID, citaId: p.CitaID, pacienteId: p.PacienteID,
+      texto: `Consulta de ${p.PacienteNombre} — ${p.PropietarioNombres} ${p.PropietarioApellidos}`,
+      detalle: `${new Date(String(p.FechaConsulta).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('es-PE', { day: '2-digit', month: 'long', timeZone: 'UTC' })} · ${p.MotivoConsulta}` };
+    if (p.MetodoPago) metodoElegido = p.MetodoPago;
+    promoElegida = undefined;
+    pintarOrigen(); pintarPendientes(); pintarMetodos(); pintar();
+  }
+  document.getElementById('listaPendientes').addEventListener('click', async (e) => {
+    const b = e.target.closest('.pend'); if (!b) return;
+    if (carrito.length && !(origen && origen.consultaId === Number(b.dataset.consulta))) {
+      const ok = await PCConfirmar({ titulo: '¿Reemplazar el cobro actual?', mensaje: 'Hay ítems en el carrito. Se cambiarán por los de esta consulta.', textoSi: 'Sí, reemplazar', icono: 'shopping_cart' });
+      if (!ok) return;
+    }
+    const p = pendientes.find((x) => x.ConsultaID === Number(b.dataset.consulta)); if (p) cargarPendiente(p);
+  });
+
+  function vaciar() {
+    carrito = []; origen = null; promoElegida = undefined;
+    document.getElementById('chkDescuento').checked = false; document.getElementById('bloqueDescuento').classList.add('hidden');
+    document.getElementById('descValor').value = ''; document.getElementById('descMotivo').value = '';
+    document.getElementById('errorCobro').classList.add('hidden');
+    pintarOrigen(); pintarPendientes(); pintar();
+  }
+  document.getElementById('btnVaciar').addEventListener('click', vaciar);
+
+  function mostrarError(t) { const el = document.getElementById('errorCobro'); el.textContent = t; el.classList.remove('hidden'); }
+
+  // =============================================================
+  // Cobrar
+  // =============================================================
+  document.getElementById('btnCobrar').addEventListener('click', async () => {
+    document.getElementById('errorCobro').classList.add('hidden');
+    const c = calcular();
+    if (!carrito.length) return mostrarError('Agrega al menos un ítem.');
+    if (carrito.some((i) => !String(i.descripcion || '').trim())) return mostrarError('Escribe la descripción de cada concepto.');
+    if (carrito.some((i) => !(Number(i.cantidad) > 0))) return mostrarError('Revisa las cantidades.');
+    if (carrito.some((i) => i.controlStock && Number(i.cantidad) > Number(i.stock))) return mostrarError('Hay un producto sin stock suficiente: ajusta la cantidad.');
+    if (c.hayManual && !document.getElementById('descMotivo').value.trim()) { document.getElementById('descMotivo').focus(); return mostrarError('Escribe el motivo del descuento.'); }
+    if (!(c.total > 0)) return mostrarError('El total debe ser mayor que cero.');
+    const body = {
+      items: carrito.map((i) => ({ tipo: i.tipo, tarifaId: i.tarifaId, medicamentoId: i.medicamentoId, descripcion: i.descripcion, cantidad: Number(i.cantidad), precioUnitario: Number(i.precioUnitario),
+        ...(!c.manual && i.desc && Number(i.desc.valor) > 0 ? { descuento: { tipo: i.desc.tipo, valor: Number(i.desc.valor) } } : {}) })),
+      motivoDescuento: c.hayManual ? document.getElementById('descMotivo').value : null,
+      metodoPago: metodoElegido,
+      consultaId: origen ? origen.consultaId : null, citaId: origen ? origen.citaId : (q.get('citaId') ? Number(q.get('citaId')) : null),
+      pacienteId: origen ? origen.pacienteId : (q.get('pacienteId') ? Number(q.get('pacienteId')) : null),
+    };
+    if (c.manual && c.descGeneral > 0) body.descuentoManual = { tipo: document.getElementById('descTipo').value, valor: Number(document.getElementById('descValor').value), motivo: document.getElementById('descMotivo').value };
+    else if (c.promo) body.promocionId = c.promo.PromocionID;
+    try {
+      const r = await Auth.apiFetch('/caja/pagos', { method: 'POST', body: JSON.stringify(body) });
+      const b = document.getElementById('btnCobrar').getBoundingClientRect();
+      if (window.PCEfectos) PCEfectos.huellitas(b.left + b.width / 2, b.top + b.height / 2, 14);
+      if (q.get('consultaId') || q.get('citaId')) history.replaceState(null, '', 'caja.html');
+      vaciar();
+      await Promise.all([cargarDia(), cargarPendientes(), cargarCatalogo()]);
+      ticket(r.pagoId);
+    } catch (err) { mostrarError(err.message); }
+  });
+
+  // =============================================================
+  // Cobros del día, cierre, ticket
+  // =============================================================
+  const fechaInput = document.getElementById('fechaCaja');
+  fechaInput.value = hoyLima(); fechaInput.max = hoyLima();
+  fechaInput.addEventListener('change', cargarDia);
+
+  function tarjeta(etiqueta, valor, icono, color, pie) {
+    return `<div class="pc-stat"><div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">${etiqueta}</span><span class="pc-ico" style="background:${color}"><span class="material-symbols-outlined">${icono}</span></span></div>
+      <p class="pc-stat-valor" style="font-size:28px">${soles(valor)}</p><p class="pc-stat-pie">${pie}</p></div>`;
+  }
+
+  async function cargarDia() {
+    try {
+      estadoDia = await Auth.apiFetch(`/caja?fecha=${fechaInput.value}`);
+      const t = estadoDia.totales;
+      document.getElementById('tarjetasTotales').innerHTML =
+        tarjeta('Total del día', t.total, 'account_balance_wallet', 'linear-gradient(135deg,#13a3a3,#00606a)', `${t.cantidad} cobro(s)${t.descuentos ? ` · ${soles(t.descuentos)} en descuentos` : ''}`) +
+        tarjeta('Efectivo', t.Efectivo, 'payments', 'linear-gradient(135deg,#3ccf91,#16865a)', 'En caja') +
+        tarjeta('Tarjeta', t.Tarjeta, 'credit_card', 'linear-gradient(135deg,#60a5fa,#2563eb)', 'POS') +
+        tarjeta('Yape', t.Yape, 'smartphone', 'linear-gradient(135deg,#a78bfa,#7c3aed)', 'Billetera') +
+        tarjeta('Plin', t.Plin, 'phone_iphone', 'linear-gradient(135deg,#5eead4,#0d9488)', 'Billetera');
+      const fechaTxt = new Date(`${estadoDia.fecha}T12:00:00Z`).toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
+      document.getElementById('subtituloCaja').textContent = `${fechaTxt.charAt(0).toUpperCase()}${fechaTxt.slice(1)}${estadoDia.esHoy ? ' (hoy)' : ''}`;
+      const aviso = document.getElementById('avisoCierre');
+      if (estadoDia.cierre) {
+        const d = Number(estadoDia.cierre.Diferencia);
+        aviso.innerHTML = `<span class="material-symbols-outlined">lock</span><span class="flex-1">Caja cerrada por ${escHtml(estadoDia.cierre.CerradoPor)}: efectivo contado ${escHtml(soles(estadoDia.cierre.EfectivoContado))} (${d === 0 ? 'cuadra exacto' : d > 0 ? `sobran ${escHtml(soles(d))}` : `faltan ${escHtml(soles(-d))}`})${estadoDia.cierre.Observaciones ? ` · ${escHtml(estadoDia.cierre.Observaciones)}` : ''}</span>
+          ${esAdmin && estadoDia.esHoy ? `<span class="flex flex-wrap items-center gap-2 font-normal">
+            <input class="py-1.5 px-3 text-sm" id="motivoReabrir" maxlength="200" placeholder="Motivo (ej. se cerró por error)" style="min-width:230px" type="text">
+            <button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary text-sm font-semibold flex items-center gap-1" id="btnReabrirCaja" type="button"><span class="material-symbols-outlined text-[18px]">lock_open</span>Reabrir caja</button>
+            <span class="w-full text-error text-sm" id="errorReabrir"></span></span>` : ''}`;
+        aviso.classList.add('flex-wrap');
+        aviso.classList.remove('hidden');
+        document.getElementById('btnReabrirCaja')?.addEventListener('click', async () => {
+          const motivo = document.getElementById('motivoReabrir').value.trim();
+          if (!motivo) { document.getElementById('errorReabrir').textContent = 'Escribe el motivo para reabrir la caja.'; document.getElementById('motivoReabrir').focus(); return; }
+          const ok = await PCConfirmar({ titulo: '¿Reabrir la caja de hoy?', mensaje: 'Se anula el cierre y se podrán registrar y anular cobros otra vez. Quedará registrado en Actividad. Al final del día vuelve a cerrarla.', textoSi: 'Sí, reabrir', icono: 'lock_open' });
+          if (!ok) return;
+          try { await Auth.apiFetch('/caja/cierre/reabrir', { method: 'POST', body: JSON.stringify({ motivo }) }); await Promise.all([cargarDia(), cargarPendientes(), cargarCatalogo()]); }
+          catch (ex) { document.getElementById('errorReabrir').textContent = ex.message; }
+        });
+      } else aviso.classList.add('hidden');
+      const editable = estadoDia.esHoy && !estadoDia.cierre;
+      document.getElementById('zonaCobro').classList.toggle('hidden', !editable);
+      document.getElementById('btnCerrarCaja').classList.toggle('hidden', !editable);
+      document.getElementById('cantidadCobros').textContent = `${estadoDia.pagos.length} registro(s)`;
+      document.getElementById('tablaCobros').innerHTML = estadoDia.pagos.length ? estadoDia.pagos.map((p) => `
+        <tr class="${p.Anulado ? 'opacity-50' : ''}">
+          <td class="py-3 px-4 text-on-surface-variant align-top">${escHtml(new Date(p.Fecha).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' }))}</td>
+          <td class="py-3 px-4 align-top"><p class="font-semibold text-on-surface ${p.Anulado ? 'line-through' : ''}">${escHtml(p.PacienteNombre ? `${p.PacienteNombre} · ` : '')}${escHtml(p.Concepto)}</p>
+            ${(p.Detalle || []).length > 1 ? `<p class="det-cobro">${(p.Detalle || []).map((d) => `${escHtml(Number(d.Cantidad))}× ${escHtml(d.Descripcion)}`).join(' · ')}</p>` : ''}
+            ${Number(p.Descuento) > 0 ? `<p class="det-cobro" style="color:#16a34a">Descuento −${escHtml(soles(p.Descuento))}${p.PromocionTitulo ? ` · 🎁 ${escHtml(p.PromocionTitulo)}` : ''}${p.MotivoDescuento ? ` · ${escHtml(p.MotivoDescuento)}` : ''}${(p.Detalle || []).filter((d) => Number(d.Descuento) > 0).map((d) => ` · ${escHtml(d.Descripcion)} −${escHtml(soles(d.Descuento))}`).join('')}</p>` : ''}
+            ${p.ConsultaID ? `<p class="det-cobro">Consulta #${escHtml(p.ConsultaID)}</p>` : ''}
+            ${p.Anulado ? `<p class="text-caption text-error">Anulado: ${escHtml(p.MotivoAnulacion)}</p>` : ''}</td>
+          <td class="py-3 px-4 align-top">${escHtml(p.MetodoPago)}</td>
+          <td class="py-3 px-4 text-right font-bold text-on-surface align-top">${escHtml(soles(p.Monto))}</td>
+          <td class="py-3 px-4 text-on-surface-variant align-top">${escHtml((p.Usuario || '').split(' ').slice(0, 2).join(' '))}</td>
+          <td class="py-3 px-4 text-right whitespace-nowrap align-top">
+            <button class="btn-ticket text-primary text-sm font-semibold mr-2" data-id="${escHtml(p.PagoID)}" type="button">Ticket</button>
+            ${esAdmin && editable && !p.Anulado ? `<button class="btn-anular text-error text-sm font-semibold" data-id="${escHtml(p.PagoID)}" data-concepto="${escHtml(p.Concepto)}" type="button">Anular</button>` : ''}</td>
+        </tr>`).join('')
+        : '<tr><td class="py-6 px-4 text-center text-on-surface-variant" colspan="6">Todavía no hay cobros este día.</td></tr>';
+    } catch (err) {
+      document.getElementById('tablaCobros').innerHTML = `<tr><td class="py-6 px-4 text-center text-error" colspan="6">${escHtml(err.message)}</td></tr>`;
+    }
+  }
+
+  // Ticket imprimible de un cobro
+  function ticket(pagoId) {
+    const p = (estadoDia && estadoDia.pagos || []).find((x) => x.PagoID === pagoId); if (!p) return;
+    const w = window.open('', '_blank', 'width=420,height=640'); if (!w) return;
+    const filas = (p.Detalle || []).map((d) => `<tr><td>${escHtml(Number(d.Cantidad))}× ${escHtml(d.Descripcion)}</td><td style="text-align:right">${escHtml(soles(d.Subtotal))}</td></tr>`
+      + (Number(d.Descuento) > 0 ? `<tr><td style="padding-left:14px">desc.</td><td style="text-align:right">-${escHtml(soles(d.Descuento))}</td></tr>` : '')
+      + (Number(d.DescuentoPromo) > 0 ? `<tr><td style="padding-left:14px">promo</td><td style="text-align:right">-${escHtml(soles(d.DescuentoPromo))}</td></tr>` : '')).join('');
+    w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Ticket #${escHtml(p.PagoID)}</title><style>
+      body{font-family:'Courier New',monospace;font-size:13px;margin:16px;color:#111} h2{margin:0;text-align:center} .c{text-align:center} table{width:100%;border-collapse:collapse} td{padding:3px 0;vertical-align:top} hr{border:0;border-top:1px dashed #999;margin:8px 0} .t td{font-weight:bold;font-size:15px}
+      @media print{button{display:none}}</style></head><body>
+      <h2>PREMIER CAN</h2><p class="c">Clínica veterinaria</p><hr>
+      <p>Ticket N.º ${escHtml(String(p.PagoID).padStart(6, '0'))}<br>${escHtml(new Date(p.Fecha).toLocaleString('es-PE', { timeZone: 'UTC', dateStyle: 'short', timeStyle: 'short' }))}${p.PacienteNombre ? `<br>Paciente: ${escHtml(p.PacienteNombre)}` : ''}</p><hr>
+      <table>${filas || `<tr><td>${escHtml(p.Concepto)}</td><td style="text-align:right">${escHtml(soles(p.Monto))}</td></tr>`}</table><hr>
+      <table><tr><td>Subtotal</td><td style="text-align:right">${escHtml(soles(p.Subtotal ?? p.Monto))}</td></tr>
+      ${Number(p.Descuento) > 0 ? `<tr><td>Descuentos${p.PromocionTitulo ? ` (incl. ${escHtml(p.PromocionTitulo)})` : ''}</td><td style="text-align:right">-${escHtml(soles(p.Descuento))}</td></tr>` : ''}
+      <tr class="t"><td>TOTAL</td><td style="text-align:right">${escHtml(soles(p.Monto))}</td></tr><tr><td>Pago</td><td style="text-align:right">${escHtml(p.MetodoPago)}</td></tr></table><hr>
+      <p class="c">¡Gracias por confiar en nosotros! 🐾</p><p class="c"><button onclick="print()">Imprimir</button></p></body></html>`);
+    w.document.close();
+  }
+
+  document.getElementById('tablaCobros').addEventListener('click', async (e) => {
+    const t = e.target.closest('.btn-ticket'); if (t) return ticket(Number(t.dataset.id));
+    const b = e.target.closest('.btn-anular'); if (!b) return;
+    const motivo = prompt(`Motivo para anular "${b.dataset.concepto}":`);
+    if (!motivo || !motivo.trim()) return;
+    try { const r = await Auth.apiFetch(`/caja/pagos/${b.dataset.id}/anular`, { method: 'POST', body: JSON.stringify({ motivo }) }); alert(r.mensaje); await Promise.all([cargarDia(), cargarPendientes(), cargarCatalogo()]); } catch (ex) { alert(ex.message); }
+  });
+
+  // Cierre
+  const modalCierre = document.getElementById('modalCierre');
+  document.querySelectorAll('#modalCierre [data-cerrar]').forEach((b) => b.addEventListener('click', () => modalCierre.classList.add('hidden')));
+  document.getElementById('btnCerrarCaja').addEventListener('click', () => {
+    document.getElementById('cierreEsperado').textContent = soles(estadoDia.totales.Efectivo);
+    document.getElementById('cierreContado').value = ''; document.getElementById('cierreObs').value = ''; document.getElementById('cierreDiferencia').textContent = '';
+    document.getElementById('errorCierre').classList.add('hidden');
+    modalCierre.classList.remove('hidden'); document.getElementById('cierreContado').focus();
+  });
+  document.getElementById('cierreContado').addEventListener('input', (e) => {
+    const d = r2(Number(e.target.value || 0) - estadoDia.totales.Efectivo);
+    const el = document.getElementById('cierreDiferencia');
+    el.textContent = e.target.value === '' ? '' : d === 0 ? '✅ Cuadra exacto' : d > 0 ? `Sobran ${soles(d)}` : `⚠️ Faltan ${soles(-d)}`;
+    el.style.color = d === 0 ? '#16a34a' : d > 0 ? '#2563eb' : '#dc2626';
+  });
+  document.getElementById('formCierre').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const ok = await PCConfirmar({ titulo: '¿Cerrar la caja de hoy?', mensaje: 'Después ya no se podrán registrar ni anular cobros de hoy.', textoSi: 'Sí, cerrar caja', icono: 'lock' });
+    if (!ok) return;
+    try {
+      await Auth.apiFetch('/caja/cierre', { method: 'POST', body: JSON.stringify({ efectivoContado: document.getElementById('cierreContado').value, observaciones: document.getElementById('cierreObs').value }) });
+      modalCierre.classList.add('hidden'); cargarDia();
+    } catch (ex) { const el = document.getElementById('errorCierre'); el.textContent = ex.message; el.classList.remove('hidden'); }
+  });
+
+  // Tarifas (Administrativo)
+  const modalTarifas = document.getElementById('modalTarifas');
+  if (esAdmin) document.getElementById('btnTarifas').classList.remove('hidden');
+  document.querySelectorAll('#modalTarifas [data-cerrar]').forEach((b) => b.addEventListener('click', () => modalTarifas.classList.add('hidden')));
+  document.getElementById('btnTarifas').addEventListener('click', () => {
+    document.getElementById('listaTarifas').innerHTML = catalogo.tarifas.map((t) => `
+      <div class="flex items-center gap-3 p-3 rounded-xl border border-outline-variant">
+        <div class="flex-1"><p class="font-semibold text-on-surface">${escHtml(t.Nombre)}</p><p class="det-cobro">${escHtml(t.Grupo)}</p></div>
+        <label class="flex items-center gap-1 text-sm"><input class="tar-activo" data-id="${escHtml(t.TarifaID)}" type="checkbox" ${t.Activo ? 'checked' : ''}> Activo</label>
+        <input class="tar-precio w-24 py-1.5 px-2 text-right" data-id="${escHtml(t.TarifaID)}" min="0" step="0.01" type="number" value="${escHtml(Number(t.Precio))}">
+        <button class="tar-guardar px-3 py-1.5 rounded-lg bg-primary text-on-primary text-sm" data-id="${escHtml(t.TarifaID)}" type="button">Guardar</button>
+      </div>`).join('');
+    modalTarifas.classList.remove('hidden');
+  });
+  document.getElementById('listaTarifas').addEventListener('click', async (e) => {
+    const b = e.target.closest('.tar-guardar'); if (!b) return;
+    const id = b.dataset.id;
+    try {
+      await Auth.apiFetch(`/caja/tarifas/${id}`, { method: 'PUT', body: JSON.stringify({ precio: document.querySelector(`.tar-precio[data-id="${id}"]`).value, activo: document.querySelector(`.tar-activo[data-id="${id}"]`).checked }) });
+      b.textContent = '✓ Listo'; setTimeout(() => { b.textContent = 'Guardar'; }, 1500);
+      await Promise.all([cargarCatalogo(), cargarPendientes()]);
+    } catch (ex) { alert(ex.message); }
+  });
+
+  document.getElementById('btnImprimirCaja').addEventListener('click', () => window.print());
+
+  // =============================================================
+  // Carga inicial
+  // =============================================================
+  async function cargarCatalogo() {
+    try {
+      catalogo = await Auth.apiFetch('/caja/catalogo');
+      document.getElementById('selServicio').innerHTML = '<option value="">+ Servicio…</option>' +
+        catalogo.tarifas.filter((t) => t.Activo).map((t) => `<option value="${escHtml(t.TarifaID)}">${escHtml(t.Nombre)} — ${escHtml(soles(t.Precio))}</option>`).join('');
+      document.getElementById('listaProductosCaja').innerHTML = catalogo.productos.map((p) =>
+        `<option value="${escHtml(p.NombreMedicamento)}">${escHtml(p.PrecioVenta != null ? soles(p.PrecioVenta) : 'sin precio')}${p.ControlStock ? ` · stock ${escHtml(Number(p.Stock))}` : ''}</option>`).join('');
+      // El stock del carrito se actualiza con el del inventario
+      carrito.forEach((i) => { if (i.medicamentoId) { const p = catalogo.productos.find((x) => x.MedicamentoID === i.medicamentoId); if (p) { i.stock = Number(p.Stock); i.controlStock = !!p.ControlStock; } } });
+      pintar();
+    } catch (err) { mostrarError(err.message); }
+  }
+  async function cargarPendientes() {
+    try { pendientes = await Auth.apiFetch('/caja/pendientes'); pintarPendientes(); }
+    catch (err) { document.getElementById('listaPendientes').innerHTML = `<p class="text-error text-sm">${escHtml(err.message)}</p>`; }
+  }
+
+  // Llegar desde otra pantalla: caja.html?consultaId=…  |  ?citaId=…&concepto=…&metodo=…
+  const q = new URLSearchParams(location.search);
+  if (q.get('metodo') && METODOS.some(([m]) => m === q.get('metodo'))) metodoElegido = q.get('metodo');
+  pintarMetodos();
+
+  (async () => {
+    await Promise.all([cargarCatalogo(), cargarPendientes(), cargarDia()]);
+    const pend = q.get('consultaId') ? pendientes.find((p) => p.ConsultaID === Number(q.get('consultaId')))
+      : q.get('citaId') ? pendientes.find((p) => p.CitaID === Number(q.get('citaId'))) : null;
+    if (pend) cargarPendiente(pend);
+    else if (q.get('consultaId')) mostrarError('Esa consulta ya fue cobrada o no está pendiente.');
+    else if (q.get('concepto')) {
+      const t = catalogo.tarifas.find((x) => q.get('concepto').toLowerCase().startsWith(x.Nombre.toLowerCase().split(' ')[0]));
+      if (t) agregarServicio(t); else { carrito.push({ tipo: 'Libre', descripcion: q.get('concepto'), grupo: null, cantidad: 1, precioUnitario: 0 }); pintar(); }
+    }
+  })();
+</script>
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

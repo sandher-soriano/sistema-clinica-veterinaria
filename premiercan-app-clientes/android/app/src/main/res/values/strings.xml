@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Premier Can</string>
+    <string name="title_activity_main">Premier Can</string>
+    <string name="package_name">com.premiercan.clientes</string>
+    <string name="custom_url_scheme">com.premiercan.clientes</string>
+</resources>

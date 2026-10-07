@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mis avisos - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth-cliente.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<script src="../assets/js/app-notificaciones.js" defer></script>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-background">
+<header class="bg-surface-container-lowest border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center gap-3 sticky top-0 z-10">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="mis-mascotas.html" title="Volver">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<span class="font-headline-md text-headline-md text-primary">Mis avisos</span>
+</header>
+
+<main class="p-margin-mobile md:p-margin-desktop max-w-2xl mx-auto">
+<p class="font-body-md text-body-md text-on-surface-variant mb-5">Mensajes que te envió la clínica.</p>
+<div class="space-y-3" id="listaAvisos">
+<p class="text-on-surface-variant">Cargando…</p>
+</div>
+</main>
+
+<script>
+  const propietario = AuthCliente.protegerPagina();
+  const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'set', 'oct', 'nov', 'dic'];
+
+  function escapar(texto) {
+    return String(texto ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  // Fecha literal de Perú guardada en los campos UTC (mismo criterio que el backend)
+  function fechaTexto(iso) {
+    const f = new Date(iso);
+    return `${f.getUTCDate()} ${MESES[f.getUTCMonth()]} ${f.getUTCFullYear()}, ${String(f.getUTCHours()).padStart(2, '0')}:${String(f.getUTCMinutes()).padStart(2, '0')}`;
+  }
+
+  (async () => {
+    if (!propietario) return;
+    const cont = document.getElementById('listaAvisos');
+    try {
+      const avisos = await AuthCliente.apiFetch('/cliente/avisos');
+      try { localStorage.setItem('pc_avisos_vistos', JSON.stringify(avisos.map((a) => a.RecordatorioID))); } catch (e) { /* nada */ }
+      cont.innerHTML = avisos.length
+        ? avisos.map((a) => `
+            <article class="bg-surface-container-lowest border rounded-xl p-4 flex gap-3">
+              <span class="material-symbols-outlined text-primary shrink-0" style="width:40px;height:40px;line-height:40px;text-align:center;border-radius:12px;background:#e6f3f4">campaign</span>
+              <div class="min-w-0">
+                <p class="font-semibold text-on-surface">${escapar(a.Titulo || 'Aviso')}</p>
+                <p class="text-body-md text-on-surface-variant whitespace-pre-line break-words">${escapar(a.Mensaje)}</p>
+                <p class="text-caption text-outline mt-1">${fechaTexto(a.Fecha)}</p>
+              </div>
+            </article>`).join('')
+        : `<div class="text-center py-12 text-on-surface-variant">
+             <span class="material-symbols-outlined text-[44px] text-outline">notifications_off</span>
+             <p class="mt-2">Todavía no tienes avisos de la clínica.</p>
+           </div>`;
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error">${escapar(err.message)}</p>`;
+    }
+  })();
+</script>
+</body></html>

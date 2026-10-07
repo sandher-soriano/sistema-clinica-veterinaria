@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mis citas - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth-cliente.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<script src="../assets/js/app-notificaciones.js" defer></script>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-background">
+<header class="bg-surface-container-lowest border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center gap-3 sticky top-0 z-10">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="mis-mascotas.html">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<span class="font-headline-md text-headline-md text-primary">Premier Can</span>
+</header>
+
+<main class="p-margin-mobile md:p-margin-desktop max-w-lg mx-auto">
+<div class="flex items-center justify-between mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Mis citas</h1>
+<a class="flex items-center gap-1 px-4 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md" href="agendar-cita.html">
+<span class="material-symbols-outlined text-[18px]">add</span> Nueva
+</a>
+</div>
+
+<p class="hidden" id="avisoCitas" role="status"></p>
+<div class="space-y-3" id="listaCitas">
+<p class="text-on-surface-variant">Cargando tus citas...</p>
+</div>
+</main>
+
+<script>
+  const propietario = AuthCliente.protegerPagina();
+
+  const TIPO_LABEL = { Consulta: 'Consulta', Vacunacion: 'Vacunación', CirugiaMenor: 'Cirugía menor', Urgencia: 'Urgencia', BanoPeluqueria: 'Baño y peluquería' };
+  const ESTADO_BADGE = {
+    Programada: { texto: 'Programada', clases: 'bg-surface-variant text-on-surface-variant' },
+    Confirmada: { texto: 'Confirmada', clases: 'bg-secondary-container text-on-secondary-container' },
+    Completada: { texto: 'Atendida', clases: 'bg-primary-container text-on-primary-container' },
+    NoAsistio: { texto: 'No asististe', clases: 'bg-surface-container-high text-on-surface-variant' },
+    Cancelada: { texto: 'Cancelada', clases: 'bg-error-container text-on-error-container' },
+    // Ya pasó pero la clínica todavía no marcó la asistencia
+    EnRevision: { texto: 'En revisión', clases: 'bg-surface-container-high text-on-surface-variant' },
+  };
+
+  function escapar(texto) {
+    return String(texto ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  }
+  // La hora de la cita es "hora literal de Perú" (campos UTC), igual que en el backend
+  const yaPaso = (c) => new Date(c.FechaHora).getTime() <= Date.now() - 5 * 3600 * 1000;
+
+  function tarjetaCita(c) {
+    const abierta = c.Estado === 'Programada' || c.Estado === 'Confirmada';
+    const badge = abierta && yaPaso(c) ? ESTADO_BADGE.EnRevision : (ESTADO_BADGE[c.Estado] || ESTADO_BADGE.Programada);
+    return `
+      <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-md ${yaPaso(c) ? 'opacity-80' : ''}">
+        <div class="flex justify-between items-start mb-2">
+          <div>
+            <p class="font-body-md text-body-md text-on-surface font-semibold">${escapar(c.PacienteNombre)} — ${TIPO_LABEL[c.TipoCita] || escapar(c.TipoCita)}</p>
+            <p class="font-caption text-caption text-on-surface-variant">${formatearFechaHora(c.FechaHora)}</p>
+          </div>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold shrink-0 ${escHtml(badge.clases)}">${escHtml(badge.texto)}</span>
+        </div>
+        ${c.Motivo ? `<p class="font-caption text-caption text-on-surface-variant">"${escapar(c.Motivo)}"</p>` : ''}
+        ${c.VeterinarioNombre ? `<p class="font-caption text-caption text-on-surface-variant mt-1">Con Dr(a). ${escapar(c.VeterinarioNombre)}</p>` : ''}
+        ${c.CanceladaPorCliente && c.Estado === 'Cancelada' ? '<p class="font-caption text-caption text-on-surface-variant mt-1">La cancelaste desde el portal.</p>' : ''}
+        ${abierta && !yaPaso(c) ? accionesCita(c) : ''}
+        ${c.Estado === 'Completada' ? bloqueEncuesta(c) : ''}
+      </div>`;
+  }
+
+  // Encuesta de satisfacción de una cita atendida
+  function bloqueEncuesta(c) {
+    if (c.MiPuntuacion) {
+      return `<p class="mt-3 pt-3 border-t border-outline-variant text-sm text-on-surface-variant">Tu calificación: <span style="color:#f2b632;letter-spacing:2px">${'★'.repeat(c.MiPuntuacion)}${'☆'.repeat(5 - c.MiPuntuacion)}</span></p>`;
+    }
+    return `<div class="encuesta mt-3 pt-3 border-t border-outline-variant" data-id="${escHtml(c.CitaID)}">
+      <p class="font-label-md text-label-md text-on-surface mb-1">¿Cómo te atendimos?</p>
+      <div class="flex gap-1 mb-2" role="radiogroup" aria-label="Calificación">${[1, 2, 3, 4, 5].map((n) => `<button class="estrella text-3xl leading-none" data-n="${n}" type="button" aria-label="${n} estrella${n > 1 ? 's' : ''}" style="color:#cbd5d8">★</button>`).join('')}</div>
+      <div class="hidden encuesta-extra">
+        <textarea class="w-full p-2 text-sm" maxlength="500" placeholder="Cuéntanos más (opcional)" rows="2"></textarea>
+        <button class="enviar-encuesta mt-2 px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md" type="button">Enviar opinión</button>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('listaCitas').addEventListener('click', async (e) => {
+    const estrella = e.target.closest('.estrella');
+    const enviar = e.target.closest('.enviar-encuesta');
+    if (estrella) {
+      const caja = estrella.closest('.encuesta');
+      caja.dataset.puntuacion = estrella.dataset.n;
+      caja.querySelectorAll('.estrella').forEach((s) => { s.style.color = Number(s.dataset.n) <= Number(estrella.dataset.n) ? '#f2b632' : '#cbd5d8'; });
+      caja.querySelector('.encuesta-extra').classList.remove('hidden');
+    }
+    if (enviar) {
+      const caja = enviar.closest('.encuesta');
+      try {
+        const r = await AuthCliente.apiFetch(`/cliente/citas/${caja.dataset.id}/encuesta`, { method: 'POST', body: JSON.stringify({ puntuacion: Number(caja.dataset.puntuacion), comentario: caja.querySelector('textarea').value }) });
+        avisar(r.mensaje);
+        if (window.PCEfectos) { const b = enviar.getBoundingClientRect(); PCEfectos.huellitas(b.left + b.width / 2, b.top + b.height / 2, 12); }
+        cargarCitas();
+      } catch (err) { avisar(err.message, true); }
+    }
+  });
+
+  // Botones de una cita próxima: "Asistiré" y "Cancelar" (hasta 2 h antes)
+  const HORAS_MIN_CANCELAR = 2;
+  function accionesCita(c) {
+    const minutosFaltan = (new Date(c.FechaHora).getTime() - (Date.now() - 5 * 3600 * 1000)) / 60000;
+    const confirmar = c.ClienteConfirmo
+      ? '<span class="inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-semibold" style="background:rgba(22,163,74,.12);color:#16a34a"><span class="material-symbols-outlined text-[18px]">check_circle</span>Confirmaste que asistirás</span>'
+      : `<button class="btn-cita-confirmar flex-1 flex items-center justify-center gap-1 px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md" data-id="${escHtml(c.CitaID)}" type="button"><span class="material-symbols-outlined text-[18px]">event_available</span>Asistiré</button>`;
+    const cancelar = minutosFaltan >= HORAS_MIN_CANCELAR * 60
+      ? `<button class="btn-cita-cancelar flex items-center justify-center gap-1 px-4 py-2 rounded-full border border-error text-error font-label-md text-label-md" data-id="${escHtml(c.CitaID)}" data-mascota="${escHtml(c.PacienteNombre)}" type="button"><span class="material-symbols-outlined text-[18px]">event_busy</span>Cancelar cita</button>`
+      : '<span class="text-caption font-caption text-on-surface-variant">Para cancelarla ahora, llama a la clínica.</span>';
+    return `<div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-outline-variant">${confirmar}${cancelar}</div>`;
+  }
+
+  // Mensaje breve arriba de la lista
+  function avisar(texto, esError) {
+    const caja = document.getElementById('avisoCitas');
+    caja.textContent = texto;
+    caja.className = `mb-3 p-3 rounded-xl text-sm font-semibold ${esError ? 'bg-error-container text-on-error-container' : 'bg-primary-container text-on-primary-container'}`;
+    clearTimeout(avisar.t);
+    avisar.t = setTimeout(() => caja.classList.add('hidden'), 6000);
+  }
+
+  document.getElementById('listaCitas').addEventListener('click', async (e) => {
+    const confirmar = e.target.closest('.btn-cita-confirmar');
+    const cancelar = e.target.closest('.btn-cita-cancelar');
+    if (!confirmar && !cancelar) return;
+    try {
+      if (confirmar) {
+        const r = await AuthCliente.apiFetch(`/cliente/citas/${confirmar.dataset.id}/confirmar`, { method: 'POST' });
+        avisar(r.mensaje);
+      } else {
+        const ok = await PCConfirmar({
+          titulo: '¿Cancelar la cita?',
+          mensaje: `La cita de ${cancelar.dataset.mascota} se cancelará y avisaremos a la clínica. Podrás agendar otra cuando quieras.`,
+          textoSi: 'Sí, cancelar', textoNo: 'No, mantenerla', peligro: true, icono: 'event_busy',
+        });
+        if (!ok) return;
+        const r = await AuthCliente.apiFetch(`/cliente/citas/${cancelar.dataset.id}/cancelar`, { method: 'POST' });
+        avisar(r.mensaje);
+      }
+      await cargarCitas();
+    } catch (err) {
+      avisar(err.message, true);
+    }
+  });
+
+  function fechaSoloDia(fechaIso) {
+    const [y, m, d] = fechaIso.substring(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+  function formatearFechaHora(fechaIso) {
+    const fecha = fechaSoloDia(fechaIso).toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+    const hora = fechaIso.substring(11, 16);
+    return `${fecha}, ${hora}`;
+  }
+
+  async function cargarCitas() {
+    const cont = document.getElementById('listaCitas');
+    try {
+      const citas = await AuthCliente.apiFetch('/cliente/citas');
+      if (citas.length === 0) {
+        cont.innerHTML = '<p class="text-on-surface-variant">Todavía no tienes citas. Usa el botón "Nueva" para pedir una.</p>';
+        return;
+      }
+      // Próximas (de la más cercana a la más lejana) e historial (de la más reciente a la más antigua)
+      const proximas = citas.filter((c) => !yaPaso(c) && c.Estado !== 'Cancelada')
+        .sort((a, b) => new Date(a.FechaHora) - new Date(b.FechaHora));
+      const historial = citas.filter((c) => !proximas.includes(c))
+        .sort((a, b) => new Date(b.FechaHora) - new Date(a.FechaHora));
+      const titulo = (t) => `<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mt-2">${t}</h2>`;
+      cont.innerHTML =
+        titulo('Próximas') +
+        (proximas.length ? proximas.map(tarjetaCita).join('') : '<p class="text-caption text-on-surface-variant">No tienes citas próximas.</p>') +
+        (historial.length ? titulo('Historial') + historial.map(tarjetaCita).join('') : '');
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  if (propietario) cargarCitas();
+</script>
+</body></html>

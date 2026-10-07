@@ -1,0 +1,904 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Citas - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<!-- Material Symbols -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- Main Content Area -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Citas</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+
+<!-- Page Content -->
+<main class="pt-6 md:pt-10 px-margin-mobile md:px-margin-desktop pb-margin-desktop flex-1 flex flex-col lg:flex-row gap-gutter">
+<!-- Calendar Section -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest rounded-xl border border-[#E0E6ED] shadow-[0_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<!-- Citas que ya pasaron y falta marcar si el cliente asistió (lo llena cargarPorCerrar) -->
+<div class="hidden px-md py-3 border-b" id="avisoPorCerrar" style="background:#fff7ed;border-color:#fed7aa"></div>
+<!-- Calendar Header -->
+<div class="px-md py-4 border-b border-[#E0E6ED] flex justify-between items-center bg-[#F8FAFB]">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface m-0" id="tituloSemana">—</h2>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-surface-dim text-on-surface-variant" id="btnSemanaAnterior"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-surface-dim text-on-surface-variant" id="btnSemanaSiguiente"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<button class="ml-2 px-3 py-1 text-sm font-label-md text-primary hover:bg-surface-container-low rounded" id="btnHoy">Hoy</button>
+</div>
+</div>
+<!-- Calendar Grid (Weekly View) -->
+<div class="flex-1 flex flex-col overflow-auto">
+<!-- Days Header -->
+<div class="grid grid-cols-8 border-b border-[#E0E6ED] bg-[#F8FAFB] sticky top-0 z-10" id="cabeceraDias">
+<div class="p-3 border-r border-[#E0E6ED] text-center w-20 flex-shrink-0"></div>
+</div>
+<!-- Time Grid -->
+<div class="relative flex-1 bg-surface-container-lowest" style="min-height: 780px;">
+<!-- Time Labels (Left Column) -->
+<div class="absolute inset-y-0 left-0 w-20 flex flex-col z-10">
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">08:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">09:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">10:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">11:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">12:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">13:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">14:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">15:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">16:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">17:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">18:00</span></div>
+<div class="h-[65px] flex items-start justify-end pr-2 pt-2 border-t border-[#E0E6ED]/50"><span class="font-caption text-caption text-outline">19:00</span></div>
+</div>
+<!-- Horizontal Row Lines spanning full width -->
+<div class="absolute inset-0 flex flex-col ml-20 pointer-events-none">
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+<div class="h-[65px] border-t border-[#E0E6ED]/50"></div>
+</div>
+<!-- Appointments Overlay -->
+<div class="absolute inset-0 ml-20 grid grid-cols-7 z-10 gap-1 p-1" id="overlayCitas"></div>
+</div>
+</div>
+</div>
+<!-- Side Panel Section -->
+<aside class="w-full lg:w-96 flex-shrink-0 flex flex-col gap-6">
+<!-- Schedule Form Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-[#E0E6ED] shadow-[0_12px_24px_rgba(13,122,135,0.05)] p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-[#E0E6ED] pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">event_note</span>
+                        Agendar cita
+                    </h3>
+<div class="flex flex-col gap-5">
+<!-- Type Selection -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Tipo de cita</label>
+<div class="grid grid-cols-2 gap-2" id="tipoCitaOpciones">
+<label class="flex items-center gap-2 p-2 rounded border border-primary bg-[#E6F6FF] cursor-pointer">
+<input checked class="text-primary focus:ring-primary border-primary" name="tipoCita" type="radio" value="Consulta">
+<span class="font-caption text-caption font-semibold text-primary">Consulta</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="text-[#006874] focus:ring-[#006874] border-outline-variant" name="tipoCita" type="radio" value="Vacunacion">
+<span class="font-caption text-caption text-on-surface-variant">Vacunación</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="text-[#9333EA] focus:ring-[#9333EA] border-outline-variant" name="tipoCita" type="radio" value="CirugiaMenor">
+<span class="font-caption text-caption text-on-surface-variant">Cirugía Menor</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="text-error focus:ring-error border-outline-variant" name="tipoCita" type="radio" value="Urgencia">
+<span class="font-caption text-caption text-on-surface-variant">Urgencia</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded border border-outline-variant hover:border-outline cursor-pointer col-span-2">
+<input class="text-[#D99A17] focus:ring-[#D99A17] border-outline-variant" name="tipoCita" type="radio" value="BanoPeluqueria">
+<span class="font-caption text-caption text-on-surface-variant">🛁 Baño y peluquería</span>
+</label>
+</div>
+</div>
+<!-- Patient Search -->
+<div class="relative">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Paciente</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">search</span>
+<input autocomplete="off" class="w-full pl-10 pr-4 py-2.5 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-md font-body-md text-on-surface transition-colors" id="citaBuscarPaciente" placeholder="Buscar por nombre de mascota..." type="text">
+</div>
+<div class="hidden absolute z-20 w-full bg-surface-container-lowest border border-outline-variant rounded-b-md shadow-lg max-h-48 overflow-y-auto" id="citaResultadosPaciente"></div>
+<div class="hidden mt-2 p-2 bg-primary-container/10 border border-primary/30 rounded-md flex items-center justify-between" id="citaPacienteSeleccionadoBox">
+<span class="font-body-md text-body-md text-on-surface" id="citaPacienteSeleccionadoTexto"></span>
+<button class="text-on-surface-variant hover:text-error" id="citaQuitarPacienteBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Date & Time Row -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Fecha</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">calendar_today</span>
+<input class="w-full pl-10 pr-2 py-2.5 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-md font-body-md text-on-surface transition-colors text-sm" id="citaFecha" type="date">
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Hora</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">schedule</span>
+<input class="w-full pl-10 pr-2 py-2.5 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-md font-body-md text-on-surface transition-colors text-sm" id="citaHora" type="time" value="09:00">
+</div>
+</div>
+</div>
+<!-- Assigned Veterinarian -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Veterinario</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">stethoscope</span>
+<select class="w-full pl-10 pr-8 py-2.5 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-md font-body-md text-on-surface transition-colors appearance-none" id="citaVeterinario">
+<option value="">Cargando veterinarios...</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Reason / Notes -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1">Motivo de la visita</label>
+<textarea class="w-full px-4 py-2.5 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-md font-body-md text-on-surface transition-colors resize-none" id="citaMotivo" placeholder="Notas clínicas o inquietud del dueño..." rows="3"></textarea>
+</div>
+<!-- Payment Method -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Método de pago</label>
+<div class="grid grid-cols-4 gap-2" id="metodoPagoOpciones">
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-primary bg-primary-container/10 cursor-pointer">
+<input checked class="sr-only" name="metodoPago" type="radio" value="Efectivo"/>
+<span class="material-symbols-outlined text-[20px] text-primary">payments</span>
+<span class="font-caption text-caption text-on-surface text-center">Efectivo</span>
+</label>
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer">
+<input class="sr-only" name="metodoPago" type="radio" value="Tarjeta"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">credit_card</span>
+<span class="font-caption text-caption text-on-surface text-center">Tarjeta</span>
+</label>
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer">
+<input class="sr-only" name="metodoPago" type="radio" value="Yape"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">smartphone</span>
+<span class="font-caption text-caption text-on-surface text-center">Yape</span>
+</label>
+<label class="flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer">
+<input class="sr-only" name="metodoPago" type="radio" value="Plin"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">smartphone</span>
+<span class="font-caption text-caption text-on-surface text-center">Plin</span>
+</label>
+</div>
+</div>
+<p class="hidden font-caption text-caption text-error" id="errorCita"></p>
+<!-- Actions -->
+<div class="mt-4 flex gap-3">
+<button class="flex-1 py-2.5 border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors" id="btnLimpiarForm" type="button">Limpiar</button>
+<button class="flex-1 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md shadow-[0_4px_12px_rgba(13,122,135,0.2)] hover:opacity-90 hover:-translate-y-0.5 transition-all" id="btnGuardarCita" type="button">Guardar cita</button>
+</div>
+</div>
+</div>
+<!-- Citas de hoy -->
+<div class="bg-surface-container-lowest rounded-xl border border-[#E0E6ED] shadow-sm p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">today</span>
+                        Citas de hoy
+                    </h3>
+<div class="space-y-2" id="listaCitasHoy">
+<p class="text-caption font-caption text-on-surface-variant">Cargando...</p>
+</div>
+</div>
+</aside>
+</main>
+
+<!-- Modal: detalle de cita -->
+<div class="fixed inset-0 z-[100] hidden" id="modalDetalleCita">
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm" id="modalDetalleCitaBackdrop"></div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="bg-surface-container-lowest rounded-xl shadow-2xl max-w-md w-full">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Detalle de la cita</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="cerrarModalDetalleCita">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-3" id="contenidoModalDetalleCita"></div>
+<!-- Asignar / cambiar veterinario -->
+<div class="px-6 pb-4 flex items-end gap-2" id="bloqueAsignarVeterinario">
+<div class="flex-1">
+<label class="block font-caption text-caption text-on-surface-variant mb-1">Veterinario</label>
+<select class="w-full pl-3 pr-8 py-2 bg-[#F1F4F6] border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-md font-body-md text-body-md text-on-surface appearance-none" id="selectVeterinarioModal">
+<option value="">Sin asignar</option>
+</select>
+</div>
+<button class="px-4 py-2 rounded-lg font-label-md text-label-md border border-primary text-primary hover:bg-primary-container/10 transition-colors shrink-0" id="btnAsignarVeterinarioModal" type="button">Asignar</button>
+</div>
+<div class="px-6 py-4 border-t border-outline-variant flex flex-wrap gap-2 justify-end" id="accionesModalDetalleCita"></div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<script>
+  // ============================================================
+  // Estado de la semana visible
+  // ============================================================
+  const DIAS_SEMANA = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+  const HORA_INICIO = 8; // el grid empieza a las 08:00
+  const PX_POR_MINUTO = 65 / 60; // cada fila de hora mide 65px
+
+  const TIPO_ESTILOS = {
+    Consulta: { bg: '#E6F6FF', borde: '#0D7A87', texto: '#0D7A87', label: 'Consulta' },
+    Vacunacion: { bg: '#E3F6FF', borde: '#006874', texto: '#006874', label: 'Vacunación' },
+    CirugiaMenor: { bg: '#F3E8FF', borde: '#9333EA', texto: '#7E22CE', label: 'Cirugía Menor' },
+    Urgencia: { bg: '#FFDAD6', borde: '#BA1A1A', texto: '#93000A', label: 'Urgencia' },
+    BanoPeluqueria: { bg: '#FFF4DC', borde: '#D99A17', texto: '#8A5A00', label: 'Baño y peluquería' },
+  };
+  // Modo oscuro: fondos translúcidos sobre negro y textos claros
+  const TIPO_ESTILOS_OSCURO = {
+    Consulta: { bg: 'rgba(52,211,153,.14)', borde: '#34d399', texto: '#a7f3d0', label: 'Consulta' },
+    Vacunacion: { bg: 'rgba(56,189,248,.14)', borde: '#38bdf8', texto: '#bae6fd', label: 'Vacunación' },
+    CirugiaMenor: { bg: 'rgba(192,132,252,.16)', borde: '#c084fc', texto: '#e9d5ff', label: 'Cirugía Menor' },
+    Urgencia: { bg: 'rgba(248,113,113,.16)', borde: '#f87171', texto: '#fecaca', label: 'Urgencia' },
+    BanoPeluqueria: { bg: 'rgba(251,191,36,.16)', borde: '#fbbf24', texto: '#fde68a', label: 'Baño y peluquería' },
+  };
+  function estiloTipo(tipo) {
+    const tabla = window.PCTema && window.PCTema.esOscuro() ? TIPO_ESTILOS_OSCURO : TIPO_ESTILOS;
+    return tabla[tipo] || tabla.Consulta;
+  }
+  // Al cambiar de tema, el calendario se vuelve a pintar con los colores correctos
+  window.addEventListener('pc:tema', () => { if (typeof cargarSemana === 'function') cargarSemana(); });
+  const DURACION_MIN = { Consulta: 30, Vacunacion: 20, CirugiaMenor: 90, Urgencia: 60, BanoPeluqueria: 60 };
+  const ESTADO_LABEL = { Programada: 'Programada', Confirmada: 'Confirmada', Completada: 'Asistió / atendida', Cancelada: 'Cancelada', NoAsistio: 'No asistió' };
+
+  // Hora "literal de Perú" (mismo criterio que el backend: los campos UTC de la
+  // fecha guardan la hora de Lima). ¿Ya empezó? ¿Ya terminó y sigue abierta?
+  const ahoraLimaMs = () => Date.now() - 5 * 3600 * 1000;
+  function yaEmpezo(c) {
+    return new Date(c.FechaHora).getTime() <= ahoraLimaMs();
+  }
+  function estaPorCerrar(c) {
+    if (c.Estado !== 'Programada' && c.Estado !== 'Confirmada') return false;
+    const fin = new Date(c.FechaHora).getTime() + (DURACION_MIN[c.TipoCita] || 30) * 60000;
+    return fin <= ahoraLimaMs();
+  }
+
+  let inicioSemana = lunesDeEsaSemana(new Date());
+  let citasSemanaCache = [];
+
+  function lunesDeEsaSemana(fecha) {
+    const d = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
+    const diaSemana = d.getDay(); // 0=domingo
+    const diff = diaSemana === 0 ? -6 : 1 - diaSemana;
+    d.setDate(d.getDate() + diff);
+    return d;
+  }
+
+  function sumarDias(fecha, dias) {
+    const d = new Date(fecha);
+    d.setDate(d.getDate() + dias);
+    return d;
+  }
+
+  function fechaISO(fecha) {
+    const y = fecha.getFullYear();
+    const m = String(fecha.getMonth() + 1).padStart(2, '0');
+    const d = String(fecha.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  }
+
+  function esMismoDia(a, b) {
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+
+  // FechaHora se guarda con la hora literal de Perú metida en los campos
+  // UTC (no es un instante UTC real) — por eso aquí se compara con
+  // getUTCFullYear/getUTCMonth/getUTCDate, para que "hoy" no cambie según
+  // la zona horaria configurada en el navegador de quien mira el calendario.
+  function esFechaCitaHoy(fechaCitaUTC) {
+    const hoy = new Date();
+    return fechaCitaUTC.getUTCFullYear() === hoy.getFullYear()
+      && fechaCitaUTC.getUTCMonth() === hoy.getMonth()
+      && fechaCitaUTC.getUTCDate() === hoy.getDate();
+  }
+
+  function nombreMes(fecha) {
+    return fecha.toLocaleDateString('es-PE', { month: 'long', year: 'numeric' });
+  }
+
+  // ============================================================
+  // Cabecera de días (Lun..Dom con su número)
+  // ============================================================
+  function renderCabeceraDias() {
+    const cont = document.getElementById('cabeceraDias');
+    const hoy = new Date();
+    let html = '<div class="p-3 border-r border-[#E0E6ED] text-center w-20 flex-shrink-0"></div>';
+    for (let i = 0; i < 7; i++) {
+      const dia = sumarDias(inicioSemana, i);
+      const esHoy = esMismoDia(dia, hoy);
+      html += `
+        <div class="p-3 border-r border-[#E0E6ED] text-center ${esHoy ? 'bg-surface-container-low' : ''}">
+          <span class="block font-caption text-caption ${esHoy ? 'text-primary font-bold' : 'text-on-surface-variant'} uppercase">${DIAS_SEMANA[i]}</span>
+          <span class="block font-headline-md text-headline-md ${esHoy ? 'text-primary' : 'text-on-surface'}">${dia.getDate()}</span>
+        </div>`;
+    }
+    cont.innerHTML = html;
+
+    const finSemana = sumarDias(inicioSemana, 6);
+    const mismosMes = inicioSemana.getMonth() === finSemana.getMonth();
+    document.getElementById('tituloSemana').textContent = mismosMes
+      ? nombreMes(inicioSemana)
+      : `${nombreMes(inicioSemana)} - ${nombreMes(finSemana)}`;
+  }
+
+  // ============================================================
+  // Bloques de citas sobre el grid
+  // ============================================================
+  function renderOverlayCitas() {
+    const cont = document.getElementById('overlayCitas');
+    const columnas = Array.from({ length: 7 }, () => []);
+
+    citasSemanaCache.forEach((c) => {
+      const fecha = new Date(c.FechaHora);
+      const diaIndice = (fecha.getUTCDay() + 6) % 7; // lunes=0
+      columnas[diaIndice].push({ ...c, fecha });
+    });
+
+    cont.innerHTML = columnas.map((citasDelDia) => {
+      const bloques = citasDelDia.map((c) => {
+        const estilo = estiloTipo(c.TipoCita);
+        const minutosDesdeInicio = (c.fecha.getUTCHours() - HORA_INICIO) * 60 + c.fecha.getUTCMinutes();
+        const top = Math.max(0, minutosDesdeInicio * PX_POR_MINUTO);
+        const duracion = DURACION_MIN[c.TipoCita] || 30;
+        const alto = Math.max(28, duracion * PX_POR_MINUTO);
+        const hora = c.fecha.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' });
+        const opacidad = c.Estado === 'Cancelada' ? 'opacity-40 line-through'
+          : c.Estado === 'NoAsistio' ? 'opacity-50' : '';
+        const porCerrar = estaPorCerrar(c);
+        const etiqueta = porCerrar ? '<span class="px-1 rounded text-[9px] font-bold text-white mr-1" style="background:#d97706">POR CERRAR</span>'
+          : c.Estado === 'NoAsistio' ? '<span class="px-1 rounded text-[9px] font-bold text-white mr-1" style="background:#6b7280">NO ASISTIÓ</span>'
+          : c.Estado === 'Completada' ? '<span class="px-1 rounded text-[9px] font-bold text-white mr-1" style="background:#15803d">ASISTIÓ</span>' : '';
+        return `
+          <div class="absolute w-full rounded shadow-sm p-1.5 overflow-hidden hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer btn-detalle-cita ${opacidad}"
+               style="top:${top}px; height:${alto}px; background:${escHtml(estilo.bg)}; border-left:4px solid ${escHtml(estilo.borde)};${porCerrar ? ' box-shadow:0 0 0 2px #f59e0b;' : ''}"
+               data-id="${escHtml(c.CitaID)}">
+            <div class="font-label-md text-[11px] leading-tight font-bold" style="color:${escHtml(estilo.texto)}">${etiqueta}${escHtml(c.PacienteNombre)} - ${escHtml(c.Motivo || estilo.label)}</div>
+            <div class="font-caption text-[10px] truncate" style="color:${escHtml(estilo.texto)}cc">${escHtml(c.VeterinarioNombre || 'Sin asignar')} • ${hora}</div>
+          </div>`;
+      }).join('');
+      return `<div class="relative">${bloques}</div>`;
+    }).join('');
+  }
+
+  // ============================================================
+  // Citas por cerrar: ya pasaron y siguen Programada/Confirmada
+  // ============================================================
+  async function cargarPorCerrar() {
+    const cont = document.getElementById('avisoPorCerrar');
+    try {
+      const lista = await Auth.apiFetch('/citas/por-cerrar');
+      if (!lista.length) { cont.classList.add('hidden'); return; }
+      cont.innerHTML = `
+        <p class="font-label-md text-sm font-bold mb-2" style="color:#9a3412">
+          ⚠️ ${lista.length === 1 ? 'Hay 1 cita que ya pasó' : `Hay ${escHtml(lista.length)} citas que ya pasaron`} y falta marcar si el cliente asistió:
+        </p>
+        <div class="space-y-1.5">
+          ${lista.map((c) => {
+            const f = new Date(c.FechaHora);
+            const cuando = `${f.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', timeZone: 'UTC' })}, ${f.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}`;
+            return `
+              <div class="flex flex-wrap items-center gap-2 text-sm">
+                <span class="font-semibold text-on-surface">${escaparHtml(c.PacienteNombre)}</span>
+                <span class="text-on-surface-variant">${cuando} · ${escaparHtml(c.PropietarioNombres)} ${escaparHtml(c.PropietarioApellidos)}${c.Telefono ? ` · ${escaparHtml(c.Telefono)}` : ''}</span>
+                <span class="ml-auto flex gap-1.5">
+                  <button class="px-3 py-1 rounded-lg text-xs font-bold text-white btn-cierre-rapido" data-id="${escHtml(c.CitaID)}" data-estado="Completada" style="background:#15803d" type="button">Asistió</button>
+                  <button class="px-3 py-1 rounded-lg text-xs font-bold text-white btn-cierre-rapido" data-id="${escHtml(c.CitaID)}" data-estado="NoAsistio" style="background:#b91c1c" type="button">No asistió</button>
+                </span>
+              </div>`;
+          }).join('')}
+        </div>`;
+      cont.classList.remove('hidden');
+    } catch (err) {
+      cont.classList.add('hidden');
+    }
+  }
+
+  function escaparHtml(texto) {
+    return String(texto ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  }
+
+  document.getElementById('avisoPorCerrar').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-cierre-rapido');
+    if (!btn) return;
+    if (!(await confirmarCambioEstado(btn.dataset.estado))) return;
+    btn.disabled = true;
+    try {
+      await Auth.apiFetch(`/citas/${btn.dataset.id}/estado`, { method: 'PATCH', body: JSON.stringify({ estado: btn.dataset.estado }) });
+      await cargarSemana();
+    } catch (err) {
+      alert(err.message);
+      btn.disabled = false;
+    }
+  });
+
+  // Cada minuto: si una cita termina mientras la pantalla está abierta, aparece sola en el aviso
+  setInterval(() => { if (document.visibilityState === 'visible') cargarSemana(); }, 60000);
+
+  async function cargarSemana() {
+    cargarPorCerrar();
+    renderCabeceraDias();
+    const desde = fechaISO(inicioSemana);
+    const hasta = fechaISO(sumarDias(inicioSemana, 6));
+    try {
+      citasSemanaCache = await Auth.apiFetch(`/citas?desde=${desde}&hasta=${hasta}`);
+      renderOverlayCitas();
+      renderCitasHoy();
+    } catch (err) {
+      document.getElementById('overlayCitas').innerHTML =
+        `<p class="text-error text-caption p-2">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  function renderCitasHoy() {
+    const cont = document.getElementById('listaCitasHoy');
+    const citasHoy = citasSemanaCache
+      .filter((c) => esFechaCitaHoy(new Date(c.FechaHora)))
+      .sort((a, b) => new Date(a.FechaHora) - new Date(b.FechaHora));
+
+    if (citasHoy.length === 0) {
+      cont.innerHTML = '<p class="text-caption font-caption text-on-surface-variant">No hay citas programadas para hoy.</p>';
+      return;
+    }
+
+    cont.innerHTML = citasHoy.map((c) => {
+      const estilo = estiloTipo(c.TipoCita);
+      const hora = new Date(c.FechaHora).toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' });
+      return `
+        <div class="flex items-center gap-3 p-2 rounded-lg border-l-4 cursor-pointer hover:bg-surface-container-low btn-detalle-cita" style="border-color:${escHtml(estilo.borde)}" data-id="${escHtml(c.CitaID)}">
+          <span class="font-label-md text-sm font-semibold text-on-surface w-14 shrink-0">${hora}</span>
+          <div class="min-w-0">
+            <p class="font-body-md text-sm text-on-surface truncate">${escHtml(c.PacienteNombre)} — ${escHtml(estilo.label)}</p>
+            <p class="font-caption text-xs text-on-surface-variant truncate">${escHtml(c.PropietarioNombres)} ${escHtml(c.PropietarioApellidos)}</p>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  document.getElementById('btnSemanaAnterior').addEventListener('click', () => {
+    inicioSemana = sumarDias(inicioSemana, -7);
+    cargarSemana();
+  });
+  document.getElementById('btnSemanaSiguiente').addEventListener('click', () => {
+    inicioSemana = sumarDias(inicioSemana, 7);
+    cargarSemana();
+  });
+  document.getElementById('btnHoy').addEventListener('click', () => {
+    inicioSemana = lunesDeEsaSemana(new Date());
+    cargarSemana();
+  });
+
+  // ============================================================
+  // Modal: detalle de cita (click en un bloque o en "Citas de hoy")
+  // ============================================================
+  let citaEnDetalle = null;
+
+  function abrirDetalleCita(cita) {
+    citaEnDetalle = cita;
+    const estilo = estiloTipo(cita.TipoCita);
+    const fecha = new Date(cita.FechaHora);
+    document.getElementById('contenidoModalDetalleCita').innerHTML = `
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded text-xs font-semibold" style="background:${escHtml(estilo.bg)}; color:${escHtml(estilo.texto)}">${escHtml(estilo.label)}</span>
+        <span class="text-caption font-caption text-on-surface-variant">${ESTADO_LABEL[cita.Estado]}</span>
+      </div>
+      <p class="font-headline-md text-headline-md text-on-surface">${escHtml(cita.PacienteNombre)}</p>
+      <p class="font-body-md text-body-md text-on-surface-variant">${escHtml(cita.PropietarioNombres)} ${escHtml(cita.PropietarioApellidos)}</p>
+      <p class="font-body-md text-body-md text-on-surface">📅 ${fecha.toLocaleDateString('es-PE', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' })}, ${fecha.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}</p>
+      ${cita.MetodoPago ? `<p class="font-body-md text-body-md text-on-surface">💳 ${escHtml(cita.MetodoPago)}</p>` : ''}
+      ${cita.Motivo ? `<p class="font-body-md text-body-md text-on-surface-variant">"${escHtml(cita.Motivo)}"</p>` : ''}
+      ${cita.ClienteConfirmo && ['Programada', 'Confirmada'].includes(cita.Estado) ? '<p class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold" style="background:rgba(22,163,74,.12);color:#15803d">✓ El cliente confirmó que asistirá</p>' : ''}
+      ${cita.CanceladaPorCliente && cita.Estado === 'Cancelada' ? '<p class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold" style="background:rgba(220,38,38,.1);color:#b91c1c">Cancelada por el cliente desde el portal</p>' : ''}
+      ${(() => {
+        const url = pcEnlaceWhatsApp(cita.PropietarioTelefono,
+          `Hola ${String(cita.PropietarioNombres || '').trim().split(/\s+/)[0]}, te escribimos de Premier Can 🐾 sobre la cita de ${cita.PacienteNombre} del ${fecha.toLocaleDateString('es-PE', { day: '2-digit', month: 'long', timeZone: 'UTC' })} a las ${fecha.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' })}.`);
+        return url ? `<a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold" style="background:rgba(37,211,102,.14);color:#128c4a" href="${escHtml(url)}" target="_blank" rel="noopener"><span class="material-symbols-outlined text-[18px]">chat</span>Escribir por WhatsApp</a>` : '';
+      })()}
+    `;
+
+    // Selector de veterinario: se puede asignar/cambiar mientras la cita
+    // no esté Completada ni Cancelada.
+    const bloqueVet = document.getElementById('bloqueAsignarVeterinario');
+    const selectVet = document.getElementById('selectVeterinarioModal');
+    const puedeAsignar = cita.Estado === 'Programada' || cita.Estado === 'Confirmada';
+    bloqueVet.classList.toggle('hidden', !puedeAsignar);
+    if (puedeAsignar) {
+      selectVet.innerHTML = '<option value="">Sin asignar</option>' +
+        veterinariosCache.map((v) => `<option value="${escHtml(v.UsuarioID)}">${escHtml(v.NombreCompleto)}</option>`).join('');
+      selectVet.value = cita.VeterinarioID || '';
+    }
+
+    const acciones = document.getElementById('accionesModalDetalleCita');
+    // Una cita que ya empezó no se confirma ni se cancela: se CIERRA marcando
+    // si el cliente asistió o no asistió.
+    const pasada = yaEmpezo(cita);
+    const botonesEstado = pasada
+      ? {
+        Programada: [['Completada', 'Asistió'], ['NoAsistio', 'No asistió']],
+        Confirmada: [['Completada', 'Asistió'], ['NoAsistio', 'No asistió']],
+        NoAsistio: [['Completada', 'Corregir: sí asistió']],
+        Completada: [],
+        Cancelada: [],
+      }
+      : {
+        Programada: [['Confirmada', 'Confirmar'], ['Cancelada', 'Cancelar']],
+        Confirmada: [['Completada', 'Marcar completada'], ['Cancelada', 'Cancelar']],
+        Completada: [],
+        Cancelada: [],
+      };
+    const opciones = botonesEstado[cita.Estado] || [];
+    const botonesHtml = opciones.map(([estado, texto]) => `
+      <button class="px-4 py-2 rounded-lg font-label-md text-label-md border ${escHtml(['Cancelada', 'NoAsistio'].includes(estado) ? 'border-error text-error hover:bg-error-container/10' : 'border-primary text-primary hover:bg-primary-container/10')} btn-cambiar-estado-cita"
+              data-id="${escHtml(cita.CitaID)}" data-estado="${estado}" type="button">${texto}</button>
+    `).join('');
+    const avisoPasada = pasada && (cita.Estado === 'Programada' || cita.Estado === 'Confirmada')
+      ? '<p class="w-full p-3 mb-2 rounded-xl text-sm font-semibold" style="background:#fff7ed;color:#9a3412">⚠️ Esta cita ya pasó. Márcala: ¿el cliente asistió o no asistió?</p>'
+      : '';
+
+    // "Atender": abre la consulta ligada a esta cita; al guardarla, la cita
+    // queda Completada sola. Solo desde el día de la cita (hora de Perú).
+    const hoyLima = new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
+    const diaCita = String(cita.FechaHora).slice(0, 10);
+    let atenderHtml = '';
+    if (cita.Estado === 'Programada' || cita.Estado === 'Confirmada') {
+      atenderHtml = diaCita <= hoyLima
+        ? `<a class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-on-primary font-label-md mb-2"
+              href="registrar-consulta.html?pacienteId=${escHtml(cita.PacienteID)}&citaId=${escHtml(cita.CitaID)}">
+             <span class="material-symbols-outlined">stethoscope</span>Atender y registrar consulta</a>`
+        : '<p class="w-full text-caption font-caption text-on-surface-variant mb-2">🩺 El botón "Atender" aparecerá el día de la cita.</p>';
+    }
+    // Cobrar: abre Caja con el concepto, la mascota y el método de pago ya puestos
+    if (['Programada', 'Confirmada', 'Completada'].includes(cita.Estado)) {
+      const conceptos = { Consulta: 'Consulta general', Vacunacion: 'Vacuna', CirugiaMenor: 'Cirugía menor', Urgencia: 'Urgencia', BanoPeluqueria: 'Baño y peluquería' };
+      const params = new URLSearchParams({ concepto: `${conceptos[cita.TipoCita] || 'Consulta'} - ${cita.PacienteNombre}`, citaId: cita.CitaID, pacienteId: cita.PacienteID });
+      if (cita.MetodoPago) params.set('metodo', cita.MetodoPago);
+      atenderHtml += `<a class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-primary text-primary rounded-lg font-label-md mb-2" href="caja.html?${escHtml(params.toString())}"><span class="material-symbols-outlined">point_of_sale</span>Registrar cobro</a>`;
+    }
+    if (cita.Estado === 'Completada' && cita.ConsultaID) {
+      atenderHtml = `<a class="w-full flex items-center justify-center gap-2 px-4 py-3 border border-primary text-primary font-label-md mb-2"
+             href="historia-clinica.html?pacienteId=${escHtml(cita.PacienteID)}">
+           <span class="material-symbols-outlined">description</span>Ver la consulta en la historia clínica</a>` + atenderHtml;
+    }
+    acciones.innerHTML = (avisoPasada + atenderHtml + botonesHtml) ||
+      '<span class="text-caption font-caption text-on-surface-variant">Sin más acciones disponibles.</span>';
+
+    document.getElementById('modalDetalleCita').classList.remove('hidden');
+  }
+  function cerrarDetalleCita() {
+    document.getElementById('modalDetalleCita').classList.add('hidden');
+  }
+  document.getElementById('cerrarModalDetalleCita').addEventListener('click', cerrarDetalleCita);
+  document.getElementById('modalDetalleCitaBackdrop').addEventListener('click', cerrarDetalleCita);
+
+  document.getElementById('btnAsignarVeterinarioModal').addEventListener('click', async () => {
+    if (!citaEnDetalle) return;
+    const veterinarioId = document.getElementById('selectVeterinarioModal').value;
+    const btn = document.getElementById('btnAsignarVeterinarioModal');
+    btn.disabled = true;
+    try {
+      await Auth.apiFetch(`/citas/${citaEnDetalle.CitaID}/estado`, {
+        method: 'PATCH',
+        body: JSON.stringify({ estado: citaEnDetalle.Estado, veterinarioId: veterinarioId || null }),
+      });
+      cerrarDetalleCita();
+      await cargarSemana();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.btn-detalle-cita');
+    if (!card) return;
+    const cita = citasSemanaCache.find((c) => c.CitaID === Number(card.dataset.id));
+    if (cita) abrirDetalleCita(cita);
+  });
+
+  // Confirmación antes de los cambios que no conviene hacer por error
+  async function confirmarCambioEstado(estado) {
+    if (estado === 'Cancelada') {
+      return PCConfirmar({ titulo: '¿Cancelar esta cita?', mensaje: 'El horario quedará libre y el cliente ya no recibirá recordatorios de esta cita.', textoSi: 'Sí, cancelar cita', textoNo: 'No, mantenerla', peligro: true, icono: 'event_busy' });
+    }
+    if (estado === 'NoAsistio') {
+      return PCConfirmar({ titulo: '¿Marcar que no asistió?', mensaje: 'Quedará registrado en el historial y en los reportes de asistencia.', textoSi: 'Sí, no asistió', peligro: true, icono: 'person_off' });
+    }
+    return true;
+  }
+
+  document.getElementById('accionesModalDetalleCita').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-cambiar-estado-cita');
+    if (!btn) return;
+    if (!(await confirmarCambioEstado(btn.dataset.estado))) return;
+    try {
+      await Auth.apiFetch(`/citas/${btn.dataset.id}/estado`, {
+        method: 'PATCH',
+        body: JSON.stringify({ estado: btn.dataset.estado }),
+      });
+      cerrarDetalleCita();
+      await cargarSemana();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  // ============================================================
+  // Formulario: agendar nueva cita
+  // ============================================================
+  let pacienteSeleccionadoIdCita = null;
+
+  let veterinariosCache = [];
+
+  async function cargarVeterinariosSelect() {
+    const select = document.getElementById('citaVeterinario');
+    try {
+      veterinariosCache = await Auth.apiFetch('/usuarios/veterinarios/lista');
+      select.innerHTML = '<option value="">Automático (según disponibilidad)</option>' +
+        veterinariosCache.map((v) => `<option value="${escHtml(v.UsuarioID)}">${escHtml(v.NombreCompleto)}</option>`).join('');
+    } catch (err) {
+      select.innerHTML = '<option value="">No se pudo cargar</option>';
+    }
+  }
+
+  let debounceBuscarPacienteCita;
+  document.getElementById('citaBuscarPaciente').addEventListener('input', (e) => {
+    clearTimeout(debounceBuscarPacienteCita);
+    const texto = e.target.value.trim().toLowerCase();
+    const resultadosEl = document.getElementById('citaResultadosPaciente');
+    if (texto.length < 1) {
+      resultadosEl.classList.add('hidden');
+      return;
+    }
+    debounceBuscarPacienteCita = setTimeout(async () => {
+      try {
+        const pacientes = await Auth.apiFetch('/pacientes');
+        const coincidencias = pacientes.filter((p) => p.Nombre.toLowerCase().includes(texto));
+        resultadosEl.innerHTML = coincidencias.length === 0
+          ? `<div class="p-2 text-caption text-on-surface-variant">Sin resultados.</div>`
+          : coincidencias.map((p) => `
+              <div class="p-2 hover:bg-surface-container-low cursor-pointer border-b border-outline-variant/30 last:border-0"
+                   data-id="${escHtml(p.PacienteID)}" data-nombre="${escHtml(p.Nombre)} (${escHtml(p.PropietarioNombres)} ${escHtml(p.PropietarioApellidos)})">
+                <p class="font-body-md text-body-md text-on-surface">${escHtml(p.Nombre)}</p>
+                <p class="text-caption font-caption text-on-surface-variant">${escHtml(p.PropietarioNombres)} ${escHtml(p.PropietarioApellidos)}</p>
+              </div>
+            `).join('');
+        resultadosEl.classList.remove('hidden');
+      } catch (err) {
+        resultadosEl.classList.add('hidden');
+      }
+    }, 250);
+  });
+
+  document.getElementById('citaResultadosPaciente').addEventListener('click', (e) => {
+    const item = e.target.closest('[data-id]');
+    if (!item) return;
+    pacienteSeleccionadoIdCita = Number(item.dataset.id);
+    document.getElementById('citaPacienteSeleccionadoTexto').textContent = item.dataset.nombre;
+    document.getElementById('citaPacienteSeleccionadoBox').classList.remove('hidden');
+    document.getElementById('citaResultadosPaciente').classList.add('hidden');
+    document.getElementById('citaBuscarPaciente').value = '';
+  });
+  document.getElementById('citaQuitarPacienteBtn').addEventListener('click', () => {
+    pacienteSeleccionadoIdCita = null;
+    document.getElementById('citaPacienteSeleccionadoBox').classList.add('hidden');
+  });
+
+  document.querySelectorAll('input[name="tipoCita"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('#tipoCitaOpciones label').forEach((lbl) => {
+        lbl.classList.remove('border-primary', 'bg-[#E6F6FF]');
+        lbl.classList.add('border-outline-variant');
+      });
+      radio.closest('label').classList.add('border-primary', 'bg-[#E6F6FF]');
+      radio.closest('label').classList.remove('border-outline-variant');
+    });
+  });
+
+  document.querySelectorAll('input[name="metodoPago"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('#metodoPagoOpciones label').forEach((lbl) => {
+        lbl.className = 'flex flex-col items-center gap-1 p-2 rounded-lg border border-outline-variant cursor-pointer';
+        lbl.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[20px] text-on-surface-variant';
+      });
+      radio.closest('label').className = 'flex flex-col items-center gap-1 p-2 rounded-lg border border-primary bg-primary-container/10 cursor-pointer';
+      radio.closest('label').querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[20px] text-primary';
+    });
+  });
+
+  function limpiarFormularioCita() {
+    pacienteSeleccionadoIdCita = null;
+    document.getElementById('citaBuscarPaciente').value = '';
+    document.getElementById('citaPacienteSeleccionadoBox').classList.add('hidden');
+    document.getElementById('citaFecha').value = fechaISO(new Date());
+    document.getElementById('citaHora').value = '09:00';
+    document.getElementById('citaMotivo').value = '';
+    document.getElementById('errorCita').classList.add('hidden');
+    const primerRadio = document.querySelector('input[name="tipoCita"][value="Consulta"]');
+    primerRadio.checked = true;
+    primerRadio.dispatchEvent(new Event('change'));
+    const primerMetodoPago = document.querySelector('input[name="metodoPago"][value="Efectivo"]');
+    primerMetodoPago.checked = true;
+    primerMetodoPago.dispatchEvent(new Event('change'));
+  }
+  document.getElementById('btnLimpiarForm').addEventListener('click', limpiarFormularioCita);
+
+  document.getElementById('btnGuardarCita').addEventListener('click', async () => {
+    const errorEl = document.getElementById('errorCita');
+    errorEl.classList.add('hidden');
+
+    if (!pacienteSeleccionadoIdCita) {
+      errorEl.textContent = 'Selecciona un paciente de la lista.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+    const fecha = document.getElementById('citaFecha').value;
+    const hora = document.getElementById('citaHora').value;
+    if (!fecha || !hora) {
+      errorEl.textContent = 'La fecha y la hora son obligatorias.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const body = {
+      pacienteId: pacienteSeleccionadoIdCita,
+      veterinarioId: document.getElementById('citaVeterinario').value || null,
+      fechaHora: `${fecha}T${hora}:00`,
+      tipoCita: document.querySelector('input[name="tipoCita"]:checked').value,
+      motivo: document.getElementById('citaMotivo').value.trim(),
+      metodoPago: document.querySelector('input[name="metodoPago"]:checked')?.value,
+    };
+
+    try {
+      const resp = await Auth.apiFetch('/citas', { method: 'POST', body: JSON.stringify(body) });
+      // Si la cita cae en la semana visible, se ve reflejada al instante
+      inicioSemana = lunesDeEsaSemana(new Date(fecha + 'T00:00:00'));
+      limpiarFormularioCita();
+      await cargarSemana();
+      // Si nadie eligió veterinario a mano y el sistema tampoco encontró
+      // uno disponible en ese horario, la cita queda creada pero sin
+      // asignar — hay que avisarle al admin para que la asigne a mano
+      // desde el detalle de la cita.
+      if (!body.veterinarioId && !resp.veterinarioAsignado) {
+        alert('La cita se agendó, pero no hay ningún veterinario disponible en ese horario. Ábrela desde el calendario y asígnalo manualmente.');
+      }
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+
+  // ============================================================
+  // Carga inicial
+  // ============================================================
+  limpiarFormularioCita();
+  cargarVeterinariosSelect();
+  cargarSemana();
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

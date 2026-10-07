@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promoción - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth-cliente.js"></script>
+<script src="../assets/js/promo-ui.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<link rel="stylesheet" href="../assets/css/promociones.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<script src="../assets/js/app-notificaciones.js" defer></script>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-background">
+<header class="bg-surface-container-lowest border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center gap-3 sticky top-0 z-10">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="promociones.html" title="Todas las promociones">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<span class="font-headline-md text-headline-md text-primary">Promoción</span>
+</header>
+
+<main class="p-margin-mobile md:p-margin-desktop max-w-2xl mx-auto pb-16" id="contenido">
+<p class="text-on-surface-variant">Cargando promoción…</p>
+</main>
+
+<script>
+  const id = Number(new URLSearchParams(window.location.search).get('id'));
+  const conSesion = !!AuthCliente.obtenerToken();
+  const U = PromoUI;
+
+  function dato(icono, titulo, valor) {
+    return `<div class="promo-dato"><span class="material-symbols-outlined">${icono}</span><div><small>${titulo}</small><b>${valor}</b></div></div>`;
+  }
+
+  function pintar(p) {
+    document.title = `${p.Titulo} - Premier Can`;
+    const estado = U.ESTADOS[p.Estado] || U.ESTADOS.Vigente;
+    const pct = U.descuento(p);
+    const ahorro = pct ? U.precio(p.PrecioRegular - p.PrecioPromocion) : '';
+    const destinoCita = conSesion ? 'mis-mascotas.html' : 'login.html';
+
+    document.getElementById('contenido').innerHTML = `
+      <article class="promo-detalle">
+        ${U.portada(p, { grande: true })}
+        <div class="promo-detalle__cuerpo">
+          <div class="promo-card__meta">
+            <span class="promo-chip ${escHtml(estado.clase)}">${escHtml(estado.texto)}</span>
+            ${p.Categoria ? `<span class="promo-categoria">${U.escapar(p.Categoria)}</span>` : ''}
+          </div>
+          <h1 class="promo-detalle__titulo">${U.escapar(p.Titulo)}</h1>
+
+          ${U.bloquePrecios(p) ? `
+          <div class="flex items-center gap-3 flex-wrap">
+            ${U.bloquePrecios(p).replace('promo-precio"', 'promo-precio" style="font-size:32px"')}
+            ${ahorro ? `<span class="promo-ahorro"><span class="material-symbols-outlined text-[18px]">savings</span>Ahorras ${ahorro}</span>` : ''}
+          </div>` : ''}
+
+          <p class="promo-detalle__desc">${U.escapar(p.Descripcion)}</p>
+
+          <div class="grid sm:grid-cols-2 gap-3">
+            ${dato('date_range', 'Válida', U.rango(p.FechaInicio, p.FechaFin))}
+            ${dato('hourglass_top', p.Estado === 'Programada' ? 'Empieza' : 'Tiempo', U.textoTiempo(p))}
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 mt-2">
+            <a class="flex-1 flex items-center justify-center gap-2 py-3.5 bg-primary text-on-primary font-label-md" href="${destinoCita}">
+              <span class="material-symbols-outlined">event_available</span>${conSesion ? 'Agendar una cita' : 'Inicia sesión para agendar'}
+            </a>
+            <button class="sm:w-auto flex items-center justify-center gap-2 px-5 py-3.5 border border-primary text-primary font-label-md" id="btnCompartir" type="button">
+              <span class="material-symbols-outlined">share</span>Compartir
+            </button>
+          </div>
+
+          ${p.Condiciones ? `<div class="promo-condiciones"><b>Condiciones:</b>\n${U.escapar(p.Condiciones)}</div>` : ''}
+        </div>
+      </article>`;
+
+    document.getElementById('btnCompartir').addEventListener('click', async () => {
+      const texto = `${p.Titulo}${p.Etiqueta ? ` (${p.Etiqueta})` : ''} en Premier Can 🐾`;
+      const url = window.location.href;
+      if (navigator.share) {
+        try { await navigator.share({ title: p.Titulo, text: texto, url }); } catch (e) { /* cancelado */ }
+      } else {
+        window.open(`https://wa.me/?text=${encodeURIComponent(`${texto} ${url}`)}`, '_blank');
+      }
+    });
+  }
+
+  function noDisponible(mensaje) {
+    document.getElementById('contenido').innerHTML = `
+      <div class="promo-vacio">
+        <span class="promo-vacio__emoji">😿</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface mt-3">${U.escapar(mensaje)}</h2>
+        <p class="text-body-md text-on-surface-variant mt-1 mb-5">Puede que ya haya terminado. Mira las que siguen disponibles.</p>
+        <a class="inline-flex items-center gap-2 px-5 py-3 bg-primary text-on-primary font-label-md" href="promociones.html">
+          <span class="material-symbols-outlined">loyalty</span>Ver promociones
+        </a>
+      </div>`;
+  }
+
+  (async () => {
+    if (!id) return noDisponible('No encontramos esa promoción');
+    try {
+      const resp = await fetch(`${window.API_BASE_URL}/cliente/promociones/${id}`);
+      const data = await resp.json();
+      if (!resp.ok) return noDisponible(data.mensaje || 'Esta promoción ya no está disponible');
+      pintar(data);
+    } catch (e) {
+      noDisponible('No se pudo cargar la promoción');
+    }
+  })();
+</script>
+</body></html>

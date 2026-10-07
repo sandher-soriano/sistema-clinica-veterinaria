@@ -1,0 +1,629 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Premier Can - Personal</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<!-- Tailwind CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config injected by the system -->
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Avatar del Logo de la Clínica" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Administración de Clínica Veterinaria</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Panel de Control</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<main class="flex-1 md:ml-64 p-6 md:p-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Personal</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Registro del personal contratado (veterinarios y administrativos), antes de darles acceso al sistema.</p>
+</div>
+<button class="border-2 border-primary text-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-primary-container/10 transition-colors flex items-center gap-2 h-[42px]" id="openAddPersonaBtn">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+Registrar persona
+</button>
+</div>
+
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden">
+<div class="p-4 border-b border-outline-variant">
+<div class="relative max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-[#F1F4F6] border-b-2 border-transparent focus:border-primary pl-10 pr-4 py-2 rounded-t-sm text-on-surface focus:outline-none transition-colors font-body-md text-body-md placeholder-on-surface-variant/50" id="searchPersonasInput" placeholder="Buscar por nombre, correo o DNI..." type="text">
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low/60 border-b border-outline-variant">
+<tr class="font-label-md text-label-md text-on-surface-variant">
+<th class="py-3 px-6">Nombre</th>
+<th class="py-3 px-6">DNI</th>
+<th class="py-3 px-6">Contacto</th>
+<th class="py-3 px-6">Acceso al sistema</th>
+<th class="py-3 px-6">Estado</th>
+<th class="py-3 px-6 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-[#E0E6ED]" id="personasTableBody">
+<tr><td class="py-6 px-6 text-on-surface-variant" colspan="6">Cargando...</td></tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-outline-variant">
+<p class="font-caption text-caption text-on-surface-variant" id="personasCountLabel">Cargando...</p>
+</div>
+</div>
+</main>
+
+<!-- Modal: Registrar / Editar Persona -->
+<div class="fixed inset-0 z-[100] hidden" id="personaModal">
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm transition-opacity" id="personaModalBackdrop"></div>
+<div class="absolute inset-y-0 right-0 w-full max-w-md bg-surface-container-lowest shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out" id="personaModalPanel">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold" id="personaModalTitulo">Registrar Persona</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="closePersonaModalBtn">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-md">
+<form id="personaForm" class="space-y-md">
+<input id="personaIdEdit" type="hidden">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaNombres">Nombres</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaNombres" placeholder="ej. Juana" required type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaApellidos">Apellidos</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaApellidos" placeholder="ej. Pérez Ramos" required type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaDocumento">Número de documento (DNI)</label>
+<div class="flex gap-xs">
+<input class="flex-1 bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaDocumento" inputmode="numeric" maxlength="8" placeholder="ej. 71802345" required type="text">
+<button class="px-3 py-1.5 border border-primary text-primary rounded-full font-label-md text-caption whitespace-nowrap hover:bg-primary-container/10 transition-colors" id="btnValidarDniPersona" type="button">Validar DNI</button>
+</div>
+<p class="hidden font-caption text-caption mt-1" id="personaDniEstadoTexto"></p>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaTelefono">Teléfono</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaTelefono" inputmode="numeric" maxlength="9" placeholder="ej. 917484467" type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaCorreo">Correo electrónico</label>
+<div class="flex gap-xs">
+<input class="flex-1 bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaCorreo" placeholder="juana.perez@premiercan.com" required type="email">
+<button class="px-3 py-1.5 border border-primary text-primary rounded-full font-label-md text-caption whitespace-nowrap hover:bg-primary-container/10 transition-colors" id="btnVerificarCorreoPersona" type="button">Verificar correo</button>
+</div>
+<p class="hidden font-caption text-caption mt-1" id="personaCorreoEstadoTexto"></p>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaFechaNacimiento">Fecha de nacimiento</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaFechaNacimiento" type="date">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Ubigeo</label>
+<div class="grid grid-cols-3 gap-xs">
+<select class="bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-2 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-caption" id="personaDepartamento">
+<option value="">Departamento</option>
+</select>
+<select class="bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-2 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-caption" disabled id="personaProvincia">
+<option value="">Provincia</option>
+</select>
+<select class="bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-2 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-caption" disabled id="personaDistrito">
+<option value="">Distrito</option>
+</select>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-1">
+Código Ubigeo: <span class="font-semibold text-on-surface" id="personaUbigeoCodigo">— — —</span>
+<span class="italic">(se arma solo, no se escribe)</span>
+</p>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="personaDireccion">Dirección (calle, número, referencia)</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="personaDireccion" placeholder="Opcional" type="text">
+</div>
+<p id="personaFormError" class="hidden text-error text-caption font-caption"></p>
+</form>
+</div>
+<div class="px-md py-sm border-t border-outline-variant bg-surface-container-lowest flex justify-end gap-sm">
+<button class="px-md py-2 border border-primary text-primary rounded-DEFAULT font-label-md text-label-md hover:bg-primary-container/10 transition-colors" id="cancelPersonaModalBtn" type="button">
+                    Cancelar
+                </button>
+<button class="px-md py-2 bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md hover:bg-surface-tint transition-colors shadow-sm" id="savePersonaBtn" type="button">
+                    Guardar
+                </button>
+</div>
+</div>
+</div>
+
+<script>
+        // Verifica sesión y permisos ANTES de pedir datos al backend — si no
+        // hay sesión válida o el rol no es Administrativo, redirige de una vez
+        // y no llega a llamar cargarPersonas().
+        Auth.protegerPaginaConfig();
+
+        const modal = document.getElementById('personaModal');
+        const modalPanel = document.getElementById('personaModalPanel');
+        const openBtn = document.getElementById('openAddPersonaBtn');
+        const closeBtn = document.getElementById('closePersonaModalBtn');
+        const cancelBtn = document.getElementById('cancelPersonaModalBtn');
+        const backdrop = document.getElementById('personaModalBackdrop');
+        const personaForm = document.getElementById('personaForm');
+        const personaFormError = document.getElementById('personaFormError');
+        const savePersonaBtn = document.getElementById('savePersonaBtn');
+        const personaModalTitulo = document.getElementById('personaModalTitulo');
+
+        function abrirModalNuevo() {
+            personaForm.reset();
+            document.getElementById('personaIdEdit').value = '';
+            personaModalTitulo.textContent = 'Registrar Persona';
+            personaFormError.classList.add('hidden');
+            document.getElementById('personaDniEstadoTexto').classList.add('hidden');
+            document.getElementById('personaCorreoEstadoTexto').classList.add('hidden');
+            resetearUbigeo();
+            abrirModal();
+        }
+
+        function abrirModalEditar(persona) {
+            personaForm.reset();
+            document.getElementById('personaDniEstadoTexto').classList.add('hidden');
+            document.getElementById('personaCorreoEstadoTexto').classList.add('hidden');
+            document.getElementById('personaIdEdit').value = persona.PersonaID;
+            document.getElementById('personaNombres').value = persona.Nombres;
+            document.getElementById('personaApellidos').value = persona.Apellidos;
+            document.getElementById('personaDocumento').value = persona.NumeroDocumento || '';
+            document.getElementById('personaTelefono').value = persona.Telefono || '';
+            document.getElementById('personaCorreo').value = persona.CorreoElectronico;
+            document.getElementById('personaDireccion').value = persona.Direccion || '';
+            document.getElementById('personaFechaNacimiento').value = persona.FechaNacimiento ? persona.FechaNacimiento.substring(0, 10) : '';
+            personaModalTitulo.textContent = 'Editar Persona';
+            personaFormError.classList.add('hidden');
+            precargarUbigeo(persona.CodigoDepartamento, persona.CodigoProvincia, persona.CodigoDistrito);
+            abrirModal();
+        }
+
+        function abrirModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => modalPanel.classList.remove('translate-x-full'), 10);
+        }
+
+        function cerrarModal() {
+            modalPanel.classList.add('translate-x-full');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // ============================================================
+        // Ubigeo en cascada: Departamento -> Provincia -> Distrito
+        // ============================================================
+        const selDepartamento = document.getElementById('personaDepartamento');
+        const selProvincia = document.getElementById('personaProvincia');
+        const selDistrito = document.getElementById('personaDistrito');
+
+        function llenarSelect(select, items, valueKey, labelKey, placeholder) {
+            select.innerHTML = `<option value="">${placeholder}</option>` +
+                items.map((it) => `<option value="${escHtml(it[valueKey])}">${escHtml(it[labelKey])}</option>`).join('');
+        }
+
+        function actualizarCodigoUbigeoTexto() {
+            const codigo = document.getElementById('personaUbigeoCodigo');
+            if (selDistrito.value) {
+                codigo.textContent = selDistrito.value;
+            } else {
+                const dep = selDepartamento.value || '——';
+                const prov = selProvincia.value ? selProvincia.value.slice(-2) : '——';
+                codigo.textContent = `${dep} ${prov} ——`;
+            }
+        }
+
+        function resetearUbigeo() {
+            llenarSelect(selDepartamento, departamentosCache, 'CodigoDepartamento', 'Nombre', 'Departamento');
+            llenarSelect(selProvincia, [], null, null, 'Provincia');
+            llenarSelect(selDistrito, [], null, null, 'Distrito');
+            selProvincia.disabled = true;
+            selDistrito.disabled = true;
+            actualizarCodigoUbigeoTexto();
+        }
+
+        // Se pide una sola vez y se reutiliza (el catálogo no cambia).
+        let departamentosCache = [];
+        async function cargarDepartamentos() {
+            departamentosCache = await Auth.listarDepartamentos();
+            llenarSelect(selDepartamento, departamentosCache, 'CodigoDepartamento', 'Nombre', 'Departamento');
+        }
+        cargarDepartamentos();
+        document.getElementById('personaFechaNacimiento').max = new Date().toISOString().substring(0, 10);
+
+        selDepartamento.addEventListener('change', async () => {
+            llenarSelect(selProvincia, [], null, null, 'Provincia');
+            llenarSelect(selDistrito, [], null, null, 'Distrito');
+            selDistrito.disabled = true;
+            actualizarCodigoUbigeoTexto();
+            if (!selDepartamento.value) {
+                selProvincia.disabled = true;
+                return;
+            }
+            const provincias = await Auth.listarProvincias(selDepartamento.value);
+            llenarSelect(selProvincia, provincias, 'CodigoProvincia', 'Nombre', 'Provincia');
+            selProvincia.disabled = false;
+        });
+
+        selProvincia.addEventListener('change', async () => {
+            llenarSelect(selDistrito, [], null, null, 'Distrito');
+            actualizarCodigoUbigeoTexto();
+            if (!selProvincia.value) {
+                selDistrito.disabled = true;
+                return;
+            }
+            const distritos = await Auth.listarDistritos(selProvincia.value);
+            llenarSelect(selDistrito, distritos, 'CodigoDistrito', 'Nombre', 'Distrito');
+            selDistrito.disabled = false;
+        });
+
+        selDistrito.addEventListener('change', actualizarCodigoUbigeoTexto);
+
+        // Al editar una Persona que ya tenía Ubigeo guardado, hay que
+        // reconstruir la cascada en orden: primero el departamento, con
+        // eso pedir sus provincias y seleccionar la correcta, y así con
+        // el distrito — cada paso depende del anterior.
+        async function precargarUbigeo(codigoDepartamento, codigoProvincia, codigoDistrito) {
+            resetearUbigeo();
+            if (!codigoDepartamento) return;
+
+            selDepartamento.value = codigoDepartamento;
+            const provincias = await Auth.listarProvincias(codigoDepartamento);
+            llenarSelect(selProvincia, provincias, 'CodigoProvincia', 'Nombre', 'Provincia');
+            selProvincia.disabled = false;
+            selProvincia.value = codigoProvincia || '';
+
+            if (!codigoProvincia) { actualizarCodigoUbigeoTexto(); return; }
+            const distritos = await Auth.listarDistritos(codigoProvincia);
+            llenarSelect(selDistrito, distritos, 'CodigoDistrito', 'Nombre', 'Distrito');
+            selDistrito.disabled = false;
+            selDistrito.value = codigoDistrito || '';
+            actualizarCodigoUbigeoTexto();
+        }
+
+        // ============================================================
+        // Verificar que el correo tenga un dominio real (sin API de pago)
+        // ============================================================
+        document.getElementById('btnVerificarCorreoPersona').addEventListener('click', async () => {
+            const correo = document.getElementById('personaCorreo').value.trim();
+            const estadoEl = document.getElementById('personaCorreoEstadoTexto');
+            estadoEl.classList.remove('hidden', 'text-error', 'text-secondary', 'text-on-surface-variant');
+
+            if (!correo || !correo.includes('@')) {
+                estadoEl.textContent = 'Escribe un correo válido primero.';
+                estadoEl.classList.add('text-error');
+                return;
+            }
+
+            estadoEl.textContent = 'Verificando dominio...';
+            try {
+                const resultado = await Auth.verificarCorreo(correo);
+                if (resultado.valido === true) {
+                    estadoEl.textContent = '✓ El dominio tiene servidor de correo activo.';
+                    estadoEl.classList.add('text-secondary');
+                } else if (resultado.valido === false) {
+                    estadoEl.textContent = resultado.mensaje;
+                    estadoEl.classList.add('text-error');
+                } else {
+                    estadoEl.textContent = resultado.mensaje || 'No se pudo verificar en este momento.';
+                    estadoEl.classList.add('text-on-surface-variant');
+                }
+            } catch (err) {
+                estadoEl.textContent = err.message;
+                estadoEl.classList.add('text-error');
+            }
+        });
+
+        openBtn.addEventListener('click', abrirModalNuevo);
+
+        // DNI y teléfono: solo números mientras se escribe (beforeinput
+        // bloquea la letra antes de que aparezca; input es respaldo por
+        // si el texto llega pegado con Ctrl+V).
+        function permitirSoloNumeros(input, maxDigitos) {
+            input.addEventListener('beforeinput', (e) => {
+                if (e.data && /\D/.test(e.data)) e.preventDefault();
+            });
+            input.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, maxDigitos);
+            });
+        }
+        permitirSoloNumeros(document.getElementById('personaDocumento'), 8);
+        permitirSoloNumeros(document.getElementById('personaTelefono'), 9);
+
+        // ============================================================
+        // Validar DNI contra RENIEC (mismo endpoint que usa Pacientes)
+        // ============================================================
+        document.getElementById('btnValidarDniPersona').addEventListener('click', async () => {
+            const dni = document.getElementById('personaDocumento').value.trim();
+            const estadoEl = document.getElementById('personaDniEstadoTexto');
+            estadoEl.classList.remove('hidden', 'text-error', 'text-secondary', 'text-on-surface-variant');
+
+            if (!/^\d{8}$/.test(dni)) {
+                estadoEl.textContent = 'El DNI debe tener 8 dígitos.';
+                estadoEl.classList.add('text-error');
+                return;
+            }
+
+            estadoEl.textContent = 'Consultando RENIEC...';
+            try {
+                const resultado = await Auth.validarDniPropietario(dni);
+                if (resultado.valido) {
+                    estadoEl.textContent = `✓ DNI válido: ${resultado.nombres} ${resultado.apellidos}`;
+                    estadoEl.classList.add('text-secondary');
+                    if (!document.getElementById('personaNombres').value) {
+                        document.getElementById('personaNombres').value = resultado.nombres;
+                    }
+                    if (!document.getElementById('personaApellidos').value) {
+                        document.getElementById('personaApellidos').value = resultado.apellidos;
+                    }
+                } else {
+                    estadoEl.textContent = resultado.mensaje || 'No se pudo validar el DNI.';
+                    estadoEl.classList.add(resultado.modoDesarrollo ? 'text-on-surface-variant' : 'text-error');
+                }
+            } catch (err) {
+                estadoEl.textContent = err.message;
+                estadoEl.classList.add('text-error');
+            }
+        });
+        closeBtn.addEventListener('click', cerrarModal);
+        cancelBtn.addEventListener('click', cerrarModal);
+        backdrop.addEventListener('click', cerrarModal);
+
+        // ---- Estado en memoria (para filtrar sin volver a pedir al backend) ----
+        let personasCache = [];
+
+        function inicialesDe(nombre, apellido) {
+            return `${(nombre || '')[0] || ''}${(apellido || '')[0] || ''}`.toUpperCase();
+        }
+
+        function renderPersonas(lista) {
+            const tbody = document.getElementById('personasTableBody');
+            tbody.innerHTML = '';
+
+            if (lista.length === 0) {
+                tbody.innerHTML = '<tr><td class="py-6 px-6 text-on-surface-variant" colspan="6">No se encontró personal registrado.</td></tr>';
+                return;
+            }
+
+            lista.forEach((p) => {
+                const activo = !!p.Activo;
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-surface-container-low/30 transition-colors group';
+                tr.innerHTML = `
+                    <td class="py-4 px-6">
+                        <div class="flex items-center gap-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant shrink-0 bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                ${inicialesDe(p.Nombres, p.Apellidos)}
+                            </div>
+                            <div>
+                                <p class="font-semibold text-on-surface">${escHtml(p.Nombres)} ${escHtml(p.Apellidos)}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-on-surface-variant">${escHtml(p.NumeroDocumento || '—')}</td>
+                    <td class="py-4 px-6 text-on-surface-variant">
+                        <p>${escHtml(p.CorreoElectronico)}</p>
+                        <p class="font-caption text-caption">${escHtml(p.Telefono || '')}</p>
+                    </td>
+                    <td class="py-4 px-6">
+                        ${p.TieneUsuario
+                            ? `<span class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-secondary-container/30 text-secondary-container text-caption font-semibold">@${escHtml(p.NombreUsuario)}</span>`
+                            : `<span class="font-caption text-caption text-on-surface-variant">Sin usuario — ve a Usuarios</span>`}
+                    </td>
+                    <td class="py-4 px-6">
+                        <span class="inline-flex items-center gap-xs px-2 py-1 rounded-full ${activo ? 'bg-secondary-container/30 text-secondary-container' : 'bg-outline-variant/30 text-on-surface-variant'} text-caption font-semibold">
+                            <span class="w-2 h-2 rounded-full ${activo ? 'bg-secondary-container' : 'bg-outline-variant'}"></span>
+                            ${activo ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 text-right">
+                        <div class="flex justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button class="edit-persona-btn w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" data-id="${escHtml(p.PersonaID)}" title="Editar">
+                                <span class="material-symbols-outlined text-[20px]">edit</span>
+                            </button>
+                            <button class="toggle-estado-btn w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant ${activo ? 'hover:text-error hover:bg-error-container/20' : 'hover:text-primary hover:bg-surface-container-high'} transition-colors" data-id="${escHtml(p.PersonaID)}" data-activo="${activo}" title="${activo ? 'Desactivar' : 'Activar'}">
+                                <span class="material-symbols-outlined text-[20px]">${activo ? 'toggle_off' : 'toggle_on'}</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            tbody.querySelectorAll('.edit-persona-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const persona = personasCache.find((p) => String(p.PersonaID) === btn.dataset.id);
+                    if (persona) abrirModalEditar(persona);
+                });
+            });
+
+            tbody.querySelectorAll('.toggle-estado-btn').forEach((btn) => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.dataset.id;
+                    const activoActual = btn.dataset.activo === 'true';
+                    const mensaje = activoActual
+                        ? '¿Desactivar a esta persona? Si tiene un usuario de sistema, también se desactivará.'
+                        : '¿Activar a esta persona?';
+                    if (!confirm(mensaje)) return;
+                    try {
+                        await Auth.cambiarEstadoPersona(id, !activoActual);
+                        await cargarPersonas();
+                    } catch (err) {
+                        alert(err.message);
+                    }
+                });
+            });
+        }
+
+        async function cargarPersonas() {
+            try {
+                personasCache = await Auth.listarPersonas();
+                aplicarFiltro();
+            } catch (err) {
+                document.getElementById('personasTableBody').innerHTML =
+                    `<tr><td class="py-6 px-6 text-error" colspan="6">${escHtml(err.message)}</td></tr>`;
+            }
+        }
+
+        function aplicarFiltro() {
+            const termino = (document.getElementById('searchPersonasInput').value || '').toLowerCase();
+            const filtrados = personasCache.filter((p) =>
+                `${p.Nombres} ${p.Apellidos}`.toLowerCase().includes(termino) ||
+                p.CorreoElectronico.toLowerCase().includes(termino) ||
+                (p.NumeroDocumento || '').toLowerCase().includes(termino)
+            );
+            renderPersonas(filtrados);
+            document.getElementById('personasCountLabel').textContent = `Mostrando ${filtrados.length} de ${personasCache.length} personas`;
+        }
+
+        document.getElementById('searchPersonasInput').addEventListener('input', aplicarFiltro);
+
+        // ---- Guardar (crear o editar) ----
+        savePersonaBtn.addEventListener('click', async () => {
+            personaFormError.classList.add('hidden');
+
+            const personaId = document.getElementById('personaIdEdit').value;
+            const datos = {
+                nombres: document.getElementById('personaNombres').value.trim(),
+                apellidos: document.getElementById('personaApellidos').value.trim(),
+                numeroDocumento: document.getElementById('personaDocumento').value.trim() || null,
+                telefono: document.getElementById('personaTelefono').value.trim() || null,
+                correo: document.getElementById('personaCorreo').value.trim(),
+                direccion: document.getElementById('personaDireccion').value.trim() || null,
+                codigoDistrito: document.getElementById('personaDistrito').value || null,
+                fechaNacimiento: document.getElementById('personaFechaNacimiento').value || null,
+            };
+
+            if (!datos.nombres || !datos.apellidos || !datos.correo) {
+                personaFormError.textContent = 'Nombres, apellidos y correo son obligatorios.';
+                personaFormError.classList.remove('hidden');
+                return;
+            }
+            if (datos.fechaNacimiento && datos.fechaNacimiento > new Date().toISOString().substring(0, 10)) {
+                personaFormError.textContent = 'La fecha de nacimiento no puede ser una fecha futura.';
+                personaFormError.classList.remove('hidden');
+                return;
+            }
+            if (!datos.numeroDocumento || datos.numeroDocumento.length !== 8) {
+                personaFormError.textContent = 'El DNI debe tener exactamente 8 dígitos.';
+                personaFormError.classList.remove('hidden');
+                return;
+            }
+            if (datos.telefono && datos.telefono.length !== 9) {
+                personaFormError.textContent = 'El teléfono debe tener exactamente 9 dígitos.';
+                personaFormError.classList.remove('hidden');
+                return;
+            }
+
+            savePersonaBtn.disabled = true;
+            savePersonaBtn.textContent = 'Guardando...';
+            try {
+                if (personaId) {
+                    await Auth.actualizarPersona(personaId, datos);
+                } else {
+                    await Auth.crearPersona(datos);
+                }
+                cerrarModal();
+                await cargarPersonas();
+            } catch (err) {
+                personaFormError.textContent = err.message;
+                personaFormError.classList.remove('hidden');
+            } finally {
+                savePersonaBtn.disabled = false;
+                savePersonaBtn.textContent = 'Guardar';
+            }
+        });
+
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+            Auth.cerrarSesion();
+        });
+
+        cargarPersonas();
+    </script>
+</body></html>

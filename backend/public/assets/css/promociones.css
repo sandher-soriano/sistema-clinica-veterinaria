@@ -1,0 +1,363 @@
+/* ==========================================================
+   Premier Can - Promociones (panel + portal de clientes)
+   Usado junto con assets/js/promo-ui.js
+   ========================================================== */
+
+/* ---------- Tarjeta ---------- */
+.promo-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(0, 96, 106, .09);
+  box-shadow: 0 1px 2px rgba(13, 34, 38, .04), 0 14px 34px -20px rgba(0, 96, 106, .35);
+  color: #0d2226;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+a.promo-card:hover, .promo-card.es-clicable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 6px rgba(13, 34, 38, .05), 0 26px 50px -24px rgba(0, 96, 106, .5);
+}
+a.promo-card:active { transform: translateY(-1px) scale(.995); }
+
+.promo-portada {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.promo-portada img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+a.promo-card:hover .promo-portada img { transform: scale(1.05); }
+.promo-portada::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .28));
+  pointer-events: none;
+}
+.promo-portada__emoji {
+  font-size: 64px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .25));
+  animation: promo-flotar 4s ease-in-out infinite;
+}
+.promo-portada--grande { aspect-ratio: 4 / 3; }
+.promo-portada--grande .promo-portada__emoji { font-size: 96px; }
+@keyframes promo-flotar {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+/* Etiqueta tipo "sticker" (-20%, 2x1...) */
+.promo-etiqueta {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd166, #f2a93b);
+  color: #4a2a00;
+  font: 800 15px/1 'Manrope', sans-serif;
+  letter-spacing: -.01em;
+  box-shadow: 0 8px 18px -6px rgba(120, 70, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .5);
+  transform: rotate(4deg);
+}
+.promo-portada--grande .promo-etiqueta { font-size: 20px; padding: 10px 18px; top: 18px; right: 18px; }
+
+.promo-card__cuerpo { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.promo-card__meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.promo-card__titulo { font: 800 18px/1.25 'Manrope', sans-serif; letter-spacing: -.015em; margin: 0; color: #0d2226; }
+.promo-card__desc {
+  margin: 0;
+  color: #5d7174;
+  font-size: 14px;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.promo-card__pie { margin-top: auto; padding-top: 6px; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+.promo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font: 700 11.5px/1.2 'Hanken Grotesk', sans-serif;
+  letter-spacing: .02em;
+}
+.promo-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.promo-chip--vigente { background: #dcf7e9; color: #0f7a47; }
+.promo-chip--vigente::before { animation: promo-latido 1.6s ease-in-out infinite; }
+.promo-chip--programada { background: #e3efff; color: #2759b8; }
+.promo-chip--finalizada { background: #eef1f2; color: #6b7a7d; }
+.promo-chip--pausada { background: #fff1d6; color: #9a6400; }
+@keyframes promo-latido { 50% { opacity: .3; } }
+
+.promo-categoria { font-size: 12px; color: #6b7f82; font-weight: 600; }
+
+.promo-precios { display: flex; align-items: baseline; gap: 8px; }
+.promo-precio { font: 800 22px/1 'Manrope', sans-serif; color: #00606a; letter-spacing: -.02em; }
+.promo-precio-antes { font-size: 14px; color: #8fa3a6; text-decoration: line-through; }
+.promo-tiempo { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; color: #5d7174; }
+.promo-tiempo .material-symbols-outlined { font-size: 16px; }
+
+/* ---------- Panel: tarjeta de administración ---------- */
+.promo-admin { position: relative; }
+.promo-admin .promo-card__desc { -webkit-line-clamp: 3; }
+.promo-admin__fechas { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4a5b5e; font-weight: 600; }
+.promo-admin__fechas .material-symbols-outlined { font-size: 17px; color: #0d7a87; }
+.promo-progreso { height: 6px; border-radius: 99px; background: #e6eff0; overflow: hidden; }
+.promo-progreso > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #58d6a7, #0d7a87); }
+.promo-admin__acciones {
+  display: flex;
+  gap: 6px;
+  padding: 12px 14px;
+  border-top: 1px solid #edf2f3;
+  background: #fafcfc;
+}
+.promo-accion {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  font: 700 13px/1 'Hanken Grotesk', sans-serif;
+  color: #3c5053;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+  cursor: pointer;
+}
+.promo-accion .material-symbols-outlined { font-size: 18px; }
+.promo-accion:hover { background: #eef6f7; color: #00606a; }
+.promo-accion--peligro:hover { background: #fdeceb; color: #ba1a1a; }
+.promo-accion--solo-icono { flex: 0 0 auto; padding: 9px; }
+
+/* Tarjeta atenuada cuando está pausada o finalizada */
+.promo-admin.es-apagada .promo-portada { filter: grayscale(.65) opacity(.8); }
+
+/* ---------- Filtros tipo pastilla ---------- */
+.promo-filtros { display: flex; gap: 8px; flex-wrap: wrap; }
+.promo-filtro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #dbe6e8;
+  background: #fff;
+  color: #3c5053;
+  font: 700 13px/1 'Hanken Grotesk', sans-serif;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.promo-filtro:hover { border-color: #9fcbd1; }
+.promo-filtro .cuenta { min-width: 20px; padding: 3px 6px; border-radius: 99px; background: #eef4f5; font-size: 11.5px; text-align: center; }
+.promo-filtro.activo { background: #00606a; border-color: #00606a; color: #fff; box-shadow: 0 8px 18px -10px rgba(0, 96, 106, .8); }
+.promo-filtro.activo .cuenta { background: rgba(255, 255, 255, .2); }
+
+/* ---------- Estado vacío ---------- */
+.promo-vacio {
+  text-align: center;
+  padding: 56px 24px;
+  border-radius: 24px;
+  border: 2px dashed #cfe0e2;
+  background: rgba(255, 255, 255, .6);
+}
+.promo-vacio__emoji { font-size: 56px; display: inline-block; animation: promo-flotar 4s ease-in-out infinite; }
+
+/* ---------- Formulario (panel lateral) ---------- */
+.promo-drop {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  border: 2px dashed #c6d8db;
+  background: #f5f9f9;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .2s ease, background-color .2s ease;
+  text-align: center;
+}
+.promo-drop:hover, .promo-drop.arrastrando { border-color: #0d7a87; background: #eaf6f7; }
+.promo-drop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.promo-drop__quitar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, .55);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+.promo-atajos { display: flex; flex-wrap: wrap; gap: 6px; }
+.promo-atajo {
+  padding: 5px 11px;
+  border-radius: 99px;
+  border: 1px solid #d5e3e5;
+  background: #fff;
+  color: #3c5053;
+  font: 700 12px/1.3 'Hanken Grotesk', sans-serif;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.promo-atajo:hover { border-color: #0d7a87; color: #00606a; background: #eef7f8; }
+
+/* Celular de la vista previa */
+.promo-telefono {
+  width: 300px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 14px 12px 18px;
+  border-radius: 40px;
+  background: #0f1d20;
+  box-shadow: 0 30px 60px -24px rgba(0, 40, 45, .6), inset 0 0 0 2px #2b3a3d;
+}
+.promo-telefono__pantalla {
+  border-radius: 30px;
+  background: #f4f8f9;
+  padding: 26px 14px 16px;
+  position: relative;
+  min-height: 420px;
+}
+.promo-telefono__pantalla::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 70px;
+  height: 7px;
+  border-radius: 99px;
+  background: #0f1d20;
+  transform: translateX(-50%);
+}
+.promo-notif {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .95);
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .35);
+  font-size: 12px;
+  line-height: 1.35;
+  animation: promo-notif-entra .5s cubic-bezier(.2, .8, .2, 1) both;
+}
+.promo-notif__icono { width: 30px; height: 30px; border-radius: 9px; background: #00606a; display: grid; place-items: center; flex-shrink: 0; }
+.promo-notif__icono img { width: 20px; height: 20px; }
+.promo-notif strong { display: block; color: #0d2226; font-size: 12.5px; }
+.promo-notif span { color: #5d7174; }
+@keyframes promo-notif-entra { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Detalle (portal) ---------- */
+.promo-detalle { border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 30px 70px -36px rgba(0, 80, 90, .55); }
+.promo-detalle .promo-portada { border-radius: 0; }
+.promo-detalle__cuerpo { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 14px; }
+.promo-detalle__titulo { font: 800 28px/1.15 'Manrope', sans-serif; letter-spacing: -.02em; margin: 0; }
+.promo-detalle__desc { white-space: pre-line; color: #3c5053; font-size: 16px; line-height: 1.6; margin: 0; }
+.promo-dato {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #f3f8f8;
+}
+.promo-dato .material-symbols-outlined {
+  width: 38px; height: 38px; font-size: 21px; line-height: 38px; text-align: center;
+  border-radius: 12px; background: #fff; color: #0d7a87; box-shadow: 0 4px 10px -6px rgba(0, 96, 106, .5);
+}
+.promo-dato small { display: block; color: #6b7f82; font-size: 12px; }
+.promo-dato b { font-size: 15px; color: #0d2226; }
+.promo-ahorro {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 99px;
+  background: #dcf7e9; color: #0f7a47; font-weight: 800; font-size: 13px;
+}
+.promo-condiciones { border-top: 1px dashed #d5e3e5; padding-top: 14px; color: #6b7f82; font-size: 13px; line-height: 1.5; white-space: pre-line; }
+
+/* Carrusel horizontal (banner en "Mis mascotas") */
+.promo-carrusel { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; margin: 0 -2px; }
+.promo-carrusel > * { flex: 0 0 min(300px, 82%); scroll-snap-align: start; }
+.promo-carrusel .promo-card__desc { -webkit-line-clamp: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-portada__emoji, .promo-vacio__emoji, .promo-chip--vigente::before, .promo-notif { animation: none; }
+}
+
+/* ==========================================================
+   Modo oscuro (verde con negro, igual que el resto del sistema)
+   ========================================================== */
+html.pc-oscuro .promo-card {
+  background: #111d1a;
+  border-color: rgba(61, 220, 151, .12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .45), 0 16px 36px -20px rgba(0, 0, 0, .85);
+  color: #e2f1ec;
+}
+html.pc-oscuro a.promo-card:hover, html.pc-oscuro .promo-card.es-clicable:hover {
+  border-color: rgba(61, 220, 151, .3);
+  box-shadow: 0 0 0 1px rgba(61, 220, 151, .18), 0 24px 48px -22px rgba(16, 185, 129, .4);
+}
+html.pc-oscuro .promo-card__titulo, html.pc-oscuro .promo-detalle__titulo { color: #e2f1ec; }
+html.pc-oscuro .promo-card__desc, html.pc-oscuro .promo-tiempo, html.pc-oscuro .promo-categoria { color: #94b0a9; }
+html.pc-oscuro .promo-precio { color: #3ddc97; }
+html.pc-oscuro .promo-precio-antes { color: #6f8b84; }
+
+html.pc-oscuro .promo-chip--vigente { background: rgba(61, 220, 151, .14); color: #6ee7b7; }
+html.pc-oscuro .promo-chip--programada { background: rgba(96, 165, 250, .14); color: #93c5fd; }
+html.pc-oscuro .promo-chip--finalizada { background: rgba(148, 176, 169, .12); color: #94b0a9; }
+html.pc-oscuro .promo-chip--pausada { background: rgba(242, 193, 78, .14); color: #f2c14e; }
+
+/* Panel: tarjeta de administración */
+html.pc-oscuro .promo-admin__fechas { color: #b6cbc5; }
+html.pc-oscuro .promo-admin__fechas .material-symbols-outlined { color: #3ddc97; }
+html.pc-oscuro .promo-progreso { background: #1b2c27; }
+html.pc-oscuro .promo-admin__acciones { background: #0d1816; border-top-color: #22372f; }
+html.pc-oscuro .promo-accion { color: #b6cbc5; }
+html.pc-oscuro .promo-accion:hover { background: rgba(61, 220, 151, .1); color: #6ee7b7; }
+html.pc-oscuro .promo-accion--peligro:hover { background: rgba(255, 107, 107, .12); color: #ff8a8a; }
+
+/* Filtros */
+html.pc-oscuro .promo-filtro { background: #111d1a; border-color: #22372f; color: #b6cbc5; }
+html.pc-oscuro .promo-filtro:hover { border-color: rgba(61, 220, 151, .4); }
+html.pc-oscuro .promo-filtro .cuenta { background: #1b2c27; }
+html.pc-oscuro .promo-filtro.activo { background: #10b981; border-color: #10b981; color: #04130e; box-shadow: 0 8px 18px -10px rgba(16, 185, 129, .7); }
+html.pc-oscuro .promo-filtro.activo .cuenta { background: rgba(4, 19, 14, .2); }
+
+/* Estado vacío y formulario */
+html.pc-oscuro .promo-vacio { background: rgba(17, 29, 26, .6); border-color: #22372f; }
+html.pc-oscuro .promo-drop { background: #0d1816; border-color: #2a4038; }
+html.pc-oscuro .promo-drop:hover, html.pc-oscuro .promo-drop.arrastrando { background: #12231e; border-color: #3ddc97; }
+html.pc-oscuro .promo-atajo { background: #111d1a; border-color: #22372f; color: #b6cbc5; }
+html.pc-oscuro .promo-atajo:hover { background: rgba(61, 220, 151, .1); border-color: #3ddc97; color: #6ee7b7; }
+html.pc-oscuro .promo-telefono__pantalla { background: #0b1412; }
+html.pc-oscuro .promo-notif { background: rgba(23, 38, 34, .96); }
+html.pc-oscuro .promo-notif strong { color: #e2f1ec; }
+html.pc-oscuro .promo-notif span { color: #94b0a9; }
+
+/* Detalle (portal) */
+html.pc-oscuro .promo-detalle { background: #111d1a; box-shadow: 0 30px 70px -36px rgba(0, 0, 0, .9); border: 1px solid rgba(61, 220, 151, .12); }
+html.pc-oscuro .promo-detalle__desc { color: #b6cbc5; }
+html.pc-oscuro .promo-dato { background: #0d1816; }
+html.pc-oscuro .promo-dato .material-symbols-outlined { background: #16261f; color: #3ddc97; box-shadow: none; }
+html.pc-oscuro .promo-dato small { color: #94b0a9; }
+html.pc-oscuro .promo-dato b { color: #e2f1ec; }
+html.pc-oscuro .promo-ahorro { background: rgba(61, 220, 151, .14); color: #6ee7b7; }
+html.pc-oscuro .promo-condiciones { border-top-color: #2a4038; color: #94b0a9; }

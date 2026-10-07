@@ -1,0 +1,20 @@
+{
+  "appId": "com.premiercan.clientes",
+  "appName": "Premier Can",
+  "webDir": "www",
+  "server": {
+    "url": "https://TU-DOMINIO.ngrok-free.dev/cliente/login.html",
+    "cleartext": false
+  },
+  "overrideUserAgent": "PremierCanApp/1.0",
+  "plugins": {
+    "BackgroundRunner": {
+      "label": "com.premiercan.clientes.promociones",
+      "src": "runners/promociones.js",
+      "event": "revisarNovedades",
+      "repeat": true,
+      "interval": 15,
+      "autoStart": true
+    }
+  }
+}

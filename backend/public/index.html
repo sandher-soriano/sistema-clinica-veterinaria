@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premier Can - Iniciar Sesión</title>
+<script src="assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="assets/js/tailwind-config.js"></script>
+<script src="assets/js/auth.js"></script>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<link rel="stylesheet" href="assets/css/mascota.css"/>
+<script src="assets/js/mascota.js" defer></script>
+<link rel="stylesheet" href="assets/css/theme.css"/>
+<script src="assets/js/layout.js" defer></script>
+</head>
+<body class="h-full bg-background font-body-md text-on-background relative overflow-x-hidden">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-[2px] z-10"></div>
+<img alt="Veterinary Clinic Background" class="w-full h-full object-cover object-center" src="assets/img/fondo.jpg"/>
+</div>
+<!-- Login Container -->
+<div class="relative z-20 flex min-h-full items-center justify-center p-margin-mobile md:p-margin-desktop">
+<!-- Central Card -->
+<div class="w-full max-w-md bg-surface-container-lowest rounded-lg shadow-[0px_12px_24px_rgba(13,122,135,0.1)] border border-outline-variant p-lg flex flex-col items-center mt-36">
+<!-- Mascota: se asoma por el borde y se tapa los ojos con la contraseña (assets/js/mascota.js) -->
+<div data-mascota data-especie="perro"></div>
+<!-- Logo -->
+<div class="mb-md w-24 h-24">
+<img alt="Premier Can Logo" class="w-full h-full object-contain" src="assets/img/logo.jpg"/>
+</div>
+<div class="pc-acceso-titulo">
+<h2 class="font-headline-md">¡Hola de nuevo! 👋</h2>
+<p>Ingresa al panel de la clínica</p>
+</div>
+<!-- Role Selector -->
+<!-- Nota: este selector es solo una ayuda visual/UX (recuerda la última
+     opción elegida). La seguridad real (qué rol tiene cada usuario)
+     siempre se valida en el backend contra la base de datos, nunca aquí. -->
+<div class="w-full mb-md flex bg-surface-container-low rounded-DEFAULT p-1" id="roleSelector">
+<button class="flex-1 py-2 text-center rounded-DEFAULT bg-surface-container-lowest shadow-sm text-primary font-label-md transition-all" data-role="Administrativo" type="button">Administrativo</button>
+<button class="flex-1 py-2 text-center rounded-DEFAULT text-on-surface-variant font-label-md hover:text-primary transition-all" data-role="Veterinario" type="button">Veterinario</button>
+</div>
+<!-- Login Form -->
+<form id="loginForm" class="w-full space-y-md">
+<!-- Email/User Input -->
+<div class="relative">
+<input class="block w-full px-4 pt-5 pb-2 text-body-lg text-on-surface bg-[#F1F4F6] border-0 border-b-2 border-outline-variant rounded-t-DEFAULT appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" id="username" name="username" placeholder=" " required="" type="text"/>
+<label class="absolute text-label-md text-on-surface-variant duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" for="username">Correo electrónico o Usuario</label>
+</div>
+<!-- Password Input -->
+<div class="relative">
+<input class="block w-full px-4 pt-5 pb-2 text-body-lg text-on-surface bg-[#F1F4F6] border-0 border-b-2 border-outline-variant rounded-t-DEFAULT appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" id="password" name="password" placeholder=" " required="" type="password"/>
+<label class="absolute text-label-md text-on-surface-variant duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" for="password">Contraseña</label>
+<button class="absolute inset-y-0 right-0 flex items-center pr-3 text-on-surface-variant hover:text-primary" type="button" id="togglePasswordBtn">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-DEFAULT shadow-sm font-label-md text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200" id="btnIngresar" type="submit">
+                        Iniciar sesión
+                    </button>
+</div>
+<p id="loginError" class="hidden text-error text-caption font-caption mt-2 text-center"></p>
+</form>
+<!-- Links -->
+<div class="mt-md text-center">
+<a class="font-label-md text-primary hover:text-primary-container transition-colors" href="olvide-password.html">¿Olvidé mi contraseña?</a>
+</div>
+</div>
+</div>
+
+<!-- Paso 2: Verificación en dos pasos (solo Administrativo) -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-on-surface/40 p-margin-mobile" id="pantallaTotp">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-lg shadow-xl border border-outline-variant p-lg">
+<div class="flex flex-col items-center text-center mb-md">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">verified_user</span>
+<h2 class="font-headline-md text-headline-md text-on-surface" id="totpTitulo">Verificación en dos pasos</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1" id="totpDescripcion"></p>
+</div>
+
+<!-- Modo: configurar por primera vez (muestra QR) -->
+<div class="hidden text-center" id="totpBloqueQr">
+<img alt="Código QR" class="mx-auto mb-sm border border-outline-variant rounded-lg" id="totpQrImg" style="width:180px;height:180px;"/>
+<p class="font-caption text-caption text-on-surface-variant mb-1">¿No puedes escanear? Ingresa esta clave manualmente:</p>
+<p class="font-body-md text-body-md text-on-surface bg-surface-container-low rounded px-3 py-2 mb-md break-all select-all" id="totpSecretoTexto"></p>
+</div>
+
+<div class="space-y-sm">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="totpCodigo">Código de 6 dígitos</label>
+<input autocomplete="one-time-code" class="block w-full px-4 py-3 text-center text-headline-md tracking-[0.5em] text-on-surface bg-[#F1F4F6] border-0 border-b-2 border-outline-variant rounded-t-DEFAULT focus:outline-none focus:ring-0 focus:border-primary" id="totpCodigo" inputmode="numeric" maxlength="6" placeholder="000000" type="text"/>
+</div>
+<p class="hidden text-error text-caption font-caption mt-2 text-center" id="totpError"></p>
+
+<label class="flex items-center gap-2 mt-sm text-body-md text-on-surface-variant select-none">
+<input type="checkbox" id="totpRecordarDispositivo" class="rounded border-outline-variant text-primary focus:ring-primary"/>
+Recordar este dispositivo por 30 días
+</label>
+
+<button class="w-full mt-md py-3 rounded-DEFAULT font-label-md text-on-primary bg-primary hover:bg-primary-container transition-colors" id="totpBtnConfirmar" type="button">Verificar</button>
+<button class="w-full mt-2 py-2 rounded-DEFAULT font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors" id="totpBtnCancelar" type="button">Cancelar</button>
+</div>
+</div>
+
+<!-- Contraseña vencida (vigencia configurada por el administrador) -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center bg-on-surface/40 p-margin-mobile" id="pantallaPasswordVencida">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-lg shadow-xl border border-outline-variant p-lg">
+<div class="flex flex-col items-center text-center mb-md">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">lock_reset</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Tu contraseña venció</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1" id="passwordVencidaDescripcion"></p>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="passwordVencidaNueva">Nueva contraseña</label>
+<input class="block w-full px-4 py-3 text-body-lg text-on-surface bg-[#F1F4F6] border-0 border-b-2 border-outline-variant rounded-t-DEFAULT focus:outline-none focus:ring-0 focus:border-primary" id="passwordVencidaNueva" type="password" minlength="6"/>
+</div>
+<p class="hidden text-error text-caption font-caption mt-2 text-center" id="passwordVencidaError"></p>
+<button class="w-full mt-md py-3 rounded-DEFAULT font-label-md text-on-primary bg-primary hover:bg-primary-container transition-colors" id="passwordVencidaBtnGuardar" type="button">Guardar y volver a iniciar sesión</button>
+</div>
+</div>
+
+<script>
+  // --- Selector de rol (Administrativo / Veterinario) ---
+  // Solo cambia el estilo del botón activo y guarda la selección para
+  // mostrar un mensaje más claro si el rol no coincide con el real.
+  const roleSelector = document.getElementById('roleSelector');
+  const roleButtons = roleSelector.querySelectorAll('button[data-role]');
+  let tipoAccesoSeleccionado = 'Administrativo';
+
+  function activarBotonRol(boton) {
+    roleButtons.forEach((btn) => {
+      const esActivo = btn === boton;
+      btn.classList.toggle('bg-surface-container-lowest', esActivo);
+      btn.classList.toggle('shadow-sm', esActivo);
+      btn.classList.toggle('text-primary', esActivo);
+      btn.classList.toggle('text-on-surface-variant', !esActivo);
+    });
+  }
+
+  roleButtons.forEach((boton) => {
+    boton.addEventListener('click', () => {
+      tipoAccesoSeleccionado = boton.dataset.role;
+      activarBotonRol(boton);
+      document.getElementById('loginError').classList.add('hidden');
+    });
+  });
+
+  // --- Mostrar/ocultar contraseña ---
+  document.getElementById('togglePasswordBtn').addEventListener('click', () => {
+    const passwordInput = document.getElementById('password');
+    const icon = document.querySelector('#togglePasswordBtn .material-symbols-outlined');
+    const esPassword = passwordInput.type === 'password';
+    passwordInput.type = esPassword ? 'text' : 'password';
+    icon.textContent = esPassword ? 'visibility_off' : 'visibility';
+  });
+
+  // --- Envío del formulario de login ---
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const usuario = document.getElementById('username').value.trim();
+    const contrasena = document.getElementById('password').value;
+    const errorEl = document.getElementById('loginError');
+    const btnIngresar = document.getElementById('btnIngresar');
+    errorEl.classList.add('hidden');
+    btnIngresar.classList.add('pc-enviando');
+
+    try {
+      const respuesta = await Auth.login(usuario, contrasena);
+
+      // Caso 1: login normal completo (Veterinario, o Administrativo ya
+      // pasó las validaciones... esto solo ocurre para Veterinario).
+      if (respuesta.token) {
+        if (respuesta.usuario.rol !== tipoAccesoSeleccionado) {
+          errorEl.textContent = `Este usuario pertenece al rol "${respuesta.usuario.rol}", no a "${tipoAccesoSeleccionado}". Selecciona la pestaña correcta e intenta de nuevo.`;
+          errorEl.classList.remove('hidden');
+          return;
+        }
+        Auth.guardarSesion(respuesta.token, respuesta.usuario);
+        entrarAlPanel();
+        return;
+      }
+
+      // Caso 0: la contraseña venció (vigencia definida por el administrador).
+      if (respuesta.passwordVencida) {
+        abrirPantallaPasswordVencida(respuesta.tokenTemporal, respuesta.mensaje);
+        return;
+      }
+
+      // Antes de pedir el código, confirmamos que el rol coincida con la
+      // pestaña elegida (evita pedirle un código a alguien que se equivocó
+      // de pestaña).
+      if (respuesta.rol !== tipoAccesoSeleccionado) {
+        errorEl.textContent = `Este usuario pertenece al rol "${respuesta.rol}", no a "${tipoAccesoSeleccionado}". Selecciona la pestaña correcta e intenta de nuevo.`;
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      // Caso 2: Administrativo sin autenticador configurado todavía -> pedir QR
+      if (respuesta.requiereConfigurarTotp) {
+        abrirPantallaTotp({ modo: 'configurar', tokenTemporal: respuesta.tokenTemporal });
+        return;
+      }
+
+      // Caso 3: Administrativo con autenticador ya configurado -> pedir código
+      if (respuesta.requiereTotp) {
+        abrirPantallaTotp({ modo: 'verificar', tokenTemporal: respuesta.tokenTemporal });
+        return;
+      }
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    } finally {
+      btnIngresar.classList.remove('pc-enviando');
+    }
+  });
+
+  // Transición: pantalla de carga completa y luego el panel
+  function entrarAlPanel() {
+    const r = document.getElementById('btnIngresar').getBoundingClientRect();
+    if (window.PCEfectos) window.PCEfectos.huellitas(r.left + r.width / 2, r.top + r.height / 2);
+    setTimeout(() => { if (window.PCCarga) window.PCCarga.mostrar('Iniciando sesión…'); }, 380);
+    setTimeout(() => { window.location.href = 'pages/dashboard.html'; }, 850);
+  }
+
+  // ============================================================
+  // Pantalla de verificación en dos pasos (2FA)
+  // ============================================================
+  const API_BASE_URL_LOGIN = window.API_BASE_URL;
+  let totpModoActual = null;
+  let totpTokenActual = null;
+
+  async function abrirPantallaTotp({ modo, tokenTemporal }) {
+    totpModoActual = modo;
+    totpTokenActual = tokenTemporal;
+    document.getElementById('totpCodigo').value = '';
+    document.getElementById('totpError').classList.add('hidden');
+    document.getElementById('pantallaTotp').classList.remove('hidden');
+    document.getElementById('pantallaTotp').classList.add('flex');
+
+    if (modo === 'configurar') {
+      document.getElementById('totpTitulo').textContent = 'Configura tu autenticador';
+      document.getElementById('totpDescripcion').textContent =
+        'Escanea este código con Google Authenticator (o cualquier app compatible) y luego ingresa el código de 6 dígitos que te muestre.';
+      document.getElementById('totpBloqueQr').classList.remove('hidden');
+      document.getElementById('totpBtnConfirmar').textContent = 'Activar y entrar';
+
+      try {
+        const resp = await fetch(`${API_BASE_URL_LOGIN}/auth/totp/configurar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tokenTemporal }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.mensaje);
+        document.getElementById('totpQrImg').src = data.qrDataUrl;
+        document.getElementById('totpSecretoTexto').textContent = data.secretoBase32;
+        totpTokenActual = data.tokenTemporal; // ahora trae el secreto embebido
+      } catch (err) {
+        document.getElementById('totpError').textContent = err.message;
+        document.getElementById('totpError').classList.remove('hidden');
+      }
+    } else {
+      document.getElementById('totpTitulo').textContent = 'Ingresa tu código';
+      document.getElementById('totpDescripcion').textContent =
+        'Abre tu app autenticadora e ingresa el código de 6 dígitos que te muestra para esta cuenta.';
+      document.getElementById('totpBloqueQr').classList.add('hidden');
+      document.getElementById('totpBtnConfirmar').textContent = 'Verificar';
+    }
+
+    document.getElementById('totpCodigo').focus();
+  }
+
+  function cerrarPantallaTotp() {
+    document.getElementById('pantallaTotp').classList.add('hidden');
+    document.getElementById('pantallaTotp').classList.remove('flex');
+    totpModoActual = null;
+    totpTokenActual = null;
+  }
+  document.getElementById('totpBtnCancelar').addEventListener('click', cerrarPantallaTotp);
+
+  document.getElementById('totpBtnConfirmar').addEventListener('click', async () => {
+    const codigo = document.getElementById('totpCodigo').value.trim();
+    const errorEl = document.getElementById('totpError');
+    errorEl.classList.add('hidden');
+
+    if (!/^\d{6}$/.test(codigo)) {
+      errorEl.textContent = 'Ingresa los 6 dígitos del código.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const endpoint = totpModoActual === 'configurar' ? '/auth/totp/confirmar' : '/auth/totp/verificar';
+    const recordarDispositivo = document.getElementById('totpRecordarDispositivo').checked;
+
+    try {
+      const resp = await fetch(`${API_BASE_URL_LOGIN}${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tokenTemporal: totpTokenActual, codigo, recordarDispositivo }),
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.mensaje || 'Código incorrecto.');
+
+      if (data.dispositivoToken) Auth.guardarDispositivoToken(data.dispositivoToken);
+      Auth.guardarSesion(data.token, data.usuario);
+      cerrarPantallaTotp();
+      entrarAlPanel();
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+
+  // ============================================================
+  // Pantalla de contraseña vencida (vigencia de clave)
+  // ============================================================
+  let passwordVencidaTokenActual = null;
+
+  function abrirPantallaPasswordVencida(tokenTemporal, mensaje) {
+    passwordVencidaTokenActual = tokenTemporal;
+    document.getElementById('passwordVencidaDescripcion').textContent =
+      mensaje || 'Por seguridad, debes definir una nueva contraseña antes de continuar.';
+    document.getElementById('passwordVencidaNueva').value = '';
+    document.getElementById('passwordVencidaError').classList.add('hidden');
+    document.getElementById('pantallaPasswordVencida').classList.remove('hidden');
+    document.getElementById('pantallaPasswordVencida').classList.add('flex');
+  }
+
+  document.getElementById('passwordVencidaBtnGuardar').addEventListener('click', async () => {
+    const nuevaContrasena = document.getElementById('passwordVencidaNueva').value;
+    const errorEl = document.getElementById('passwordVencidaError');
+    errorEl.classList.add('hidden');
+
+    if (nuevaContrasena.length < 6) {
+      errorEl.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    try {
+      const resp = await fetch(`${API_BASE_URL_LOGIN}/auth/cambiar-password-vencida`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tokenTemporal: passwordVencidaTokenActual, nuevaContrasena }),
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.mensaje || 'No se pudo actualizar la contraseña.');
+
+      // Cambiar la contraseña también olvida los dispositivos de confianza
+      // en el backend, así que este navegador también debe olvidar su token.
+      localStorage.removeItem('pc_device_token');
+
+      document.getElementById('pantallaPasswordVencida').classList.add('hidden');
+      document.getElementById('pantallaPasswordVencida').classList.remove('flex');
+      document.getElementById('loginError').textContent = 'Contraseña actualizada. Ya puedes iniciar sesión con la nueva.';
+      document.getElementById('loginError').classList.remove('hidden');
+      document.getElementById('password').value = '';
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+</script>
+</body></html>

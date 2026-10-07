@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promociones - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/promo-ui.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<link rel="stylesheet" href="../assets/css/promociones.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background flex min-h-screen antialiased">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined" >dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<!-- Encabezado móvil -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Promociones</h1>
+</div>
+</header>
+
+<main class="flex-1 px-margin-mobile md:px-margin-desktop py-8 md:py-10 max-w-[1400px] w-full">
+<!-- Encabezado -->
+<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+<div>
+<p class="font-label-md text-label-md text-primary uppercase tracking-[0.12em] mb-1">Marketing de la clínica</p>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Promociones</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl">Publica ofertas para tus clientes. Aparecen en el portal y en la app, y el celular les avisa con una notificación.</p>
+</div>
+<button class="flex items-center justify-center gap-2 px-5 py-3 bg-primary text-on-primary font-label-md text-label-md shrink-0" id="btnNueva" type="button">
+<span class="material-symbols-outlined">add_circle</span>
+Nueva promoción
+</button>
+</div>
+
+<!-- Resumen -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="resumen">
+<div class="bg-surface-container-lowest border rounded-lg p-5 flex items-center gap-4">
+<span class="material-symbols-outlined text-[26px]" style="background:#dcf7e9;color:#0f7a47;width:48px;height:48px;line-height:48px;text-align:center;border-radius:16px">campaign</span>
+<div><p class="text-caption font-caption text-on-surface-variant">Vigentes</p><p class="font-headline-lg text-[30px] leading-none text-on-surface mt-1" id="kpiVigentes">–</p></div>
+</div>
+<div class="bg-surface-container-lowest border rounded-lg p-5 flex items-center gap-4">
+<span class="material-symbols-outlined text-[26px]" style="background:#e3efff;color:#2759b8;width:48px;height:48px;line-height:48px;text-align:center;border-radius:16px">event_upcoming</span>
+<div><p class="text-caption font-caption text-on-surface-variant">Próximas</p><p class="font-headline-lg text-[30px] leading-none text-on-surface mt-1" id="kpiProgramadas">–</p></div>
+</div>
+<div class="bg-surface-container-lowest border rounded-lg p-5 flex items-center gap-4">
+<span class="material-symbols-outlined text-[26px]" style="background:#fff1d6;color:#9a6400;width:48px;height:48px;line-height:48px;text-align:center;border-radius:16px">pause_circle</span>
+<div><p class="text-caption font-caption text-on-surface-variant">Pausadas</p><p class="font-headline-lg text-[30px] leading-none text-on-surface mt-1" id="kpiPausadas">–</p></div>
+</div>
+<div class="bg-surface-container-lowest border rounded-lg p-5 flex items-center gap-4">
+<span class="material-symbols-outlined text-[26px]" style="background:#eef1f2;color:#6b7a7d;width:48px;height:48px;line-height:48px;text-align:center;border-radius:16px">history</span>
+<div><p class="text-caption font-caption text-on-surface-variant">Finalizadas</p><p class="font-headline-lg text-[30px] leading-none text-on-surface mt-1" id="kpiFinalizadas">–</p></div>
+</div>
+</div>
+
+<!-- Filtros -->
+<div class="flex flex-col lg:flex-row lg:items-center gap-4 mb-6">
+<div class="promo-filtros" id="filtros">
+<button class="promo-filtro activo" data-filtro="todas" type="button">Todas <span class="cuenta" data-cuenta="todas">0</span></button>
+<button class="promo-filtro" data-filtro="Vigente" type="button">Vigentes <span class="cuenta" data-cuenta="Vigente">0</span></button>
+<button class="promo-filtro" data-filtro="Programada" type="button">Próximas <span class="cuenta" data-cuenta="Programada">0</span></button>
+<button class="promo-filtro" data-filtro="Inactiva" type="button">Pausadas <span class="cuenta" data-cuenta="Inactiva">0</span></button>
+<button class="promo-filtro" data-filtro="Finalizada" type="button">Finalizadas <span class="cuenta" data-cuenta="Finalizada">0</span></button>
+</div>
+<div class="relative lg:ml-auto lg:w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 font-body-md text-body-md" id="buscar" placeholder="Buscar promoción…" type="search"/>
+</div>
+</div>
+
+<!-- Lista -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6" id="lista">
+<p class="text-on-surface-variant">Cargando promociones…</p>
+</div>
+</main>
+</div>
+
+<!-- ============ Panel lateral: crear / editar ============ -->
+<div class="fixed inset-0 z-[100] hidden" id="panelPromo">
+<div class="absolute inset-0 transition-opacity" id="panelFondo"></div>
+<div class="absolute inset-y-0 right-0 w-full max-w-5xl bg-surface-container-lowest shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out" id="panelCaja">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface" id="panelTitulo">Nueva promoción</h3>
+<p class="text-caption font-caption text-on-surface-variant">Lo que ves a la derecha es exactamente lo que verá el cliente.</p>
+</div>
+<button class="w-10 h-10 rounded-full grid place-items-center text-on-surface-variant hover:bg-surface-container-low" id="btnCerrarPanel" title="Cerrar" type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+
+<form class="flex-1 overflow-y-auto" id="formPromo" novalidate>
+<div class="grid lg:grid-cols-[1fr_340px] gap-8 p-6">
+<!-- Campos -->
+<div class="space-y-5">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Imagen de la promoción</label>
+<label class="promo-drop" id="zonaImagen">
+<input accept="image/*" class="sr-only" id="inputImagen" type="file"/>
+<div class="p-4" id="zonaImagenTexto">
+<span class="material-symbols-outlined text-[40px] text-primary">add_photo_alternate</span>
+<p class="font-label-md text-on-surface mt-1">Arrastra una imagen o haz clic para elegirla</p>
+<p class="text-caption text-on-surface-variant">JPG, PNG o WEBP · máximo 5 MB · ideal horizontal (16:9)</p>
+</div>
+</label>
+<p class="text-caption text-on-surface-variant mt-1">¿Sin imagen? No pasa nada: se usará un diseño con el color de la categoría.</p>
+</div>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fTitulo">Nombre de la promoción *</label>
+<input class="w-full px-4 py-3 font-body-md" id="fTitulo" maxlength="120" placeholder="Ej. Campaña de vacunación antirrábica" required type="text"/>
+</div>
+
+<div class="grid sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fCategoria">Categoría</label>
+<select class="w-full px-4 py-3 font-body-md" id="fCategoria">
+<option value="">Sin categoría</option>
+<option>Consultas</option><option>Vacunas</option><option>Desparasitación</option><option>Baño y grooming</option>
+<option>Cirugía</option><option>Laboratorio</option><option>Tienda</option><option>Otro</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fEtiqueta">Etiqueta destacada</label>
+<input class="w-full px-4 py-3 font-body-md" id="fEtiqueta" maxlength="30" placeholder="Ej. -20%, 2x1, GRATIS" type="text"/>
+<div class="promo-atajos mt-2" data-atajos="fEtiqueta">
+<button class="promo-atajo" data-valor="-10%" type="button">-10%</button>
+<button class="promo-atajo" data-valor="-20%" type="button">-20%</button>
+<button class="promo-atajo" data-valor="-50%" type="button">-50%</button>
+<button class="promo-atajo" data-valor="2x1" type="button">2x1</button>
+<button class="promo-atajo" data-valor="GRATIS" type="button">GRATIS</button>
+</div>
+</div>
+</div>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fDescripcion">Descripción *</label>
+<textarea class="w-full px-4 py-3 font-body-md resize-y" id="fDescripcion" maxlength="2000" placeholder="Cuéntale al cliente qué incluye, para quién es y por qué le conviene." required rows="4"></textarea>
+<p class="text-caption text-on-surface-variant text-right mt-1"><span id="contadorDesc">0</span>/2000</p>
+</div>
+
+<div class="grid sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fPrecioRegular">Precio regular (S/)</label>
+<input class="w-full px-4 py-3 font-body-md" id="fPrecioRegular" inputmode="decimal" min="0" placeholder="Ej. 80" step="0.01" type="number"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fPrecioPromocion">Precio de promoción (S/)</label>
+<input class="w-full px-4 py-3 font-body-md" id="fPrecioPromocion" inputmode="decimal" min="0" placeholder="Ej. 60" step="0.01" type="number"/>
+<p class="text-caption mt-1 font-semibold" id="textoAhorro" style="color:#0f7a47"></p>
+</div>
+</div>
+
+<!-- Descuento que la promoción aplica sola en Caja -->
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low">
+<p class="font-label-md text-label-md text-on-surface mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]">point_of_sale</span>Descuento automático en caja</p>
+<p class="text-caption text-on-surface-variant mb-3">Mientras esté vigente, Caja la aplicará sola a los cobros de su <b>categoría</b> (sin categoría: a todo el cobro). Si lo dejas vacío, se usa la diferencia de precios o el % de la etiqueta.</p>
+<div class="grid grid-cols-2 gap-3">
+<select class="w-full px-4 py-3 font-body-md" id="fDescuentoTipo"><option value="">Sin descuento en caja</option><option value="Porcentaje">Porcentaje (%)</option><option value="Monto">Monto fijo (S/)</option></select>
+<input class="w-full px-4 py-3 font-body-md" id="fDescuentoValor" inputmode="decimal" min="0" placeholder="Ej. 20" step="0.01" type="number"/>
+</div>
+</div>
+
+<div>
+<div class="grid sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fInicio">Inicia *</label>
+<input class="w-full px-4 py-3 font-body-md" id="fInicio" required type="date"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fFin">Finaliza *</label>
+<input class="w-full px-4 py-3 font-body-md" id="fFin" required type="date"/>
+</div>
+</div>
+<div class="promo-atajos mt-2" id="atajosFechas">
+<button class="promo-atajo" data-dias="1" type="button">Solo hoy</button>
+<button class="promo-atajo" data-dias="7" type="button">1 semana</button>
+<button class="promo-atajo" data-dias="15" type="button">15 días</button>
+<button class="promo-atajo" data-dias="30" type="button">1 mes</button>
+<button class="promo-atajo" data-fin-mes="1" type="button">Hasta fin de mes</button>
+</div>
+</div>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="fCondiciones">Condiciones (letra pequeña)</label>
+<textarea class="w-full px-4 py-3 font-body-md resize-y" id="fCondiciones" maxlength="1000" placeholder="Ej. Válido para perros y gatos mayores de 3 meses. No acumulable con otras promociones." rows="2"></textarea>
+</div>
+
+<label class="flex items-center justify-between gap-4 p-4 rounded-2xl bg-surface-container-low cursor-pointer">
+<span>
+<span class="block font-label-md text-on-surface">Publicar para los clientes</span>
+<span class="block text-caption text-on-surface-variant">Si lo desactivas, se guarda como pausada y nadie la ve.</span>
+</span>
+<input checked class="w-5 h-5 rounded" id="fActivo" type="checkbox"/>
+</label>
+
+<p class="hidden text-error text-body-md font-semibold p-3 rounded-xl bg-error-container/40" id="errorForm"></p>
+</div>
+
+<!-- Vista previa -->
+<div class="lg:sticky lg:top-0 self-start">
+<p class="font-label-md text-label-md text-on-surface-variant mb-3 text-center">Vista previa en el celular</p>
+<div class="promo-telefono">
+<div class="promo-telefono__pantalla">
+<div class="promo-notif">
+<div class="promo-notif__icono"><img alt="" src="../assets/img/favicon.svg"/></div>
+<div><strong id="notifTitulo">🎉 Nueva promoción en Premier Can</strong><span id="notifTexto">Toca para ver los detalles</span></div>
+</div>
+<div id="vistaPrevia"></div>
+</div>
+</div>
+</div>
+</div>
+</form>
+
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-end gap-3 bg-surface-container-lowest">
+<button class="px-5 py-2.5 border border-primary text-primary font-label-md" id="btnCancelar" type="button">Cancelar</button>
+<button class="px-6 py-2.5 bg-primary text-on-primary font-label-md flex items-center gap-2" form="formPromo" id="btnGuardar" type="submit">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span><span id="btnGuardarTexto">Publicar promoción</span>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Confirmación de eliminar -->
+<div class="fixed inset-0 z-[110] hidden items-center justify-center bg-on-surface/40 p-4" id="modalEliminar">
+<div class="max-w-md w-full bg-surface-container-lowest shadow-2xl rounded-2xl p-6 text-center">
+<span class="material-symbols-outlined text-[44px]" style="color:#ba1a1a">delete_forever</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-2">¿Eliminar esta promoción?</h3>
+<p class="text-body-md text-on-surface-variant mt-1" id="eliminarTexto"></p>
+<p class="text-caption text-on-surface-variant mt-2">Si solo quieres ocultarla un tiempo, mejor usa <b>Pausar</b>.</p>
+<div class="flex gap-3 mt-6">
+<button class="flex-1 py-2.5 border border-primary text-primary font-label-md" id="btnEliminarNo" type="button">Cancelar</button>
+<button class="flex-1 py-2.5 rounded-xl font-label-md text-white" id="btnEliminarSi" style="background:#ba1a1a" type="button">Sí, eliminar</button>
+</div>
+</div>
+</div>
+
+<!-- Aviso flotante -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[120] hidden px-5 py-3 rounded-2xl shadow-xl text-white font-label-md flex items-center gap-2" id="aviso" style="background:#0d2226"></div>
+
+<script>
+  Auth.protegerPaginaConfig();
+
+  const API = window.API_BASE_URL;
+  let promociones = [];
+  let filtroActual = 'todas';
+  let editandoId = null;
+  let archivoImagen = null;     // File elegido en el formulario
+  let quitarImagen = false;     // editando: el admin quitó la imagen existente
+  let imagenExistente = null;   // editando: ImagenURL actual
+
+  const $ = (id) => document.getElementById(id);
+
+  // ---------- Aviso flotante ----------
+  let timerAviso;
+  function avisar(texto, icono = 'check_circle') {
+    const el = $('aviso');
+    el.innerHTML = `<span class="material-symbols-outlined">${icono}</span>${PromoUI.escapar(texto)}`;
+    el.classList.remove('hidden');
+    clearTimeout(timerAviso);
+    timerAviso = setTimeout(() => el.classList.add('hidden'), 2800);
+  }
+
+  // Auth.apiFetch siempre manda JSON; para subir la imagen (multipart) usamos fetch directo.
+  async function enviarFormulario(metodo, ruta, formData) {
+    const resp = await fetch(`${API}${ruta}`, {
+      method: metodo,
+      headers: { Authorization: `Bearer ${Auth.obtenerToken()}` },
+      body: formData,
+    });
+    if (resp.status === 401) { Auth.cerrarSesion(); throw new Error('Tu sesión expiró.'); }
+    const data = await resp.json().catch(() => ({}));
+    if (!resp.ok) throw new Error(data.mensaje || 'No se pudo guardar.');
+    return data;
+  }
+
+  // ---------- Lista ----------
+  async function cargar() {
+    try {
+      promociones = await Auth.apiFetch('/promociones');
+      pintar();
+    } catch (err) {
+      $('lista').innerHTML = `<p class="text-error">${PromoUI.escapar(err.message)}</p>`;
+    }
+  }
+
+  function pintar() {
+    const cuentas = { todas: promociones.length, Vigente: 0, Programada: 0, Inactiva: 0, Finalizada: 0 };
+    promociones.forEach((p) => { cuentas[p.Estado] = (cuentas[p.Estado] || 0) + 1; });
+    document.querySelectorAll('[data-cuenta]').forEach((el) => { el.textContent = cuentas[el.dataset.cuenta] || 0; });
+    $('kpiVigentes').textContent = cuentas.Vigente;
+    $('kpiProgramadas').textContent = cuentas.Programada;
+    $('kpiPausadas').textContent = cuentas.Inactiva;
+    $('kpiFinalizadas').textContent = cuentas.Finalizada;
+
+    const texto = $('buscar').value.trim().toLowerCase();
+    const visibles = promociones.filter((p) =>
+      (filtroActual === 'todas' || p.Estado === filtroActual) &&
+      (!texto || `${p.Titulo} ${p.Descripcion} ${p.Categoria || ''} ${p.Etiqueta || ''}`.toLowerCase().includes(texto)));
+
+    if (!promociones.length) {
+      $('lista').innerHTML = `
+        <div class="promo-vacio sm:col-span-2 xl:col-span-3">
+          <span class="promo-vacio__emoji">🎁</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface mt-3">Aún no hay promociones</h3>
+          <p class="text-body-md text-on-surface-variant mt-1 mb-5">Crea la primera: tus clientes la verán en la app y recibirán una notificación.</p>
+          <button class="px-5 py-3 bg-primary text-on-primary font-label-md inline-flex items-center gap-2" onclick="abrirPanel()" type="button">
+            <span class="material-symbols-outlined">add_circle</span>Crear promoción
+          </button>
+        </div>`;
+      return;
+    }
+    if (!visibles.length) {
+      $('lista').innerHTML = '<div class="promo-vacio sm:col-span-2 xl:col-span-3"><span class="promo-vacio__emoji">🔍</span><p class="text-body-md text-on-surface-variant mt-2">No hay promociones con ese filtro.</p></div>';
+      return;
+    }
+
+    $('lista').innerHTML = visibles.map((p) => {
+      const estado = PromoUI.ESTADOS[p.Estado];
+      const apagada = p.Estado === 'Inactiva' || p.Estado === 'Finalizada';
+      const barra = p.Estado === 'Vigente'
+        ? `<div class="promo-progreso" title="${PromoUI.avance(p)}% del periodo transcurrido"><span style="width:${PromoUI.avance(p)}%"></span></div>` : '';
+      return `
+        <article class="promo-card promo-admin${apagada ? ' es-apagada' : ''}">
+          ${PromoUI.portada(p)}
+          <div class="promo-card__cuerpo">
+            <div class="promo-card__meta">
+              <span class="promo-chip ${escHtml(estado.clase)}">${escHtml(estado.texto)}</span>
+              ${p.Categoria ? `<span class="promo-categoria">${PromoUI.escapar(p.Categoria)}</span>` : ''}
+            </div>
+            <h3 class="promo-card__titulo">${PromoUI.escapar(p.Titulo)}</h3>
+            <p class="promo-card__desc">${PromoUI.escapar(p.Descripcion)}</p>
+            <div class="promo-admin__fechas"><span class="material-symbols-outlined">date_range</span>${PromoUI.rango(p.FechaInicio, p.FechaFin)}</div>
+            ${barra}
+            <div class="promo-card__pie">
+              ${PromoUI.bloquePrecios(p)}
+              <span class="promo-tiempo"><span class="material-symbols-outlined">schedule</span>${PromoUI.escapar(PromoUI.textoTiempo(p))}</span>
+            </div>
+          </div>
+          <div class="promo-admin__acciones">
+            <button class="promo-accion" data-accion="editar" data-id="${escHtml(p.PromocionID)}" type="button"><span class="material-symbols-outlined">edit</span>Editar</button>
+            <button class="promo-accion" data-accion="estado" data-id="${escHtml(p.PromocionID)}" type="button">
+              <span class="material-symbols-outlined">${escHtml(p.Activo ? 'pause' : 'play_arrow')}</span>${escHtml(p.Activo ? 'Pausar' : 'Activar')}
+            </button>
+            <button class="promo-accion promo-accion--peligro promo-accion--solo-icono" data-accion="eliminar" data-id="${escHtml(p.PromocionID)}" title="Eliminar" type="button"><span class="material-symbols-outlined">delete</span></button>
+          </div>
+        </article>`;
+    }).join('');
+  }
+
+  $('filtros').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-filtro]');
+    if (!btn) return;
+    filtroActual = btn.dataset.filtro;
+    document.querySelectorAll('.promo-filtro').forEach((b) => b.classList.toggle('activo', b === btn));
+    pintar();
+  });
+  $('buscar').addEventListener('input', pintar);
+
+  $('lista').addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-accion]');
+    if (!btn) return;
+    const promo = promociones.find((p) => p.PromocionID === Number(btn.dataset.id));
+    if (!promo) return;
+    if (btn.dataset.accion === 'editar') abrirPanel(promo);
+    if (btn.dataset.accion === 'eliminar') pedirEliminar(promo);
+    if (btn.dataset.accion === 'estado') {
+      try {
+        const r = await Auth.apiFetch(`/promociones/${promo.PromocionID}/estado`, {
+          method: 'PATCH', body: JSON.stringify({ activo: !promo.Activo }),
+        });
+        avisar(r.mensaje, promo.Activo ? 'pause_circle' : 'play_circle');
+        cargar();
+      } catch (err) { avisar(err.message, 'error'); }
+    }
+  });
+
+  // ---------- Eliminar ----------
+  let eliminarId = null;
+  function pedirEliminar(promo) {
+    eliminarId = promo.PromocionID;
+    $('eliminarTexto').textContent = `"${promo.Titulo}" se borrará definitivamente, junto con su imagen.`;
+    $('modalEliminar').classList.remove('hidden');
+    $('modalEliminar').classList.add('flex');
+  }
+  function cerrarEliminar() {
+    $('modalEliminar').classList.add('hidden');
+    $('modalEliminar').classList.remove('flex');
+  }
+  $('btnEliminarNo').addEventListener('click', cerrarEliminar);
+  $('btnEliminarSi').addEventListener('click', async () => {
+    try {
+      const r = await Auth.apiFetch(`/promociones/${eliminarId}`, { method: 'DELETE' });
+      cerrarEliminar();
+      avisar(r.mensaje, 'delete');
+      cargar();
+    } catch (err) { avisar(err.message, 'error'); }
+  });
+
+  // ---------- Panel crear / editar ----------
+  const campos = ['fTitulo', 'fCategoria', 'fEtiqueta', 'fDescripcion', 'fPrecioRegular', 'fPrecioPromocion', 'fInicio', 'fFin', 'fCondiciones'];
+
+  function sumarDias(fecha, dias) {
+    const [y, m, d] = fecha.split('-').map(Number);
+    return new Date(Date.UTC(y, m - 1, d + dias)).toISOString().slice(0, 10);
+  }
+
+  function abrirPanel(promo = null) {
+    editandoId = promo ? promo.PromocionID : null;
+    cambiarArchivo(null);
+    quitarImagen = false;
+    imagenExistente = promo ? promo.ImagenURL : null;
+    $('formPromo').reset();
+    $('errorForm').classList.add('hidden');
+    $('panelTitulo').textContent = promo ? 'Editar promoción' : 'Nueva promoción';
+    $('btnGuardarTexto').textContent = promo ? 'Guardar cambios' : 'Publicar promoción';
+
+    const hoy = PromoUI.hoyLima();
+    $('fTitulo').value = promo?.Titulo || '';
+    $('fCategoria').value = promo?.Categoria || '';
+    $('fEtiqueta').value = promo?.Etiqueta || '';
+    $('fDescripcion').value = promo?.Descripcion || '';
+    $('fPrecioRegular').value = promo?.PrecioRegular ?? '';
+    $('fPrecioPromocion').value = promo?.PrecioPromocion ?? '';
+    $('fDescuentoTipo').value = promo?.DescuentoTipo || '';
+    $('fDescuentoValor').value = promo?.DescuentoValor ?? '';
+    $('fInicio').value = promo?.FechaInicio || hoy;
+    $('fFin').value = promo?.FechaFin || sumarDias(hoy, 14);
+    $('fCondiciones').value = promo?.Condiciones || '';
+    $('fActivo').checked = promo ? !!promo.Activo : true;
+    pintarZonaImagen();
+    actualizarVistaPrevia();
+
+    $('panelPromo').classList.remove('hidden');
+    requestAnimationFrame(() => $('panelCaja').classList.remove('translate-x-full'));
+    setTimeout(() => $('fTitulo').focus(), 320);
+  }
+  window.abrirPanel = abrirPanel;
+
+  function cerrarPanel() {
+    $('panelCaja').classList.add('translate-x-full');
+    setTimeout(() => $('panelPromo').classList.add('hidden'), 300);
+  }
+  $('btnNueva').addEventListener('click', () => abrirPanel());
+  $('btnCerrarPanel').addEventListener('click', cerrarPanel);
+  $('btnCancelar').addEventListener('click', cerrarPanel);
+  $('panelFondo').addEventListener('click', cerrarPanel);
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!$('modalEliminar').classList.contains('hidden')) cerrarEliminar();
+    else if (!$('panelPromo').classList.contains('hidden')) cerrarPanel();
+  });
+
+  // Imagen: clic, arrastrar y soltar, quitar
+  // URL local (blob:) de la imagen elegida: se crea UNA vez por archivo y se libera al cambiarlo
+  let urlPreviewLocal = null;
+  function cambiarArchivo(archivo) {
+    if (urlPreviewLocal) URL.revokeObjectURL(urlPreviewLocal);
+    archivoImagen = archivo;
+    urlPreviewLocal = archivo ? URL.createObjectURL(archivo) : null;
+  }
+  function urlImagenActual() {
+    if (archivoImagen) return urlPreviewLocal;
+    if (imagenExistente && !quitarImagen) return `${window.BACKEND_ORIGIN}${imagenExistente}`;
+    return null;
+  }
+
+  function pintarZonaImagen() {
+    const zona = $('zonaImagen');
+    zona.querySelectorAll('img, .promo-drop__quitar').forEach((el) => el.remove());
+    const url = urlImagenActual();
+    $('zonaImagenTexto').classList.toggle('hidden', !!url);
+    if (!url) return;
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = '';
+    const quitar = document.createElement('button');
+    quitar.type = 'button';
+    quitar.className = 'promo-drop__quitar';
+    quitar.title = 'Quitar imagen';
+    quitar.innerHTML = '<span class="material-symbols-outlined">close</span>';
+    quitar.addEventListener('click', (e) => {
+      e.preventDefault();
+      cambiarArchivo(null);
+      if (imagenExistente) quitarImagen = true;
+      $('inputImagen').value = '';
+      pintarZonaImagen();
+      actualizarVistaPrevia();
+    });
+    zona.append(img, quitar);
+  }
+
+  function elegirArchivo(archivo) {
+    if (!archivo) return;
+    if (!archivo.type.startsWith('image/')) return mostrarError('El archivo debe ser una imagen.');
+    if (archivo.size > 5 * 1024 * 1024) return mostrarError('La imagen no puede pesar más de 5 MB.');
+    $('errorForm').classList.add('hidden');
+    cambiarArchivo(archivo);
+    quitarImagen = false;
+    pintarZonaImagen();
+    actualizarVistaPrevia();
+  }
+  $('inputImagen').addEventListener('change', (e) => elegirArchivo(e.target.files[0]));
+  ['dragenter', 'dragover'].forEach((ev) => $('zonaImagen').addEventListener(ev, (e) => {
+    e.preventDefault(); $('zonaImagen').classList.add('arrastrando');
+  }));
+  ['dragleave', 'drop'].forEach((ev) => $('zonaImagen').addEventListener(ev, (e) => {
+    e.preventDefault(); $('zonaImagen').classList.remove('arrastrando');
+  }));
+  $('zonaImagen').addEventListener('drop', (e) => elegirArchivo(e.dataTransfer.files[0]));
+
+  // Atajos
+  document.querySelector('[data-atajos="fEtiqueta"]').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-valor]');
+    if (!b) return;
+    $('fEtiqueta').value = b.dataset.valor;
+    actualizarVistaPrevia();
+  });
+  $('atajosFechas').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    const inicio = $('fInicio').value || PromoUI.hoyLima();
+    $('fInicio').value = inicio;
+    if (b.dataset.finMes) {
+      const [y, m] = inicio.split('-').map(Number);
+      $('fFin').value = new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10);
+    } else {
+      $('fFin').value = sumarDias(inicio, Number(b.dataset.dias) - 1);
+    }
+    actualizarVistaPrevia();
+  });
+
+  // Vista previa en vivo
+  function datosFormulario() {
+    return {
+      Titulo: $('fTitulo').value.trim(),
+      Categoria: $('fCategoria').value || null,
+      Etiqueta: $('fEtiqueta').value.trim() || null,
+      Descripcion: $('fDescripcion').value.trim(),
+      PrecioRegular: $('fPrecioRegular').value === '' ? null : Number($('fPrecioRegular').value),
+      PrecioPromocion: $('fPrecioPromocion').value === '' ? null : Number($('fPrecioPromocion').value),
+      FechaInicio: $('fInicio').value,
+      FechaFin: $('fFin').value,
+      Condiciones: $('fCondiciones').value.trim() || null,
+      Activo: $('fActivo').checked,
+    };
+  }
+
+  function actualizarVistaPrevia() {
+    const d = datosFormulario();
+    const previa = { ...d, _previewUrl: urlImagenActual() };
+    $('vistaPrevia').innerHTML = PromoUI.tarjetaCliente(previa);
+    $('contadorDesc').textContent = $('fDescripcion').value.length;
+    const pct = PromoUI.descuento(d);
+    $('textoAhorro').textContent = pct ? `El cliente ahorra ${PromoUI.precio(d.PrecioRegular - d.PrecioPromocion)} (${pct}%)` : '';
+    $('notifTitulo').textContent = `🎉 ${d.Titulo || 'Nueva promoción en Premier Can'}`;
+    $('notifTexto').textContent = d.Etiqueta ? `${d.Etiqueta} · ${PromoUI.textoTiempo(d)}` : 'Toca para ver los detalles';
+  }
+  campos.concat('fActivo').forEach((id) => $(id).addEventListener('input', actualizarVistaPrevia));
+  $('fActivo').addEventListener('change', actualizarVistaPrevia);
+
+  function mostrarError(texto) {
+    $('errorForm').textContent = texto;
+    $('errorForm').classList.remove('hidden');
+    $('errorForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Guardar
+  $('formPromo').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const d = datosFormulario();
+    if (!d.Titulo) return mostrarError('Ponle un nombre a la promoción.');
+    if (!d.Descripcion) return mostrarError('Escribe una descripción.');
+    if (!d.FechaInicio || !d.FechaFin) return mostrarError('Indica cuándo inicia y cuándo finaliza.');
+    if (d.FechaFin < d.FechaInicio) return mostrarError('La fecha de fin no puede ser anterior a la de inicio.');
+    if (d.PrecioRegular !== null && d.PrecioPromocion !== null && d.PrecioPromocion > d.PrecioRegular) {
+      return mostrarError('El precio de promoción no puede ser mayor que el regular.');
+    }
+    const descTipo = $('fDescuentoTipo').value;
+    const descValor = $('fDescuentoValor').value;
+    if (descTipo && !(Number(descValor) > 0)) return mostrarError('Indica el valor del descuento en caja.');
+    if (descTipo === 'Porcentaje' && Number(descValor) > 100) return mostrarError('El descuento en caja no puede ser mayor al 100%.');
+
+    const fd = new FormData();
+    fd.append('titulo', d.Titulo);
+    fd.append('descripcion', d.Descripcion);
+    fd.append('fechaInicio', d.FechaInicio);
+    fd.append('fechaFin', d.FechaFin);
+    fd.append('categoria', d.Categoria || '');
+    fd.append('etiqueta', d.Etiqueta || '');
+    fd.append('condiciones', d.Condiciones || '');
+    fd.append('precioRegular', d.PrecioRegular ?? '');
+    fd.append('precioPromocion', d.PrecioPromocion ?? '');
+    fd.append('descuentoTipo', descTipo);
+    fd.append('descuentoValor', descTipo ? descValor : '');
+    fd.append('activo', d.Activo ? 'true' : 'false');
+    if (archivoImagen) fd.append('imagen', archivoImagen);
+    if (quitarImagen) fd.append('quitarImagen', 'true');
+
+    const btn = $('btnGuardar');
+    btn.disabled = true;
+    try {
+      const r = editandoId
+        ? await enviarFormulario('PUT', `/promociones/${editandoId}`, fd)
+        : await enviarFormulario('POST', '/promociones', fd);
+      cerrarPanel();
+      avisar(editandoId ? r.mensaje : '¡Promoción publicada! Los clientes ya pueden verla 🎉', 'celebration');
+      cargar();
+    } catch (err) {
+      mostrarError(err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  cargar();
+</script>
+</body></html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de la barra de estado para notificaciones de promociones (huellita, blanco sobre transparente) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <path android:fillColor="#FFFFFFFF" android:pathData="M32,31C38.6,31 44,35.5 44,41C44,46.5 38.6,51 32,51C25.4,51 20,46.5 20,41C20,35.5 25.4,31 32,31Z"/>
+    <path android:fillColor="#FFFFFFFF" android:pathData="M17,21.5C19.8,21.5 22,24.4 22,28C22,31.6 19.8,34.5 17,34.5C14.2,34.5 12,31.6 12,28C12,24.4 14.2,21.5 17,21.5Z"/>
+    <path android:fillColor="#FFFFFFFF" android:pathData="M26,12.5C28.8,12.5 31,15.4 31,19C31,22.6 28.8,25.5 26,25.5C23.2,25.5 21,22.6 21,19C21,15.4 23.2,12.5 26,12.5Z"/>
+    <path android:fillColor="#FFFFFFFF" android:pathData="M38,12.5C40.8,12.5 43,15.4 43,19C43,22.6 40.8,25.5 38,25.5C35.2,25.5 33,22.6 33,19C33,15.4 35.2,12.5 38,12.5Z"/>
+    <path android:fillColor="#FFFFFFFF" android:pathData="M47,21.5C49.8,21.5 52,24.4 52,28C52,31.6 49.8,34.5 47,34.5C44.2,34.5 42,31.6 42,28C42,24.4 44.2,21.5 47,21.5Z"/>
+</vector>

@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mis mascotas - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth-cliente.js"></script>
+<script src="../assets/js/promo-ui.js"></script>
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<link rel="stylesheet" href="../assets/css/promociones.css"/>
+<script src="../assets/js/layout.js" defer></script>
+<script src="../assets/js/app-notificaciones.js" defer></script>
+</head>
+<body class="min-h-full bg-background font-body-md text-on-background">
+<!-- Encabezado simple -->
+<header class="bg-surface-container-lowest border-b border-outline-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<img alt="Premier Can" class="w-10 h-10 object-contain" src="../assets/img/logo.jpg"/>
+<span class="font-headline-md text-headline-md text-primary">Premier Can</span>
+</div>
+<div class="flex items-center gap-4">
+<a class="relative flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="avisos.html" title="Mis avisos">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="font-label-md text-label-md hidden sm:inline">Avisos</span>
+<span class="hidden absolute -top-1 left-3 w-2.5 h-2.5 rounded-full ring-2 ring-white" id="puntoAvisos" style="background:#ff5a5f" title="Tienes avisos nuevos"></span>
+</a>
+<a class="relative flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="promociones.html">
+<span class="material-symbols-outlined text-[20px]">loyalty</span>
+<span class="font-label-md text-label-md hidden sm:inline">Promociones</span>
+<span class="hidden absolute -top-1 left-3 w-2.5 h-2.5 rounded-full ring-2 ring-white" id="puntoPromos" style="background:#ff5a5f" title="Hay promociones nuevas"></span>
+</a>
+<a class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="mis-citas.html">
+<span class="material-symbols-outlined text-[20px]">event</span>
+<span class="font-label-md text-label-md hidden sm:inline">Mis citas</span>
+</a>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-error transition-colors" id="btnCerrarSesion">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-label-md text-label-md hidden sm:inline">Cerrar sesión</span>
+</button>
+</div>
+</header>
+
+<main class="p-margin-mobile md:p-margin-desktop max-w-3xl mx-auto">
+<div class="flex flex-wrap items-end justify-between gap-3 mb-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1" id="saludo">Hola</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Elige una mascota para ver su información.</p>
+</div>
+<button class="bg-primary text-on-primary py-2.5 px-4 rounded-xl flex items-center gap-2 font-label-md shadow-sm hover:shadow-md transition-shadow" id="btnNuevaMascota" type="button"><span class="material-symbols-outlined">add_circle</span>Registrar mascota</button>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md" id="listaMascotas">
+<p class="text-on-surface-variant">Cargando tus mascotas...</p>
+</div>
+
+<!-- Promociones vigentes (solo aparece si hay alguna) -->
+<section class="hidden mt-10" id="seccionPromos">
+<div class="flex items-end justify-between mb-3">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Promociones para ti 🎁</h2>
+<p class="text-caption font-caption text-on-surface-variant">Por tiempo limitado en Premier Can</p>
+</div>
+<a class="font-label-md text-label-md text-primary flex items-center gap-1" href="promociones.html">Ver todas<span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+<div class="promo-carrusel" id="carruselPromos"></div>
+</section>
+</main>
+
+<!-- Registrar mascota -->
+<div class="fixed inset-0 z-[100] hidden" id="modalMascota">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-end sm:items-center justify-center sm:p-4 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest w-full sm:max-w-lg max-h-[94vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-2xl p-6 space-y-4" id="formMascota" novalidate>
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">pets</span>Registrar mascota</h2>
+<button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button>
+</div>
+
+<!-- Foto -->
+<div class="flex items-center gap-4">
+<label class="relative w-20 h-20 rounded-full bg-surface-container-high border-2 border-dashed border-outline-variant grid place-items-center overflow-hidden cursor-pointer shrink-0" for="mFoto" title="Elegir foto">
+<span class="material-symbols-outlined text-[30px] text-on-surface-variant" id="mFotoIcono">add_a_photo</span>
+<img alt="" class="hidden absolute inset-0 w-full h-full object-cover" id="mFotoVista">
+</label>
+<div class="text-sm text-on-surface-variant"><p class="font-semibold text-on-surface">Foto (opcional)</p><p>Toca el círculo para elegir una. JPG o PNG, hasta 5 MB.</p></div>
+<input accept="image/jpeg,image/png,image/webp" class="hidden" id="mFoto" type="file">
+</div>
+
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="mNombre">Nombre *</label>
+<input class="w-full py-2.5 px-3 rounded-lg" id="mNombre" maxlength="100" placeholder="Ej. Luna" type="text"></div>
+
+<div><span class="block font-label-md text-label-md text-on-surface-variant mb-1">¿Qué es? *</span>
+<div class="grid grid-cols-3 gap-2" id="mEspecies">
+<label class="cursor-pointer"><input class="sr-only peer" name="mEspecie" type="radio" value="Canino"><span class="flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md"><span class="material-symbols-outlined">sound_detection_dog_barking</span>Perro</span></label>
+<label class="cursor-pointer"><input class="sr-only peer" name="mEspecie" type="radio" value="Felino"><span class="flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md"><span class="material-symbols-outlined">cruelty_free</span>Gato</span></label>
+<label class="cursor-pointer"><input class="sr-only peer" name="mEspecie" type="radio" value="Otro"><span class="flex flex-col items-center gap-1 p-3 rounded-xl border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md"><span class="material-symbols-outlined">pets</span>Otro</span></label>
+</div></div>
+
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="mRaza" id="mRazaEtiqueta">Raza (opcional)</label>
+<input class="w-full py-2.5 px-3 rounded-lg" id="mRaza" list="mListaRazas" maxlength="80" placeholder="Ej. Mestizo, Shih Tzu" type="text"><datalist id="mListaRazas"></datalist></div>
+
+<div class="grid grid-cols-2 gap-3">
+<div><span class="block font-label-md text-label-md text-on-surface-variant mb-1">Sexo</span>
+<div class="grid grid-cols-2 gap-2">
+<label class="cursor-pointer"><input class="sr-only peer" name="mSexo" type="radio" value="M"><span class="block text-center py-2.5 rounded-lg border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md">♂ Macho</span></label>
+<label class="cursor-pointer"><input class="sr-only peer" name="mSexo" type="radio" value="H"><span class="block text-center py-2.5 rounded-lg border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md">♀ Hembra</span></label>
+</div></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="mNacimiento">Fecha de nacimiento</label>
+<input class="w-full py-2.5 px-3 rounded-lg" id="mNacimiento" type="date"><p class="text-caption text-on-surface-variant mt-1">Si no la sabes, pon una aproximada.</p></div>
+</div>
+
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="mAlergias">Alergias o condiciones importantes</label>
+<input class="w-full py-2.5 px-3 rounded-lg" id="mAlergias" maxlength="500" placeholder="Ej. alérgico al pollo, ninguna conocida" type="text"></div>
+
+<p class="text-caption text-on-surface-variant flex gap-2"><span class="material-symbols-outlined text-[18px]">info</span>La clínica revisará estos datos en su primera visita.</p>
+<p class="hidden text-error text-sm font-semibold" id="errorMascota"></p>
+<div class="flex justify-end gap-2 pt-1">
+<button class="px-4 py-2.5 rounded-lg border border-outline-variant font-label-md" data-cerrar type="button">Cancelar</button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-label-md flex items-center gap-2" id="btnGuardarMascota" type="submit"><span class="material-symbols-outlined text-[20px]">check</span>Registrar</button>
+</div>
+</form>
+</div>
+</div>
+
+<script>
+  const propietario = AuthCliente.protegerPagina();
+  if (propietario) {
+    document.getElementById('saludo').textContent = `Hola, ${propietario.nombreCompleto.split(' ')[0]}`;
+  }
+
+  document.getElementById('btnCerrarSesion').addEventListener('click', () => AuthCliente.cerrarSesion());
+
+  const ICONOS_ESPECIE = { Canino: 'sound_detection_dog_barking', Felino: 'cruelty_free', Otro: 'pets' };
+  const NOMBRE_ESPECIE = { Canino: 'Perro', Felino: 'Gato', Otro: 'Otro' };
+
+  async function cargarMascotas() {
+    const cont = document.getElementById('listaMascotas');
+    try {
+      const mascotas = await AuthCliente.apiFetch('/cliente/mascotas');
+
+      if (mascotas.length === 0) {
+        cont.innerHTML = `<button class="sm:col-span-2 border-2 border-dashed border-outline-variant rounded-xl p-8 text-center hover:border-primary transition-colors" data-nueva type="button">
+          <span class="material-symbols-outlined text-[40px] text-primary">add_circle</span>
+          <p class="font-semibold text-on-surface mt-1">Registra a tu primera mascota</p>
+          <p class="text-sm text-on-surface-variant">Así podrás agendarle citas y ver su historial.</p></button>`;
+        return;
+      }
+
+      cont.innerHTML = mascotas.map((m) => {
+        const avatar = m.FotoURL
+          ? `<img class="w-full h-full object-cover" src="${escHtml(window.BACKEND_ORIGIN)}${escHtml(m.FotoURL)}">`
+          : `<span class="material-symbols-outlined text-[32px] text-primary">${ICONOS_ESPECIE[m.Especie] || 'pets'}</span>`;
+        return `
+          <a href="mascota.html?id=${escHtml(m.PacienteID)}"
+             class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all">
+            <div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant">
+              ${avatar}
+            </div>
+            <div>
+              <p class="font-headline-md text-headline-md-mobile font-semibold text-on-surface">${escHtml(m.Nombre)}</p>
+              <p class="font-caption text-caption text-on-surface-variant">${escHtml(NOMBRE_ESPECIE[m.Especie] || m.Especie)}${escHtml(m.Raza ? ' • ' + m.Raza : '')}</p>
+            </div>
+          </a>`;
+      }).join('') + `<button class="border-2 border-dashed border-outline-variant rounded-xl p-4 flex items-center gap-4 hover:border-primary transition-colors text-left" data-nueva type="button">
+            <div class="w-16 h-16 rounded-full bg-primary/10 grid place-items-center shrink-0"><span class="material-symbols-outlined text-[30px] text-primary">add</span></div>
+            <div><p class="font-semibold text-on-surface">Registrar otra mascota</p><p class="font-caption text-caption text-on-surface-variant">Perro, gato u otro</p></div></button>`;
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error sm:col-span-2">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  if (propietario) cargarMascotas();
+
+  // ---------------- Registrar mascota ----------------
+  const $m = (id) => document.getElementById(id);
+  const RAZAS = {
+    Canino: ['Mestizo', 'Shih Tzu', 'Poodle', 'Schnauzer', 'Labrador', 'Golden Retriever', 'Pastor Alemán', 'Bulldog Francés', 'Pug', 'Chihuahua', 'Yorkshire Terrier', 'Cocker Spaniel', 'Beagle', 'Husky Siberiano', 'Pitbull', 'Rottweiler', 'Dachshund (salchicha)', 'Pekinés', 'Perro sin pelo del Perú'],
+    Felino: ['Mestizo', 'Siamés', 'Persa', 'Angora', 'Maine Coon', 'Bengalí', 'British Shorthair', 'Ragdoll', 'Esfinge'],
+    Otro: ['Conejo', 'Hámster', 'Cuy', 'Loro', 'Periquito', 'Tortuga', 'Hurón', 'Erizo', 'Pez'],
+  };
+  let fotoElegida = null;
+  const abrirModal = () => {
+    $m('formMascota').reset(); fotoElegida = null;
+    $m('mFotoVista').classList.add('hidden'); $m('mFotoIcono').classList.remove('hidden');
+    $m('errorMascota').classList.add('hidden');
+    $m('mNacimiento').max = new Date(Date.now() - 5 * 3600e3).toISOString().slice(0, 10);
+    actualizarEspecie();
+    $m('modalMascota').classList.remove('hidden');
+    setTimeout(() => $m('mNombre').focus(), 50);
+  };
+  const cerrarModal = () => $m('modalMascota').classList.add('hidden');
+  $m('btnNuevaMascota').addEventListener('click', abrirModal);
+  $m('listaMascotas').addEventListener('click', (e) => { if (e.target.closest('[data-nueva]')) abrirModal(); });
+  document.querySelectorAll('#modalMascota [data-cerrar]').forEach((b) => b.addEventListener('click', cerrarModal));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarModal(); });
+
+  function actualizarEspecie() {
+    const esp = (document.querySelector('input[name="mEspecie"]:checked') || {}).value;
+    const otro = esp === 'Otro';
+    $m('mRazaEtiqueta').textContent = otro ? '¿Qué animal es? *' : 'Raza (opcional)';
+    $m('mRaza').placeholder = otro ? 'Ej. conejo, hámster, loro' : esp === 'Felino' ? 'Ej. Mestizo, Siamés' : 'Ej. Mestizo, Shih Tzu';
+    $m('mListaRazas').innerHTML = (RAZAS[esp] || []).map((r) => `<option value="${escHtml(r)}"></option>`).join('');
+  }
+  $m('mEspecies').addEventListener('change', actualizarEspecie);
+
+  $m('mFoto').addEventListener('change', (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    if (f.size > 5 * 1024 * 1024) { e.target.value = ''; return mostrarErrorMascota('La foto no puede pesar más de 5 MB.'); }
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { e.target.value = ''; return mostrarErrorMascota('Elige una foto JPG, PNG o WEBP.'); }
+    fotoElegida = f;
+    $m('mFotoVista').src = URL.createObjectURL(f); $m('mFotoVista').classList.remove('hidden'); $m('mFotoIcono').classList.add('hidden');
+  });
+
+  function mostrarErrorMascota(t) { const el = $m('errorMascota'); el.textContent = t; el.classList.remove('hidden'); }
+
+  $m('formMascota').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    $m('errorMascota').classList.add('hidden');
+    const especie = (document.querySelector('input[name="mEspecie"]:checked') || {}).value;
+    const body = {
+      nombre: $m('mNombre').value.trim(), especie, raza: $m('mRaza').value.trim(),
+      sexo: (document.querySelector('input[name="mSexo"]:checked') || {}).value || null,
+      fechaNacimiento: $m('mNacimiento').value || null, alergias: $m('mAlergias').value.trim(),
+    };
+    if (!body.nombre) return mostrarErrorMascota('Escribe el nombre de tu mascota.');
+    if (!especie) return mostrarErrorMascota('Elige si es perro, gato u otro.');
+    if (especie === 'Otro' && !body.raza) return mostrarErrorMascota('Cuéntanos qué animal es.');
+    const btn = $m('btnGuardarMascota'); btn.disabled = true;
+    try {
+      const r = await AuthCliente.apiFetch('/cliente/mascotas', { method: 'POST', body: JSON.stringify(body) });
+      // La foto va aparte (multipart); si falla, la mascota igual queda registrada
+      if (fotoElegida) {
+        const fd = new FormData(); fd.append('foto', fotoElegida);
+        try {
+          const resp = await fetch(`${window.API_BASE_URL}/cliente/mascotas/${r.pacienteId}/foto`, { method: 'POST', headers: { Authorization: `Bearer ${AuthCliente.obtenerToken()}` }, body: fd });
+          if (!resp.ok) console.warn('Foto no guardada:', (await resp.json().catch(() => ({}))).mensaje);
+        } catch (_) { /* sin conexión: la foto se puede agregar después en la clínica */ }
+      }
+      cerrarModal();
+      await cargarMascotas();
+      if (window.PCEfectos) { const b = $m('btnNuevaMascota').getBoundingClientRect(); PCEfectos.huellitas(b.left + b.width / 2, b.top + b.height / 2, 14); }
+    } catch (err) { mostrarErrorMascota(err.message); }
+    finally { btn.disabled = false; }
+  });
+
+  // Punto rojo en "Avisos" si la clínica mandó alguno que todavía no vio
+  (async () => {
+    if (!propietario) return;
+    try {
+      const avisos = await AuthCliente.apiFetch('/cliente/avisos');
+      let vistos = [];
+      try { vistos = JSON.parse(localStorage.getItem('pc_avisos_vistos') || '[]'); } catch (e) { /* nada */ }
+      if (avisos.some((a) => !vistos.includes(a.RecordatorioID))) document.getElementById('puntoAvisos').classList.remove('hidden');
+    } catch (e) { /* los avisos son un extra: si fallan, la página sigue igual */ }
+  })();
+
+  // Promociones vigentes: carrusel + puntito rojo si hay alguna que no ha visto
+  (async () => {
+    try {
+      const resp = await fetch(`${window.API_BASE_URL}/cliente/promociones`);
+      if (!resp.ok) return;
+      const vigentes = (await resp.json()).filter((p) => p.Estado === 'Vigente');
+      if (!vigentes.length) return;
+      document.getElementById('carruselPromos').innerHTML = vigentes
+        .map((p) => PromoUI.tarjetaCliente(p, { href: `promocion.html?id=${p.PromocionID}` })).join('');
+      document.getElementById('seccionPromos').classList.remove('hidden');
+      let vistas = [];
+      try { vistas = JSON.parse(localStorage.getItem('pc_promos_vistas') || '[]'); } catch (e) {}
+      if (vigentes.some((p) => !vistas.includes(p.PromocionID))) document.getElementById('puntoPromos').classList.remove('hidden');
+    } catch (e) { /* las promociones son un extra: si fallan, la página sigue igual */ }
+  })();
+</script>
+</body></html>

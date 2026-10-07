@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventario - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background flex min-h-screen antialiased">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm"><div class="w-9 h-9"></div><h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Inventario</h1></div>
+</header>
+<main class="flex-1 p-margin-mobile md:p-margin-desktop">
+<div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Inventario</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Medicamentos, vacunas e insumos: stock, vencimientos y movimientos.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="border border-primary text-primary py-3 px-4 rounded-lg flex items-center gap-2 font-label-md" id="btnPedirNuevo" type="button"><span class="material-symbols-outlined">add_comment</span>Pedir producto nuevo</button>
+<a class="solo-admin hidden border border-primary text-primary py-3 px-4 rounded-lg flex items-center gap-2 font-label-md" href="compras.html?tab=pedido"><span class="material-symbols-outlined">assignment</span>Pedido sugerido</a>
+<a class="solo-admin hidden border border-primary text-primary py-3 px-4 rounded-lg flex items-center gap-2 font-label-md" href="compras.html"><span class="material-symbols-outlined">local_shipping</span>Compras y proveedores</a>
+<button class="bg-primary text-on-primary py-3 px-5 rounded-lg flex items-center gap-2 font-label-md text-label-md" id="btnNuevoProducto" type="button"><span class="material-symbols-outlined">add</span>Agregar producto</button>
+</div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
+<div class="pc-stat" style="--pc-stat-tono:rgba(13,122,135,.07)"><div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Productos con control</span><span class="pc-ico" style="background:linear-gradient(135deg,#13a3a3,#00606a)"><span class="material-symbols-outlined">inventory_2</span></span></div><p class="pc-stat-valor" id="statProductos">—</p><p class="pc-stat-pie">Con stock controlado</p></div>
+<div class="pc-stat" style="--pc-stat-tono:rgba(242,193,78,.14)"><div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Stock bajo</span><span class="pc-ico" style="background:linear-gradient(135deg,#f6cf6a,#d99a17)"><span class="material-symbols-outlined">production_quantity_limits</span></span></div><p class="pc-stat-valor" id="statBajo">—</p><p class="pc-stat-pie">En el mínimo o por debajo</p></div>
+<div class="pc-stat" style="--pc-stat-tono:rgba(212,82,94,.08)"><div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Vencimientos</span><span class="pc-ico" style="background:linear-gradient(135deg,#ff8a8a,#d4525e)"><span class="material-symbols-outlined">event_busy</span></span></div><p class="pc-stat-valor" id="statVence">—</p><p class="pc-stat-pie" id="statVenceDetalle">Vencidos o en ≤ 60 días</p></div>
+<div class="pc-stat solo-admin hidden" style="--pc-stat-tono:rgba(37,99,235,.07)"><div class="pc-stat-cabeza"><span class="pc-stat-etiqueta">Valor del inventario</span><span class="pc-ico" style="background:linear-gradient(135deg,#60a5fa,#2563eb)"><span class="material-symbols-outlined">savings</span></span></div><p class="pc-stat-valor" id="statValor" style="font-size:28px">—</p><p class="pc-stat-pie" id="statValorDetalle">Stock × último costo</p></div>
+</div>
+
+<section class="hidden bg-surface-container-lowest rounded-xl border border-outline-variant p-4 mb-4" id="panelSolicitudes">
+<div class="flex items-center justify-between gap-2 mb-2"><h3 class="font-label-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary">front_hand</span>Solicitudes de reposición</h3>
+<a class="solo-admin hidden text-primary text-sm font-semibold" href="compras.html?tab=pedido">Ver en el pedido sugerido →</a></div>
+<div class="flex flex-wrap gap-2" id="listaSolicitudes"></div>
+</section>
+
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 mb-4 flex flex-wrap gap-3 items-center">
+<div class="relative flex-1 min-w-[220px]"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-3 py-2" id="buscarProducto" placeholder="Buscar producto o lote…" type="text"></div>
+<select class="py-2 px-3" id="filtroCategoria"><option value="">Todas las categorías</option><option>Medicamento</option><option>Vacuna</option><option>Antiparasitario</option><option>Insumo</option><option>Alimento</option></select>
+<select class="py-2 px-3" id="filtroEstado"><option value="">Todos</option><option value="alerta">Solo con alertas</option><option value="control">Solo con control de stock</option></select>
+</div>
+
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-x-auto">
+<table class="w-full text-left">
+<thead><tr><th class="py-3 px-4">Producto</th><th class="py-3 px-4">Categoría</th><th class="py-3 px-4 text-right">Stock</th><th class="py-3 px-4 text-right" id="thPrecio">Costo / Precio</th><th class="py-3 px-4">Vence</th><th class="py-3 px-4">Estado</th><th class="py-3 px-4 text-right">Acciones</th></tr></thead>
+<tbody id="tablaInventario"><tr><td class="py-6 px-4 text-center text-on-surface-variant" colspan="7">Cargando…</td></tr></tbody>
+</table>
+</div>
+</main>
+</div>
+
+<!-- Modal producto -->
+<div class="fixed inset-0 z-[100] hidden" id="modalProducto">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 space-y-4" id="formProducto">
+<div class="flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface" id="tituloModalProducto">Agregar producto</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<input id="productoId" type="hidden">
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodNombre">Nombre *</label><input class="w-full py-2 px-3" id="prodNombre" maxlength="150" placeholder="Ej. Amoxicilina 250 mg" required type="text"></div>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodCategoria">Categoría</label><select class="w-full py-2 px-3" id="prodCategoria"><option>Medicamento</option><option>Vacuna</option><option>Antiparasitario</option><option>Insumo</option><option>Alimento</option></select></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodPresentacion">Presentación</label><input class="w-full py-2 px-3" id="prodPresentacion" maxlength="80" placeholder="Caja x 10 tab." type="text"></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodUnidad">Unidad</label><input class="w-full py-2 px-3" id="prodUnidad" maxlength="20" placeholder="unid., ml, dosis…" type="text" value="unid."></div>
+<div id="bloqueStockInicial"><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodStock">Stock inicial</label><input class="w-full py-2 px-3" id="prodStock" min="0" step="0.01" type="number" value="0"></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodMinimo">Stock mínimo (alerta)</label><input class="w-full py-2 px-3" id="prodMinimo" min="0" step="0.01" type="number" value="0"></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodCosto">Costo unitario (S/)</label><input class="w-full py-2 px-3" id="prodCosto" min="0" step="0.01" type="number"></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodPrecio">Precio de venta (S/)</label><input class="w-full py-2 px-3" id="prodPrecio" min="0" step="0.01" type="number"><p class="text-caption mt-1" id="prodMargen"></p></div>
+<div class="bloque-solo-nuevo"><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodLote">Lote del stock inicial</label><input class="w-full py-2 px-3" id="prodLote" maxlength="40" type="text"></div>
+<div class="bloque-solo-nuevo"><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodVence">Vencimiento</label><input class="w-full py-2 px-3" id="prodVence" type="date"></div>
+<div class="col-span-2"><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodProveedor">Proveedor habitual</label><select class="w-full py-2 px-3" id="prodProveedor"><option value="">— Sin asignar —</option></select></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodLaboratorio">Laboratorio / marca</label><input class="w-full py-2 px-3" id="prodLaboratorio" maxlength="80" placeholder="Ej. MSD, Zoetis, Bayer" type="text"></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="prodSenasa">Registro SENASA</label><input class="w-full py-2 px-3" id="prodSenasa" maxlength="30" placeholder="Ej. F.06.01.N.0123" type="text"></div>
+<label class="col-span-2 flex items-center gap-2 text-sm text-on-surface"><input id="prodRefrigerado" type="checkbox"> ❄️ Requiere cadena de frío (2–8 °C)</label>
+</div>
+<p class="text-caption text-on-surface-variant hidden" id="avisoLotesEdicion">El lote y el vencimiento se manejan por lote: usa el botón <b>Lotes</b> del producto o registra una compra.</p>
+<p class="hidden text-error text-caption font-caption" id="errorProducto"></p>
+<div class="flex justify-end gap-2 pt-2"><button class="px-4 py-2 rounded-lg border border-outline-variant" data-cerrar type="button">Cancelar</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md" type="submit">Guardar</button></div>
+</form>
+</div>
+</div>
+
+<!-- Modal movimiento -->
+<div class="fixed inset-0 z-[100] hidden" id="modalMovimiento">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 space-y-4" id="formMovimiento">
+<div class="flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface">Movimiento de stock</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<p class="font-body-md text-on-surface"><b id="movNombre"></b><br><span class="text-on-surface-variant text-sm">Stock actual: <b id="movStock"></b></span></p>
+<input id="movId" type="hidden">
+<div class="grid grid-cols-3 gap-2" id="movTipos">
+<label class="cursor-pointer"><input checked class="sr-only peer" name="movTipo" type="radio" value="Entrada"><span class="block text-center p-3 rounded-xl border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md">⬆️ Entrada</span></label>
+<label class="cursor-pointer"><input class="sr-only peer" name="movTipo" type="radio" value="Salida"><span class="block text-center p-3 rounded-xl border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md">⬇️ Salida</span></label>
+<label class="cursor-pointer"><input class="sr-only peer" name="movTipo" type="radio" value="Ajuste"><span class="block text-center p-3 rounded-xl border border-outline-variant peer-checked:border-primary peer-checked:bg-primary/10 font-label-md">🔄 Conteo</span></label>
+</div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="movCantidad" id="movEtiquetaCantidad">Cantidad que ingresa</label><input class="w-full py-2 px-3" id="movCantidad" min="0" required step="0.01" type="number"></div>
+<div class="grid grid-cols-3 gap-2" id="bloqueLoteEntrada">
+<div><label class="block text-xs font-semibold text-on-surface-variant mb-1" for="movLote">Lote</label><input class="w-full py-2 px-2" id="movLote" maxlength="40" type="text"></div>
+<div><label class="block text-xs font-semibold text-on-surface-variant mb-1" for="movVence">Vence</label><input class="w-full py-2 px-2" id="movVence" type="date"></div>
+<div class="solo-admin hidden"><label class="block text-xs font-semibold text-on-surface-variant mb-1" for="movCosto">Costo S/</label><input class="w-full py-2 px-2" id="movCosto" min="0" step="0.01" type="number"></div>
+<p class="col-span-3 text-caption text-on-surface-variant">Para compras con factura usa <b>Compras</b>: queda el comprobante y la deuda con el proveedor.</p>
+</div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="movMotivo">Motivo</label><input class="w-full py-2 px-3" id="movMotivo" maxlength="200" placeholder="Compra a proveedor, uso en consulta, conteo mensual…" type="text"></div>
+<p class="hidden text-error text-caption font-caption" id="errorMovimiento"></p>
+<div class="flex justify-end gap-2"><button class="px-4 py-2 rounded-lg border border-outline-variant" data-cerrar type="button">Cancelar</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md" type="submit">Registrar</button></div>
+<div><h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-2 mt-2">Últimos movimientos</h4><div class="space-y-1 text-sm" id="movHistorial"></div></div>
+</form>
+</div>
+</div>
+
+<!-- Modal solicitud de reposición -->
+<div class="fixed inset-0 z-[100] hidden" id="modalSolicitud">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+<form class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-md w-full p-6 space-y-4" id="formSolicitud" novalidate>
+<div class="flex items-center justify-between"><h3 class="font-headline-md text-headline-md text-on-surface">Solicitar reposición</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<p class="text-on-surface-variant text-sm">El área administrativa lo verá en el pedido sugerido y lo comprará al proveedor.</p>
+<input id="solMedId" type="hidden">
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="solProducto">Producto</label><input class="w-full py-2 px-3" id="solProducto" maxlength="150" placeholder="Ej. Meloxicam 1.5 mg/ml suspensión" type="text"><p class="text-caption text-on-surface-variant mt-1" id="solStock"></p></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="solCantidad">Cantidad aproximada (opcional)</label><input class="w-full py-2 px-3" id="solCantidad" min="1" step="1" type="number"></div>
+<div><label class="block font-label-md text-label-md text-on-surface-variant mb-1" for="solNota">Nota</label><input class="w-full py-2 px-3" id="solNota" maxlength="300" placeholder="Ej. queda 1 frasco abierto, lo uso en cirugías" type="text"></div>
+<label class="flex items-center gap-2 text-sm text-on-surface"><input id="solUrgente" type="checkbox"> Es urgente</label>
+<p class="hidden text-error text-sm font-semibold" id="errorSolicitud"></p>
+<div class="flex justify-end gap-2"><button class="px-4 py-2 rounded-lg border border-outline-variant" data-cerrar type="button">Cancelar</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md" type="submit">Enviar solicitud</button></div>
+</form>
+</div>
+</div>
+
+<!-- Modal lotes -->
+<div class="fixed inset-0 z-[100] hidden" id="modalLotes">
+<div class="absolute inset-0 bg-on-surface/40" data-cerrar></div>
+<div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+<div class="pointer-events-auto bg-surface-container-lowest rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6">
+<div class="flex items-center justify-between mb-1"><h3 class="font-headline-md text-headline-md text-on-surface">Lotes</h3><button class="w-10 h-10 rounded-full grid place-items-center hover:bg-surface-container-high" data-cerrar type="button"><span class="material-symbols-outlined">close</span></button></div>
+<p class="text-on-surface-variant text-sm mb-4"><b class="text-on-surface" id="lotesNombre"></b> · Al vender o dar salida se usa primero el lote que vence antes.</p>
+<div class="overflow-x-auto rounded-xl border border-outline-variant"><table class="w-full text-left text-sm">
+<thead><tr><th class="py-2 px-3">Lote</th><th class="py-2 px-3">Vence</th><th class="py-2 px-3 text-right">Queda</th><th class="py-2 px-3">Origen</th><th class="py-2 px-3 text-right">Costo</th><th class="py-2 px-3"></th></tr></thead>
+<tbody id="tablaLotes"></tbody></table></div>
+<p class="hidden text-error text-sm font-semibold mt-3" id="errorLotes"></p>
+</div>
+</div>
+</div>
+
+<script>
+  let productos = [];
+  let proveedoresInv = [];
+  let loteProducto = null;
+  const esAdmin = !!(Auth.obtenerUsuario() || {}).accesoConfig;
+  if (!esAdmin) document.getElementById('btnNuevoProducto').classList.add('hidden');
+  else document.querySelectorAll('.solo-admin').forEach((el) => el.classList.remove('hidden'));
+  // El costo de compra y el valor del inventario son información del área administrativa
+  if (!esAdmin) {
+    document.getElementById('thPrecio').textContent = 'Precio';
+    document.getElementById('statValor').closest('.grid').classList.replace('xl:grid-cols-4', 'xl:grid-cols-3');
+  }
+  const soles = (v) => `S/ ${Number(v || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const margen = (costo, precio) => (costo != null && precio != null && Number(precio) > 0 ? Math.round(((Number(precio) - Number(costo)) / Number(precio)) * 100) : null);
+  const n = (v) => Number(v || 0).toLocaleString('es-PE', { maximumFractionDigits: 2 });
+  const fecha = (f) => (f ? new Date(String(f).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '—');
+
+  function chips(p) {
+    const c = [];
+    if (p.Vencido) c.push('<span class="px-2 py-0.5 rounded-full text-xs font-bold" style="background:rgba(220,38,38,.12);color:#dc2626">Vencido</span>');
+    else if (p.PorVencer) c.push('<span class="px-2 py-0.5 rounded-full text-xs font-bold" style="background:rgba(217,119,6,.14);color:#d97706">Por vencer</span>');
+    if (p.BajoStock) c.push('<span class="px-2 py-0.5 rounded-full text-xs font-bold" style="background:rgba(217,119,6,.14);color:#d97706">Stock bajo</span>');
+    if (!c.length) c.push(p.ControlStock ? '<span class="px-2 py-0.5 rounded-full text-xs font-bold" style="background:rgba(22,163,74,.12);color:#16a34a">OK</span>' : '<span class="text-xs text-on-surface-variant">Sin control</span>');
+    return c.join(' ');
+  }
+
+  function render() {
+    const q = document.getElementById('buscarProducto').value.trim().toLowerCase();
+    const cat = document.getElementById('filtroCategoria').value;
+    const est = document.getElementById('filtroEstado').value;
+    const lista = productos.filter((p) =>
+      (!q || p.NombreMedicamento.toLowerCase().includes(q) || (p.Lote || '').toLowerCase().includes(q)) &&
+      (!cat || p.Categoria === cat) &&
+      (est !== 'alerta' || p.BajoStock || p.Vencido || p.PorVencer) &&
+      (est !== 'control' || p.ControlStock));
+    const tbody = document.getElementById('tablaInventario');
+    tbody.innerHTML = lista.length ? lista.map((p) => `
+      <tr>
+        <td class="py-3 px-4"><p class="font-semibold text-on-surface">${p.Refrigerado ? '<span title="Cadena de frío (2–8 °C)">❄️</span> ' : ''}${escHtml(p.NombreMedicamento)}</p>
+          <p class="text-caption text-on-surface-variant">${escHtml([p.Presentacion, p.Laboratorio, p.Lote && `Lote ${p.Lote}`, p.LotesActivos > 1 && `${p.LotesActivos} lotes`].filter(Boolean).join(' · '))}</p>
+          ${p.Proveedor || p.RegistroSenasa ? `<p class="text-caption text-on-surface-variant">${escHtml([p.Proveedor && `Prov.: ${p.Proveedor}`, p.RegistroSenasa && `SENASA ${p.RegistroSenasa}`].filter(Boolean).join(' · '))}</p>` : ''}</td>
+        <td class="py-3 px-4 text-on-surface-variant">${escHtml(p.Categoria)}</td>
+        <td class="py-3 px-4 text-right"><b class="text-on-surface">${escHtml(n(p.Stock))}</b> <span class="text-on-surface-variant text-sm">${escHtml(p.Unidad)}</span>${p.ControlStock ? `<p class="text-caption text-on-surface-variant">mín. ${escHtml(n(p.StockMinimo))}</p>` : ''}</td>
+        <td class="py-3 px-4 text-right whitespace-nowrap">${esAdmin ? `<span class="text-on-surface-variant text-sm">${p.CostoUnitario != null ? escHtml(soles(p.CostoUnitario)) : '—'}</span> / ` : ''}<b class="text-on-surface">${p.PrecioVenta != null ? escHtml(soles(p.PrecioVenta)) : '<span style="color:#d97706">sin precio</span>'}</b>
+          ${esAdmin && margen(p.CostoUnitario, p.PrecioVenta) !== null ? `<p class="text-caption" style="color:${margen(p.CostoUnitario, p.PrecioVenta) < 15 ? '#dc2626' : '#16a34a'}">margen ${escHtml(margen(p.CostoUnitario, p.PrecioVenta))}%</p>` : ''}</td>
+        <td class="py-3 px-4 text-on-surface-variant">${escHtml(fecha(p.FechaVencimiento))}</td>
+        <td class="py-3 px-4">${chips(p)}</td>
+        <td class="py-3 px-4 text-right whitespace-nowrap">
+          <button class="btn-mov px-3 py-1.5 rounded-lg border border-primary text-primary text-sm font-semibold" data-id="${escHtml(p.MedicamentoID)}" type="button">Movimiento</button>
+          ${p.SolicitudPendiente ? '<span class="inline-grid place-items-center w-9 h-9" title="Ya se solicitó su reposición">🙋</span>' : `<button class="btn-solicitar w-9 h-9 rounded-lg inline-grid place-items-center text-on-surface-variant hover:bg-surface-container-high" data-id="${escHtml(p.MedicamentoID)}" title="Solicitar reposición" type="button"><span class="material-symbols-outlined">front_hand</span></button>`}
+          ${p.ControlStock ? `<button class="btn-lotes w-9 h-9 rounded-lg inline-grid place-items-center text-on-surface-variant hover:bg-surface-container-high" data-id="${escHtml(p.MedicamentoID)}" title="Lotes y vencimientos" type="button"><span class="material-symbols-outlined">stacks</span></button>` : ''}
+          ${esAdmin ? `<button class="btn-editar w-9 h-9 rounded-lg inline-grid place-items-center text-on-surface-variant hover:bg-surface-container-high" data-id="${escHtml(p.MedicamentoID)}" title="Editar" type="button"><span class="material-symbols-outlined">edit</span></button>` : ''}
+        </td>
+      </tr>`).join('')
+      : '<tr><td class="py-6 px-4 text-center text-on-surface-variant" colspan="7">No hay productos con ese filtro.</td></tr>';
+  }
+
+  async function cargar() {
+    try {
+      productos = await Auth.apiFetch('/inventario');
+      document.getElementById('statProductos').textContent = productos.filter((p) => p.ControlStock).length;
+      document.getElementById('statBajo').textContent = productos.filter((p) => p.BajoStock).length;
+      const venc = productos.filter((p) => p.Vencido).length; const porV = productos.filter((p) => p.PorVencer).length;
+      document.getElementById('statVence').textContent = venc + porV;
+      document.getElementById('statVenceDetalle').textContent = `${venc} vencido(s) · ${porV} por vencer (≤ 60 días)`;
+      const conCosto = productos.filter((p) => p.ControlStock && Number(p.Stock) > 0);
+      const valor = conCosto.reduce((s, p) => s + Number(p.Stock) * Number(p.CostoUnitario || 0), 0);
+      const sinCosto = conCosto.filter((p) => p.CostoUnitario == null).length;
+      document.getElementById('statValor').textContent = soles(valor);
+      document.getElementById('statValorDetalle').textContent = sinCosto ? `Stock × costo · ${sinCosto} producto(s) sin costo` : 'Stock × último costo de compra';
+      render();
+    } catch (err) {
+      document.getElementById('tablaInventario').innerHTML = `<tr><td class="py-6 px-4 text-center text-error" colspan="7">${escHtml(err.message)}</td></tr>`;
+    }
+  }
+  async function cargarProveedores() {
+    if (!esAdmin) return;
+    try {
+      proveedoresInv = await Auth.apiFetch('/proveedores');
+      document.getElementById('prodProveedor').innerHTML = '<option value="">— Sin asignar —</option>' +
+        proveedoresInv.filter((p) => p.Activo).map((p) => `<option value="${escHtml(p.ProveedorID)}">${escHtml(p.NombreComercial || p.RazonSocial)}</option>`).join('');
+    } catch (_) { /* sin proveedores */ }
+  }
+  ['buscarProducto', 'filtroCategoria', 'filtroEstado'].forEach((id) => document.getElementById(id).addEventListener('input', render));
+
+  // --- Modales ---
+  const abrir = (id) => document.getElementById(id).classList.remove('hidden');
+  const cerrar = (id) => document.getElementById(id).classList.add('hidden');
+  const MODALES = ['modalProducto', 'modalMovimiento', 'modalLotes', 'modalSolicitud'];
+  document.querySelectorAll('[data-cerrar]').forEach((b) => b.addEventListener('click', () => MODALES.forEach(cerrar)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') MODALES.forEach(cerrar); });
+
+  function abrirProducto(p) {
+    document.getElementById('tituloModalProducto').textContent = p ? 'Editar producto' : 'Agregar producto';
+    document.getElementById('productoId').value = p ? p.MedicamentoID : '';
+    document.getElementById('prodNombre').value = p ? p.NombreMedicamento : '';
+    document.getElementById('prodCategoria').value = p ? p.Categoria : 'Medicamento';
+    document.getElementById('prodPresentacion').value = p ? p.Presentacion || '' : '';
+    document.getElementById('prodUnidad').value = p ? p.Unidad : 'unid.';
+    document.getElementById('prodStock').value = 0;
+    document.getElementById('bloqueStockInicial').classList.toggle('hidden', !!p);
+    document.getElementById('prodMinimo').value = p ? Number(p.StockMinimo) : 0;
+    document.getElementById('prodPrecio').value = p && p.PrecioVenta != null ? Number(p.PrecioVenta) : '';
+    document.getElementById('prodLote').value = '';
+    document.getElementById('prodVence').value = '';
+    document.querySelectorAll('.bloque-solo-nuevo').forEach((el) => el.classList.toggle('hidden', !!p));
+    document.getElementById('avisoLotesEdicion').classList.toggle('hidden', !p);
+    document.getElementById('prodCosto').value = p && p.CostoUnitario != null ? Number(p.CostoUnitario) : '';
+    document.getElementById('prodProveedor').value = p && p.ProveedorID ? p.ProveedorID : '';
+    document.getElementById('prodLaboratorio').value = p ? p.Laboratorio || '' : '';
+    document.getElementById('prodSenasa').value = p ? p.RegistroSenasa || '' : '';
+    document.getElementById('prodRefrigerado').checked = p ? !!p.Refrigerado : false;
+    pintarMargen();
+    document.getElementById('errorProducto').classList.add('hidden');
+    abrir('modalProducto');
+    document.getElementById('prodNombre').focus();
+  }
+  document.getElementById('btnNuevoProducto').addEventListener('click', () => abrirProducto(null));
+
+  document.getElementById('formProducto').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('productoId').value;
+    const v = (k) => document.getElementById(k).value;
+    const body = { nombre: v('prodNombre'), categoria: v('prodCategoria'), presentacion: v('prodPresentacion'), unidad: v('prodUnidad'),
+      stockInicial: v('prodStock'), stockMinimo: v('prodMinimo'), precioVenta: v('prodPrecio'), costoUnitario: v('prodCosto'),
+      proveedorId: v('prodProveedor') || null, laboratorio: v('prodLaboratorio'), registroSenasa: v('prodSenasa'),
+      refrigerado: document.getElementById('prodRefrigerado').checked };
+    if (!id) { body.lote = v('prodLote'); body.fechaVencimiento = v('prodVence'); }
+    try {
+      await Auth.apiFetch(id ? `/inventario/${id}` : '/inventario', { method: id ? 'PUT' : 'POST', body: JSON.stringify(body) });
+      cerrar('modalProducto');
+      cargar();
+    } catch (err) {
+      const el = document.getElementById('errorProducto'); el.textContent = err.message; el.classList.remove('hidden');
+    }
+  });
+
+  function pintarMargen() {
+    const m = margen(document.getElementById('prodCosto').value || null, document.getElementById('prodPrecio').value || null);
+    const el = document.getElementById('prodMargen');
+    el.textContent = m === null ? '' : `Margen: ${m}%${m < 15 ? ' (bajo)' : ''}`;
+    el.style.color = m !== null && m < 15 ? '#dc2626' : '#16a34a';
+  }
+  ['prodCosto', 'prodPrecio'].forEach((id) => document.getElementById(id).addEventListener('input', pintarMargen));
+  document.getElementById('prodCategoria').addEventListener('change', (e) => { if (!document.getElementById('productoId').value) document.getElementById('prodRefrigerado').checked = e.target.value === 'Vacuna'; });
+
+  const ETIQUETAS_MOV = { Entrada: 'Cantidad que ingresa', Salida: 'Cantidad que sale', Ajuste: 'Stock contado (nuevo total)' };
+  document.getElementById('movTipos').addEventListener('change', () => {
+    const t = document.querySelector('input[name="movTipo"]:checked').value;
+    document.getElementById('movEtiquetaCantidad').textContent = ETIQUETAS_MOV[t];
+    document.getElementById('bloqueLoteEntrada').classList.toggle('hidden', t !== 'Entrada');
+  });
+
+  // --- Lotes ---
+  async function abrirLotes(p) {
+    loteProducto = p;
+    document.getElementById('lotesNombre').textContent = `${p.NombreMedicamento} (stock ${n(p.Stock)} ${p.Unidad})`;
+    document.getElementById('errorLotes').classList.add('hidden');
+    document.getElementById('tablaLotes').innerHTML = '<tr><td class="py-4 px-3 text-on-surface-variant" colspan="6">Cargando…</td></tr>';
+    abrir('modalLotes');
+    try {
+      const lotes = await Auth.apiFetch(`/inventario/${p.MedicamentoID}/lotes`);
+      document.getElementById('tablaLotes').innerHTML = lotes.length ? lotes.map((l) => {
+        const agotado = Number(l.CantidadActual) <= 0;
+        const estado = agotado ? '<span class="text-caption text-on-surface-variant">agotado</span>' : l.Vencido ? '<span class="px-2 py-0.5 rounded-full text-xs font-bold" style="background:rgba(220,38,38,.12);color:#dc2626">Vencido</span>' : l.PorVencer ? '<span class="px-2 py-0.5 rounded-full text-xs font-bold" style="background:rgba(217,119,6,.14);color:#d97706">Por vencer</span>' : '';
+        return `<tr class="border-t border-outline-variant ${agotado ? 'opacity-50' : ''}">
+          <td class="py-2 px-3">${esAdmin && !agotado ? `<input class="lote-num py-1 px-2 w-28" data-id="${escHtml(l.LoteID)}" maxlength="40" value="${escHtml(l.NumeroLote || '')}" placeholder="sin número">` : `<b>${escHtml(l.NumeroLote || 'sin número')}</b>`}</td>
+          <td class="py-2 px-3">${esAdmin && !agotado ? `<input class="lote-vence py-1 px-2" data-id="${escHtml(l.LoteID)}" type="date" value="${escHtml(l.FechaVencimiento ? String(l.FechaVencimiento).slice(0, 10) : '')}">` : escHtml(fecha(l.FechaVencimiento))} ${estado}</td>
+          <td class="py-2 px-3 text-right font-semibold">${escHtml(n(l.CantidadActual))} <span class="text-caption text-on-surface-variant">de ${escHtml(n(l.CantidadInicial))}</span></td>
+          <td class="py-2 px-3 text-on-surface-variant">${escHtml(l.Origen)}${l.CompraID ? ` · compra #${escHtml(l.CompraID)}${l.Proveedor ? ` (${escHtml(l.Proveedor)})` : ''}` : ''}</td>
+          <td class="py-2 px-3 text-right">${l.CostoUnitario != null ? escHtml(soles(l.CostoUnitario)) : '—'}</td>
+          <td class="py-2 px-3 text-right whitespace-nowrap">${esAdmin && !agotado ? `<button class="lote-guardar text-primary text-sm font-semibold mr-2" data-id="${escHtml(l.LoteID)}" type="button">Guardar</button><button class="lote-baja text-error text-sm font-semibold" data-id="${escHtml(l.LoteID)}" type="button">Dar de baja</button>` : ''}</td>
+        </tr>`;
+      }).join('') : '<tr><td class="py-4 px-3 text-on-surface-variant" colspan="6">Este producto todavía no tiene lotes. Se crean al registrar una compra o una entrada.</td></tr>';
+    } catch (err) { document.getElementById('tablaLotes').innerHTML = `<tr><td class="py-4 px-3 text-error" colspan="6">${escHtml(err.message)}</td></tr>`; }
+  }
+  document.getElementById('tablaLotes').addEventListener('click', async (e) => {
+    const b = e.target.closest('button[data-id]'); if (!b) return;
+    const id = b.dataset.id;
+    const err = (m) => { const el = document.getElementById('errorLotes'); el.textContent = m; el.classList.remove('hidden'); };
+    try {
+      if (b.classList.contains('lote-guardar')) {
+        await Auth.apiFetch(`/inventario/lotes/${id}`, { method: 'PUT', body: JSON.stringify({ numeroLote: document.querySelector(`.lote-num[data-id="${id}"]`).value, fechaVencimiento: document.querySelector(`.lote-vence[data-id="${id}"]`).value || null }) });
+      } else if (b.classList.contains('lote-baja')) {
+        const ok = await PCConfirmar({ titulo: '¿Dar de baja este lote?', mensaje: 'Se retiran del stock todas las unidades que quedan (vencido, dañado, cadena de frío rota…). Queda registrado en los movimientos.', textoSi: 'Sí, dar de baja', icono: 'delete_sweep' });
+        if (!ok) return;
+        const vencido = b.closest('tr').innerHTML.includes('Vencido');
+        await Auth.apiFetch(`/inventario/lotes/${id}/baja`, { method: 'POST', body: JSON.stringify({ motivo: vencido ? 'Vencido' : 'Retirado del stock' }) });
+      }
+      await cargar();
+      const p = productos.find((x) => x.MedicamentoID === loteProducto.MedicamentoID);
+      if (p) abrirLotes(p);
+    } catch (ex) { err(ex.message); }
+  });
+
+  async function abrirMovimiento(p) {
+    document.getElementById('movId').value = p.MedicamentoID;
+    document.getElementById('movNombre').textContent = p.NombreMedicamento;
+    document.getElementById('movStock').textContent = `${n(p.Stock)} ${p.Unidad}`;
+    document.getElementById('movCantidad').value = '';
+    document.getElementById('movMotivo').value = '';
+    document.getElementById('errorMovimiento').classList.add('hidden');
+    document.querySelector('input[name="movTipo"][value="Entrada"]').checked = true;
+    document.getElementById('movEtiquetaCantidad').textContent = ETIQUETAS_MOV.Entrada;
+    document.getElementById('bloqueLoteEntrada').classList.remove('hidden');
+    ['movLote', 'movVence', 'movCosto'].forEach((id) => { document.getElementById(id).value = ''; });
+    document.getElementById('movHistorial').innerHTML = '<p class="text-on-surface-variant">Cargando…</p>';
+    abrir('modalMovimiento');
+    document.getElementById('movCantidad').focus();
+    try {
+      const hist = await Auth.apiFetch(`/inventario/${p.MedicamentoID}/movimientos`);
+      document.getElementById('movHistorial').innerHTML = hist.length ? hist.slice(0, 8).map((m) => `
+        <div class="flex justify-between gap-2 py-1 border-b border-outline-variant"><span>${m.Tipo === 'Entrada' ? '⬆️' : m.Tipo === 'Salida' ? '⬇️' : '🔄'} ${escHtml(m.Tipo)} ${escHtml(n(m.Cantidad))}${m.Motivo ? ` · <span class="text-on-surface-variant">${escHtml(m.Motivo)}</span>` : ''}</span>
+        <span class="text-on-surface-variant whitespace-nowrap">${escHtml(new Date(m.Fecha).toLocaleDateString('es-PE', { day: '2-digit', month: 'short' }))} · ${escHtml((m.Usuario || '').split(' ')[0])}</span></div>`).join('')
+        : '<p class="text-on-surface-variant">Sin movimientos todavía.</p>';
+    } catch (_) { document.getElementById('movHistorial').innerHTML = ''; }
+  }
+
+  document.getElementById('formMovimiento').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('movId').value;
+    const body = { tipo: document.querySelector('input[name="movTipo"]:checked').value, cantidad: document.getElementById('movCantidad').value, motivo: document.getElementById('movMotivo').value };
+    if (body.tipo === 'Entrada') { body.lote = document.getElementById('movLote').value; body.fechaVencimiento = document.getElementById('movVence').value || null; body.costoUnitario = document.getElementById('movCosto').value; }
+    try {
+      await Auth.apiFetch(`/inventario/${id}/movimiento`, { method: 'POST', body: JSON.stringify(body) });
+      cerrar('modalMovimiento');
+      cargar();
+    } catch (err) {
+      const el = document.getElementById('errorMovimiento'); el.textContent = err.message; el.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('tablaInventario').addEventListener('click', (e) => {
+    const mov = e.target.closest('.btn-mov'); const ed = e.target.closest('.btn-editar'); const lo = e.target.closest('.btn-lotes'); const so = e.target.closest('.btn-solicitar');
+    const p = productos.find((x) => String(x.MedicamentoID) === (mov || ed || lo || so || {}).dataset?.id);
+    if (mov && p) abrirMovimiento(p);
+    if (ed && p) abrirProducto(p);
+    if (lo && p) abrirLotes(p);
+    if (so && p) abrirSolicitud(p);
+  });
+
+  // --- Solicitudes de reposición (todo el personal) ---
+  const yo = (Auth.obtenerUsuario() || {}).usuarioId;
+  function abrirSolicitud(p) {
+    document.getElementById('solMedId').value = p ? p.MedicamentoID : '';
+    const prod = document.getElementById('solProducto');
+    prod.value = p ? p.NombreMedicamento : ''; prod.readOnly = !!p;
+    document.getElementById('solStock').textContent = p ? `Stock actual: ${n(p.Stock)} ${p.Unidad}${p.ControlStock ? ` (mínimo ${n(p.StockMinimo)})` : ''}` : 'Escribe el producto que necesitas y aún no tenemos.';
+    ['solCantidad', 'solNota'].forEach((id) => { document.getElementById(id).value = ''; });
+    document.getElementById('solUrgente').checked = false;
+    document.getElementById('errorSolicitud').classList.add('hidden');
+    abrir('modalSolicitud');
+    (p ? document.getElementById('solCantidad') : prod).focus();
+  }
+  document.getElementById('btnPedirNuevo').addEventListener('click', () => abrirSolicitud(null));
+  document.getElementById('formSolicitud').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = (m) => { const el = document.getElementById('errorSolicitud'); el.textContent = m; el.classList.remove('hidden'); };
+    const medId = document.getElementById('solMedId').value;
+    const nombre = document.getElementById('solProducto').value.trim();
+    if (!medId && !nombre) return err('Escribe qué producto se necesita.');
+    try {
+      const r = await Auth.apiFetch('/inventario/solicitudes', { method: 'POST', body: JSON.stringify({
+        medicamentoId: medId ? Number(medId) : null, nombreProducto: medId ? null : nombre, cantidad: document.getElementById('solCantidad').value || null,
+        nota: document.getElementById('solNota').value, urgente: document.getElementById('solUrgente').checked }) });
+      cerrar('modalSolicitud');
+      await Promise.all([cargar(), cargarSolicitudes()]);
+      if (window.PCEfectos) { const b = document.getElementById('btnPedirNuevo').getBoundingClientRect(); PCEfectos.huellitas(b.left + b.width / 2, b.top + b.height / 2, 10); }
+      console.log(r.mensaje);
+    } catch (ex) { err(ex.message); }
+  });
+  async function cargarSolicitudes() {
+    try {
+      const lista = await Auth.apiFetch('/inventario/solicitudes');
+      const pend = lista.filter((s) => s.Estado === 'Pendiente');
+      const atendidasMias = lista.filter((s) => s.Estado !== 'Pendiente');
+      document.getElementById('panelSolicitudes').classList.toggle('hidden', !lista.length);
+      document.getElementById('listaSolicitudes').innerHTML = pend.map((s) => `
+        <div class="flex items-center gap-2 px-3 py-2 rounded-xl border ${s.Urgente ? 'border-error' : 'border-outline-variant'} text-sm" style="background:var(--pc-field)">
+          <span>${s.Urgente ? '🔴' : '🙋'}</span>
+          <div><b class="text-on-surface">${escHtml(s.Producto)}</b>${s.Cantidad ? ` × ${escHtml(n(s.Cantidad))}` : ''}
+            <p class="text-caption text-on-surface-variant">${escHtml((s.Solicitante || '').split(' ').slice(0, 2).join(' '))} · ${escHtml(new Date(s.Fecha).toLocaleDateString('es-PE', { day: '2-digit', month: 'short', timeZone: 'UTC' }))}${s.Nota ? ` · ${escHtml(s.Nota)}` : ''}</p></div>
+          ${s.UsuarioID === yo || esAdmin ? `<button class="sol-quitar ml-1 text-on-surface-variant hover:text-error" data-id="${escHtml(s.SolicitudID)}" title="Descartar" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>` : ''}
+        </div>`).join('') + atendidasMias.map((s) => `
+        <div class="flex items-center gap-2 px-3 py-2 rounded-xl text-sm opacity-80" style="background:${s.Estado === 'Atendida' ? 'rgba(22,163,74,.10)' : 'var(--pc-field)'}">
+          <span>${s.Estado === 'Atendida' ? '✅' : '➖'}</span><div><b class="text-on-surface">${escHtml(s.Producto)}</b><p class="text-caption text-on-surface-variant">${s.Estado === 'Atendida' ? (s.CompraID ? 'Ya se compró' : 'Atendida') : 'Descartada'}</p></div>
+        </div>`).join('');
+    } catch (_) { /* sin solicitudes */ }
+  }
+  document.getElementById('listaSolicitudes').addEventListener('click', async (e) => {
+    const b = e.target.closest('.sol-quitar'); if (!b) return;
+    try { await Auth.apiFetch(`/inventario/solicitudes/${b.dataset.id}/resolver`, { method: 'POST', body: JSON.stringify({ estado: 'Descartada' }) }); await Promise.all([cargar(), cargarSolicitudes()]); } catch (ex) { alert(ex.message); }
+  });
+
+  cargar();
+  cargarProveedores();
+  cargarSolicitudes();
+</script>
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

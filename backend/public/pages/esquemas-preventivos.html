@@ -1,0 +1,571 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Esquemas preventivos - Premier Can</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden min-h-screen">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Clinic Logo Avatar" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Veterinary Clinic Admin</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- TopAppBar Component -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Esquemas Preventivos</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<header class="hidden md:flex fixed top-0 right-0 left-0 md:left-64 h-16 bg-background/80 backdrop-blur-md border-b border-outline-variant dark:border-outline justify-between items-center px-margin-desktop w-full z-10">
+<!-- Title -->
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 -ml-2 text-on-surface-variant rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface dark:text-on-surface" id="tituloTopBar">Esquemas Preventivos</h2>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full p-2 transition-opacity duration-200 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full p-2 transition-opacity duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="ml-4 w-8 h-8 rounded-full border border-outline-variant overflow-hidden bg-surface-container">
+<span data-avatar-usuario></span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop md:ml-64 flex flex-col gap-md">
+
+<!-- Selector de paciente (si no llegamos con ?pacienteId=) -->
+<div class="hidden" id="selectorPaciente">
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-md">Selecciona un paciente</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-lg">Elige una mascota para ver su esquema de vacunación y desparasitación.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md" id="listaSelectorPacientes"></div>
+</div>
+
+<!-- Vista de esquemas del paciente -->
+<div class="hidden" id="vistaEsquemas">
+<!-- Header Actions -->
+<div class="flex justify-between items-end mb-4">
+<div>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container-high shrink-0 shadow-sm flex items-center justify-center text-primary font-bold text-headline-md" id="pacienteAvatarIniciales"></div>
+<div>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background" id="pacienteNombreHeader"></h3>
+<p class="font-body-md text-body-md text-on-surface-variant" id="pacienteInfoHeader"></p>
+</div>
+</div>
+</div>
+<button class="bg-primary-container hover:bg-surface-tint text-on-primary-container font-label-md text-label-md py-3 px-6 rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-sm hover:shadow-md active:translate-y-px" id="btnRegistrarDosis">
+<span class="material-symbols-outlined">vaccines</span>
+                Registrar nueva dosis
+            </button>
+<button class="border border-primary text-primary font-label-md text-label-md py-3 px-6 rounded-full flex items-center justify-center gap-2" id="btnCarnetPaciente" type="button">
+<span class="material-symbols-outlined">badge</span> Carnet con QR
+</button>
+</div>
+<!-- General Summary Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md mb-8">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Total aplicadas</p>
+<p class="font-display-lg text-display-lg text-on-background" id="statTotal">0</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]">event_upcoming</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Próximas (30 días)</p>
+<p class="font-display-lg text-display-lg text-on-background" id="statProximas">0</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-error-container rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center gap-4 relative overflow-hidden">
+<div class="absolute inset-0 bg-error/5 z-0"></div>
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error relative z-10">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div class="relative z-10">
+<p class="font-label-md text-label-md text-error uppercase tracking-wider mb-1">Atrasadas</p>
+<p class="font-display-lg text-display-lg text-error" id="statAtrasadas">0</p>
+</div>
+</div>
+</section>
+<!-- Layout: Table + Próximas dosis -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Table Section -->
+<div class="col-span-12 lg:col-span-8 xl:col-span-9 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md text-on-background">Historial de tratamientos</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<th class="p-4 border-b border-outline-variant font-semibold">Producto</th>
+<th class="p-4 border-b border-outline-variant font-semibold">Categoría</th>
+<th class="p-4 border-b border-outline-variant font-semibold">Fecha aplicación</th>
+<th class="p-4 border-b border-outline-variant font-semibold">Próxima dosis</th>
+<th class="p-4 border-b border-outline-variant font-semibold">Estado</th>
+<th class="p-4 border-b border-outline-variant font-semibold text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-background divide-y divide-outline-variant/50" id="tablaEsquemas">
+<tr><td class="p-4 text-center text-on-surface-variant" colspan="6">Cargando...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Próximas dosis (reemplaza el widget de calendario estático) -->
+<aside class="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-4">
+<h4 class="font-headline-md text-headline-md text-on-background text-lg mb-4">Próximas dosis</h4>
+<div class="space-y-3" id="listaProximasDosis">
+<p class="text-caption font-caption text-on-surface-variant">Cargando...</p>
+</div>
+</div>
+</aside>
+</div>
+</div>
+
+<!-- Modal: Registrar dosis aplicada -->
+<div class="fixed inset-0 z-[100] hidden" id="modalDosis">
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm" id="modalDosisBackdrop"></div>
+<div class="absolute inset-y-0 right-0 w-full max-w-md bg-surface-container-lowest shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out" id="modalDosisPanel">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Registrar nueva dosis</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="cerrarModalDosis">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<p class="font-caption text-caption text-on-surface-variant bg-surface-container-low rounded-DEFAULT p-3">
+  Registra la dosis que se le está aplicando <strong>hoy</strong> a la mascota. El sistema calculará solo la fecha de la próxima dosis y la dejará como <strong>pendiente</strong> en el historial, con un botón para marcarla como aplicada cuando corresponda.
+</p>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Tipo</label>
+<select class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="dosisTipo">
+<option disabled selected value="">Cargando tipos...</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Nombre del producto</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="dosisNombreProducto" placeholder="Ej. Vacuna Antirrábica, Bravecto...">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Fecha de aplicación</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="dosisFechaAplicacion" type="date">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1">Observaciones (opcional)</label>
+<textarea class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary py-2 px-3 text-on-surface focus:ring-0 focus:outline-none font-body-md text-body-md" id="dosisObservaciones" rows="3"></textarea>
+</div>
+<p class="hidden font-caption text-caption text-error" id="errorDosis"></p>
+</div>
+<div class="px-md py-sm border-t border-outline-variant bg-surface-container-lowest flex justify-end gap-sm">
+<button class="px-md py-2 border border-primary text-primary rounded-DEFAULT font-label-md text-label-md hover:bg-primary-container/10 transition-colors" id="cancelarModalDosis" type="button">Cancelar</button>
+<button class="px-md py-2 bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md hover:bg-surface-tint transition-colors shadow-sm" id="guardarDosis" type="button">Guardar</button>
+</div>
+</div>
+</div>
+</main>
+
+
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const pacienteId = params.get('pacienteId');
+
+  // Carnet de vacunación con QR (pestaña nueva abierta en el mismo clic)
+  document.getElementById('btnCarnetPaciente').addEventListener('click', async () => {
+    if (!pacienteId) return;
+    const pestana = window.open('', '_blank');
+    try {
+      const { url } = await Auth.apiFetch(`/pacientes/${pacienteId}/carnet-enlace`);
+      pestana.location = url;
+    } catch (err) {
+      pestana.close();
+      alert(err.message);
+    }
+  });
+
+  const ICONOS_TIPO = { 'Vacuna': 'vaccines', 'Desparasitación': 'bug_report' };
+  const BADGE_ESTADO = {
+    AlDia: { texto: 'Al día', clases: 'bg-secondary-container text-on-secondary-container border-secondary/20' },
+    Pendiente: { texto: 'Pendiente', clases: 'bg-surface-variant text-on-surface-variant border-outline-variant' },
+    Atrasado: { texto: 'Atrasado', clases: 'bg-error-container text-on-error-container border-error/20' },
+  };
+
+  // Arma una fecha "local" a partir de solo año-mes-día (YYYY-MM-DD),
+  // sin pasar por interpretación UTC — evita el bug clásico de JS donde
+  // new Date("2026-08-26") se lee como medianoche UTC y al mostrarla en
+  // Perú (UTC-5) se ve como el día anterior.
+  function fechaSoloDia(fechaIso) {
+    if (!fechaIso) return null;
+    const [y, m, d] = fechaIso.substring(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function calcularEdad(fechaNacimiento) {
+    const nacimiento = fechaSoloDia(fechaNacimiento);
+    if (!nacimiento) return 'Edad no registrada';
+    const hoy = new Date();
+    let años = hoy.getFullYear() - nacimiento.getFullYear();
+    let meses = hoy.getMonth() - nacimiento.getMonth();
+    if (meses < 0) { años--; meses += 12; }
+    if (años <= 0) return `${meses} meses`;
+    return `${años} años, ${meses} meses`;
+  }
+
+  function formatearFecha(fechaIso) {
+    const f = fechaSoloDia(fechaIso);
+    if (!f) return '—';
+    return f.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  async function mostrarSelectorPacientes() {
+    document.getElementById('selectorPaciente').classList.remove('hidden');
+    document.getElementById('vistaEsquemas').classList.add('hidden');
+    const cont = document.getElementById('listaSelectorPacientes');
+    cont.innerHTML = '<p class="text-on-surface-variant">Cargando pacientes...</p>';
+
+    try {
+      const pacientes = await Auth.apiFetch('/pacientes');
+      if (pacientes.length === 0) {
+        cont.innerHTML = '<p class="text-on-surface-variant">Aún no hay pacientes registrados.</p>';
+        return;
+      }
+      cont.innerHTML = pacientes.map((p) => {
+        const avatar = p.FotoURL
+          ? `<img class="w-full h-full object-cover" src="${escHtml(window.BACKEND_ORIGIN ?? 'http://localhost:4000')}${escHtml(p.FotoURL)}">`
+          : p.Nombre.slice(0, 2).toUpperCase();
+        return `
+        <a href="esquemas-preventivos.html?pacienteId=${escHtml(p.PacienteID)}"
+           class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-3 hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold shrink-0 overflow-hidden">
+            ${avatar}
+          </div>
+          <div>
+            <p class="font-body-md text-body-md text-on-surface font-semibold">${escHtml(p.Nombre)}</p>
+            <p class="text-caption font-caption text-on-surface-variant">${escHtml(p.PropietarioNombres)} ${escHtml(p.PropietarioApellidos)}</p>
+          </div>
+        </a>
+      `;
+      }).join('');
+    } catch (err) {
+      cont.innerHTML = `<p class="text-error">${escHtml(err.message)}</p>`;
+    }
+  }
+
+  function renderTabla(esquemas) {
+    const tbody = document.getElementById('tablaEsquemas');
+    if (esquemas.length === 0) {
+      tbody.innerHTML = '<tr><td class="p-4 text-center text-on-surface-variant" colspan="6">Todavía no hay esquemas preventivos registrados.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = esquemas.map((e) => {
+      const badge = BADGE_ESTADO[e.Estado];
+      const filaClase = e.Estado === 'Atrasado' ? 'bg-error/5' : '';
+      const pendiente = !e.FechaAplicacion;
+      return `
+        <tr class="hover:bg-surface/50 transition-colors ${filaClase}">
+          <td class="p-4 font-semibold">${escHtml(e.NombreProducto)}</td>
+          <td class="p-4">
+            <span class="inline-flex items-center gap-1 text-sm text-tertiary">
+              <span class="material-symbols-outlined text-[16px]">${ICONOS_TIPO[e.TipoEsquema] || 'medication'}</span> ${escHtml(e.TipoEsquema)}
+            </span>
+          </td>
+          <td class="p-4">
+            ${pendiente
+              ? '<span class="italic text-on-surface-variant">Pendiente de aplicar</span>'
+              : formatearFecha(e.FechaAplicacion)}
+          </td>
+          <td class="p-4 font-semibold ${escHtml(e.Estado === 'Atrasado' ? 'text-error' : '')}">
+            ${formatearFecha(e.FechaProximaDosis)}
+          </td>
+          <td class="p-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${escHtml(badge.clases)}">${escHtml(badge.texto)}</span>
+          </td>
+          <td class="p-4 text-right">
+            ${pendiente
+              ? `<button class="text-primary hover:text-surface-tint font-label-md text-label-md flex items-center gap-1 ml-auto btn-aplicar-dosis" data-esquema-id="${escHtml(e.EsquemaID)}" type="button">
+                   <span class="material-symbols-outlined text-[18px]">task_alt</span> Aplicar ahora
+                 </button>`
+              : ''}
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  function renderProximasDosis(esquemas) {
+    const cont = document.getElementById('listaProximasDosis');
+    const proximas = esquemas
+      .filter((e) => e.Estado === 'Pendiente' || e.Estado === 'Atrasado')
+      .sort((a, b) => new Date(a.FechaProximaDosis) - new Date(b.FechaProximaDosis));
+
+    if (proximas.length === 0) {
+      cont.innerHTML = '<p class="text-caption font-caption text-on-surface-variant">No hay dosis próximas ni atrasadas.</p>';
+      return;
+    }
+
+    cont.innerHTML = proximas.map((e) => `
+      <div class="flex items-start gap-3 p-2 bg-surface-container rounded-lg border-l-4 ${escHtml(e.Estado === 'Atrasado' ? 'border-error' : 'border-primary')}">
+        <span class="material-symbols-outlined ${escHtml(e.Estado === 'Atrasado' ? 'text-error' : 'text-primary')} text-sm mt-0.5">${ICONOS_TIPO[e.TipoEsquema] || 'medication'}</span>
+        <div>
+          <p class="font-label-md text-sm text-on-background leading-tight">${escHtml(e.NombreProducto)}</p>
+          <p class="font-caption text-xs text-on-surface-variant">${formatearFecha(e.FechaProximaDosis)}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  let esquemasCache = [];
+
+  async function cargarEsquemas() {
+    document.getElementById('selectorPaciente').classList.add('hidden');
+    document.getElementById('vistaEsquemas').classList.remove('hidden');
+
+    try {
+      const [paciente, esquemas] = await Promise.all([
+        Auth.apiFetch(`/pacientes/${pacienteId}`),
+        Auth.apiFetch(`/esquemas?pacienteId=${pacienteId}`),
+      ]);
+      esquemasCache = esquemas;
+
+      document.title = `Esquemas Preventivos - ${paciente.Nombre} | Premier Can`;
+      document.getElementById('tituloTopBar').textContent = `Esquemas Preventivos - ${paciente.Nombre}`;
+      const avatarEl = document.getElementById('pacienteAvatarIniciales');
+      if (paciente.FotoURL) {
+        avatarEl.innerHTML = `<img class="w-full h-full object-cover" src="${escHtml(window.BACKEND_ORIGIN ?? 'http://localhost:4000')}${escHtml(paciente.FotoURL)}">`;
+      } else {
+        avatarEl.textContent = paciente.Nombre.slice(0, 2).toUpperCase();
+      }
+      document.getElementById('pacienteNombreHeader').textContent = paciente.Nombre;
+      document.getElementById('pacienteInfoHeader').textContent =
+        `${paciente.Especie} • ${paciente.Raza || 'Sin raza registrada'} • ${calcularEdad(paciente.FechaNacimiento)}`;
+
+      // "Total aplicadas" debe contar solo las dosis que YA se aplicaron
+      // (tienen FechaAplicacion) — las pendientes generadas automáticamente
+      // no cuentan como aplicadas todavía.
+      document.getElementById('statTotal').textContent = esquemas.filter((e) => !!e.FechaAplicacion).length;
+      document.getElementById('statProximas').textContent = esquemas.filter((e) => e.Estado === 'Pendiente').length;
+      document.getElementById('statAtrasadas').textContent = esquemas.filter((e) => e.Estado === 'Atrasado').length;
+
+      renderTabla(esquemas);
+      renderProximasDosis(esquemas);
+    } catch (err) {
+      document.getElementById('tablaEsquemas').innerHTML =
+        `<tr><td class="p-4 text-center text-error" colspan="6">${escHtml(err.message)}</td></tr>`;
+    }
+  }
+
+  // ============================================================
+  // Modal: registrar nueva dosis (Programar pendiente / Ya se aplicó)
+  // ============================================================
+  const modalDosis = document.getElementById('modalDosis');
+  const modalDosisPanel = document.getElementById('modalDosisPanel');
+  let tiposCache = [];
+
+  // Fecha local de "hoy" en formato YYYY-MM-DD, sin el bug de UTC
+  // (new Date().toISOString() puede saltarse al día siguiente/anterior
+  // según la hora y el huso horario del navegador).
+  function hoyLocalISO() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const dia = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${dia}`;
+  }
+
+  async function abrirModalDosis() {
+    document.getElementById('dosisNombreProducto').value = '';
+    document.getElementById('dosisFechaAplicacion').value = hoyLocalISO();
+    document.getElementById('dosisObservaciones').value = '';
+    document.getElementById('errorDosis').classList.add('hidden');
+
+    modalDosis.classList.remove('hidden');
+    setTimeout(() => modalDosisPanel.classList.remove('translate-x-full'), 10);
+
+    const select = document.getElementById('dosisTipo');
+    try {
+      tiposCache = await Auth.apiFetch('/esquemas/tipos');
+      select.innerHTML = '<option disabled selected value="">Selecciona un tipo...</option>' +
+        tiposCache.map((t) => `<option value="${escHtml(t.TipoEsquemaID)}">${escHtml(t.NombreTipo)}</option>`).join('');
+    } catch (err) {
+      select.innerHTML = '<option disabled selected value="">No se pudo cargar</option>';
+    }
+  }
+
+  function cerrarModalDosis() {
+    modalDosisPanel.classList.add('translate-x-full');
+    setTimeout(() => modalDosis.classList.add('hidden'), 300);
+  }
+
+  document.getElementById('btnRegistrarDosis').addEventListener('click', abrirModalDosis);
+  document.getElementById('cerrarModalDosis').addEventListener('click', cerrarModalDosis);
+  document.getElementById('cancelarModalDosis').addEventListener('click', cerrarModalDosis);
+  document.getElementById('modalDosisBackdrop').addEventListener('click', cerrarModalDosis);
+
+  document.getElementById('guardarDosis').addEventListener('click', async () => {
+    const errorEl = document.getElementById('errorDosis');
+    errorEl.classList.add('hidden');
+
+    const tipoEsquemaId = Number(document.getElementById('dosisTipo').value) || null;
+    const nombreProducto = document.getElementById('dosisNombreProducto').value.trim();
+    const fechaAplicacion = document.getElementById('dosisFechaAplicacion').value;
+
+    if (!tipoEsquemaId || !nombreProducto || !fechaAplicacion) {
+      errorEl.textContent = 'Tipo, nombre del producto y fecha de aplicación son obligatorios.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const body = {
+      pacienteId: Number(pacienteId),
+      tipoEsquemaId,
+      nombreProducto,
+      fechaAplicacion,
+      observaciones: document.getElementById('dosisObservaciones').value.trim(),
+    };
+
+    try {
+      await Auth.apiFetch('/esquemas', {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+      cerrarModalDosis();
+      await cargarEsquemas();
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  });
+
+  // ============================================================
+  // Botón "Aplicar ahora" en filas pendientes de la tabla
+  // ============================================================
+  document.getElementById('tablaEsquemas').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-aplicar-dosis');
+    if (!btn) return;
+    const esquemaId = btn.dataset.esquemaId;
+
+    btn.disabled = true;
+    btn.textContent = 'Aplicando...';
+
+    try {
+      await Auth.apiFetch(`/esquemas/${esquemaId}/aplicar`, { method: 'PATCH', body: JSON.stringify({}) });
+      await cargarEsquemas();
+    } catch (err) {
+      alert(err.message);
+      await cargarEsquemas();
+    }
+  });
+
+  if (pacienteId) {
+    cargarEsquemas();
+  } else {
+    mostrarSelectorPacientes();
+  }
+</script>
+
+<script>
+  Auth.protegerPagina();
+</script>
+</body></html>

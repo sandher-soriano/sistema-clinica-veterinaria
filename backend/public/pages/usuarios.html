@@ -1,0 +1,585 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Premier Can - Administración de Usuarios</title>
+<script src="../assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg"/>
+<!-- Tailwind CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..600,0..1,0&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config injected by the system -->
+<script src="../assets/js/tailwind-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+
+<link rel="stylesheet" href="../assets/css/styles.css"/>
+<link rel="stylesheet" href="../assets/css/theme.css"/>
+<script src="../assets/js/layout.js" defer></script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex">
+<nav class="fixed left-0 top-0 bottom-0 z-[65] flex flex-col pt-16 h-full w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline hidden md:flex" id="sidebarNav">
+<div class="px-6 py-8 flex flex-col items-center border-b border-outline-variant">
+<img alt="Avatar del Logo de la Clínica" class="w-16 h-16 rounded-full mb-4 object-cover" src="../assets/img/Logo2.jpg"/>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">Premier Can</h1>
+<p class="font-caption text-caption text-on-surface-variant text-center mt-1">Administración de Clínica Veterinaria</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Panel de Control</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="pacientes.html">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="historia-clinica.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Historias Clínicas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="esquemas-preventivos.html">
+<span class="material-symbols-outlined">vaccines</span>
+<span class="font-label-md text-label-md">Esquemas Preventivos</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="recordatorios.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-md text-label-md">Recordatorios</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="citas.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+</li><li>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="reportes.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li><li id="navPromocionesItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="promociones.html" title="Promociones para clientes">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-md text-label-md">Promociones</span>
+</a>
+</li><li id="navPersonalItem">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="personas.html" title="Personal contratado">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Personal</span>
+</a>
+</li><li id="navConfigItem">
+<a class="flex items-center gap-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-r-full border-l-4 border-primary px-4 py-3 hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all" href="usuarios.html" title="Administrar usuarios">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">manage_accounts</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-4 py-4 border-t border-outline-variant">
+<button class="w-full flex items-center gap-sm text-error hover:bg-error-container/10 rounded-lg px-4 py-3 transition-colors" id="btnCerrarSesion" type="button">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</button>
+</div>
+</nav>
+<!-- Botón de menú móvil (siempre visible en celular) + fondo oscuro al abrir -->
+<button class="md:hidden fixed top-3 left-3 z-[70] w-11 h-11 rounded-full bg-surface-container-lowest shadow-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors" id="btnAbrirMenuMovil" title="Abrir menú">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:hidden fixed inset-0 bg-on-surface/40 z-[55]" id="backdropMenuMovil"></div>
+
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen bg-background">
+<!-- TopAppBar (Shared Component) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9"></div>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary font-bold">Usuarios</h1>
+</div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant p-sm hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 border-b border-outline-variant bg-surface-bright flex justify-between items-center px-margin-desktop z-10 hidden md:flex">
+<!-- Title / Search (Search on left) -->
+<div class="flex items-center gap-6">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Administración de Usuarios</h2>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-[#F1F4F6] border-b-2 border-transparent focus:border-primary pl-10 pr-4 py-2 rounded-t-sm font-body-md text-body-md focus:outline-none transition-colors" id="searchUsersInputTop" placeholder="Buscar..." type="text">
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="p-2 hover:bg-surface-container rounded-full transition-all focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-all focus:ring-2 focus:ring-primary focus:ring-offset-2" id="logoutBtn" title="Cerrar sesión">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden cursor-pointer ml-2">
+<span data-avatar-usuario></span>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 mt-16 p-margin-desktop bg-background overflow-y-auto">
+<!-- Controls Row -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant">Administrar el personal de la clínica, roles y permisos de acceso al sistema.</p>
+</div>
+<!-- Add User CTA -->
+<button class="border-2 border-primary text-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:bg-primary-container/10 transition-colors flex items-center gap-2 h-[42px]" id="openAddUserBtn">
+<span class="material-symbols-outlined">person_add</span>
+                    Agregar Usuario
+                </button>
+</div>
+<!-- Stats Bar (Bento-style summary) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-8">
+<div class="bg-surface-container-lowest border border-[#E0E6ED] rounded-xl p-6 clinical-shadow clinical-hover-shadow flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill text-[28px]">group</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Total de Usuarios</p>
+<p class="font-headline-md text-headline-md text-on-surface font-bold text-primary" id="statTotalUsers">–</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-[#E0E6ED] rounded-xl p-6 clinical-shadow clinical-hover-shadow flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 text-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill text-[28px]">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Activos</p>
+<p class="font-headline-md text-headline-md text-on-surface font-bold text-primary" id="statActiveUsers">–</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-[#E0E6ED] rounded-xl p-6 clinical-shadow clinical-hover-shadow flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 text-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill text-[28px]">pending</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Inactivos</p>
+<p class="font-headline-md text-headline-md text-on-surface font-bold text-primary" id="statInactiveUsers">–</p>
+</div>
+</div>
+</div>
+<!-- Users Table Container -->
+<div class="bg-surface-container-lowest border border-[#E0E6ED] rounded-xl clinical-shadow overflow-hidden">
+<!-- Table Toolbar -->
+<div class="p-6 border-b border-[#E0E6ED] bg-surface-container-lowest flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full bg-[#F1F4F6] border-b-2 border-transparent focus:border-primary pl-10 pr-4 py-2 rounded-t-sm text-on-surface focus:outline-none transition-colors font-body-md text-body-md placeholder-on-surface-variant/50" id="searchUsersInput" placeholder="Buscar usuarios por nombre o correo electrónico..." type="text">
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 border-b border-[#E0E6ED]">
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Usuario</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Rol</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Correo Electrónico</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Estado</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-[#E0E6ED]" id="usuariosTableBody">
+<tr>
+<td class="py-6 px-6 text-on-surface-variant" colspan="5">Cargando usuarios...</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer / count -->
+<div class="p-6 border-t border-[#E0E6ED] bg-surface-container-lowest flex items-center justify-between">
+<p class="font-caption text-caption text-on-surface-variant" id="usersCountLabel">Cargando...</p>
+</div>
+</div>
+</main>
+</div>
+<!-- Slide-over / Modal for 'Add User' (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden" id="addUserModal">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-sm transition-opacity" id="modalBackdrop"></div>
+<!-- Slide-over panel -->
+<div class="absolute inset-y-0 right-0 w-full max-w-md bg-surface-container-lowest shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-in-out" id="modalPanel">
+<div class="px-md py-sm border-b border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Agregar Nuevo Usuario</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" id="closeModalBtn">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-md">
+<form id="addUserForm" class="space-y-md">
+<!-- Persona ya registrada (Config > Personal). Ya no se piden nombre/correo
+     aquí directamente: se heredan de la Persona elegida. -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="newUserPersona">Persona (registrada en Personal)</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary border-t-0 border-l-0 border-r-0 rounded-t-DEFAULT py-2 pl-3 pr-10 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md appearance-none" id="newUserPersona" required>
+<option disabled selected value="">Cargando personal...</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-1">¿No aparece la persona que buscas? <a href="personas.html" class="text-primary hover:underline">Regístrala primero en Personal</a>.</p>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="newUserUsername">Nombre de Usuario</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary border-t-0 border-l-0 border-r-0 rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="newUserUsername" placeholder="juana.perez" required type="text">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="newUserPassword">Contraseña Temporal</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary border-t-0 border-l-0 border-r-0 rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="newUserPassword" minlength="6" placeholder="Mínimo 6 caracteres" required type="password">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="newUserRole">Rol</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary border-t-0 border-l-0 border-r-0 rounded-t-DEFAULT py-2 pl-3 pr-10 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md appearance-none" id="newUserRole" required>
+<option disabled selected value="">Seleccione un rol...</option>
+<option value="1">Administrativo</option>
+<option value="2">Veterinario</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Días y horario de trabajo: solo aplica a Veterinario. El sistema usa
+     esto para asignar automáticamente el veterinario a cada cita nueva
+     según el día y la hora en que se agende. -->
+<div id="bloqueHorarioVeterinario" class="hidden space-y-sm border-t border-outline-variant pt-md mt-md">
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Días y horario de trabajo</label>
+<p class="font-caption text-caption text-on-surface-variant mb-xs">La clínica atiende de lunes a sábado, de 7:00 a. m. a 12:00 a. m. (medianoche). Marca los días en que trabaja y el rango de horas dentro de ese horario.</p>
+<div class="grid grid-cols-3 gap-xs mb-sm" id="diasVeterinarioOpciones">
+<label class="flex items-center gap-xs p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="dia-veterinario-check text-primary focus:ring-primary border-outline-variant rounded" type="checkbox" value="1">
+<span class="font-caption text-caption text-on-surface-variant">Lunes</span>
+</label>
+<label class="flex items-center gap-xs p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="dia-veterinario-check text-primary focus:ring-primary border-outline-variant rounded" type="checkbox" value="2">
+<span class="font-caption text-caption text-on-surface-variant">Martes</span>
+</label>
+<label class="flex items-center gap-xs p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="dia-veterinario-check text-primary focus:ring-primary border-outline-variant rounded" type="checkbox" value="3">
+<span class="font-caption text-caption text-on-surface-variant">Miércoles</span>
+</label>
+<label class="flex items-center gap-xs p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="dia-veterinario-check text-primary focus:ring-primary border-outline-variant rounded" type="checkbox" value="4">
+<span class="font-caption text-caption text-on-surface-variant">Jueves</span>
+</label>
+<label class="flex items-center gap-xs p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="dia-veterinario-check text-primary focus:ring-primary border-outline-variant rounded" type="checkbox" value="5">
+<span class="font-caption text-caption text-on-surface-variant">Viernes</span>
+</label>
+<label class="flex items-center gap-xs p-2 rounded border border-outline-variant hover:border-outline cursor-pointer">
+<input class="dia-veterinario-check text-primary focus:ring-primary border-outline-variant rounded" type="checkbox" value="6">
+<span class="font-caption text-caption text-on-surface-variant">Sábado</span>
+</label>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="horaInicioVeterinario">Hora de inicio</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="horaInicioVeterinario" type="time" value="07:00" min="07:00" max="23:59">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="horaFinVeterinario">Hora de fin</label>
+<input class="w-full bg-surface-container-low border-b-2 border-transparent focus:border-primary rounded-t-DEFAULT py-2 px-3 text-on-surface focus:ring-0 focus:outline-none transition-colors font-body-md text-body-md" id="horaFinVeterinario" type="time" value="22:00" min="07:00" max="23:59">
+</div>
+</div>
+</div>
+<p id="addUserError" class="hidden text-error text-caption font-caption"></p>
+</form>
+</div>
+<!-- Footer Actions -->
+<div class="px-md py-sm border-t border-outline-variant bg-surface-container-lowest flex justify-end gap-sm">
+<button class="px-md py-2 border border-primary text-primary rounded-DEFAULT font-label-md text-label-md hover:bg-primary-container/10 transition-colors" id="cancelModalBtn" type="button">
+                    Cancelar
+                </button>
+<button class="px-md py-2 bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md hover:bg-surface-tint transition-colors shadow-sm" id="saveUserBtn" type="button">
+                    Guardar
+                </button>
+</div>
+</div>
+</div>
+<!-- Script for Modal Interaction + datos reales del backend -->
+<script>
+        // Verifica sesión y permisos ANTES de pedir datos al backend.
+        Auth.protegerPaginaConfig();
+
+        const modal = document.getElementById('addUserModal');
+        const modalPanel = document.getElementById('modalPanel');
+        const openBtn = document.getElementById('openAddUserBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelModalBtn');
+        const backdrop = document.getElementById('modalBackdrop');
+        const addUserForm = document.getElementById('addUserForm');
+        const addUserError = document.getElementById('addUserError');
+        const saveUserBtn = document.getElementById('saveUserBtn');
+
+        function openModal() {
+            addUserForm.reset();
+            addUserError.classList.add('hidden');
+            document.getElementById('bloqueHorarioVeterinario').classList.add('hidden');
+            document.querySelectorAll('.dia-veterinario-check').forEach((chk) => { chk.checked = false; });
+            document.getElementById('horaInicioVeterinario').value = '07:00';
+            document.getElementById('horaFinVeterinario').value = '22:00';
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalPanel.classList.remove('translate-x-full');
+            }, 10);
+            cargarPersonasDisponibles();
+        }
+
+        // El bloque de "Días y horario de trabajo" solo tiene sentido para
+        // el rol Veterinario (value="2" según los Roles sembrados en la BD).
+        document.getElementById('newUserRole').addEventListener('change', (e) => {
+            const esVeterinario = e.target.value === '2';
+            document.getElementById('bloqueHorarioVeterinario').classList.toggle('hidden', !esVeterinario);
+        });
+
+        // Llena el selector de "Persona" solo con quienes están activos y
+        // TODAVÍA no tienen un Usuario de sistema asignado (una Persona =
+        // como máximo un Usuario).
+        async function cargarPersonasDisponibles() {
+            const select = document.getElementById('newUserPersona');
+            select.innerHTML = '<option disabled selected value="">Cargando personal...</option>';
+            try {
+                const personas = await Auth.listarPersonas();
+                const disponibles = personas.filter((p) => p.Activo && !p.TieneUsuario);
+                if (disponibles.length === 0) {
+                    select.innerHTML = '<option disabled selected value="">No hay personal disponible — regístralo en Personal</option>';
+                    return;
+                }
+                select.innerHTML = '<option disabled selected value="">Seleccione una persona...</option>' +
+                    disponibles.map((p) => `<option value="${escHtml(p.PersonaID)}">${escHtml(p.Nombres)} ${escHtml(p.Apellidos)} — ${escHtml(p.CorreoElectronico)}</option>`).join('');
+            } catch (err) {
+                select.innerHTML = '<option disabled selected value="">Error al cargar el personal</option>';
+            }
+        }
+
+        function closeModal() {
+            modalPanel.classList.add('translate-x-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+
+        // ---- Estado en memoria de la lista de usuarios (para poder filtrar) ----
+        let usuariosCache = [];
+
+        function iconoYColorPorRol(nombreRol) {
+            if (nombreRol === 'Administrativo') {
+                return { icono: 'admin_panel_settings', color: 'text-tertiary' };
+            }
+            if (nombreRol === 'Cliente') {
+                return { icono: 'person', color: 'text-secondary' };
+            }
+            return { icono: 'stethoscope', color: 'text-primary' };
+        }
+
+        function inicialesDe(nombreCompleto) {
+            return nombreCompleto
+                .split(' ')
+                .filter(Boolean)
+                .slice(0, 2)
+                .map((p) => p[0].toUpperCase())
+                .join('');
+        }
+
+        function renderUsuarios(lista) {
+            const tbody = document.getElementById('usuariosTableBody');
+            tbody.innerHTML = '';
+
+            if (lista.length === 0) {
+                tbody.innerHTML = '<tr><td class="py-6 px-6 text-on-surface-variant" colspan="5">No se encontraron usuarios.</td></tr>';
+                return;
+            }
+
+            lista.forEach((u) => {
+                const { icono, color } = iconoYColorPorRol(u.NombreRol);
+                const activo = !!u.Activo;
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-surface-container-low/30 transition-colors group';
+                tr.innerHTML = `
+                    <td class="py-4 px-6">
+                        <div class="flex items-center gap-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant shrink-0 bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                ${inicialesDe(u.NombreCompleto)}
+                            </div>
+                            <div>
+                                <p class="font-semibold text-on-surface">${escHtml(u.NombreCompleto)}</p>
+                                <p class="font-caption text-caption text-on-surface-variant">${escHtml(u.esCliente ? 'Portal de clientes' : '@' + u.NombreUsuario)}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6">
+                        <div class="flex items-center gap-xs text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[18px] ${color}">${icono}</span>
+                            <span>${escHtml(u.NombreRol)}</span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-on-surface-variant">${escHtml(u.CorreoElectronico)}</td>
+                    <td class="py-4 px-6">
+                        <span class="inline-flex items-center gap-xs px-2 py-1 rounded-full ${activo ? 'bg-secondary-container/30 text-secondary-container' : 'bg-outline-variant/30 text-on-surface-variant'} text-caption font-semibold">
+                            <span class="w-2 h-2 rounded-full ${activo ? 'bg-secondary-container' : 'bg-outline-variant'}"></span>
+                            ${activo ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 text-right">
+                        <div class="flex justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button class="toggle-estado-btn w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant ${activo ? 'hover:text-error hover:bg-error-container/20' : 'hover:text-primary hover:bg-surface-container-high'} transition-colors" data-id="${escHtml(u.UsuarioID)}" data-activo="${activo}" data-es-cliente="${!!u.esCliente}" title="${activo ? 'Desactivar' : 'Activar'}">
+                                <span class="material-symbols-outlined text-[20px]">${activo ? 'toggle_off' : 'toggle_on'}</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Wire botones de activar/desactivar
+            tbody.querySelectorAll('.toggle-estado-btn').forEach((btn) => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.dataset.id;
+                    const activoActual = btn.dataset.activo === 'true';
+                    const esCliente = btn.dataset.esCliente === 'true';
+                    const confirmar = confirm(activoActual ? '¿Desactivar este acceso?' : '¿Activar este acceso?');
+                    if (!confirmar) return;
+                    try {
+                        await Auth.cambiarEstadoUsuario(id, !activoActual, esCliente);
+                        await cargarUsuarios();
+                    } catch (err) {
+                        alert(err.message);
+                    }
+                });
+            });
+        }
+
+        function actualizarStats(lista) {
+            const total = lista.length;
+            const activos = lista.filter((u) => u.Activo).length;
+            document.getElementById('statTotalUsers').textContent = total;
+            document.getElementById('statActiveUsers').textContent = activos;
+            document.getElementById('statInactiveUsers').textContent = total - activos;
+            document.getElementById('usersCountLabel').textContent = `Mostrando ${lista.length} de ${usuariosCache.length} usuarios`;
+        }
+
+        async function cargarUsuarios() {
+            try {
+                usuariosCache = await Auth.listarUsuarios();
+                aplicarFiltro();
+            } catch (err) {
+                document.getElementById('usuariosTableBody').innerHTML =
+                    `<tr><td class="py-6 px-6 text-error" colspan="5">${escHtml(err.message)}</td></tr>`;
+            }
+        }
+
+        function aplicarFiltro() {
+            const termino = (document.getElementById('searchUsersInput').value || '').toLowerCase();
+            const filtrados = usuariosCache.filter((u) =>
+                u.NombreCompleto.toLowerCase().includes(termino) ||
+                u.CorreoElectronico.toLowerCase().includes(termino) ||
+                (u.NombreUsuario || '').toLowerCase().includes(termino)
+            );
+            renderUsuarios(filtrados);
+            actualizarStats(filtrados);
+        }
+
+        document.getElementById('searchUsersInput').addEventListener('input', aplicarFiltro);
+        // El buscador del header hace lo mismo que el de la tabla, por comodidad
+        document.getElementById('searchUsersInputTop').addEventListener('input', (e) => {
+            document.getElementById('searchUsersInput').value = e.target.value;
+            aplicarFiltro();
+        });
+
+        // ---- Guardar nuevo usuario ----
+        saveUserBtn.addEventListener('click', async () => {
+            addUserError.classList.add('hidden');
+
+            const personaId = document.getElementById('newUserPersona').value;
+            const nombreUsuario = document.getElementById('newUserUsername').value.trim();
+            const contrasena = document.getElementById('newUserPassword').value;
+            const rolId = document.getElementById('newUserRole').value;
+
+            if (!personaId || !nombreUsuario || !contrasena || !rolId) {
+                addUserError.textContent = 'Todos los campos son obligatorios.';
+                addUserError.classList.remove('hidden');
+                return;
+            }
+            if (contrasena.length < 6) {
+                addUserError.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                addUserError.classList.remove('hidden');
+                return;
+            }
+
+            // Si el rol es Veterinario, arma un horario por cada día marcado,
+            // todos con el mismo rango de hora inicio/fin elegido.
+            let horarios;
+            if (rolId === '2') {
+                const dias = Array.from(document.querySelectorAll('.dia-veterinario-check:checked')).map((chk) => Number(chk.value));
+                const horaInicio = document.getElementById('horaInicioVeterinario').value;
+                const horaFin = document.getElementById('horaFinVeterinario').value;
+
+                if (dias.length === 0) {
+                    addUserError.textContent = 'Marca al menos un día de trabajo para el veterinario.';
+                    addUserError.classList.remove('hidden');
+                    return;
+                }
+                if (!horaInicio || !horaFin || horaInicio >= horaFin) {
+                    addUserError.textContent = 'La hora de inicio debe ser menor que la hora de fin.';
+                    addUserError.classList.remove('hidden');
+                    return;
+                }
+                if (horaInicio < '07:00') {
+                    addUserError.textContent = 'La clínica abre a las 7:00 a. m. — el horario no puede empezar antes.';
+                    addUserError.classList.remove('hidden');
+                    return;
+                }
+                horarios = dias.map((diaSemana) => ({ diaSemana, horaInicio, horaFin }));
+            }
+
+            saveUserBtn.disabled = true;
+            saveUserBtn.textContent = 'Guardando...';
+            try {
+                await Auth.crearUsuario({
+                    personaId: Number(personaId),
+                    nombreUsuario,
+                    contrasena,
+                    rolId: Number(rolId),
+                    ...(horarios ? { horarios } : {}),
+                });
+                closeModal();
+                await cargarUsuarios();
+            } catch (err) {
+                addUserError.textContent = err.message;
+                addUserError.classList.remove('hidden');
+            } finally {
+                saveUserBtn.disabled = false;
+                saveUserBtn.textContent = 'Guardar';
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            Auth.cerrarSesion();
+        });
+
+        // Carga inicial de la tabla al abrir la página
+        cargarUsuarios();
+    </script>
+</body></html>

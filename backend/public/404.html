@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premier Can - Página no encontrada</title>
+<script src="/assets/js/cargando.js"></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="/assets/js/tailwind-config.js"></script>
+<link rel="stylesheet" href="/assets/css/styles.css"/>
+<link rel="stylesheet" href="/assets/css/mascota.css"/>
+<script src="/assets/js/mascota.js" defer></script>
+<style>
+  .huellas span { position: absolute; font-size: 22px; opacity: 0; animation: huella 6s linear infinite; }
+  @keyframes huella { 0% { opacity: 0; } 10% { opacity: .35; } 60% { opacity: .35; } 100% { opacity: 0; } }
+</style>
+<link rel="stylesheet" href="/assets/css/theme.css"/>
+<script src="/assets/js/layout.js" defer></script>
+</head>
+<body class="h-full bg-background font-body-md text-on-background relative overflow-x-hidden">
+<!-- Rastro de huellitas que "se fue" de la página -->
+<div class="huellas pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+  <span style="left:12%;top:78%;animation-delay:0s">🐾</span>
+  <span style="left:20%;top:66%;animation-delay:.6s">🐾</span>
+  <span style="left:30%;top:58%;animation-delay:1.2s">🐾</span>
+  <span style="left:66%;top:30%;animation-delay:2.4s">🐾</span>
+  <span style="left:76%;top:22%;animation-delay:3s">🐾</span>
+  <span style="left:86%;top:12%;animation-delay:3.6s">🐾</span>
+</div>
+<div class="relative z-20 flex min-h-full items-center justify-center p-margin-mobile md:p-margin-desktop">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-lg shadow-[0px_12px_24px_rgba(13,122,135,0.1)] border border-outline-variant p-lg flex flex-col items-center text-center mt-36">
+<div data-mascota data-frase="Olfateé por todos lados… y nada 🐽"></div>
+<p class="font-headline-lg text-5xl text-primary mb-2">404</p>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Esta página se escapó del consultorio</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Buscamos en la sala de espera, en la jaula de recuperación y hasta debajo de la camilla, pero no la encontramos.</p>
+<div class="flex flex-col sm:flex-row gap-2 w-full">
+<a class="flex-1 py-3 rounded-DEFAULT font-label-md text-on-primary bg-primary hover:bg-primary-container transition-colors" href="/">Acceso del personal</a>
+<a class="flex-1 py-3 rounded-DEFAULT font-label-md text-primary border border-primary hover:bg-surface-container-low transition-colors" href="/cliente/login.html">Portal de clientes</a>
+</div>
+</div>
+</div>
+</body></html>
